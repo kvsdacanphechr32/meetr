@@ -9,6 +9,53 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+    <button class="signin-google">Sign in with Google (redirect)</button><br>
+    <br><p>--- or ---</p>
+    <label>Email</label><input type="text" id="email"><br>
+    <label>Password</label><input type="password" id="password"><br>
+    <button class="signin-db">Sign in with Email/Password</button>
+    
+    <!-- <script src="https://cdn.auth0.com/js/auth0/9.10/auth0.min.js"></script> -->
+<!--     <script>
+      var webAuth = new auth0.WebAuth({
+        domain:         'engagementlab.auth0.com',
+        clientID:       'ljih2vKCTn00KKdgP6Vt8zh5A0ePS9vW',
+        redirectUri:    'http://localhost:4200/callback',
+        responseType: 'token'
+      });
+      // sign-in with social provider with plain redirect
+      document.querySelector('.signin-google').onclick = function() {
+        webAuth.authorize({
+          connection: 'google-oauth2' // use connection identifier
+        });
+      };
+      // sign-in with social provider using a popup (window.open)
+      $('.signin-google-popup').on('click', function() {
+        webAuth.popup.authorize({
+          connection: 'google-oauth2'
+        });
+      });
+    
+      $('.signin-db').on('click', function() {
+        webAuth.login({
+          realm: 'tests',
+          username: 'testuser',
+          password: 'testpass',
+        });
+      });
+      // Parse the authentication result
+      webAuth.parseHash((err, authResult) => {
+        if (authResult) {
+          // Save the tokens from the authResult in local storage or a cookie
+          localStorage.setItem('access_token', authResult.accessToken);
+          localStorage.setItem('id_token', authResult.idToken);
+        } else if (err) {
+          // Handle errors
+          console.log(err);
+        }
+      });
+    </script> -->
+
   <app-root></app-root>
 </body>
 </html>
