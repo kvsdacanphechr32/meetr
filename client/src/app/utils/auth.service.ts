@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 
 export class AuthService {
+  
   isAuthenticated = new BehaviorSubject(false);
   profile = new BehaviorSubject<any>(null);
 
