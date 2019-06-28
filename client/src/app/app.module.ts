@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { CallbackComponent } from './utils/callback/callback.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     CallbackComponent,
-    ProfileComponent
+    ProfileComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

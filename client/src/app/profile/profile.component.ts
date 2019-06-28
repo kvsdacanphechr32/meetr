@@ -66,10 +66,6 @@ export class ProfileComponent implements OnInit {
       redirect_uri: `${window.location.origin}/callback`
     };
 
-    if(connectionType === 'Username-Password-Authentication') {
-      
-    }
-
     await this.auth0Client.loginWithRedirect(body);
 
   }

@@ -22,4 +22,12 @@ export class NavComponent implements OnInit {
 
   }
 
+  openCloseNav() {
+
+    document.getElementById('bg').classList.toggle('white');
+    document.getElementById('menu').classList.toggle('open');
+    document.getElementById('menu-btn').classList.toggle('open');
+    
+  }
+
 }
