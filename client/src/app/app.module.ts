@@ -8,6 +8,7 @@ import { NavComponent } from './nav/nav.component';
 import { CallbackComponent } from './utils/callback/callback.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MenuComponent } from './menu/menu.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MenuComponent } from './menu/menu.component';
     NavComponent,
     CallbackComponent,
     ProfileComponent,
-    MenuComponent
+    MenuComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,

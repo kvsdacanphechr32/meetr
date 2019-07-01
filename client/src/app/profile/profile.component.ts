@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   public profile: any;
   public isAuthenticated: boolean;
   public alreadyExists: boolean;
+  public signUpShow: boolean;
 
   private signupForm: FormGroup;
   private signinForm: FormGroup;
@@ -46,14 +47,30 @@ export class ProfileComponent implements OnInit {
     this.authService.profile.subscribe(profile => {
       this.profile = profile;
     });
-    
-    this.authService.profile.subscribe(profile => (this.profile = profile));
 
   }
 
   // convenience getter for easy access to form fields
   get f() {
     return this.signupForm.controls;
+  }
+
+  showModal() { 
+
+    document.getElementById('wrapper-profile').style.display = 'flex';
+
+  }
+
+  closeModal() { 
+
+    document.getElementById('wrapper-profile').style.display = 'none';
+
+  }
+
+  toggleSignup() { 
+
+    this.signUpShow = !this.signUpShow;
+
   }
 
   /**
