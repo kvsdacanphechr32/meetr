@@ -15,6 +15,7 @@ if(process.env.NODE_ENV !== 'test')
 	require('dotenv').load();
 
 const winston = require('winston'),
+bodyParser = require('body-parser'),
 logFormat = winston.format.combine(
 	winston.format.colorize(),
 	winston.format.timestamp(),
@@ -39,6 +40,13 @@ global.logger = winston.createLogger({
 const bootstrap = require('@engagementlab/el-bootstrapper'), express = require('express');
 
 var app = express();
+
+// for parsing application/json
+app.use(bodyParser.json()); 
+
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({ extended: true })); 
+
 bootstrap.start(
 	'./config.json', 
 	app,
@@ -47,6 +55,13 @@ bootstrap.start(
 		'name': 'Engagement Journalism CMS'
 	},
 	() => {
+		
 		app.listen(process.env.PORT);
+
+		var mongoose = require('mongoose');
+		mongoose.connect('mongodb://localhost/engagement-journalism', {useNewUrlParser: true});
+		var db = mongoose.connection;
+		db.on('error', console.error.bind(console, 'connection error:'));
+
 	}
 );

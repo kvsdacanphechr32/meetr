@@ -3,7 +3,7 @@
  * ==========
  */
 const mongoose = require('mongoose'),
-Schema = mongoose.Schema;
+	Schema = mongoose.Schema;
 
 var appUserSchema = new Schema({
 	name: {
@@ -13,7 +13,13 @@ var appUserSchema = new Schema({
 	email: {
 		type: String,
 		required: true,
-		index: true
+		index: true,
+		unique: true
+	},
+	socialId: {
+		type: String,
+		index: true,
+		unique: true
 	}
 });
 

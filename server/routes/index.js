@@ -31,5 +31,9 @@ router.all('/*', function(req, res, next) {
 });
 
 router.post('/api/user/create', routeIncludes, routes.api.user.create);
+router.post('/api/user/exists', routeIncludes, routes.api.user.exists);
+
+router.post('/api/project/create', routeIncludes, routes.api.project.create);
+router.get('/api/project/get/:userId', routeIncludes, routes.api.project.get);
 
 module.exports = router;

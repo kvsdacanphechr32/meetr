@@ -3,8 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { CallbackComponent } from './utils/callback/callback.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ProjectComponent } from './projects/project/project.component';
+import { HomeComponent } from './home/home.component';
+import { TrackComponent } from './projects/track/track.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
   {
     path: 'callback',
     component: CallbackComponent
@@ -16,6 +23,14 @@ const routes: Routes = [
   {
     path: 'projects',
     component: ProjectsComponent
+  },
+  {
+    path: 'projects/:id',
+    component: ProjectComponent
+  },
+  {
+    path: 'projects/:id/track',
+    component: TrackComponent
   }
 ];
 

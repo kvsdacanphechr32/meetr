@@ -8,24 +8,47 @@
  *
  * ==========
  */
-const mongoose = require('mongoose'),
-Bluebird = require('bluebird');
-
-mongoose.Promise = require('bluebird');
 const AppUser = require('../../models/AppUser');
+
+let createUser = async (req, res) => { 
+
+    console.log(req.body)
+
+    let newUser = new AppUser({ name: req.body.name, email: req.body.email});
+ 
+    try {
+        let saveRes = await newUser.save();
+        res.json(saveRes);
+    }
+    catch(e) {
+        res.status(500).json({e});
+    }
+};
+
+/*
+ * Check if user for email exists and create one if not
+ */
+exports.exists = async (req, res) => { 
+
+    let userFind = AppUser.findOne({email: req.body.email}, '_id');
+ 
+    try {
+        let userRes = await userFind.exec();
+
+        if(userRes.length < 1)
+            createUser(req, res);
+        else
+            res.status(200).send(userRes);
+    }
+    catch(e) {
+        console.error(e);
+        res.status(500).send(e);
+    }
+}
 
 /*
  * Create data
  */
-exports.create = async function (req, res) { 
-
-    var book1 = new AppUser({ name: 'Test', email: 'email@domain.edy' });
- 
-    try {
-        let saveRes = await book1.save();
-        res.send('done');
-    }
-    catch(e) {
-        console.error(e);
-    }
+exports.create = (req, res) => {
+    createUser(req, res);
 }

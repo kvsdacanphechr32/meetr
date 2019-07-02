@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import { AuthService } from '../utils/auth.service';
+import { DataService } from '../utils/data.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +21,7 @@ export class ProfileComponent implements OnInit {
   private signinForm: FormGroup;
   private auth0Client: Auth0Client;
   
-  constructor(private authService: AuthService, private _formBuilder: FormBuilder) {}
+  constructor(private authService: AuthService, private _dataSvc: DataService, private _formBuilder: FormBuilder) {}
 
   async ngOnInit() {
 
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit {
     // Watch for changes to the profile data
     this.authService.profile.subscribe(profile => {
       this.profile = profile;
+      this.createOrGetUser(profile);
     });
 
   }
@@ -53,6 +55,19 @@ export class ProfileComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() {
     return this.signupForm.controls;
+  }
+
+  createOrGetUser(profile: any) {
+
+    let data = {
+      email: profile.email,
+      name: profile.name
+    };
+
+    this._dataSvc.sendDataToUrl('/api/user/exists', data).subscribe((response: any) => {
+      this._dataSvc.userId.next(response._id);
+    });
+
   }
 
   showModal() { 

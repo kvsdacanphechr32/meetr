@@ -8,60 +8,37 @@
  *
  * ==========
  */
-const keystone = global.keystone,
-mongoose = global.keystone.get('mongoose'),
-Bluebird = require('bluebird');
-
-mongoose.Promise = require('bluebird');
-
-var buildData = (res) => {
-
-let aboutFields = 'intro introPara description.html who.html -_id';
-let articleFields = 'name description image.public_id url dataUrl -_id';
-let guideFields = 'name description image.public_id file.url isSyllabus -_id';
-let videoFields = 'name description videoId -_id';
-
-let about = keystone.list('About').model;
-let article = keystone.list('Article').model;
-let guide = keystone.list('Guide').model;
-let video = keystone.list('Video').model;
-
-// Get about
-let aboutData = about.findOne({}, aboutFields);
-// Get all articles
-let articleData = article.find({}, articleFields);
-// Get all guides
-let guideData = guide.find({}, guideFields);
-// Get all videps
-let videoData = video.find({}, videoFields);
-
-Bluebird.props({
-        about: aboutData,
-        articles: articleData,
-        guides: guideData,
-        videos: videoData
-    })
-    .then(results => {
-        if(!results)
-            return res.status(204).send();
-
-        return res.status(200).json({
-            status: 200,
-            data: results
-        });
-    }).catch(err => {
-        console.error(err);
-        return res.status(400);
-    });
-
-}
-
+const Project = require('../../models/Project');
 
 /*
- * Get data
+ * Create data
  */
-exports.get = function (req, res) {
+exports.create = async (req, res) => { 
 
-    return buildData(res);
-
+    let newProject = new Project({ name: req.body.name, description: req.body.description, user: req.body.userId });
+ 
+    try {
+        let saveRes = await newProject.save();
+        res.json(saveRes);
+    }
+    catch(e) {
+        res.status(500).json({e});
+    }
 }
+
+/*
+ * Get projects for user
+ */
+exports.get = async (req, res) => { 
+
+    let userProjects = Project.find({user: req.params.userId}, 'name description _id');
+ 
+    try {
+        let getRes = await userProjects.exec();
+        res.json(getRes);
+    }
+    catch(e) {
+        res.status(500).json({e});
+    }
+}
+

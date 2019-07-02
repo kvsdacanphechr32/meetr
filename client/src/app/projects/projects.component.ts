@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { AuthService } from '../utils/auth.service';
+import { DataService } from '../utils/data.service';
 
 @Component({
   selector: 'app-projects',
@@ -11,22 +11,23 @@ import { AuthService } from '../utils/auth.service';
 export class ProjectsComponent implements OnInit {
 
   public profile: any;
+  public projects: any[]
 
   private newForm: FormGroup;
 
-  constructor(private authService: AuthService, private _formBuilder: FormBuilder) {}
+  constructor(private _dataSvc: DataService, private _formBuilder: FormBuilder) {}
 
   async ngOnInit() {
 
-    // Get an instance of the Auth0 client
-    // this.auth0Client = await this.authService.getAuth0Client();
-
-    // Watch for changes to the profile data
-    this.authService.profile.subscribe(profile => {
-      this.profile = profile;
-      console.log(profile)
-    });
-
+    let userId = this._dataSvc.userId.getValue();
+    if(userId)
+      this.getProjects(userId)
+    else 
+    {
+      this._dataSvc.userId.subscribe(id => {
+        this.getProjects(id);
+      });
+    }
     this.newForm = this._formBuilder.group({
       'name': ['', [Validators.required]],
       'description': ['', [Validators.required]]
@@ -39,8 +40,32 @@ export class ProjectsComponent implements OnInit {
     return this.newForm.controls;
   }
 
+  getProjects(userId) {
+    this._dataSvc.getDataForUrl('/api/project/get/' + userId).subscribe((response: any) => {
+        
+      this.projects = response;
+
+    });
+  }
+
   create() {
+
     document.getElementById('new').style.display = 'flex';
+
+  }
+
+  submitNew() {
+
+    let data = {
+      name: this.f['name'].value,
+      description: this.f['description'].value,
+      userId: this._dataSvc.userId
+    }
+
+    this._dataSvc.sendDataToUrl('/api/project/create', data).subscribe((response: any) => {
+
+    });
+
   }
 
   closeModal() { 

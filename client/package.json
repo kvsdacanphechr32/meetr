@@ -2,8 +2,11 @@
   "name": "client",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
+    "ng": "ng",  
+    "start": "npm-run-all -l -p browser api",
+    "browser": "ng serve",
+    "browser-testing": "ng serve --configuration=dev --port 8000 --host 0.0.0.0 --disableHostCheck true",
+    "api": "cd ../server; nodemon",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -24,6 +27,7 @@
     "bulma": "^0.7.5",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
+    "underscore": "^1.9.1",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
