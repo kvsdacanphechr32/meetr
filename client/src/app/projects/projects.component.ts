@@ -25,7 +25,7 @@ export class ProjectsComponent implements OnInit {
     else 
     {
       this._dataSvc.userId.subscribe(id => {
-        this.getProjects(id);
+        if(id) this.getProjects(id);
       });
     }
     this.newForm = this._formBuilder.group({
@@ -59,11 +59,12 @@ export class ProjectsComponent implements OnInit {
     let data = {
       name: this.f['name'].value,
       description: this.f['description'].value,
-      userId: this._dataSvc.userId
+      userId: this._dataSvc.userId.getValue()
     }
 
     this._dataSvc.sendDataToUrl('/api/project/create', data).subscribe((response: any) => {
-
+      document.getElementById('new').style.display = 'none';
+      this.projects.push(response);
     });
 
   }

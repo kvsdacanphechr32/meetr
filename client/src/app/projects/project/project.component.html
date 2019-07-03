@@ -1,1 +1,6 @@
-<p>project works!</p>
+<div *ngIf="hasContent">
+    <h2>{{data.name}}</h2>
+    {{data.description}}
+
+    <a routerLink="/projects/{{data.slug}}/track">Track your Progress</a>
+</div>

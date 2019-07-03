@@ -17,7 +17,10 @@ var projectSchema = new Schema({
     user: {
 		type: Schema.Types.ObjectId,
 		ref: 'AppUser'
-    }
+	},
+	slug: {
+		type: String
+	}
 });
 
 

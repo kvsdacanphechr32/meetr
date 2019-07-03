@@ -20,6 +20,7 @@ export class DataService {
   public currentUrl: string;
 
   public userId: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  public currentProjectId: string;
 
   private baseUrl: string;
 
@@ -61,21 +62,21 @@ export class DataService {
 	
   public sendDataToUrl(urlParam: string, formData: any): Observable<any> {
 
-      this.isLoading.next(true);
-      this.serverProblem.next(false);
+    this.isLoading.next(true);
+    this.serverProblem.next(false);
 
-      let url = this.baseUrl; 
-      url += urlParam;   
-    
-      return this.http.post(url, formData).pipe(
-        map((res:any)=> {
-        
+    let url = this.baseUrl; 
+    url += urlParam;   
+  
+    return this.http.post(url, formData)
+    .pipe(
+      map((res:any)=> {      
         this.isLoading.next(false);
-        
         return res;
-        }),
-        catchError(err => throwError(err))
-      );
-      }
+      }),
+      catchError(err => throwError(err))
+    );
 
-    }
+  } 
+
+}

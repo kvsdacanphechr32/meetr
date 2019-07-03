@@ -1,0 +1,17 @@
+
+<form class="columns column is-11-mobile is-full-tablet is-multiline" [formGroup]="responseForm" (submit)="submitNew()">
+
+    <div class="row" *ngFor='let prompt of prompts; let i = index;'>
+       {{i}}
+       <h3>{{prompt}}</h3>
+
+       <input formControlName="{{i}}" type="radio" value="1" checked />
+       <input formControlName="{{i}}" type="radio" value="2" />
+       <input formControlName="{{i}}" type="radio" value="3" />
+       <input formControlName="{{i}}" type="radio" value="4" />
+
+    </div>
+
+    <button type="submit">See Your Results</button>
+
+</form>
