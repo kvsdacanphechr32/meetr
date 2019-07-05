@@ -8,7 +8,8 @@
  *
  * ==========
  */
-const Project = require('../../models/Project');
+const Project = require('../../models/Project'),
+      Progress = require('../../models/Progress');
 
 /*
  * Create data
@@ -48,13 +49,17 @@ exports.getAll = async (req, res) => {
  */
 exports.get = async (req, res) => { 
 
-    let userProjects = Project.findOne({user: req.params.userId, slug: req.params.projectId});
- 
+    let userProject = Project.findOne({user: req.params.userId, slug: req.params.projectId});
+    
     try {
-        let getRes = await userProjects.exec();
-        res.json(getRes);
+        let getProjectRes = await userProject.exec();
+        let projProgress = Progress.find({project: getProjectRes._id}, 'sumX sumY -_id');
+        let getProgressRes = await projProgress.exec();
+
+        res.json({project: getProjectRes, progress: getProgressRes});
     }
     catch(e) {
+        console.error(e);
         res.status(500).json({e});
     }
 }

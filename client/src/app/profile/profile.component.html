@@ -1,4 +1,4 @@
-<a href="#" (click)="showModal()" *ngIf="!isAuthenticated">Sign In</a>
+<a id="signin" href="#" (click)="showModal()" *ngIf="!isAuthenticated">Sign In</a>
 
 <img [src]="profile.picture" *ngIf="isAuthenticated" />
 
@@ -141,8 +141,6 @@
   </div>
 
 </div>
-
-
 <!-- <button (click)="logout()" *ngIf="isAuthenticated">logout</button> -->
 
 <div *ngIf="alreadyExists">

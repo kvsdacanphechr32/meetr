@@ -2,49 +2,12 @@
 $cloudinary-account: 'engagement-lab-home';
 $cdn-product: 'building-engagement';
 
-@font-face {
-    font-family: 'VG5000';
-    src: url('https://res.cloudinary.com/engagement-lab-home/raw/upload/beta-blocks/fonts/VG5000-Regular.otf') format('opentype');
-}
-
-@font-face {
-    font-family: 'SpaceGrotesk';
-    src: url('https://res.cloudinary.com/engagement-lab-home/raw/upload/beta-blocks/fonts/SpaceGrotesk-Regular.otf') format('opentype');
-}
-
-@font-face {
-    font-family: 'SpaceGrotesk-SemiBold';
-    src: url('https://res.cloudinary.com/engagement-lab-home/raw/upload/beta-blocks/fonts/SpaceGrotesk-SemiBold.otf') format('opentype');
-}
-
-@font-face {
-    font-family: 'SpaceGrotesk-Bold';
-    src: url('https://res.cloudinary.com/engagement-lab-home/raw/upload/beta-blocks/fonts/SpaceGrotesk-Bold.otf') format('opentype');
-}
-
-
-@font-face {
-    font-family: 'Lunchtype';
-    src: url('https://res.cloudinary.com/engagement-lab-home/raw/upload/beta-blocks/fonts/lunchtype24-regular-expanded-webfont.woff2') format('woff2'),
-        /* Super modern browsers */
-        url('https://res.cloudinary.com/engagement-lab-home/raw/upload/beta-blocks/fonts/lunchtype24-regular-expanded-webfont.woff') format('woff'),
-        /* Modern browsers */
-        url('https://res.cloudinary.com/engagement-lab-home/raw/upload/beta-blocks/fonts/Lunchtype24-regular-expanded-webfont.ttf') format('truetype');
-    /* Safari, Android, iOS */
-}
-
-@font-face {
-    font-family: 'LunchtypeMed';
-    src: url('https://res.cloudinary.com/engagement-lab-home/raw/upload/beta-blocks/fonts/lunchtype24-medium-expanded-webfont.woff2') format('woff2'),
-        /* Super modern browsers */
-        url('https://res.cloudinary.com/engagement-lab-home/raw/upload/beta-blocks/fonts/lunchtype24-medium-expanded-webfont.woff') format('woff'),
-        /* Modern browsers */
-        url('https://res.cloudinary.com/engagement-lab-home/raw/upload/beta-blocks/fonts/Lunchtype24-medium-expanded-webfont.ttf') format('truetype');
-    /* Safari, Android, iOS */
-}
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:400,700|Spectral&display=swap');
 
 // COLORS
 $pale-salmon: #e9bbb0;
+$coral: #e85e5d;
+$blueberry: #634da0;
 
 // FONT CONFIG
 $base-font-size: 14;

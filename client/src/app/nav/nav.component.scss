@@ -28,7 +28,7 @@ nav {
         position: relative;
         z-index: 11;
 
-        display: flex;
+        display: inline-flex;
         align-items: center;
         font-family: 'AvenirBold';
         @include pxtoem(12, 18);
@@ -112,4 +112,5 @@ nav {
 
         }
     }
+
 }

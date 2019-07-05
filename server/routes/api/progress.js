@@ -32,6 +32,7 @@ exports.create = async (req, res) => {
         res.json(saveRes);
     }
     catch(e) {
+        console.error(e);
         res.status(500).json({e});
     }
 }

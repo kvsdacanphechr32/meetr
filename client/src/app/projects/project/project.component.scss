@@ -1,0 +1,12 @@
+@import '~src/style/_variables';
+
+canvas {
+
+    @include not-desktop {
+        max-width: 300px;
+    }
+    // background-image: url(/assets/img/grid.png);
+    // background-size: contain;
+    background-color: white;
+
+}

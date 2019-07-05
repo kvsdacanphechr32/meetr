@@ -1,6 +1,18 @@
 <div *ngIf="hasContent">
-    <h2>{{data.name}}</h2>
-    {{data.description}}
+    <h2>{{project.name}}</h2>
+    <p>
+        {{project.description}}
+    </p>
 
-    <a routerLink="/projects/{{data.slug}}/track">Track your Progress</a>
+    <a (click)="exportPdf()">
+
+    <cdn-image cloudinaryId="img/pdf-export" width="37" phoneWidth="84" svg="true"
+    alt="Export as PDF button image"></cdn-image>
+
+    </a>
+
+    <canvas #canvasElement id="canvas" width="680" height="680" *ngIf="!isPhone"></canvas>
+    <canvas #canvasElement id="canvas" width="300" height="300" *ngIf="isPhone"></canvas>
+
+    <a routerLink="/projects/{{project.slug}}/track">Track your Progress</a>
 </div>

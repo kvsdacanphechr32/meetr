@@ -13,11 +13,24 @@ import { ProjectsComponent } from './projects/projects.component';
 import { TrackComponent } from './projects/track/track.component';
 
 import { DataService } from './utils/data.service';
+import { CdnImageComponent } from './utils/cdn-image/cdn-image.component';
+
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProjectComponent } from './projects/project/project.component';
 
+// Cloudinary
+import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
+import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
+import cloudinaryConfiguration from './cdn.config';
+
+export const cloudinary = {
+  Cloudinary: CloudinaryCore
+};
+export const config: CloudinaryConfiguration = cloudinaryConfiguration;
+
 @NgModule({
   declarations: [
+    CdnImageComponent,
     AppComponent,
     NavComponent,
     CallbackComponent,
@@ -33,7 +46,8 @@ import { ProjectComponent } from './projects/project/project.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CloudinaryModule.forRoot(cloudinary, config),
   ],
   providers: [DataService, HttpClient],
   bootstrap: [AppComponent]

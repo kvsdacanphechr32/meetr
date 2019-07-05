@@ -1,9 +1,23 @@
 <div id="menu">
     <ul>
-        <li>
-            <!-- [class.current]="itemActive('about')" -->
-            <a routerLink="/about" queryParamsHandling="merge" >
+        <li>            
+            <a [class.current]="itemActive('about')" routerLink="/about" queryParamsHandling="merge" >
                 About
+            </a>
+        </li>
+        <li>            
+            <a [class.current]="itemActive('about')" routerLink="/talk" queryParamsHandling="merge" >
+                Talk it Out
+            </a>
+        </li>
+        <li>            
+            <a [class.current]="itemActive('about')" routerLink="/talk" queryParamsHandling="merge" >
+                Track Your Progress
+            </a>
+        </li>
+        <li>            
+            <a [class.current]="itemActive('about')" routerLink="/talk" queryParamsHandling="merge" >
+                Case Studies
             </a>
         </li>
     </ul>

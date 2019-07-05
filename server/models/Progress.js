@@ -13,7 +13,8 @@ var progressSchema = new Schema({
 	},
     project: {
 		type: Schema.Types.ObjectId,
-		ref: 'Progress'
+        ref: 'Progress',
+        required: true
 	},
 	responses: {
         type: Array,

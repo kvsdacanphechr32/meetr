@@ -19,12 +19,13 @@ html {
   height: 100%;
 }
 body {
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     color: black;
     margin: 0;
     height: 100%;
 
-  overflow-x: hidden;
+    overflow-x: hidden;
 
   @include mobile-only {
     font-size: 12px;
