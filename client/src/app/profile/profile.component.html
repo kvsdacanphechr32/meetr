@@ -1,6 +1,6 @@
 <a id="signin" href="#" (click)="showModal()" *ngIf="!isAuthenticated">Sign In</a>
 
-<img [src]="profile.picture" *ngIf="isAuthenticated" />
+<img id="pic" [src]="profile.picture" *ngIf="isAuthenticated" alt="Profile picture" />
 
 <div id="wrapper-profile">
   <div id="modal">

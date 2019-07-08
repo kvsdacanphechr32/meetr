@@ -1,5 +1,11 @@
 @import '~src/style/_variables';
 
+#pic {
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 50px;
+}
+
 #wrapper-profile {
 
     position: fixed;

@@ -59,6 +59,8 @@ export class ProfileComponent implements OnInit {
 
   createOrGetUser(profile: any) {
 
+    if(!profile) return;
+
     let data = {
       email: profile.email,
       name: profile.name

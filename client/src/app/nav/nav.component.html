@@ -1,19 +1,20 @@
 <nav class="container desktop columns is-mobile is-multiline-mobile" id="nav">
-
-  <div class="column">Logo</div>
+ 
+  <div class="column is-8">Logo</div>
   
   <div class="column">
   <app-profile id="profile">
   </app-profile>
+  </div>
 
-  <div id="menu-btn" class="column is-5-mobile">
-    <a (click)="openCloseNav()" class="columns uppercase">
-      <div id="lines" class="column is-one-quarter">
+
+  <div id="menu-btn" class="column">
+    <a (click)="openCloseNav()">
+      <div id="lines">
         <span></span>
         <span></span>
         <span></span>
       </div>
     </a>
-  </div>
   </div>
 </nav>

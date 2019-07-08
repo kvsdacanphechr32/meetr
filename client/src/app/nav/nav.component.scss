@@ -8,6 +8,9 @@ nav {
     margin-bottom: 0 !important;
     z-index: 4;
 
+    padding-left: 8%;
+    padding-top: 5%;
+
     a {
        
 
@@ -29,11 +32,11 @@ nav {
         z-index: 11;
 
         display: inline-flex;
-        align-items: center;
-        font-family: 'AvenirBold';
+        align-items: baseline;
         @include pxtoem(12, 18);
 
         cursor: pointer;
+        padding-top: 5%;
 
         @include phones {
             a {
@@ -101,6 +104,7 @@ nav {
 
                     &:nth-child(2) {
                         opacity: 0;
+                        left: 15px;
                     }
 
                     &:nth-child(3) {

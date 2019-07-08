@@ -22,6 +22,7 @@ import { ProjectComponent } from './projects/project/project.component';
 import { Cloudinary as CloudinaryCore } from 'cloudinary-core';
 import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5.x';
 import cloudinaryConfiguration from './cdn.config';
+import { FooterComponent } from './footer/footer.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -39,7 +40,8 @@ export const config: CloudinaryConfiguration = cloudinaryConfiguration;
     ProjectsComponent,
     HomeComponent,
     TrackComponent,
-    ProjectComponent
+    ProjectComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

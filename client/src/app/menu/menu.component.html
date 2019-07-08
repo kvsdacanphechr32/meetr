@@ -21,5 +21,12 @@
             </a>
         </li>
     </ul>
-    
+
+    <hr />
+
+    <ul *ngIf="isAuthenticated === true">
+            <li>           
+    <a href="#" class="">Sign Out</a>
+    </li>
+    </ul>
 </div>

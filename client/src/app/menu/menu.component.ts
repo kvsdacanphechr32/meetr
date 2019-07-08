@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AuthService } from '../utils/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,10 +10,11 @@ import { filter } from 'rxjs/operators';
 })
 export class MenuComponent implements OnInit {
 
+  public isAuthenticated: boolean;
   private currentUrl: string;
   // @ViewChild('menu') menu: ElementRef;
   
-  constructor(private _router: Router) { 
+  constructor(private _router: Router, private authService: AuthService) { 
 
     // Close menu when nav starts
     _router.events.pipe(filter(e => e instanceof NavigationStart)).subscribe(e => {
@@ -24,6 +26,10 @@ export class MenuComponent implements OnInit {
       this.currentUrl = _router.url;
     });
 
+    // Watch for changes to the isAuthenticated state
+    this.authService.isAuthenticated.subscribe(value => {
+      this.isAuthenticated = value;
+    });
   }
 
   ngOnInit() {

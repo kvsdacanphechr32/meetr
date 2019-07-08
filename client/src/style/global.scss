@@ -57,25 +57,11 @@ a {
 // Global styles
 h2 {
 
-  @include pxtoem(20, 30);
-  line-height: 1.4;
-  letter-spacing: 6px;
+  font-family: 'Spectral';
 
-  text-transform: uppercase;
-  text-align: center;
+  @include pxtoem(32, 48);
+  line-height: 1.5;
 
-  padding-top: 5%;
-  padding-bottom: 4%;
-
-  &.lower {
-    @include pxtoem(18, 24);
-    text-transform: none;
-  }
-
-  &.cap {
-    @include pxtoem(18, 24);
-    text-transform: capitalize;
-  }
 }
 
 h3 {
@@ -127,4 +113,19 @@ h4 {
   padding-right: 1.5%;
 
 }
+}
+
+.content {
+  // text-align: center;
+  color: white;
+
+  
+  margin-left: auto;
+  margin-right: auto;
+  
+  width: 80%;
+  p {
+    @include pxtoem(18, 24);
+    line-height: 1.5;
+  }
 }

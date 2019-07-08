@@ -1,0 +1,21 @@
+footer {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    bottom: 0;
+    width: 100%;
+
+    margin-bottom: 5%;
+    margin-left: 1%;
+
+    ::ng-deep img {
+        filter: invert(1);
+    }
+
+    object {
+        stroke: white;
+    }
+}
