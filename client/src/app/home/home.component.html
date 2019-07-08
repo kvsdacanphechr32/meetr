@@ -1,13 +1,42 @@
-<!-- <a routerLink="projects">Projects</a>-->
+<div id="first" class="content intro column">
 
-<div class="content intro column">
+  <h2>This is Meetr.</h2>
 
-    <h2>This is Meetr.</h2>
+  <p>
+    You need the dark in order to show the light. Let's put some happy little bushes on the other side now. Let your
+    heart take you to wherever you want to be. We'll have a super time.
+  </p>
 
-    <p>
-            You need the dark in order to show the light. Let's put some happy little bushes on the other side now. Let your heart take you to wherever you want to be. We'll have a super time.
-    </p>
+  <button id="next" (click)="next()">
+    <svg width="30" height="24" fill="none" viewBox="0 0 30 24">
+      <path stroke="#fff" d="M0 11.923h29.282M17.928.359l11.713 11.713" />
+      <path stroke="#fff" stroke-width="1.01511" d="M17.928 23.331l11.713-11.713" />
+    </svg>
+  </button>
 
 </div>
 
+<div id="second" class="content intro column" style="display: none">
 
+  <h2>This is how it works.</h2>
+
+
+  <h3>
+    Talk it Out
+  </h3>
+
+  <p>
+    I'm going to mix up a little color. We’ll use Van Dyke Brown, Permanent Red, and a little bit of Prussian Blue.
+  </p>
+
+  <h3>
+    Track your Progress
+  </h3>
+
+  <p>
+    That's a son of a gun of a cloud. We need a shadow side and a highlight side. Happy painting, God bless.
+
+  </p>
+
+  <a routerLink="/projects">Get Started</a>
+</div>

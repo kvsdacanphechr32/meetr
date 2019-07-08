@@ -2,119 +2,119 @@
 
 nav {
 
-    position: relative;
-    padding-top: 0;
-    padding-left: 0;
-    margin-bottom: 0 !important;
-    z-index: 4;
+  position: relative;
+  padding-top: 0;
+  padding-left: 0;
+  margin-bottom: 0 !important;
+  z-index: 4;
 
-    padding-left: 8%;
+  padding-left: 8%;
+  padding-top: 5%;
+
+  a {
+
+
+    &#home {
+      ::ng-deep img {
+        margin-top: 2%;
+      }
+    }
+  }
+
+  #home {
+    display: flex;
+    justify-content: center;
+  }
+
+  #menu-btn {
+
+    position: relative;
+    z-index: 11;
+
+    display: inline-flex;
+    align-items: baseline;
+    @include pxtoem(12, 18);
+
+    cursor: pointer;
     padding-top: 5%;
 
-    a {
-       
-
-        &#home {
-            ::ng-deep img {
-                margin-top: 2%;
-            }
-        }
-    }
-
-    #home {
+    @include phones {
+      a {
         display: flex;
-        justify-content: center;
+        // width: 100%;
+      }
     }
 
-    #menu-btn {
+    #lines {
+      position: relative;
 
+      display: inline-grid;
+      align-content: center;
+
+      span {
+        display: block;
         position: relative;
-        z-index: 11;
+        height: 1px;
+        width: 25px;
+        background: white;
+        opacity: 1;
+        left: 0;
 
-        display: inline-flex;
-        align-items: baseline;
-        @include pxtoem(12, 18);
+        transform-origin: left;
 
-        cursor: pointer;
-        padding-top: 5%;
+        @include transform(rotate(0deg));
+        @include transition(all, .7s, ease-in-out);
 
-        @include phones {
-            a {
-                display: flex;
-                // width: 100%;
-            }
+        &:nth-child(2) {
+          top: 6px;
         }
 
-        #lines {
-            position: relative;
-
-            display: inline-grid;
-            align-content: center;
-
-            span {
-                display: block;
-            position: relative;
-                height: 1px;
-                width: 25px;
-                background: white;
-                opacity: 1;
-                left: 0;
-
-                transform-origin: left;
-                
-                @include transform(rotate(0deg));
-                @include transition(all, .7s, ease-in-out);
-                
-                &:nth-child(2) {
-                    top: 6px;
-                }
-                
-                &:nth-child(3) {
-                    position: relative;
-                    top: 12px;
-                }
-
-            }
-
+        &:nth-child(3) {
+          position: relative;
+          top: 12px;
         }
 
-        #label {
+      }
 
-            display: flex;
-            line-height: 4.22;
-            letter-spacing: 4px;
-
-            padding-top: 15%;
-            padding-left: 0;
-
-            @include transition(color, .7s, ease-in-out);
-
-        }
-
-        &.open {
-
-            #lines {
-                span {
-                    background: black;
-
-                    &:nth-child(1) {
-                        @include transform(rotate(45deg));
-                        top: -4px;
-                    }
-
-                    &:nth-child(2) {
-                        opacity: 0;
-                        left: 15px;
-                    }
-
-                    &:nth-child(3) {
-                        @include transform(rotate(-45deg));
-                        top: 14px;
-                    }
-                }
-            }
-
-        }
     }
+
+    #label {
+
+      display: flex;
+      line-height: 4.22;
+      letter-spacing: 4px;
+
+      padding-top: 15%;
+      padding-left: 0;
+
+      @include transition(color, .7s, ease-in-out);
+
+    }
+
+    &.open {
+
+      #lines {
+        span {
+          background: black;
+
+          &:nth-child(1) {
+            @include transform(rotate(45deg));
+            top: -4px;
+          }
+
+          &:nth-child(2) {
+            opacity: 0;
+            left: 15px;
+          }
+
+          &:nth-child(3) {
+            @include transform(rotate(-45deg));
+            top: 14px;
+          }
+        }
+      }
+
+    }
+  }
 
 }

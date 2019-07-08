@@ -6,11 +6,22 @@ import { ProjectsComponent } from './projects/projects.component';
 import { ProjectComponent } from './projects/project/project.component';
 import { HomeComponent } from './home/home.component';
 import { TrackComponent } from './projects/track/track.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    data: {
+      bg: ''
+    }
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    data: {
+      bg: 'white'
+    }
   },
   {
     path: 'callback',
