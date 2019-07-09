@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';;
-import { AuthService } from '../utils/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
+
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav',
@@ -8,12 +10,14 @@ import { AuthService } from '../utils/auth.service';
 })
 export class NavComponent implements OnInit {
 
-  public isAuthenticated = false;
-
-  /**
-   * Constructor - inject the AuthService class
-   */
-  constructor(private authService: AuthService) {}
+  constructor(private _router: Router) {
+    
+    _router.events.pipe(filter(e => e instanceof NavigationStart)).subscribe(e => {
+    // Close menu when nav starts
+      this.openCloseNav(true);
+    });
+  
+  }
 
   /**
    * Handle component initialization
@@ -22,7 +26,9 @@ export class NavComponent implements OnInit {
 
   }
 
-  openCloseNav() {
+  openCloseNav(close: boolean) {
+
+    if(close && !document.getElementById('menu').classList.contains('open')) return;
 
     document.getElementById('bg').classList.toggle('white');
     document.getElementById('menu').classList.toggle('open');

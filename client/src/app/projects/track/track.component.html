@@ -1,17 +1,50 @@
+<div class="content columns is-mobile is-multiline">
 
+<div class="column is-full">      
+    <h4>Track Your Progress</h4>
+    <div id="arrow">
+        <span>Not at all</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="159" height="17" fill="none" viewBox="0 0 159 17">
+            <path stroke="url(#a)" d="M0 8.236h158.555"/>
+            <path stroke="#5A5C27" d="M150.723.355l7.922 7.922"/>
+            <path stroke="#5A5C27" stroke-width="1.00351" d="M150.723 16.117l7.922-7.922"/>
+            <defs>
+                <linearGradient id="a" x1="158.555" x2="0" y1="8.738" y2="8.738" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#5A5C27"/>
+                    <stop offset=".318" stop-color="#634DA0"/>
+                    <stop offset=".661" stop-color="#E85E5D"/>
+                    <stop offset="1" stop-color="#E9BBB0"/>
+                </linearGradient>
+            </defs>
+        </svg>
+        
+        <span>A lot</span>
+    </div>
+</div>
+      
 <form class="columns column is-11-mobile is-full-tablet is-multiline" [formGroup]="responseForm" (submit)="submitNew()">
 
     <div class="row" *ngFor='let prompt of prompts; let i = index;'>
-       {{i}}
-       <h3>{{prompt}}</h3>
+       <h4>
+           {{i+1}}
+       </h4>
+       <p>{{prompt}}</p>
 
-       <input formControlName="{{i}}" type="radio" value="1" checked />
-       <input formControlName="{{i}}" type="radio" value="2" />
-       <input formControlName="{{i}}" type="radio" value="3" />
-       <input formControlName="{{i}}" type="radio" value="4" />
+       <div class="fields">
 
+           <input formControlName="{{i}}" type="radio" value="1" checked />
+           <span class="radio one"></span>
+           <input formControlName="{{i}}" type="radio" value="2" />
+           <span class="radio two"></span>
+           <input formControlName="{{i}}" type="radio" value="3" />
+           <span class="radio three"></span>
+           <input formControlName="{{i}}" type="radio" value="4" />
+           <span class="radio four"></span>
+           
+       </div>
     </div>
 
     <button type="submit">See Your Results</button>
 
 </form>
+</div>

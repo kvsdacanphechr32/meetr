@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 
 import { DataService } from '../../utils/data.service';
 
+import { TweenLite, Back, TweenMax } from 'gsap';
+
 import * as ismobile from 'ismobilejs';
 import * as paper from 'paper';
 import * as jsPDF from 'jspdf';
-import { CONTEXT_NAME } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'app-project',
@@ -15,14 +16,12 @@ import { CONTEXT_NAME } from '@angular/compiler/src/render3/view/util';
 })
 export class ProjectComponent implements OnInit, AfterViewInit {
 
-  // @Input() data: any;
   public project: any;
   public progress: any[];
   public hasContent: boolean;
-  canvasElement: ElementRef;
-
   public isPhone: boolean;
 
+  canvasElement: ElementRef;
 
   @ViewChild('canvasElement', {
     static: false
@@ -35,7 +34,6 @@ export class ProjectComponent implements OnInit, AfterViewInit {
 
     this.isPhone = ismobile.phone;
 
-
   }
 
   ngOnInit() {
@@ -43,6 +41,7 @@ export class ProjectComponent implements OnInit, AfterViewInit {
     this._dataSvc.userId.subscribe(id => {
       if (id) this.getData(id);
     });
+
   }
 
   ngAfterViewInit() {
@@ -79,19 +78,23 @@ export class ProjectComponent implements OnInit, AfterViewInit {
 
     let tooltip: paper.PointText;
     let segments: paper.Point[] = [];
-    let colors = ['#e9bbb0', '#e85e5d', '#634da0'];
+    let colors = ['#e9bbb0', '#e85e5d', '#634da0', '#5a5c27'];
+    let colorIndex = -1;
 
     let bgImg = new Image();
     bgImg.crossOrigin = 'anonymous';
-    
+
     bgImg.onload = () => {
       let bg: paper.Raster = new p.Raster(bgImg);
-      bg.position = new p.Point(widthExt/2, heightExt/2);
+      bg.position = new p.Point(widthExt / 2, heightExt / 2);
       bg.sendToBack();
     }
     bgImg.src = 'https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_300/v1562355836/engagement-journalism/img/grid.png';
 
     this.progress.forEach((survey, i) => {
+
+      colorIndex++;
+      if (colorIndex === 4) colorIndex = 0;
 
       let xPos = (widthExt / 2) + (survey.sumX * ((widthExt / 2) / 6)),
         yPos = (heightExt / 2) - survey.sumY * ((heightExt / 2) / 6);
@@ -102,14 +105,16 @@ export class ProjectComponent implements OnInit, AfterViewInit {
       let dot = new paper.Path.Circle({
         center: [xPos, yPos],
         radius: 16,
-        fillColor: colors[i]
+        fillColor: colors[colorIndex]
       });
+
       let txt = new p.PointText({
         point: [xPos - 5, yPos + 5],
         content: i + 1,
         fillColor: 'white',
         fontSize: 16
       });
+
       g.addChildren([dot, txt]);
 
       g.onMouseEnter = (event) => {
@@ -136,13 +141,23 @@ export class ProjectComponent implements OnInit, AfterViewInit {
     path.strokeWidth = 1.5;
     path.dashArray = [1, 4];
     path.sendToBack();
+
   }
 
-  exportPdf() {
+  public exportPdf() {
+
     let canvasImg = this.canvasElement.nativeElement.toDataURL();
     let doc = new jsPDF();
     doc.addImage(canvasImg, 'PNG', 0, 0);
-    doc.save('a4.pdf')
+    doc.save('results' + new Date() + '.pdf');
+
+  }
+
+  public viewAll() {
+
+    TweenLite.fromTo(document.getElementById('all'), 1, {opacity:0}, {opacity:1, display:'block'});
+    TweenMax.staggerFromTo(document.querySelectorAll('#all .columns'), 1, {y:'-50%', opacity:0}, {y:'10%', opacity:1, display:'flex', delay:.6}, .4);
+
   }
 
 }

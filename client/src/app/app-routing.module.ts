@@ -7,6 +7,7 @@ import { ProjectComponent } from './projects/project/project.component';
 import { HomeComponent } from './home/home.component';
 import { TrackComponent } from './projects/track/track.component';
 import { AboutComponent } from './about/about.component';
+import { AuthGuard } from './utils/auth.guard';
 
 const routes: Routes = [
   {
@@ -33,15 +34,25 @@ const routes: Routes = [
   },
   {
     path: 'projects',
-    component: ProjectsComponent
+    component: ProjectsComponent,
+    canActivate: [AuthGuard],
+    data: {
+      bg: 'white'
+    }
   },
   {
     path: 'projects/:id',
-    component: ProjectComponent
+    component: ProjectComponent,
+    data: {
+      bg: 'white'
+    }
   },
   {
     path: 'projects/:id/track',
-    component: TrackComponent
+    component: TrackComponent,
+    data: {
+      bg: 'white'
+    }
   }
 ];
 

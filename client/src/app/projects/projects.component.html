@@ -1,10 +1,20 @@
-<a [routerLink]="" (click)="create()">Create your <br />
-  First Project</a>
+<div class="content column">
+  <h4>Hi, {{profile.given_name}}</h4>
 
-<div id="projects">
+<button (click)="create()" *ngIf="!projects">Create your <br />First Project</button>
+
+<div id="projects" class="columns is-mobile">
+  <div class="project new">
+    <button (click)="create()" *ngIf="projects">
+       <svg width="15" height="15" fill="none" viewBox="0 0 15 15">
+          <path stroke="#fff" d="M15 7.5H0M7.5 0v15"/>
+      </svg>
+      <br />      
+      Create a Project</button>
+  </div>
   <div class="project" *ngFor="let project of projects;"><a routerLink="/projects/{{project.slug}}">{{project.name}}</a></div>
 </div>
-
+</div>
 
 <div id="new" class="modal-wrapper">
   <div id="modal" class="modal">

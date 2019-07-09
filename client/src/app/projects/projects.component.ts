@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { DataService } from '../utils/data.service';
+import { AuthService } from '../utils/auth.service';
 
 @Component({
   selector: 'app-projects',
@@ -15,15 +16,21 @@ export class ProjectsComponent implements OnInit {
 
   private newForm: FormGroup;
 
-  constructor(private _dataSvc: DataService, private _formBuilder: FormBuilder) {}
+  constructor(private _dataSvc: DataService, private _authSvc: AuthService, private _formBuilder: FormBuilder) {}
 
   async ngOnInit() {
+
+    // Watch for changes to the profile data
+    this._authSvc.profile.subscribe(profile => {
+      this.profile = profile;
+    });
 
     let userId = this._dataSvc.userId.getValue();
     if(userId)
       this.getProjects(userId)
     else 
     {
+      // this._authSvc.showLoginPrompt();
       this._dataSvc.userId.subscribe(id => {
         if(id) this.getProjects(id);
       });

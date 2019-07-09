@@ -2,8 +2,8 @@
 
 <img id="pic" [src]="profile.picture" *ngIf="isAuthenticated" alt="Profile picture" />
 
-<div id="wrapper-profile">
-  <div id="modal">
+<div id="wrapper-profile" class="modal-wrapper">
+  <div id="modal" class="modal">
 
     <div class="columns is-mobile">
         <h2 class="column"><span id="up" *ngIf="signUpShow">Sign Up</span><span id="in" *ngIf="!signUpShow">Sign In</span></h2>

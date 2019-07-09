@@ -1,12 +1,66 @@
 @import '~src/style/_variables';
 
-canvas {
+#all {
+    display: none;
 
+    .columns {
+        display: none;
+
+        .num {
+            display: block;
+            border-radius: 50px;
+
+            width: 20px;
+            height: 20px;
+            
+            color: white;
+            text-align: center;
+        }
+        
+        &:nth-last-child(5n+5) .num {  
+            background-color: $camo-green;
+        }
+        &:nth-last-child(4n+4) .num {  
+            background-color: $blueberry;
+        }
+        &:nth-last-child(2n+2) .num {  
+            background-color: $coral;
+        }
+        &:nth-last-child(0) .num {  
+            background-color: $pale-salmon;
+        }
+        // (1n) .num {  
+        // }
+    }
+    hr {
+        border-bottom: 1px solid #ccc;
+    }
+}
+
+#bottom {
+    font-family: 'Roboto Mono', sans-serif;
+    
+    text-decoration: underline;
+    text-transform: uppercase;
+    
+    line-height: 1.5;
+    letter-spacing: 2px;
+
+    margin-top: 5%;
+
+    a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        
+        div {
+            margin-left: 5%;
+        }
+    }
+}
+
+canvas {
     @include not-desktop {
         max-width: 300px;
     }
-    // background-image: url(/assets/img/grid.png);
-    // background-size: contain;
-    background-color: white;
-
 }

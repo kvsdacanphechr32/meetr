@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   
   isAuthenticated = new BehaviorSubject(false);
+  promptLogin = new BehaviorSubject(false);
   profile = new BehaviorSubject<any>(null);
 
   private auth0Client: Auth0Client;
@@ -44,5 +45,12 @@ export class AuthService {
     }
 
     return this.auth0Client;
+  }
+
+  showLoginPrompt() {
+
+    if(!this.isAuthenticated.value)
+      this.promptLogin.next(true);
+
   }
 }

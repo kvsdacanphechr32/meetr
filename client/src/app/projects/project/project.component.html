@@ -1,18 +1,62 @@
-<div *ngIf="hasContent">
-    <h2>{{project.name}}</h2>
+<div class="content columns is-mobile is-multiline" *ngIf="hasContent">
+
+  <div class="column is-full">
+
+    <h4>{{project.name}}</h4>
     <p>
-        {{project.description}}
+      {{project.description}}
     </p>
+  </div>
 
-    <a (click)="exportPdf()">
+  <div class="columns column is-full is-mobile is-multiline">
 
-    <cdn-image cloudinaryId="img/pdf-export" width="37" phoneWidth="84" svg="true"
-    alt="Export as PDF button image"></cdn-image>
+    <div class="column is-9">
+      Latest Entry: {{progress[0].date | date: 'MM/dd/yyyy'}} <br />
+      <a (click)="viewAll()">view all</a>
+    </div>
+    <div class="column">
 
-    </a>
+      <a (click)="exportPdf()">
+
+        <cdn-image cloudinaryId="img/pdf-export" width="37" phoneWidth="33" svg="true" alt="Export as PDF button image">
+        </cdn-image>
+
+      </a>
+
+    </div>
+
+    <div id="all" class="column is-full">
+      <hr />
+      <div class="columns is-mobile" *ngFor="let entry of progress; let i = index;">
+        <div class="column is-1">
+          <span class="num mono">
+            {{progress.length - i}}
+          </span>
+        </div>
+        <div class="column is-2">
+          {{entry.date | date: 'MM/dd/yyyy'}}
+        </div>
+        <div class="column">
+          {{entry.sumX}}, {{entry.sumY}}
+        </div>
+      </div>
+      <hr />
+    </div>
+  </div>
+  <div class="column is-full">
 
     <canvas #canvasElement id="canvas" width="680" height="680" *ngIf="!isPhone"></canvas>
     <canvas #canvasElement id="canvas" width="300" height="300" *ngIf="isPhone"></canvas>
 
-    <a routerLink="/projects/{{project.slug}}/track">Track your Progress</a>
+    <div id="bottom">
+      <!-- <a routerLink="/projects/{{project.slug}}/track" *ngIf="!progress">Track your Progress</a> -->
+      <a routerLink="/projects" *ngIf="progress">
+          <svg width="21" height="17" fill="none" viewBox="0 0 21 17">
+            <path stroke="#000" d="M21 8.539H.727M8.473 16.497L.363 8.388" />
+            <path stroke="#000" stroke-width="1.02719" d="M8.473.363l-8.11 8.11" />
+          </svg>
+        <div>Back to<br />Projects</div>
+      </a>
+    </div>
+  </div>
 </div>

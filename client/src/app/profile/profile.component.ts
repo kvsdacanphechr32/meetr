@@ -41,13 +41,20 @@ export class ProfileComponent implements OnInit {
     // Watch for changes to the isAuthenticated state
     this.authService.isAuthenticated.subscribe(value => {
       this.isAuthenticated = value;
-      console.log('this.isAuthenticated', this.isAuthenticated)
     });
 
     // Watch for changes to the profile data
     this.authService.profile.subscribe(profile => {
       this.profile = profile;
       this.createOrGetUser(profile);
+    });
+
+    // Prompt for login as needed
+    this.authService.promptLogin.subscribe(prompt => {
+      if(prompt) {
+        this.signUpShow = false;
+        this.showModal();
+      } 
     });
 
   }

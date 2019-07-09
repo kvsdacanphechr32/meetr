@@ -38,9 +38,9 @@ body {
 
   overflow-x: hidden;
 
-  @include mobile-only {
+  /* @include mobile-only {
     font-size: 12px;
-  }
+  } */
 
   #bg {
     position: fixed;
@@ -61,6 +61,10 @@ body {
 
     #bg {
       animation: fade 1s forwards;
+    }
+
+    .content {
+      color: black;
     }
 
     footer {
@@ -99,12 +103,11 @@ h3 {
 }
 
 h4 {
+  color: black;
+  font-family: 'Spectral';
   @include pxtoem(24, 48);
 
-  line-height: 1.42;
-  letter-spacing: 4px;
-
-  padding-bottom: 2%;
+  line-height: 1.5;
 }
 
 .container {
@@ -158,4 +161,9 @@ h4 {
     @include pxtoem(18, 24);
     line-height: 1.5;
   }
+}
+
+.mono {
+  font-family: 'Roboto Mono', sans-serif;
+
 }

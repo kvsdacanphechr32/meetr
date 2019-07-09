@@ -1,0 +1,94 @@
+@import '~src/style/_variables';
+
+#arrow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    svg {
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+
+    span {
+        text-transform: uppercase;
+    }
+}
+
+form {
+    
+    text-align: center;
+    
+    h4, p {
+        margin: 0;
+    }
+
+    	
+	/* Hide the browser's default radio button */
+	input {
+        position: absolute;
+          cursor: pointer;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 1000%;
+        opacity: 0;
+        z-index: 100;
+      }
+  
+      /* Create a custom radio button */
+      .radio {
+        // position: absolute;
+        display: inline-block;
+        border: solid 1px;
+        top: 0;        
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+
+        &.one {
+            border-color: $pale-salmon;
+        }
+        &.two {
+            border-color: $coral;
+        }
+        &.three {
+            border-color: $blueberry;
+        }
+        &.four {
+            border-color: $camo-green;
+        }
+      }
+  
+      /* When the radio button is checked, add a blue background */
+      input:checked ~ .radio {
+        color: white;
+      }
+      input:disabled ~ .radio {
+        opacity: .5;
+        color: white;
+      }
+  
+      /* Create the indicator (the dot/circle - hidden when not checked) */
+      .radio:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+  
+      /* Show the indicator (dot/circle) when checked */
+      input:checked ~ .radio:after {
+        display: block;
+      }
+  
+      /* Style the indicator (dot/circle) */
+      input:after {
+        top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+      }
+
+}
