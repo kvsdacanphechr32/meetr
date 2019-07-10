@@ -2,9 +2,15 @@
 
 <div class="column is-full">      
     <h4>Track Your Progress</h4>
+
+    <select (change)="projectSelected($event.target.value)" id="selector" *ngIf="projects">
+        <option selected="selected">Select project...</option>
+        <option *ngFor="let project of projects" value="{{project.slug}}">{{project.name}}</option>
+    </select>
+
     <div id="arrow">
         <span>Not at all</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="159" height="17" fill="none" viewBox="0 0 159 17">
+        <svg width="159" height="17" fill="none" viewBox="0 0 159 17">
             <path stroke="url(#a)" d="M0 8.236h158.555"/>
             <path stroke="#5A5C27" d="M150.723.355l7.922 7.922"/>
             <path stroke="#5A5C27" stroke-width="1.00351" d="M150.723 16.117l7.922-7.922"/>

@@ -38,10 +38,6 @@ body {
 
   overflow-x: hidden;
 
-  /* @include mobile-only {
-    font-size: 12px;
-  } */
-
   #bg {
     position: fixed;
     width: 100%;
@@ -49,6 +45,23 @@ body {
     z-index: -1;
     background-image: linear-gradient(to top, #5a5c27, #634da0 33%, #e85e5d 66%, #e9bbb0);
     animation: fade-out 1s forwards;
+  }
+
+  &.activity {
+    .content {
+      color: white;
+
+      h4 {
+        color: white;
+      }
+    }
+  }
+
+  &.pale-salmon {
+    #bg {
+      background-color: $pale-salmon;
+      background-image: none;
+    }
   }
 
   &.white {

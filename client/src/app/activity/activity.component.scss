@@ -1,0 +1,14 @@
+@import '~src/style/_variables';
+
+.activity {
+    .steps {
+
+        .text {
+            ::ng-deep p strong {
+                @include pxtoem(18, 24);
+                font-weight: 100;
+            }
+        }
+
+    }
+}

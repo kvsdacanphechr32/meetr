@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { TrackComponent } from './projects/track/track.component';
 import { AboutComponent } from './about/about.component';
 import { AuthGuard } from './utils/auth.guard';
+import { ActivityComponent } from './activity/activity.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,17 @@ const routes: Routes = [
     data: {
       bg: 'white'
     }
+  },
+  {
+    path: 'track',
+    component: TrackComponent,
+    data: {
+      bg: 'white'
+    }
+  },
+  {
+    path: 'talk',
+    component: ActivityComponent
   }
 ];
 

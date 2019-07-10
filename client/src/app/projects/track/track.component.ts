@@ -10,6 +10,7 @@ import { DataService } from '../../utils/data.service';
 })
 export class TrackComponent implements OnInit {
   
+  public projects: any[];
   public prompts: Array<string> =  
   [
     'You and your project team have strengthened your network.',
@@ -24,29 +25,52 @@ export class TrackComponent implements OnInit {
     'You are confident that people in the project’s network will maintain their connections beyond the life of the project.', 
     'You and your project team are more able to listen and respond to your participants.', 
     'You have built more trust with the people with whom you are working.'
-  ]
+  ];
 
   private responseForm: FormGroup;
+  private selectedProjectId: string;
 
   constructor(private _dataSvc: DataService, private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
 
     let radioGroups = {};
-    this.prompts.forEach((p, i) => radioGroups[i + ''] = [null, [Validators.required]] );
+    this.prompts.forEach((p, i) => radioGroups[i + ''] = [null, [Validators.required]]);
     this.responseForm = this._formBuilder.group(radioGroups);
+
+    // If no pre-selected project, get all projects for dropdown
+    if (!this._dataSvc.currentProjectId) {
+
+      this._dataSvc.userId.subscribe(id => {
+        if (id) {
+          this._dataSvc.getDataForUrl('/api/project/get/' + this._dataSvc.userId.value).subscribe((response: any) => {
+
+            this.projects = response;
+
+          });
+        }
+      });
+      
+    }
+
+  }
+
+  projectSelected(id: string) {
+
+    this.selectedProjectId = id;
+    this.responseForm.reset();
 
   }
 
   submitNew() {
-    
+
     let data = {
-      projectId: this._dataSvc.currentProjectId,
+      projectId: this.selectedProjectId || this._dataSvc.currentProjectId,
       responses: Object.values(this.responseForm.value)
     };
 
     this._dataSvc.sendDataToUrl('/api/progress/create', data).subscribe((response: any) => {
-    
+
     });
   }
 

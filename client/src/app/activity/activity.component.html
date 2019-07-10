@@ -1,0 +1,29 @@
+<div class="content column">
+
+    <div id="toc">
+        <ol>
+
+            <li>Network Building
+            <li>Holding Space</li>    
+                
+                    <!-- 3     Distributing Ownership
+                    4     Persistent Input</li> -->
+
+        </ol>
+    </div>
+
+    <div class="activity" *ngFor="let activity of activities; let i = index;">
+
+        <h4>Activity {{i+1}}: {{activity.name}}</h4>
+
+        <div class="step">
+            <p>{{activity.intro}}</p>
+
+            <div class="text" [innerHtml]="activity.step1.html"></div>
+        </div>
+
+
+    </div>
+
+
+</div>

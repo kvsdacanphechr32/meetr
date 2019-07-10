@@ -35,7 +35,6 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
   }
 
-
   // Is passed route active?
   itemActive(route: string) {
 

@@ -24,6 +24,7 @@ import { CloudinaryConfiguration, CloudinaryModule } from '@cloudinary/angular-5
 import cloudinaryConfiguration from './cdn.config';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
+import { ActivityComponent } from './activity/activity.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -43,7 +44,8 @@ export const config: CloudinaryConfiguration = cloudinaryConfiguration;
     TrackComponent,
     ProjectComponent,
     FooterComponent,
-    AboutComponent
+    AboutComponent,
+    ActivityComponent
   ],
   imports: [
     BrowserModule,
