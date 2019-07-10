@@ -22,7 +22,7 @@
     </div>
 </div>
       
-<form class="columns column is-11-mobile is-full-tablet is-multiline" [formGroup]="responseForm" (submit)="submitNew()">
+<form class="columns column is-full-mobile is-full-tablet is-multiline" [formGroup]="responseForm" (submit)="submitNew()">
 
     <div class="row" *ngFor='let prompt of prompts; let i = index;'>
        <h4>
@@ -32,14 +32,17 @@
 
        <div class="fields">
 
-           <input formControlName="{{i}}" type="radio" value="1" checked />
-           <span class="radio one"></span>
-           <input formControlName="{{i}}" type="radio" value="2" />
-           <span class="radio two"></span>
-           <input formControlName="{{i}}" type="radio" value="3" />
-           <span class="radio three"></span>
-           <input formControlName="{{i}}" type="radio" value="4" />
-           <span class="radio four"></span>
+           <input id="{{i}}_1" formControlName="{{i}}" type="radio" value="1" />
+           <label class="radio one" for="{{i}}_1">1</label>
+           
+           <input id="{{i}}_2" formControlName="{{i}}" type="radio" value="2" />
+           <label class="radio two" for="{{i}}_2">2</label>
+           
+           <input id="{{i}}_3" formControlName="{{i}}" type="radio" value="3" />
+           <label class="radio three" for="{{i}}_3">3</label>
+          
+           <input id="{{i}}_4" formControlName="{{i}}" type="radio" value="4" />
+           <label class="radio four" for="{{i}}_4">4</label>
            
        </div>
     </div>
