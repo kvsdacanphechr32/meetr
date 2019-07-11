@@ -19,8 +19,8 @@ exports.create = async (req, res) => {
     let sumX = 0;
     let sumY = 0;
 
-    responses.slice(0, 5).forEach((n) => sumX += parseInt(n)-3);
-    responses.slice(6, 10).forEach((n) => sumY += parseInt(n)-3);
+    responses.slice(0, 4).forEach((n) => sumX += parseInt(n)-3);
+    responses.slice(5, 9).forEach((n) => sumY += parseInt(n)-3);
 
     sumX += ((parseInt(responses[10])-3) + (parseInt(responses[11])-3));
     sumY += ((parseInt(responses[10])-3) + (parseInt(responses[11])-3));

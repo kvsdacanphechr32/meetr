@@ -6,6 +6,9 @@ $tablet: 768px;
 
 @import '_variables';
 
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
 @keyframes fade {
   from {
     opacity: 1;
@@ -15,6 +18,7 @@ $tablet: 768px;
     opacity: 0;
   }
 }
+
 @keyframes fade-out {
   from {
     opacity: 0;
@@ -45,6 +49,8 @@ body {
     z-index: -1;
     background-image: linear-gradient(to top, #5a5c27, #634da0 33%, #e85e5d 66%, #e9bbb0);
     animation: fade-out 1s forwards;
+
+    @include filter(opacity, 1);
   }
 
   &.activity {
@@ -55,20 +61,28 @@ body {
         color: white;
       }
     }
+    #bg {
+      background-image: none;
+    }
   }
 
   &.pale-salmon {
     #bg {
       background-color: $pale-salmon;
-      background-image: none;
+    }
+  }
+
+  &.coral {
+    #bg {
+      background-color: $coral;
     }
   }
 
   &.white {
-    
+
     #lines {
       span {
-        background: black!important;
+        background: black !important;
       }
     }
 
@@ -179,4 +193,52 @@ h4 {
 .mono {
   font-family: 'Roboto Mono', sans-serif;
 
+}
+
+// Owl slider overrides
+.owl-dots {  
+  &.end {
+
+    .owl-dot {
+      @include translate(-200%);
+    }
+    .next {
+      display: inline-block !important;
+    }
+    
+  }
+}
+
+.owl-dot {
+  @include transition(all, .6s, ease-in-out);
+
+  span {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 20px !important;
+    height: 20px !important;
+
+    border: solid 1px #ffffff;
+    border-radius: 50px;
+
+    background: none !important;
+
+    &::after {
+      content: "";
+
+      opacity: 0;
+      width: 14px;
+      height: 14px;
+      border-radius: 50px;
+
+      background-color: #ffffff;
+    }
+  }
+
+  &.active {
+    span::after {
+      opacity: 1;
+    }
+  }
 }

@@ -1,14 +1,56 @@
 @import '~src/style/_variables';
 
-.activity {
-    .steps {
+.content {
+    .activity:first-of-type {
+        display: block;
+    }
+}
 
-        .text {
-            ::ng-deep p strong {
-                @include pxtoem(18, 24);
-                font-weight: 100;
+#toc {
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: table;
+            margin-top: 4%;
+
+            &.active {
+                border-bottom: 1px solid white;
             }
         }
+        span {
+            margin-right: 15px;
+        }
+    }
+}
+
+.activity {
+    display: none;
+    
+  .step {
+
+    .text {
+
+      text-align: center;
+
+      ::ng-deep p {
+        font-size: 1em;
+
+        strong {
+          @include pxtoem(18, 24);
+          font-weight: 100;
+        }
+      }
+
 
     }
+  }
+
+  .next {
+    display: none;
+    position: absolute;
+    right: 0;
+  }
 }

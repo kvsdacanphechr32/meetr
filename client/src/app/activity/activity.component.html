@@ -1,29 +1,38 @@
 <div class="content column">
 
-    <div id="toc">
-        <ol>
+  <nav id="toc">
+    <ul>
+      <li *ngFor="let activity of activities; let i = index;" [class.active]="i === 0"><span>{{i+1}}</span>{{activity.name}}</li>
+    </ul>
+  </nav>
 
-            <li>Network Building
-            <li>Holding Space</li>    
-                
-                    <!-- 3     Distributing Ownership
-                    4     Persistent Input</li> -->
+  <div class="activity a_{{i}}" *ngFor="let activity of activities; let i = index;">
 
-        </ol>
-    </div>
+    <h4>Activity {{i+1}}: {{activity.name}}</h4>
 
-    <div class="activity" *ngFor="let activity of activities; let i = index;">
-
-        <h4>Activity {{i+1}}: {{activity.name}}</h4>
+    <owl-carousel-o class="slides" [options]="customOptions" (initialized)="sliderInit(i)" (translated)="slideChange($event, i)">
+      <ng-template carouselSlide>
 
         <div class="step">
-            <p>{{activity.intro}}</p>
-
-            <div class="text" [innerHtml]="activity.step1.html"></div>
+          <p>{{activity.intro}}</p>
+          <div class="text" [innerHtml]="activity.step1.html | sanitizeHtml"></div>
         </div>
 
+      </ng-template>
+      <ng-template carouselSlide>
 
-    </div>
+        <div class="step">
+          <div class="text" [innerHtml]="activity.step2.html | sanitizeHtml"></div>
+        </div>
 
+      </ng-template>
+    </owl-carousel-o>
+      
+    <svg class="arrow next" width="30" height="24" fill="none" viewBox="0 0 30 24" (click)="gotoNext()">
+        <path stroke="#fff" d="M0 11.923h29.282M17.928.359l11.713 11.713"/>
+        <path stroke="#fff" stroke-width="1.01511" d="M17.928 23.331l11.713-11.713"/>
+    </svg>
+ 
+  </div>
 
 </div>

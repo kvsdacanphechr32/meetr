@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -25,6 +26,9 @@ import cloudinaryConfiguration from './cdn.config';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { ActivityComponent } from './activity/activity.component';
+import { SanitizeHtmlPipe } from './utils/sanitize-html.pipe';
+
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -45,15 +49,18 @@ export const config: CloudinaryConfiguration = cloudinaryConfiguration;
     ProjectComponent,
     FooterComponent,
     AboutComponent,
-    ActivityComponent
+    ActivityComponent,
+    SanitizeHtmlPipe
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     CloudinaryModule.forRoot(cloudinary, config),
+    CarouselModule
   ],
   providers: [DataService, HttpClient],
   bootstrap: [AppComponent]

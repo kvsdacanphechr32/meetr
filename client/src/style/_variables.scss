@@ -12,7 +12,7 @@ $camo-green: #5a5c27;
 
 // FONT CONFIG
 $base-font-size: 14;
-$base-font-size-mobile: 12;
+$base-font-size-mobile: 14;
 
 @mixin pxtoem($mobile, $desktop: $base-font-size) {
     font-size: ($desktop / $base-font-size) + em;
