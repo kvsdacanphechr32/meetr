@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
   public isAuthenticated: boolean;
   public alreadyExists: boolean;
   public signUpShow: boolean;
+  public signUpSubmitted: boolean;
 
   private signupForm: FormGroup;
   private signinForm: FormGroup;
@@ -111,7 +112,25 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  // Login via user/pass
+  async loginViaDatabase() {
+
+    let body = {
+      realm: 'Username-Password-Authentication',
+      responseType: 'token',
+      email: this.f['email'].value,
+      password: this.f['password'].value,      
+      scope: 'openid profile email',
+      redirect_uri: `${window.location.origin}/callback`
+    };
+
+    await this.auth0Client.loginWithRedirect(body);
+
+  }
+
   async signup() { 
+
+    this.signUpSubmitted = true;
     
     // stop here if form is invalid
     if (this.signupForm.invalid) {

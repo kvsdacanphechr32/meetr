@@ -1,4 +1,4 @@
-<a id="signin" href="#" (click)="showModal()" *ngIf="!isAuthenticated">Sign In</a>
+<a id="signin" class="top mono" href="#" (click)="showModal()" *ngIf="!isAuthenticated">Sign In</a>
 
 <img id="pic" [src]="profile.picture" *ngIf="isAuthenticated" alt="Profile picture" />
 
@@ -6,41 +6,45 @@
   <div id="modal" class="modal">
 
     <div class="columns is-mobile">
-        <h2 class="column"><span id="up" *ngIf="signUpShow">Sign Up</span><span id="in" *ngIf="!signUpShow">Sign In</span></h2>
-        
-        <div id="close-btn" class="column">
-            <a (click)="closeModal()">
-              <div id="lines">
-                <span></span>
-                <span></span>
-              </div>
-            </a>
-          </div>
+      <h2 class="column is-9"><span id="up" *ngIf="signUpShow">Sign Up</span><span id="in" *ngIf="!signUpShow">Sign In</span>
+      </h2>
+
+      <div id="close-btn" class="column">
+        <a (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 50 50">
+              <path fill="#fff" d="M0 0h50v50H0z"/>
+              <path stroke="#000" stroke-width="1" d="M11.414 11.586l27.577 28.991M40.406 11.121L11.414 38.699"/>
+            </svg>          
+        </a>
       </div>
+    </div>
 
     <!-- SIGNIN -->
-    <div id="signin" *ngIf="!signUpShow">
-      
-      <p>Sign in with Google or Facebook</p>
+    <div class="signin" *ngIf="!signUpShow">
 
-      <a class="social" (click)="login('google-oauth2')" *ngIf="!isAuthenticated">
-        <svg width="18" height="12" fill="none" viewBox="0 0 18 12">
-          <path fill="#000" fill-rule="evenodd"
+      <p class="roboto">Sign in with Google or Facebook</p>
+
+      <div class="social-login">
+                
+        <a class="social" (click)="login('google-oauth2')" *ngIf="!isAuthenticated">
+          <svg width="18" height="12" fill="none" viewBox="0 0 18 12">
+            <path fill="#000" fill-rule="evenodd"
             d="M5.727 4.857v1.942h3.248c-.13.834-.981 2.445-3.248 2.445-1.955 0-3.55-1.603-3.55-3.578 0-1.975 1.595-3.578 3.55-3.578 1.113 0 1.858.47 2.283.875L9.565 1.48C8.566.56 7.274 0 5.727 0 2.561 0 0 2.534 0 5.666c0 3.133 2.56 5.666 5.727 5.666 3.306 0 5.498-2.299 5.498-5.536 0-.373-.04-.656-.09-.94H5.728zM18 4.857h-1.636v-1.62h-1.637v1.62h-1.636v1.619h1.636v1.618h1.637V6.476H18"
             clip-rule="evenodd" />
-        </svg>
-      </a>
-      <a class="social" (click)="login('facebook')" *ngIf="!isAuthenticated">
-        <svg width="8" height="16" fill="none" viewBox="0 0 8 16">
-          <path fill="#000"
+          </svg>
+        </a>
+        <a class="social" (click)="login('facebook')" *ngIf="!isAuthenticated">
+          <svg width="8" height="16" fill="none" viewBox="0 0 8 16">
+            <path fill="#000"
             d="M5.333 5.128V3.602c0-.69.159-1.038 1.271-1.038H8V0H5.67C2.818 0 1.876 1.258 1.876 3.417v1.711H0v2.564h1.875v7.693h3.458V7.692h2.35L8 5.128H5.333z" />
-        </svg>
-      </a>
+          </svg>
+        </a>
+      </div>
 
       <hr />
 
-      <p>Sign in with email</p>
-
+      <p>Or, <a href="#" (click)="login('Username-Password-Authentication')">sign in</a> with email</p>
+<!-- 
       <form class="columns column is-11-mobile is-full-tablet is-multiline" [formGroup]="signinForm"
         (submit)="login('Username-Password-Authentication')" *ngIf="!isAuthenticated">
         <div class="fields">
@@ -62,14 +66,11 @@
         <div class="column is-full-mobile is-5-tablet" data-aos="fade-up" data-aos-delay="1500">
           <button type="submit">Sign In</button>
         </div>
-      </form>
+      </form> -->
 
       <div class="lower">
-        <span>          
-          Don’t have an account? <a href="#" (click)="toggleSignup()">Sign up.</a>
-        </span>
         <span>
-            Forgot password
+          Don’t have an account? <a href="#" (click)="toggleSignup()">Sign up.</a>
         </span>
       </div>
 
@@ -78,49 +79,51 @@
     <!-- SIGNUP -->
     <div id="signup" *ngIf="signUpShow">
 
-        <p>Sign up with Google or Facebook</p>
+      <p>Sign up with Google or Facebook</p>
 
+      <div class="social-login">
         <a class="social" (click)="login('google-oauth2')" *ngIf="!isAuthenticated">
           <svg width="18" height="12" fill="none" viewBox="0 0 18 12">
             <path fill="#000" fill-rule="evenodd"
-              d="M5.727 4.857v1.942h3.248c-.13.834-.981 2.445-3.248 2.445-1.955 0-3.55-1.603-3.55-3.578 0-1.975 1.595-3.578 3.55-3.578 1.113 0 1.858.47 2.283.875L9.565 1.48C8.566.56 7.274 0 5.727 0 2.561 0 0 2.534 0 5.666c0 3.133 2.56 5.666 5.727 5.666 3.306 0 5.498-2.299 5.498-5.536 0-.373-.04-.656-.09-.94H5.728zM18 4.857h-1.636v-1.62h-1.637v1.62h-1.636v1.619h1.636v1.618h1.637V6.476H18"
-              clip-rule="evenodd" />
+            d="M5.727 4.857v1.942h3.248c-.13.834-.981 2.445-3.248 2.445-1.955 0-3.55-1.603-3.55-3.578 0-1.975 1.595-3.578 3.55-3.578 1.113 0 1.858.47 2.283.875L9.565 1.48C8.566.56 7.274 0 5.727 0 2.561 0 0 2.534 0 5.666c0 3.133 2.56 5.666 5.727 5.666 3.306 0 5.498-2.299 5.498-5.536 0-.373-.04-.656-.09-.94H5.728zM18 4.857h-1.636v-1.62h-1.637v1.62h-1.636v1.619h1.636v1.618h1.637V6.476H18"
+            clip-rule="evenodd" />
           </svg>
         </a>
         <a class="social" (click)="login('facebook')" *ngIf="!isAuthenticated">
           <svg width="8" height="16" fill="none" viewBox="0 0 8 16">
             <path fill="#000"
-              d="M5.333 5.128V3.602c0-.69.159-1.038 1.271-1.038H8V0H5.67C2.818 0 1.876 1.258 1.876 3.417v1.711H0v2.564h1.875v7.693h3.458V7.692h2.35L8 5.128H5.333z" />
+            d="M5.333 5.128V3.602c0-.69.159-1.038 1.271-1.038H8V0H5.67C2.818 0 1.876 1.258 1.876 3.417v1.711H0v2.564h1.875v7.693h3.458V7.692h2.35L8 5.128H5.333z" />
           </svg>
         </a>
-  
-        <hr />
+      </div>
 
-        <p>Sign up with email</p>  
+      <hr />
 
-        <form class="columns column is-11-mobile is-full-tablet is-multiline" [formGroup]="signupForm" (submit)="signup()"
-        >
+      <p>Sign up with email</p>
+
+      <form class="columns column is-11-mobile is-full-tablet is-multiline" [formGroup]="signupForm"
+        (submit)="signup()">
         <div class="fields">
-      
-          <div class="column is-full-mobile is-half-tablet" data-aos="fade-up" data-aos-delay="500">
+
+          <div class="column is-full-mobile is-half-tablet no-pad" data-aos="fade-up" data-aos-delay="500">
             <input formControlName="name" id="name" placeholder="name" required />
-            <div *ngIf="f.name.invalid">Required.</div>
+            <div class="note" *ngIf="signUpSubmitted && f.name.invalid">Required.</div>
           </div>
-      
-          <div class="column is-full-mobile is-half-tablet" data-aos="fade-up" data-aos-delay="1000">
+
+          <div class="column is-full-mobile is-half-tablet no-pad" data-aos="fade-up" data-aos-delay="1000">
             <input formControlName="email" id="email" placeholder="email" required />
-            <div *ngIf="f.email.invalid">
+            <div class="note" *ngIf="signUpSubmitted && f.email.invalid">
               <span *ngIf="f.email.errors.required">Required.</span>
               <span *ngIf="f.email.errors.email">Please enter a valid email address.</span>
             </div>
           </div>
-          <div class="column is-full-mobile is-half-tablet" data-aos="fade-up" data-aos-delay="1000">
+          <div class="column is-full-mobile is-half-tablet no-pad" data-aos="fade-up" data-aos-delay="1000">
             <input formControlName="password" id="password" placeholder="password" type="password" required />
-            <div *ngIf="f.password.invalid">
+            <div class="note" *ngIf="signUpSubmitted && f.password.invalid">
               <span *ngIf="f.password.errors.required">Required.</span>
               <span *ngIf="f.password.errors.pattern">Your password must adhere to the following: at least 8 characters,
                 Lowercase letters, Uppercase letters, Numbers
-      
+
                 Special characters.</span>
             </div>
           </div>
@@ -129,13 +132,13 @@
           <button type="submit">Create An Account</button>
         </div>
       </form>
-      
+
       <div class="lower">
-          <span>          
-              Already have an account? <a href="#" (click)="toggleSignup()">Sign in.</a>
-          </span>
-        </div>
-  
+        <span>
+          Already have an account? <a href="#" (click)="toggleSignup()">Sign in.</a>
+        </span>
+      </div>
+
 
     </div>
   </div>

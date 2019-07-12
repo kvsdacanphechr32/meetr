@@ -20,36 +20,36 @@
   <div id="modal" class="modal">
 
     <div class="columns is-mobile">
-      <h2 class="column">Create a Project</h2>
+      <h2 class="column is-9">Create a Project</h2>
 
       <div id="close-btn" class="column">
-        <a (click)="closeModal()">
-          <div id="lines">
-            <span></span>
-            <span></span>
-          </div>
-        </a>
-      </div>
+          <a (click)="closeModal()">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 50 50">
+                <path fill="#fff" d="M0 0h50v50H0z"/>
+                <path stroke="#000" stroke-width="1" d="M11.414 11.586l27.577 28.991M40.406 11.121L11.414 38.699"/>
+              </svg>          
+          </a>
+        </div>
     </div>
 
     <form class="columns column is-11-mobile is-full-tablet is-multiline" [formGroup]="newForm" (submit)="submitNew()">
       <div class="fields">
         <div class="column is-full-mobile is-half-tablet" data-aos="fade-up" data-aos-delay="1000">
           <input formControlName="name" id="name" placeholder="Project Name" required />
-          <div *ngIf="f.name.invalid">
+          <div *ngIf="projectSubmitted && f.name.invalid">
             <span *ngIf="f.name.errors.required">Required.</span>
           </div>
         </div>
         <div class="column is-full-mobile is-half-tablet" data-aos="fade-up" data-aos-delay="1000">
           <textarea formControlName="description" id="description" placeholder="Project Description" required></textarea>
-          <div *ngIf="f.description.invalid">
+          <div *ngIf="projectSubmitted && f.description.invalid">
             <span *ngIf="f.description.errors.required">Required.</span>
 
           </div>
         </div>
       </div>
       <div class="column is-full-mobile is-5-tablet" data-aos="fade-up" data-aos-delay="1500">
-        <button type="submit">Create Project</button>
+        <button class="mono no-pad" type="submit">Create Project</button>
       </div>
     </form>
   </div>

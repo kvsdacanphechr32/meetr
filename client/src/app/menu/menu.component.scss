@@ -43,6 +43,12 @@
                 opacity: .5;
                 cursor: default;
             }
+
+            &#signout {
+
+  font-family: 'Roboto', sans-serif;
+  @include pxtoem(18, 24);
+            }
         }
 
         @include phones {

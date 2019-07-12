@@ -25,8 +25,8 @@
     <hr />
 
     <ul *ngIf="isAuthenticated === true">
-            <li>           
-    <a href="#" class="">Sign Out</a>
+            <li id="signout">           
+    <a href="#" (click)="signOut()">Sign Out</a>
     </li>
     </ul>
 </div>

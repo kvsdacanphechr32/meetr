@@ -13,6 +13,7 @@ export class ProjectsComponent implements OnInit {
 
   public profile: any;
   public projects: any[]
+  public projectSubmitted: boolean;
 
   private newForm: FormGroup;
 
@@ -48,20 +49,27 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects(userId) {
+
     this._dataSvc.getDataForUrl('/api/project/get/' + userId).subscribe((response: any) => {
         
       this.projects = response;
 
     });
+  
   }
 
   create() {
 
     document.getElementById('new').style.display = 'flex';
+    document.body.classList.value = '';
 
   }
 
   submitNew() {
+
+    this.projectSubmitted = true;
+
+    if(!this.newForm.valid) return;
 
     let data = {
       name: this.f['name'].value,
@@ -70,15 +78,19 @@ export class ProjectsComponent implements OnInit {
     }
 
     this._dataSvc.sendDataToUrl('/api/project/create', data).subscribe((response: any) => {
+      
       document.getElementById('new').style.display = 'none';
+      document.body.classList.value = 'white';
       this.projects.push(response);
+
     });
 
   }
 
   closeModal() { 
 
-    document.getElementById('wrapper-profile').style.display = 'none';
+    document.getElementById('new').style.display = 'none';
+    document.body.classList.value = 'white';
 
   }
 

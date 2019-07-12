@@ -1,41 +1,45 @@
 @import '~src/style/_variables';
 
 #projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    grid-gap: 17px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-gap: 17px;
 }
+
 .project {
 
-    background-color: $camo-green;
-    background-size: cover;
-    
-    &:not(.new) {
-        background-image: cdn-image('img/grid-sm', c_fill, f_auto, w_320);
-    }
+  background-color: $camo-green;
+  background-size: cover;
 
-    height: 140px; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  &:not(.new) {
+    background-image: cdn-image('img/grid-sm', c_fill, f_auto, w_320);
+  }
 
-    button, a {
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button,
+  a {
     display: table;
-    
+
     font-family: 'Roboto Mono', sans-serif;
-    
+
     text-align: center;
     text-decoration: underline;
     text-transform: uppercase;
-    
+
     line-height: 1.5;
     letter-spacing: 2px;
-}
-button {
+  }
+
+  button {
     color: white;
     @include pxtoem(18, 24);
-}
-a {
+  }
+
+  a {
     background-color: white;
     @include pxtoem(14, 18);
 
@@ -43,5 +47,30 @@ a {
     padding-bottom: 2%;
     padding-left: 4%;
     padding-right: 4%;
+  }
+
+  &.new {
+      button {
+          background: none;
+          border: none;
+      }
+  }
 }
+
+form {
+    button {
+
+    @include pxtoem(18, 24);
+       
+    text-decoration: underline;
+    text-transform: uppercase;
+    
+    line-height: 1.5;
+    letter-spacing: 2px;
+
+    margin-top: 5%;
+
+    border: none;
+
+    }
 }

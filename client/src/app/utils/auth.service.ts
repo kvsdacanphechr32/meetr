@@ -53,4 +53,10 @@ export class AuthService {
       this.promptLogin.next(true);
 
   }
+
+  signOut() {
+
+    this.auth0Client.logout();
+    
+  }
 }

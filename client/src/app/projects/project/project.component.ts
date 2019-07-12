@@ -79,7 +79,7 @@ export class ProjectComponent implements OnInit, AfterViewInit {
     let tooltip: paper.PointText;
     let segments: paper.Point[] = [];
     let colors = ['#e9bbb0', '#e85e5d', '#634da0', '#5a5c27'];
-    let colorIndex = -1;
+    let colorIndex = 4;
 
     let bgImg = new Image();
     bgImg.crossOrigin = 'anonymous';
@@ -93,8 +93,9 @@ export class ProjectComponent implements OnInit, AfterViewInit {
 
     this.progress.forEach((survey, i) => {
 
-      colorIndex++;
-      if (colorIndex === 4) colorIndex = 0;
+
+      if (colorIndex === 0) colorIndex = 4;
+      colorIndex--;
 
       let xPos = (widthExt / 2) + (survey.sumX * ((widthExt / 2) / 6)),
         yPos = (heightExt / 2) - survey.sumY * ((heightExt / 2) / 6);
@@ -110,7 +111,7 @@ export class ProjectComponent implements OnInit, AfterViewInit {
 
       let txt = new p.PointText({
         point: [xPos - 5, yPos + 5],
-        content: i + 1,
+        content: this.progress.length - i,
         fillColor: 'white',
         fontSize: 16
       });
@@ -131,9 +132,10 @@ export class ProjectComponent implements OnInit, AfterViewInit {
         // g.scale(.75);
         tooltip.remove();
       };
-
+      console.log(g.onMouseEnter)
+      
     });
-
+    
     // Draw line(s)
     let path = new p.Path(segments);
     path.strokeColor = new p.Color('black');

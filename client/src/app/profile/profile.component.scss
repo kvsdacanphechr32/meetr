@@ -1,9 +1,19 @@
 @import '~src/style/_variables';
 
+#signin {
+
+    @include pxtoem(14, 16);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+}
+
 #pic {
+    
     max-width: 30px;
     max-height: 30px;
     border-radius: 50px;
+
 }
 
 #wrapper-profile {
@@ -26,6 +36,10 @@
             border: solid 1px $pale-salmon;
         }
 
+        .signin {
+            line-height: 1.5;
+        }
+
         a.social {
             display: inline-flex;
 
@@ -37,54 +51,14 @@
             border: solid 1px #000000;
             border-radius: 50px;
         }
-        
-        #close-btn {
 
-    
+        .social-login {
             display: flex;
-            align-items: center;
-    
-            #lines {
-                position: relative;
-    
-                display: inline-grid;
-                align-content: center;
-    
-                span {
-                    display: block;
-                    height: 1px;
-                    width: 30px;
-                    background: black;
-                    left: 0;
-    
-                    transform-origin: left;
-    
-                    &:nth-child(1) {
-                        position: relative;
-                        top: 6px;
-                        @include transform(rotate(45deg));
-                    }
-    
-                    &:nth-child(2) {
-                        position: relative;
-                        top: 12px;
-                        @include transform(rotate(-45deg));
+            justify-content: space-evenly;
 
-                    }
-    
-                }
-    
-            }
+            margin-top: 7%;
+            margin-bottom: 12%;
         }
+    
     }
-}
-
-#signin {
-
-  font-family: 'Roboto Mono';
-  font-size: pxtem(12, 14);
-  
-  letter-spacing: 2px;
-
-  text-transform: uppercase;
 }

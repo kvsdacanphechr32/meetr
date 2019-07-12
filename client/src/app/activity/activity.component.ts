@@ -47,6 +47,7 @@ export class ActivityComponent implements OnInit, AfterViewInit {
     TweenLite.to(document.querySelector('.activity.a_' + this.currentActivity), 1.2, {scale:0, opacity:0, display: 'none', onComplete:() => {
       TweenLite.fromTo(document.querySelector('.activity.a_' + this.currentActivity), 1.2, {scale:0, opacity:0}, {scale:1, opacity:1, display: 'block'});
     }});
+    
     this.currentActivity++;
     
     TweenLite.to(document.getElementById('bg'), .7, {css: {filter: 'opacity(0.5)'}, onComplete:() => {

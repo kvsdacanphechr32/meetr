@@ -41,4 +41,10 @@ export class MenuComponent implements OnInit {
     return '/'+route == this.currentUrl;
 
   }
+
+  signOut() {
+
+      this.authService.signOut();
+
+  }
 }

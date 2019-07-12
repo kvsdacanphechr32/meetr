@@ -42,6 +42,10 @@ body {
 
   overflow-x: hidden;
 
+  .top {
+    color: white;
+  }
+
   #bg {
     position: fixed;
     width: 100%;
@@ -165,11 +169,35 @@ h4 {
     display: block;
     background-color: white;
 
-    width: 355px;
-    height: 605px;
+    margin-top: -8%;
 
-    padding-left: 1.5%;
-    padding-right: 1.5%;
+    width: 355px;
+    min-height: 605px;
+
+    padding: 0 6.5% 6.5%;
+
+    .fields {
+      input, textarea {
+          border: solid 1px rgba(0, 0, 0, 0.4);
+          padding: 5% 5%;
+          margin: 3% 0;
+
+          width: 92%;
+          
+          @include placeholder {
+              text-transform: capitalize;
+              font-size: 1.5em;
+          }
+      }
+      .note {
+          padding: 4% 0;
+      }
+  }
+  
+  #close-btn {
+      display: flex;
+      align-items: center;
+  }
 
   }
 }
@@ -190,9 +218,11 @@ h4 {
   }
 }
 
+.roboto {
+  font-family: 'Roboto', sans-serif;
+}
 .mono {
   font-family: 'Roboto Mono', sans-serif;
-
 }
 
 // Owl slider overrides

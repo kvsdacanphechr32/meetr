@@ -1,24 +1,21 @@
 <nav class="container desktop columns is-mobile is-multiline-mobile" id="nav">
- 
-  <div class="column is-8">
+
+  <div class="column is-5">
     <a routerLink="/">
-        Logo
+      Logo
     </a>
   </div>
-  
+
   <div class="column">
-  <app-profile id="profile">
-  </app-profile>
+    <app-profile id="profile">
+    </app-profile>
   </div>
 
-
-  <div id="menu-btn" class="column">
-    <a (click)="openCloseNav()">
-      <div id="lines">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </a>
+  <div id="menu-btn" class="column" (click)="openCloseNav()">
+    <div id="lines">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </nav>
