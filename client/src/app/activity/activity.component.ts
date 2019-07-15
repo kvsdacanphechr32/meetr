@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DataService } from '../utils/data.service';
 
-import { TweenLite, Back } from 'gsap';
+import { TweenLite } from 'gsap';
 import { OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
 
 @Component({
@@ -63,7 +63,8 @@ export class ActivityComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       let dots = document.querySelector('.activity.a_' + activityIndex + ' .owl-dots');
       dots.appendChild(document.querySelector('.activity.a_' + activityIndex + ' .arrow'));
-    }, 100)
+    }, 100);
+
   }
 
   slideChange(data: SlidesOutputData, activityIndex: Number) {

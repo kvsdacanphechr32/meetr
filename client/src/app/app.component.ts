@@ -8,7 +8,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'client';
+  title = 'Meetr';
 
   constructor(private _router: Router, private _active: ActivatedRoute) {}
 

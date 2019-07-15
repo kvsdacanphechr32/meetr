@@ -41,18 +41,13 @@
 
 .bottom {
 
-  text-decoration: underline;
-  text-transform: uppercase;
-
-  line-height: 1.5;
-  letter-spacing: 2px;
-
+    @include pxtoem(18, 24);
+    line-height: 1.5;
+  
   margin-top: 5%;
-
+  
   a {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+      text-transform: uppercase;
 
     div {
       margin-left: 5%;

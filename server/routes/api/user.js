@@ -12,9 +12,7 @@ const AppUser = require('../../models/AppUser');
 
 let createUser = async (req, res) => { 
 
-    console.log(req.body)
-
-    let newUser = new AppUser({ name: req.body.name, email: req.body.email});
+    let newUser = new AppUser({ name: req.body.name, email: req.body.email, imgUrl: req.body.img});
  
     try {
         let saveRes = await newUser.save();
@@ -30,7 +28,7 @@ let createUser = async (req, res) => {
  */
 exports.exists = async (req, res) => { 
 
-    let userFind = AppUser.findOne({email: req.body.email}, '_id');
+    let userFind = AppUser.findOne({email: req.body.email}, '_id imgUrl');
  
     try {
         let userRes = await userFind.exec();

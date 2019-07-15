@@ -3,10 +3,12 @@
 <div class="column is-full">      
     <h4>Track Your Progress</h4>
 
-    <select (change)="projectSelected($event.target.value)" id="selector" *ngIf="projects">
-        <option selected="selected">Select project...</option>
-        <option *ngFor="let project of projects" value="{{project.slug}}">{{project.name}}</option>
-    </select>
+    <div id="select" *ngIf="projects && projects.length > 0">
+            <span (mousedown)="openSelect()">Select project...</span>
+        <ul *ngIf="projects">
+            <li *ngFor="let project of projects" id="{{project.slug}}" (click)="projectSelected(project.slug)">{{project.name}}</li>
+        </ul>
+    </div>
 
     <div id="arrow">
         <span>Not at all</span>

@@ -1,19 +1,23 @@
 <div class="content column">
   <h4>Hi, {{profile.given_name}}</h4>
 
-<button (click)="create()" *ngIf="!projects">Create your <br />First Project</button>
+  <button (click)="create()" *ngIf="!projects">Create your <br />First Project</button>
 
-<div id="projects" class="columns is-mobile">
-  <div class="project new">
-    <button (click)="create()" *ngIf="projects">
-       <svg width="15" height="15" fill="none" viewBox="0 0 15 15">
-          <path stroke="#fff" d="M15 7.5H0M7.5 0v15"/>
-      </svg>
-      <br />      
-      Create a Project</button>
+  <div id="projects" class="columns is-mobile" [class.none]="projects && projects.length === 0">
+    <div class="project new">
+      <button (click)="create()" *ngIf="projects">
+        <svg width="15" height="15" fill="none" viewBox="0 0 15 15">
+          <path stroke="#fff" d="M15 7.5H0M7.5 0v15" />
+        </svg>
+        <br />
+        Create
+        <span *ngIf="projects.length > 0; else first">a</span>
+        <ng-template #first>your first</ng-template> Project
+      </button>
+    </div>
+    <div class="project" *ngFor="let project of projects;"><a
+        routerLink="/projects/{{project.slug}}">{{project.name}}</a></div>
   </div>
-  <div class="project" *ngFor="let project of projects;"><a routerLink="/projects/{{project.slug}}">{{project.name}}</a></div>
-</div>
 </div>
 
 <div id="new" class="modal-wrapper">
@@ -23,13 +27,13 @@
       <h2 class="column is-9">Create a Project</h2>
 
       <div id="close-btn" class="column">
-          <a (click)="closeModal()">
-              <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 50 50">
-                <path fill="#fff" d="M0 0h50v50H0z"/>
-                <path stroke="#000" stroke-width="1" d="M11.414 11.586l27.577 28.991M40.406 11.121L11.414 38.699"/>
-              </svg>          
-          </a>
-        </div>
+        <a (click)="closeModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 50 50">
+            <path fill="#fff" d="M0 0h50v50H0z" />
+            <path stroke="#000" stroke-width="1" d="M11.414 11.586l27.577 28.991M40.406 11.121L11.414 38.699" />
+          </svg>
+        </a>
+      </div>
     </div>
 
     <form class="columns column is-11-mobile is-full-tablet is-multiline" [formGroup]="newForm" (submit)="submitNew()">
@@ -41,7 +45,8 @@
           </div>
         </div>
         <div class="column is-full-mobile is-half-tablet" data-aos="fade-up" data-aos-delay="1000">
-          <textarea formControlName="description" id="description" placeholder="Project Description" required></textarea>
+          <textarea formControlName="description" id="description" placeholder="Project Description"
+            required></textarea>
           <div *ngIf="projectSubmitted && f.description.invalid">
             <span *ngIf="f.description.errors.required">Required.</span>
 

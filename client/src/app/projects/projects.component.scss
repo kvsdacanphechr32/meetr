@@ -4,6 +4,14 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   grid-gap: 17px;
+
+  &.none {
+    display: flex;
+    justify-content: center;
+    .new {
+      max-width: 50%;
+    }
+  }
 }
 
 .project {
@@ -37,6 +45,9 @@
   button {
     color: white;
     @include pxtoem(18, 24);
+
+    height: 100%;
+    width: 100%;
   }
 
   a {

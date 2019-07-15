@@ -15,7 +15,6 @@ export class AuthGuard implements CanActivate
   ): Promise<boolean | UrlTree> {
     const client = await this.authService.getAuth0Client();
     const isAuthenticated = await client.isAuthenticated();
-    console.log(isAuthenticated)
 
     if (isAuthenticated) {
       return true;

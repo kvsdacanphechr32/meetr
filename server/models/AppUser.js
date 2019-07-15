@@ -20,6 +20,9 @@ var appUserSchema = new Schema({
 		type: String,
 		index: true,
 		unique: true
+	},
+	imgUrl: {
+		type: String
 	}
 });
 

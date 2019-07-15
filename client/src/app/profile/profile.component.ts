@@ -71,7 +71,8 @@ export class ProfileComponent implements OnInit {
 
     let data = {
       email: profile.email,
-      name: profile.name
+      name: profile.name,
+      img: profile.picture
     };
 
     this._dataSvc.sendDataToUrl('/api/user/exists', data).subscribe((response: any) => {
@@ -169,9 +170,11 @@ export class ProfileComponent implements OnInit {
    * Logs the user out of the applicaion, as well as on Auth0
    */
   logout() {
+    
     this.auth0Client.logout({
       client_id: this.authService.config.client_id,
       returnTo: window.location.origin
     });
+
   }
 }

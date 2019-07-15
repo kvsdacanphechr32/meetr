@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, Form } from '@angular/forms';
 
 import { DataService } from '../../utils/data.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tracks',
+  selector: 'app-track',
   templateUrl: './track.component.html',
   styleUrls: ['./track.component.scss']
 })
@@ -30,7 +31,7 @@ export class TrackComponent implements OnInit {
   private responseForm: FormGroup;
   private selectedProjectId: string;
 
-  constructor(private _dataSvc: DataService, private _formBuilder: FormBuilder) { }
+  constructor(private _dataSvc: DataService, private _formBuilder: FormBuilder, private _route: ActivatedRoute, private _router: Router) {}
 
   ngOnInit() {
 
@@ -38,27 +39,56 @@ export class TrackComponent implements OnInit {
     this.prompts.forEach((p, i) => radioGroups[i + ''] = [null, [Validators.required]]);
     this.responseForm = this._formBuilder.group(radioGroups);
 
-    // If no pre-selected project, get all projects for dropdown
+    // If no pre-selected project, get all projects for dropdown if project id is not in url
     if (!this._dataSvc.currentProjectId) {
 
-      this._dataSvc.userId.subscribe(id => {
-        if (id) {
-          this._dataSvc.getDataForUrl('/api/project/get/' + this._dataSvc.userId.value).subscribe((response: any) => {
+      // Check for project and user id
+      this._route.params.subscribe(params => {
+        this._dataSvc.userId.subscribe(id => {
+        
+          if (id) {
+            let userId = id;
 
-            this.projects = response;
+            if (!params['id']) {
+              // Get all user's projects
+              this._dataSvc.getDataForUrl('/api/project/get/' + userId).subscribe((response: any) => {
 
-          });
-        }
+                this.projects = response;
+
+              });
+            } 
+            
+            else {
+              // Get project data from api
+              this._dataSvc.getDataForUrl('/api/project/get/' + userId + '/' + params['id']).subscribe((response: any) => {
+                
+                this._dataSvc.currentProjectId = response.project._id;
+                
+              });
+            }
+          }
+
+        });
       });
-      
+
     }
+
+  }
+
+  openSelect() {
+
+    document.querySelector('#select').classList.toggle('active')
 
   }
 
   projectSelected(id: string) {
 
+    document.querySelector('#select').classList.remove('active');
+    document.querySelector('#select span').textContent = document.getElementById(id).textContent;
+
     this.selectedProjectId = id;
     this.responseForm.reset();
+
 
   }
 
@@ -71,7 +101,9 @@ export class TrackComponent implements OnInit {
 
     this._dataSvc.sendDataToUrl('/api/progress/create', data).subscribe((response: any) => {
 
+      this._router.navigate(['/projects', response.slug]);
+
     });
   }
 
-}
+  }

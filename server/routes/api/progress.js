@@ -8,7 +8,8 @@
  *
  * ==========
  */
-const Progress = require('../../models/Progress');
+const Progress = require('../../models/Progress'),
+      Project = require('../../models/Project');
 
 /*
  * Create data
@@ -26,10 +27,12 @@ exports.create = async (req, res) => {
     sumY += ((parseInt(responses[10])-3) + (parseInt(responses[11])-3));
     
     let newProgress = new Progress({ date: Date.now(), project: req.body.projectId, responses: req.body.responses, sumX: sumX, sumY: sumY });
+    let userProject = Project.findOne({_id: req.body.projectId}, 'slug');
  
     try {
-        let saveRes = await newProgress.save();
-        res.json(saveRes);
+        await newProgress.save();
+        let getProjectRes = await userProject.exec();
+        res.send({slug: getProjectRes.slug});
     }
     catch(e) {
         console.error(e);
