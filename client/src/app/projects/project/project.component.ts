@@ -8,6 +8,7 @@ import { TweenLite, Back, TweenMax } from 'gsap';
 import * as ismobile from 'ismobilejs';
 import * as paper from 'paper';
 import * as jsPDF from 'jspdf';
+import * as dateformat from 'dateformat';
 
 @Component({
   selector: 'app-project',
@@ -89,7 +90,7 @@ export class ProjectComponent implements OnInit, AfterViewInit {
       bg.position = new p.Point(widthExt / 2, heightExt / 2);
       bg.sendToBack();
     }
-    bgImg.src = 'https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_300/v1562355836/engagement-journalism/img/grid.png';
+    bgImg.src = 'https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_' + widthExt + '/v00032120/engagement-journalism/img/grid.png';
 
     this.progress.forEach((survey, i) => {
 
@@ -132,7 +133,6 @@ export class ProjectComponent implements OnInit, AfterViewInit {
         // g.scale(.75);
         tooltip.remove();
       };
-      console.log(g.onMouseEnter)
       
     });
     
@@ -150,8 +150,9 @@ export class ProjectComponent implements OnInit, AfterViewInit {
 
     let canvasImg = this.canvasElement.nativeElement.toDataURL();
     let doc = new jsPDF();
+    let dt = dateformat(new Date(), 'mm-d-yy_h:MM:sstt');
     doc.addImage(canvasImg, 'PNG', 0, 0);
-    doc.save('results' + new Date() + '.pdf');
+    doc.save('results_' + this.project.slug + '_' + dt + '.pdf');
 
   }
 

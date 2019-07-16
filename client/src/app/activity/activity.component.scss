@@ -19,6 +19,8 @@
             &.active {
                 border-bottom: 1px solid white;
             }
+
+            @include pxtoem(14, 18);
         }
         span {
             margin-right: 15px;
@@ -31,19 +33,27 @@
     
   .step {
 
+    p {
+      margin-top: 0;
+      @include pxtoem(14, 18);
+
+      &.intro {
+        margin-bottom: 18%;
+      }
+    }
+
     .text {
 
       text-align: center;
 
       ::ng-deep p {
-        font-size: 1em;
 
+        font-size: 1em;
         strong {
           @include pxtoem(18, 24);
           font-weight: 100;
         }
       }
-
 
     }
   }
@@ -52,5 +62,9 @@
     display: none;
     position: absolute;
     right: 0;
+  }
+
+  h4 {
+    margin-bottom: 5%;
   }
 }

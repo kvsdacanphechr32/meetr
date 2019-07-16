@@ -41,15 +41,18 @@
 
 .bottom {
 
-    @include pxtoem(18, 24);
-    line-height: 1.5;
-  
-  margin-top: 5%;
-  
-  a {
-      text-transform: uppercase;
+  @include pxtoem(18, 24);
+  line-height: 1.5;
 
-    div {
+  margin-top: 5%;
+
+  a {
+    display: flex;
+    flex-direction: row;
+    text-transform: uppercase;
+    align-items: center;
+
+    span {
       margin-left: 5%;
     }
   }
@@ -91,7 +94,9 @@
 }
 
 canvas {
-  @include not-desktop {
+
+  // max-width: 300px;
+  @include phones {
     max-width: 300px;
   }
 }

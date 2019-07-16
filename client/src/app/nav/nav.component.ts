@@ -28,12 +28,14 @@ export class NavComponent implements OnInit {
 
   openCloseNav(close: boolean) {
 
-    if(close && !document.getElementById('menu').classList.contains('open')) return;
+    let menuClass = document.getElementById('menu').classList;
 
+    if(close && !menuClass.contains('open')) return;
+
+    menuClass.toggle('open');
     document.getElementById('bg').classList.toggle('white');
-    document.getElementById('menu').classList.toggle('open');
     document.getElementById('menu-btn').classList.toggle('open');
-    
+
   }
 
 }

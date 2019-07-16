@@ -65,6 +65,7 @@ body {
         color: white;
       }
     }
+
     #bg {
       background-image: none;
     }
@@ -75,10 +76,19 @@ body {
       background-color: $pale-salmon;
     }
   }
-
   &.coral {
     #bg {
       background-color: $coral;
+    }
+  }
+  &.blueberry {
+    #bg {
+      background-color: $blueberry;
+    }
+  }
+  &.camo-green {
+    #bg {
+      background-color: $camo-green;
     }
   }
 
@@ -109,6 +119,7 @@ body {
 a {
   color: black;
 }
+
 button {
   cursor: pointer;
 }
@@ -125,7 +136,7 @@ h2 {
 
 h3 {
 
-  @include pxtoem(18, 30);
+  @include pxtoem(18, 24);
   font-weight: bold;
   line-height: 1.4;
   letter-spacing: 1px;
@@ -154,7 +165,6 @@ h4 {
 
 .modal-wrapper {
 
-
   position: fixed;
   display: none;
 
@@ -172,48 +182,100 @@ h4 {
     display: block;
     background-color: white;
 
-    margin-top: -8%;
+    // margin-top: -8%;
 
-    width: 355px;
-    min-height: 605px;
+    width: 900px;
+    max-width: 80%;
+    min-height: 270px;
 
-    padding: 0 6.5% 6.5%;
+    @include not-desktop {
+
+    width: 500px;
+    min-height: 300px;
+
+    }
+
+    @include phones {
+      width: 355px;
+      min-height: 405px;
+
+      hr {
+        margin: 0;
+        width: 90%;
+      }
+    }
+
+    @include desktop {
+      @include pxtoem(14, 18);
+    }
+
+    // padding: 0 6.5% 6.5%;
+    padding: 0 6.5% 1.5%;
 
     .fields {
-      input, textarea {
-          border: solid 1px rgba(0, 0, 0, 0.4);
-          padding: 5% 5%;
-          margin: 3% 0;
 
-          width: 92%;
-          
-          @include placeholder {
-              text-transform: capitalize;
-              font-size: 1.5em;
-          }
+      input,
+      textarea {
+        border: solid 1px rgba(0, 0, 0, 0.4);
+        padding: 5% 5%;
+        margin: 3% 0;
+
+        width: 92%;
+
+        @include placeholder {
+          text-transform: capitalize;
+          font-size: 1.5em;
+        }
       }
+
       .note {
-          padding: 4% 0;
+        padding: 4% 0;
       }
-  }
-  
-  #close-btn {
+    }
+
+    #close-btn {
       display: flex;
       align-items: center;
+      justify-content: flex-end;
+    }
+
+    form {
+      
+  button {
+
+    @include pxtoem(18, 24);
+
+    text-decoration: underline;
+    text-transform: uppercase;
+
+    line-height: 1.5;
+    letter-spacing: 2px;
+
+    margin-top: 5%;
+
+    border: none;
+
   }
+    }
 
   }
 }
 
 .content {
-  // text-align: center;
   color: white;
-
 
   margin-left: auto;
   margin-right: auto;
 
-  width: 80%;
+  width: 41%;
+
+  @include not-desktop {
+    width: 75%;
+  }
+
+  @include phones {
+    width: 80%;
+  }
 
   p {
     @include pxtoem(18, 24);
@@ -224,21 +286,23 @@ h4 {
 .roboto {
   font-family: 'Roboto', sans-serif;
 }
+
 .mono {
   font-family: 'Roboto Mono', sans-serif;
 }
 
 // Owl slider overrides
-.owl-dots {  
+.owl-dots {
   &.end {
 
     .owl-dot {
       @include translate(-200%);
     }
+
     .next {
       display: inline-block !important;
     }
-    
+
   }
 }
 

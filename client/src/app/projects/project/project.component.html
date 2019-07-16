@@ -49,13 +49,13 @@
     <canvas #canvasElement id="canvas" width="680" height="680" *ngIf="!isPhone"></canvas>
     <canvas #canvasElement id="canvas" width="300" height="300" *ngIf="isPhone"></canvas>
 
-    <div class="bottom" class="mono">
+    <div class="bottom mono">
       <a routerLink="/projects" *ngIf="progress">
         <svg width="21" height="17" fill="none" viewBox="0 0 21 17">
           <path stroke="#000" d="M21 8.539H.727M8.473 16.497L.363 8.388" />
           <path stroke="#000" stroke-width="1.02719" d="M8.473.363l-8.11 8.11" />
         </svg>
-        <div>Back to<br />Projects</div>
+        <span>Back to<br />Projects</span>
       </a>
     </div>
   </div>

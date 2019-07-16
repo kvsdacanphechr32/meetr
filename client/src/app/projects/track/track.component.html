@@ -3,14 +3,14 @@
 <div class="column is-full">      
     <h4>Track Your Progress</h4>
 
-    <div id="select" *ngIf="projects && projects.length > 0">
+    <div id="select" *ngIf="showDropdown">
             <span (mousedown)="openSelect()">Select project...</span>
         <ul *ngIf="projects">
             <li *ngFor="let project of projects" id="{{project.slug}}" (click)="projectSelected(project.slug)">{{project.name}}</li>
         </ul>
     </div>
 
-    <div id="arrow">
+    <div id="arrow" *ngIf="hasProjects">
         <span>Not at all</span>
         <svg width="159" height="17" fill="none" viewBox="0 0 159 17">
             <path stroke="url(#a)" d="M0 8.236h158.555"/>
@@ -28,9 +28,11 @@
         
         <span>A lot</span>
     </div>
+
+    <p *ngIf="!hasProjects">You don't have any projects to track. Please go <a routerLink="/projects">create one</a>.</p>
 </div>
       
-<form class="columns column is-full-mobile is-full-tablet is-multiline" [formGroup]="responseForm" (submit)="submitNew()">
+<form class="columns column is-full-mobile is-full-tablet is-multiline" [formGroup]="responseForm" (submit)="submitNew()" *ngIf="hasProjects">
 
     <div class="row" *ngFor='let prompt of prompts; let i = index;'>
        <h4>
@@ -55,7 +57,12 @@
        </div>
     </div>
 
-    <button type="submit">See Your Results</button>
+    <div class="column is-full">
 
+        
+        <button type="submit">See Your Results</button>
+        <strong *ngIf="formError"><br />Please select a ranking for each response.</strong>
+        
+    </div>
 </form>
 </div>

@@ -1,18 +1,18 @@
 <nav class="container desktop columns is-mobile is-multiline-mobile" id="nav">
 
-  <div class="column is-5">
+  <div class="column is-6-mobile is-8-tablet is-10-desktop">
     <a routerLink="/">
       Logo
     </a>
   </div>
+<!-- 
+  <div class="column right">
+  </div> -->
 
-  <div class="column">
+  <div id="menu-btn" class="column">
     <app-profile id="profile">
     </app-profile>
-  </div>
-
-  <div id="menu-btn" class="column" (click)="openCloseNav()">
-    <div id="lines">
+    <div id="lines" (click)="openCloseNav()">
       <span></span>
       <span></span>
       <span></span>

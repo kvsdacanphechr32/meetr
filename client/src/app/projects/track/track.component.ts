@@ -4,6 +4,8 @@ import { FormBuilder, Validators, FormGroup, Form } from '@angular/forms';
 import { DataService } from '../../utils/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import * as _ from 'underscore';
+
 @Component({
   selector: 'app-track',
   templateUrl: './track.component.html',
@@ -12,6 +14,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TrackComponent implements OnInit {
   
   public projects: any[];
+  public hasProjects: boolean;
+  public showDropdown: boolean;
+  public formError: boolean;
+
   public prompts: Array<string> =  
   [
     'You and your project team have strengthened your network.',
@@ -54,6 +60,8 @@ export class TrackComponent implements OnInit {
               this._dataSvc.getDataForUrl('/api/project/get/' + userId).subscribe((response: any) => {
 
                 this.projects = response;
+                this.hasProjects = response.length > 0;
+                this.showDropdown = true;
 
               });
             } 
@@ -63,6 +71,7 @@ export class TrackComponent implements OnInit {
               this._dataSvc.getDataForUrl('/api/project/get/' + userId + '/' + params['id']).subscribe((response: any) => {
                 
                 this._dataSvc.currentProjectId = response.project._id;
+                this.hasProjects = response.project._id !== undefined;
                 
               });
             }
@@ -71,6 +80,10 @@ export class TrackComponent implements OnInit {
         });
       });
 
+    }
+    else {
+      // Project is cached from last page
+      this.hasProjects = true;
     }
 
   }
@@ -93,6 +106,14 @@ export class TrackComponent implements OnInit {
   }
 
   submitNew() {
+    
+    // Check if all responses filled
+    let formFinished = _.every(this.responseForm.value, (v) => {return v !== null});
+    if(!formFinished) {
+      this.formError = true;
+      return;
+    }
+    this.formError = false;
 
     let data = {
       projectId: this.selectedProjectId || this._dataSvc.currentProjectId,

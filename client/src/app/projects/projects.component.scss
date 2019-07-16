@@ -2,86 +2,86 @@
 
 #projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  grid-gap: 17px;
+
+  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  grid-gap: 40px;
+  grid-auto-rows: minmax(140px, 280px);
+  
+  @include desktop {
+    grid-auto-rows: minmax(280px, 320px);
+  }
+
+  @include phones {
+
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-gap: 17px;
+
+  }
 
   &.none {
     display: flex;
     justify-content: center;
+
     .new {
       max-width: 50%;
     }
   }
-}
 
-.project {
+  .project {
 
-  background-color: $camo-green;
-  background-size: cover;
+    background-color: $camo-green;
+    background-size: cover;
 
-  &:not(.new) {
-    background-image: cdn-image('img/grid-sm', c_fill, f_auto, w_320);
-  }
-
-  height: 140px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  button,
-  a {
-    display: table;
-
-    font-family: 'Roboto Mono', sans-serif;
-
-    text-align: center;
-    text-decoration: underline;
-    text-transform: uppercase;
-
-    line-height: 1.5;
-    letter-spacing: 2px;
-  }
-
-  button {
-    color: white;
-    @include pxtoem(18, 24);
-
-    height: 100%;
-    width: 100%;
-  }
-
-  a {
-    background-color: white;
-    @include pxtoem(14, 18);
-
-    padding-top: 2%;
-    padding-bottom: 2%;
-    padding-left: 4%;
-    padding-right: 4%;
-  }
-
-  &.new {
-      button {
-          background: none;
-          border: none;
-      }
-  }
-}
-
-form {
-    button {
-
-    @include pxtoem(18, 24);
-       
-    text-decoration: underline;
-    text-transform: uppercase;
-    
-    line-height: 1.5;
-    letter-spacing: 2px;
-
-    margin-top: 5%;
-
-    border: none;
-
+    &:not(.new) {
+      background-image: cdn-image('img/grid-sm', c_fill, f_auto, w_320);
     }
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // height: 320px;
+    @include phones {
+      height: 140px;
+    }
+    
+    button,
+    a {
+      display: table;
+
+      font-family: 'Roboto Mono', sans-serif;
+
+      text-align: center;
+      text-decoration: underline;
+      text-transform: uppercase;
+
+      line-height: 1.5;
+      letter-spacing: 2px;
+    }
+
+    button {
+      color: white;
+      @include pxtoem(18, 24);
+
+      height: 100%;
+      width: 100%;
+    }
+
+    a {
+      background-color: white;
+      @include pxtoem(14, 18);
+
+      padding-top: 2%;
+      padding-bottom: 2%;
+      padding-left: 4%;
+      padding-right: 4%;
+    }
+
+    &.new {
+      button {
+        background: none;
+        border: none;
+      }
+    }
+  }
 }

@@ -9,17 +9,21 @@
 }
 
 #pic {
-    
-    max-width: 30px;
-    max-height: 30px;
+
+    max-width: 50px;
+    max-height: 50px;
     border-radius: 50px;
 
+    @include phones {
+        max-width: 30px;
+        max-height: 30px;
+    }
 }
 
 #wrapper-profile {
 
     position: fixed;
-    display: none;
+    // display: none;
 
     justify-content: center;
     align-items: center;

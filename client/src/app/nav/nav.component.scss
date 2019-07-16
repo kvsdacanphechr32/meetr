@@ -3,13 +3,18 @@
 nav {
 
   position: relative;
-  padding-top: 0;
-  padding-left: 0;
   margin-bottom: 0 !important;
-  z-index: 4;
+  z-index: 25;
 
-  padding-left: 8%;
-  padding-top: 5%;
+  padding: 2% 0;
+
+  @include not-desktop {
+    padding: 5% 5%;
+  }
+
+  @include phones {
+    padding: 5% 8%;
+  }
 
   a {
 
@@ -21,6 +26,11 @@ nav {
     }
   }
 
+  .right {
+    text-align: right;
+    justify-content: flex-end;
+  }
+
   #home {
     display: flex;
     justify-content: center;
@@ -28,43 +38,46 @@ nav {
 
   #menu-btn {
 
+    display: flex;
     position: relative;
-    z-index: 11;
+
+    justify-content: space-between;
+    
     cursor: pointer;
-
-    display: inline-flex;
-    align-items: baseline;
-    @include pxtoem(12, 18);
-
-    cursor: pointer;
-    padding-top: 5%;
-
-    @include phones {
-      a {
-        display: flex;
-        // width: 100%;
-      }
-    }
 
     #lines {
       position: relative;
 
-      display: inline-grid;
-      align-content: center;
+      display: block;
+      cursor: pointer;
+      // align-content: center;
 
       span {
         display: block;
         position: relative;
         height: 1px;
-        width: 25px;
+        width: 46px;
         background: white;
         opacity: 1;
         left: 0;
-
-        transform-origin: left;
-
+        
+        transform-origin: center;
+        
         @include transform(rotate(0deg));
         @include transition(all, .7s, ease-in-out);
+
+        &:nth-child(2) {
+          top: 14px;
+        }
+
+        &:nth-child(3) {
+          position: relative;
+          top: 29px;
+        }
+        
+        @include phones {
+          width: 25px;
+
 
         &:nth-child(2) {
           top: 6px;
@@ -73,6 +86,7 @@ nav {
         &:nth-child(3) {
           position: relative;
           top: 12px;
+        }
         }
 
       }
@@ -100,7 +114,11 @@ nav {
 
           &:nth-child(1) {
             @include transform(rotate(45deg));
-            top: -4px;
+            top: 16px;
+
+            @include phones {  
+              top: -4px;
+            }
           }
 
           &:nth-child(2) {

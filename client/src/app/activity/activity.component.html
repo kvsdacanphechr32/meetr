@@ -14,7 +14,7 @@
       <ng-template carouselSlide>
 
         <div class="step">
-          <p>{{activity.intro}}</p>
+          <p class="intro">{{activity.intro}}</p>
           <div class="text" [innerHtml]="activity.step1.html | sanitizeHtml"></div>
         </div>
 
@@ -23,6 +23,27 @@
 
         <div class="step">
           <div class="text" [innerHtml]="activity.step2.html | sanitizeHtml"></div>
+        </div>
+
+      </ng-template>
+      <ng-template carouselSlide *ngIf="activity.step3">
+
+        <div class="step">
+          <div class="text" [innerHtml]="activity.step3.html | sanitizeHtml"></div>
+        </div>
+
+      </ng-template>
+      <ng-template carouselSlide *ngIf="activity.step4">
+
+        <div class="step">
+          <div class="text" [innerHtml]="activity.step4.html | sanitizeHtml"></div>
+        </div>
+
+      </ng-template>
+      <ng-template carouselSlide *ngIf="activity.step5">
+
+        <div class="step">
+          <div class="text" [innerHtml]="activity.step5.html | sanitizeHtml"></div>
         </div>
 
       </ng-template>

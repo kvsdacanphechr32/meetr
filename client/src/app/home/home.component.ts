@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   public next() {
 
     TweenLite.to(document.getElementById('first'), 1, {x: '-100%', display: 'none', ease: Back.easeIn, onComplete:() => {
-      TweenLite.fromTo(document.getElementById('second'), 1, {x: '100%'}, {x: '0%', display: 'grid', ease: Back.easeOut});
+      TweenLite.fromTo(document.getElementById('second'), 1, {x: '100%'}, {x: '0%', display: 'flex', ease: Back.easeOut});
     }});
 
   }
