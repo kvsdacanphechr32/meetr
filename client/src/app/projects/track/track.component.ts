@@ -67,6 +67,7 @@ export class TrackComponent implements OnInit {
             } 
             
             else {
+              
               // Get project data from api
               this._dataSvc.getDataForUrl('/api/project/get/' + userId + '/' + params['id']).subscribe((response: any) => {
                 
@@ -82,8 +83,11 @@ export class TrackComponent implements OnInit {
 
     }
     else {
-      // Project is cached from last page
-      this.hasProjects = true;
+      // Project is cached from last page unless params empty
+      this._route.params.subscribe(params => {
+        if(params.length > 0)
+          this.hasProjects = true;
+      });
     }
 
   }

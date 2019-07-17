@@ -76,16 +76,19 @@ body {
       background-color: $pale-salmon;
     }
   }
+
   &.coral {
     #bg {
       background-color: $coral;
     }
   }
+
   &.blueberry {
     #bg {
       background-color: $blueberry;
     }
   }
+
   &.camo-green {
     #bg {
       background-color: $camo-green;
@@ -190,8 +193,8 @@ h4 {
 
     @include not-desktop {
 
-    width: 500px;
-    min-height: 300px;
+      width: 500px;
+      min-height: 300px;
 
     }
 
@@ -240,22 +243,22 @@ h4 {
     }
 
     form {
-      
-  button {
 
-    @include pxtoem(18, 24);
+      button {
 
-    text-decoration: underline;
-    text-transform: uppercase;
+        @include pxtoem(18, 24);
 
-    line-height: 1.5;
-    letter-spacing: 2px;
+        text-decoration: underline;
+        text-transform: uppercase;
 
-    margin-top: 5%;
+        line-height: 1.5;
+        letter-spacing: 2px;
 
-    border: none;
+        margin-top: 5%;
 
-  }
+        border: none;
+
+      }
     }
 
   }
@@ -295,9 +298,9 @@ h4 {
 .owl-carousel {
 
   &.active {
-  .owl-dots {
-    transform: translateX(0%);
-  }
+    .owl-dots {
+      transform: translateX(0%);
+    }
   }
 }
 
@@ -309,7 +312,7 @@ h4 {
 
   &.end {
     transform: translateX(-50%);
-    
+
     .owl-dot {
       @include translate(150%);
     }

@@ -93,3 +93,30 @@
     margin-bottom: 5%;
   }
 }
+
+.bottom {
+
+  margin-top: 10%;
+  
+  hr {
+    border: solid 1px white;
+  }
+  div {
+    
+    display: flex;
+    margin-top: 2%;
+    justify-content: space-between;
+    @include pxtoem(14, 18);
+    }
+
+  a {
+    color: white;
+    text-decoration: none;
+
+    span {
+      text-decoration: underline;
+    }
+  }
+
+
+}

@@ -29,6 +29,7 @@ import { ActivityComponent } from './activity/activity.component';
 import { SanitizeHtmlPipe } from './utils/sanitize-html.pipe';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { StudiesComponent } from './studies/studies.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -50,7 +51,8 @@ export const config: CloudinaryConfiguration = cloudinaryConfiguration;
     FooterComponent,
     AboutComponent,
     ActivityComponent,
-    SanitizeHtmlPipe
+    SanitizeHtmlPipe,
+    StudiesComponent
   ],
   imports: [
     BrowserModule,

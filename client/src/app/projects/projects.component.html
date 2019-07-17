@@ -36,24 +36,23 @@
       </div>
     </div>
 
-    <form class="columns column is-11-mobile is-full-tablet is-multiline" [formGroup]="newForm" (submit)="submitNew()">
+    <form class="columns column is-multiline" [formGroup]="newForm" (submit)="submitNew()">
       <div class="fields">
-        <div class="column is-full-mobile is-half-tablet" data-aos="fade-up" data-aos-delay="1000">
+        <div class="column is-full">
           <input formControlName="name" id="name" placeholder="Project Name" required />
           <div *ngIf="projectSubmitted && f.name.invalid">
             <span *ngIf="f.name.errors.required">Required.</span>
           </div>
         </div>
-        <div class="column is-full-mobile is-half-tablet" data-aos="fade-up" data-aos-delay="1000">
-          <textarea formControlName="description" id="description" placeholder="Project Description"
-            required></textarea>
+        <div class="column is-full">
+          <textarea formControlName="description" id="description" placeholder="Project Description" rows="10" required></textarea>
           <div *ngIf="projectSubmitted && f.description.invalid">
             <span *ngIf="f.description.errors.required">Required.</span>
 
           </div>
         </div>
       </div>
-      <div class="column is-full-mobile is-5-tablet" data-aos="fade-up" data-aos-delay="1500">
+      <div class="column is-full">
         <button class="mono no-pad" type="submit">Create Project</button>
       </div>
     </form>

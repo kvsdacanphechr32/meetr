@@ -1,12 +1,12 @@
 <div class="content column">
 
   <nav id="toc" class="ž">
-    <div id="c_{{i}}" *ngFor="let activity of activities; let i = index;"
-      [class.active]="i === currentActivity" (click)="goto(i)"><div class="inner">{{i+1}}<span>{{activity.name}}</span>
-        <!-- <hr class="no-margin" /> -->
+    <div id="c_{{i}}" *ngFor="let activity of activities; let i = index;" [class.active]="i === currentActivity"
+      (click)="goto(i)">
+      <div class="inner">{{i+1}}<span>{{activity.name}}</span>
       </div>
-    
-  </div>
+
+    </div>
   </nav>
 
   <div class="activity a_{{i}}" *ngFor="let activity of activities; let i = index;">
@@ -58,6 +58,24 @@
       <path stroke="#fff" stroke-width="1.01511" d="M17.928 23.331l11.713-11.713" />
     </svg>
 
+  </div>
+
+  <div class="bottom mono uppercase">
+
+    <hr />
+
+    <div>
+      <a routerLink="/track">
+        <span>Track your Progress</span>
+      </a>
+      <a href="#">
+        <span>Download Guide PDF</span>
+        &nbsp;
+        <svg width="17" height="20" fill="none" viewBox="0 0 17 20">
+          <path stroke="#fff" d="M8.13 0v19.231M15.676 11.892l-7.692 7.692M.353 11.892l7.693 7.693M.707 19.5h14.615" />
+        </svg>
+      </a>
+    </div>
   </div>
 
 </div>

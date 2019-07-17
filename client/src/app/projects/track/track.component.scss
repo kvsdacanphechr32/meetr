@@ -22,25 +22,25 @@
   width: 300px;
   height: 45px;
   margin: 40px auto;
-  
+
   background: #fff;
   cursor: pointer;
-  
+
   background-repeat: no-repeat;
   background-image: cdn-image('img/dropdown', c_fill, f_auto, w_30);
   background-position: right center;
-  
+
   border: solid 1px #999999;
   color: #999999;
-  
+
   span {
     display: block;
     width: 100%;
     height: 100%;
-    
+
     padding: 10px 15px;
   }
-  
+
   ul {
 
     position: absolute;
@@ -48,33 +48,35 @@
     left: -5px;
     right: 0px;
     padding: 0;
- 
+
     background: white;
     transition: all 0.3s ease-out;
     list-style: none;
- 
+
     opacity: 0;
     pointer-events: none;
 
     li {
-    display: block;
-    text-decoration: none;
-    color: #333;
-    padding: 10px;
-    transition: all 0.3s ease-out;
-   &:hover {
-      color: grey;
-  }
+      display: block;
+      text-decoration: none;
+      color: #333;
+      padding: 10px;
+      transition: all 0.3s ease-out;
+
+      &:hover {
+        color: grey;
+      }
     }
 
   }
-    &.active ul {
-      opacity: 1;
-      pointer-events: auto;
-    }
-  
+
+  &.active ul {
+    opacity: 1;
+    pointer-events: auto;
   }
-  
+
+}
+
 //   padding: 3%;
 //   margin: 0;
 //   border: 1px solid #ccc;
@@ -82,14 +84,14 @@
 //   border-radius: 3px;
 //   overflow: hidden;
 //   background-color: #fff;
-  
+
 //   // background: #fff url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 90% 50%;
-  
-  
+
+
 //   select {
 //     width: 300px;
 //     border: solid 1px #ccc;
-    
+
 //     padding: 5px 8px;
 //     border: none;
 //     box-shadow: none;
@@ -111,45 +113,49 @@ form {
   }
 
   p {
-      padding-top: 2%;
-      padding-bottom: 5%;
+    padding-top: 2%;
+    padding-bottom: 5%;
   }
 
   /* Hide the browser's default radio button */
   input {
     display: none;
 
-    &:hover + label, &:checked + label {
-    
-        color: white;
-        &.one {
-            background-color: $pale-salmon;
-          }
-      
-          &.two {
-            background-color: $coral;
-          }
-      
-          &.three {
-            background-color: $blueberry;
-          }
-      
-          &.four {
-            background-color: $camo-green;
-          }
+    &:hover+label,
+    &:checked+label {
+
+      color: white;
+
+      &.one {
+        background-color: $pale-salmon;
       }
-    
+
+      &.two {
+        background-color: $coral;
+      }
+
+      &.three {
+        background-color: $blueberry;
+      }
+
+      &.four {
+        background-color: $camo-green;
+      }
+    }
+
   }
 
   label {
-      display: inline-flex;    
-          border: solid 1px;
+    display: inline-flex;
+    cursor: pointer;
+
+    border: solid 1px;
     height: 40px;
     width: 40px;
     border-radius: 50%;
     transition: all 0.3s;
-align-items: center;
-justify-content: center;
+    align-items: center;
+    justify-content: center;
 
     &.one {
       border-color: $pale-salmon;
@@ -166,30 +172,33 @@ justify-content: center;
     &.four {
       border-color: $camo-green;
     }
-  
-}
 
-button {
-        font-family: 'Roboto Mono', sans-serif;
-        @include pxtoem(18, 24);
-        
-        background: none;
-        border: none;
+  }
 
-        text-decoration: underline;
-        text-transform: uppercase;
-        
-        line-height: 1.5;
-        letter-spacing: 2px;
-    
-        margin-top: 21%;
-}
-.row {
+  button {
+    font-family: 'Roboto Mono', sans-serif;
+    @include pxtoem(18, 24);
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    text-decoration: underline;
+    text-transform: uppercase;
+
+    line-height: 1.5;
+    letter-spacing: 2px;
+
+    margin-top: 21%;
+  }
+
+  .row {
     width: 100%;
     margin-top: 8%;
-}
-.fields {
+  }
+
+  .fields {
     display: flex;
     justify-content: space-evenly;
-}
+  }
 }

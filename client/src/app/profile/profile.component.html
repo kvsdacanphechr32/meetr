@@ -48,7 +48,10 @@
 
       <div class="column is-full-mobile is-offset-1-tablet">
 
-        <p>Or, <a href="#" (click)="login('Username-Password-Authentication')">sign in</a> with email</p>
+        <!-- <a href="#" (click)="login('Username-Password-Authentication')"></a> -->
+        <p>Or, sign in with email</p>
+
+        Soon!
         <!-- 
       <form class="columns column is-11-mobile is-full-tablet is-multiline" [formGroup]="signinForm"
         (submit)="login('Username-Password-Authentication')" *ngIf="!isAuthenticated">
@@ -114,7 +117,8 @@
 
         <p>Sign up with email</p>
 
-        <form [formGroup]="signupForm"
+        Soon!
+        <!-- <form [formGroup]="signupForm"
           (submit)="signup()">
           <div class="fields">
 
@@ -129,15 +133,11 @@
               <input formControlName="password" id="password" placeholder="password" type="password" required />
               <div class="note" *ngIf="signUpSubmitted && f.password.invalid">
                 <span *ngIf="f.password.errors.required">Required.</span>
-                <span *ngIf="f.password.errors.pattern">Your password must adhere to the following: at least 8
-                  characters,
-                  Lowercase letters, Uppercase letters, Numbers
-
-                  Special characters.</span>
+                <span *ngIf="f.password.errors.pattern">Your password must be at least 8 and contain at least 3 of: special characters, lowercase letters, uppercase letters, or numbers.</span>
             </div>
           </div>
             <button class="mono" type="submit">Create An Account</button>
-        </form>
+        </form> -->
       </div>
       <div class="lower column is-full">
         <span>

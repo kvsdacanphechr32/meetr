@@ -17,8 +17,8 @@ export class AuthService {
 
   // Auth0 application configuration
   config = {
-    domain: "engagementlab.auth0.com",
-    client_id: "ljih2vKCTn00KKdgP6Vt8zh5A0ePS9vW",
+    domain: "elabmeetr.auth0.com",
+    client_id: "efOEnNblz6mqHaH8plFSUZ6Tm3Oe5d9p",
     redirect_uri: `${window.location.origin}/callback`
   };
 

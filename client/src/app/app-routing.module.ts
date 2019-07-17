@@ -9,6 +9,7 @@ import { TrackComponent } from './projects/track/track.component';
 import { AboutComponent } from './about/about.component';
 import { AuthGuard } from './utils/auth.guard';
 import { ActivityComponent } from './activity/activity.component';
+import { StudiesComponent } from './studies/studies.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
     data: {
       bg: 'white'
     }
+  },
+  {
+    path: 'studies',
+    component: StudiesComponent
   },
   {
     path: 'talk',
