@@ -292,22 +292,34 @@ h4 {
 }
 
 // Owl slider overrides
+.owl-carousel {
+
+  &.active {
+  .owl-dots {
+    transform: translateX(0%);
+  }
+  }
+}
+
 .owl-dots {
+
+  // text-align: left !important;
+  transform: translateX(0%);
+  @include transition(all, .6s, ease-in-out);
+
   &.end {
-
+    transform: translateX(-50%);
+    
     .owl-dot {
-      @include translate(-200%);
+      @include translate(150%);
     }
-
-    .next {
-      display: inline-block !important;
-    }
-
   }
 }
 
 .owl-dot {
   @include transition(all, .6s, ease-in-out);
+  @include translate(0%);
+  display: inline-block !important;
 
   span {
     display: flex !important;

@@ -13,7 +13,6 @@ export class ActivityComponent implements OnInit, AfterViewInit {
 
   public activities: any[];
   public currentActivity: number = 0;
-  public activityIndex: number = 0;
 
   private bgColors: string[] = ['pale-salmon', 'coral', 'blueberry', 'camo-green'];
   
@@ -42,14 +41,23 @@ export class ActivityComponent implements OnInit, AfterViewInit {
     
   }
 
-  gotoNext() {
+  gotoNext() { 
+  
+    this.goto(0, true);
+  
+  }
 
-    TweenLite.to(document.querySelector('.activity.a_' + this.currentActivity), 1.2, {scale:0, opacity:0, display: 'none', onComplete:() => {
-      TweenLite.fromTo(document.querySelector('.activity.a_' + this.currentActivity), 1.2, {scale:0, opacity:0}, {scale:1, opacity:1, display: 'block'});
+  goto(activityIndex: number, next: boolean) {
+
+    TweenLite.to(document.querySelector('.activity.a_' + this.currentActivity), 1.2, {opacity:0, display: 'none', onComplete:() => {
+      TweenLite.fromTo(document.querySelector('.activity.a_' + this.currentActivity), 1.2, {opacity:0}, {opacity:1, display: 'block'});
     }});
     
-    this.currentActivity++;
-    
+    if(next)
+      this.currentActivity++;
+    else
+      this.currentActivity = activityIndex;
+
     TweenLite.to(document.getElementById('bg'), .7, {css: {filter: 'opacity(0.5)'}, onComplete:() => {
     
       document.body.classList.value = 'activity ' + this.bgColors[this.currentActivity];
@@ -71,11 +79,14 @@ export class ActivityComponent implements OnInit, AfterViewInit {
     
     let slidesNum = document.querySelectorAll('.activity.a_' + activityIndex + ' .owl-item').length;
     let dots = document.querySelector('.activity.a_' + activityIndex + ' .owl-dots');
-    
-    if(slidesNum-1 === data.startPosition)
+    let dotsArrow = document.querySelector('.activity.a_' + activityIndex + ' .arrow');
+    let end = (slidesNum-1 === data.startPosition);
+    if (end && activityIndex < 3)
       dots.classList.add('end');
     else
       dots.classList.remove('end');
+
+    TweenLite.to(dotsArrow, .7, {opacity: end?1:0, delay: end?.6:0});
 
   }
 

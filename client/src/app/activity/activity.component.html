@@ -1,16 +1,20 @@
 <div class="content column">
 
-  <nav id="toc">
-    <ul>
-      <li *ngFor="let activity of activities; let i = index;" [class.active]="i === 0"><span>{{i+1}}</span>{{activity.name}}</li>
-    </ul>
+  <nav id="toc" class="ž">
+    <div id="c_{{i}}" *ngFor="let activity of activities; let i = index;"
+      [class.active]="i === currentActivity" (click)="goto(i)"><div class="inner">{{i+1}}<span>{{activity.name}}</span>
+        <!-- <hr class="no-margin" /> -->
+      </div>
+    
+  </div>
   </nav>
 
   <div class="activity a_{{i}}" *ngFor="let activity of activities; let i = index;">
 
     <h4>Activity {{i+1}}: {{activity.name}}</h4>
 
-    <owl-carousel-o class="slides" [options]="customOptions" (initialized)="sliderInit(i)" (translated)="slideChange($event, i)">
+    <owl-carousel-o class="slides" [options]="customOptions" (initialized)="sliderInit(i)"
+      (translated)="slideChange($event, i)">
       <ng-template carouselSlide>
 
         <div class="step">
@@ -48,12 +52,12 @@
 
       </ng-template>
     </owl-carousel-o>
-      
+
     <svg class="arrow next" width="30" height="24" fill="none" viewBox="0 0 30 24" (click)="gotoNext()">
-        <path stroke="#fff" d="M0 11.923h29.282M17.928.359l11.713 11.713"/>
-        <path stroke="#fff" stroke-width="1.01511" d="M17.928 23.331l11.713-11.713"/>
+      <path stroke="#fff" d="M0 11.923h29.282M17.928.359l11.713 11.713" />
+      <path stroke="#fff" stroke-width="1.01511" d="M17.928 23.331l11.713-11.713" />
     </svg>
- 
+
   </div>
 
 </div>
