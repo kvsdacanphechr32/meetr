@@ -15,7 +15,7 @@ export class ProjectsComponent implements OnInit {
   public projects: any[]
   public projectSubmitted: boolean;
 
-  private newForm: FormGroup;
+  public newForm: FormGroup;
 
   constructor(private _dataSvc: DataService, private _authSvc: AuthService, private _formBuilder: FormBuilder) {}
 

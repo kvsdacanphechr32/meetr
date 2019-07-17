@@ -1,13 +1,15 @@
 {
   "name": "client",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "start": "npm-run-all -l -p browser api",
     "browser": "ng serve",
     "browser-testing": "ng serve --configuration=dev --port 8000 --host 0.0.0.0 --disableHostCheck true",
     "api": "cd ../server; nodemon",
-    "build": "ng build",
+    "build": "ng build --configuration=production --prod",    
+    "build-qa": "ng build --configuration=qa --prod",
+    "build-ci": "ng build --configuration=ci --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
