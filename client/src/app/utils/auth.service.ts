@@ -36,6 +36,7 @@ export class AuthService {
       this.isAuthenticated.subscribe(async isAuthenticated => {
         if (isAuthenticated) {
           this.profile.next(await this.auth0Client.getUser());
+          console.log('isauth', isAuthenticated)
 
           return;
         }

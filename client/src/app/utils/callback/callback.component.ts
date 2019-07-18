@@ -15,6 +15,8 @@ export class CallbackComponent implements OnInit {
 
     // Handle the redirect from Auth0
     const result = await client.handleRedirectCallback();
+
+    console.log('callback', result)
     
     // Get the URL the user was originally trying to reach
     const targetRoute =
