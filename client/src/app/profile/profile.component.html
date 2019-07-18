@@ -1,4 +1,5 @@
-<a id="signin" class="top mono" href="#" (click)="showModal()" *ngIf="!isAuthenticated">Sign In</a>
+<a id="signin" class="top mono" href="#" (click)="showModal()" *ngIf="!isAuthenticated && authInit">Sign In</a>
+<div id="signin" *ngIf="!authInit">Wait...</div>
 
 <img id="pic" [src]="profile.picture" *ngIf="isAuthenticated" alt="Profile picture" />
 

@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   public alreadyExists: boolean;
   public signUpShow: boolean;
   public signUpSubmitted: boolean;
+  public authInit: boolean;
 
   private signupForm: FormGroup;
   private signinForm: FormGroup;
@@ -38,6 +39,7 @@ export class ProfileComponent implements OnInit {
 
     // Get an instance of the Auth0 client
     this.auth0Client = await this.authService.getAuth0Client();
+    console.log('this.auth0Client', this.auth0Client)
 
     // Watch for changes to the isAuthenticated state
     this.authService.isAuthenticated.subscribe(value => {
@@ -57,6 +59,8 @@ export class ProfileComponent implements OnInit {
         this.showModal();
       } 
     });
+
+    this.authInit = true;
 
   }
 
