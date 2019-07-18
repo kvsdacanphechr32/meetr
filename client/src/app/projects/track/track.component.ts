@@ -85,7 +85,8 @@ export class TrackComponent implements OnInit {
     else {
       // Project is cached from last page unless params empty
       this._route.params.subscribe(params => {
-        if(params.length > 0)
+        console.log(params)
+        if(Object.values(params).length > 0)
           this.hasProjects = true;
       });
     }
