@@ -30,7 +30,7 @@ export class ActivityComponent implements OnInit, AfterViewInit {
     
     this._dataSvc.getDataForUrl('/api/data/get/activity').subscribe((response: any) => {
 
-      this.activities = response;
+      this.activities = response[0];
       
     }); 
   }

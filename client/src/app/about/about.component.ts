@@ -18,7 +18,7 @@ export class AboutComponent implements OnInit {
     
     this._dataSvc.getDataForUrl('/api/data/get/about').subscribe((response: any) => {
 
-      this.content = response;
+      this.content = response[0];
       this.hasContent = true;
       
     }); 

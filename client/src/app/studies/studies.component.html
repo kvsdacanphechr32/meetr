@@ -1,3 +1,30 @@
-<div class="content">
-    <p>soon!</p>
+<div class="content column" *ngIf="hasContent">    
+<h4>Case Studies</h4>
+
+<div [innerHtml]="intro.html"></div>  
+
+<div id="studies">
+
+        <ul>
+          <li [class.active]="i === 0" (click)="toggleStudy($event)" *ngFor="let study of content; let i = index;">
+            <h3 class="columns is-mobile">
+              <span class="column is-9-mobile is-10-tablet">{{study.name}}</span>
+              <span class="column icon">
+                <svg width="40" height="40" fill="none" viewBox="0 0 40 40">
+                  <line class="" x1="0" x2="40" y1="20" y2="20" />
+                  <line class="vert" x1="20" x2="20" y1="0" y2="40" />
+                </svg>
+              </span>
+            </h3>
+            <div class="text columns column is-11-mobile">
+                {{study.description}}
+            </div>
+            <a href="">Learn more</a>
+          </li>
+
+
+          </ul>
+          </div>
+
+
 </div>

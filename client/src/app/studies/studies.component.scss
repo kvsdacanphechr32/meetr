@@ -1,0 +1,71 @@
+@import '~src/style/_variables';
+
+#studies {
+
+    ul {
+        list-style: none;
+        width: 100%;
+        padding: 0;
+
+        h3 {
+            margin: 0;
+
+            font-weight: normal;
+            padding: 2% 1% 2%;
+
+            cursor: pointer;
+
+            svg {
+                line {
+                    stroke: black;
+                    stroke-width: 1;
+                    transform-origin: center center;
+                    @include transition(all, 500ms, ease-in-out);
+
+                    &.vert {
+                        @include transform(scale(1, 0));
+                    }
+                }
+            }
+        }
+
+        li {
+            list-style: none;
+
+            div.columns {
+                max-height: 0;
+                overflow: hidden;
+                color: black;
+                @include transition(max-height, 500ms, ease-out);
+
+                &.text {
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+            }
+        }
+
+        li.active {
+            
+            h3 {
+                cursor: default;
+                background-color: white;
+                color: black;
+
+                svg {
+                    line {
+                        stroke: black;
+                    }
+
+                    .vert {
+                        @include transform(scale(1, 1));
+                    }
+                }
+            }
+
+            div.columns {
+                max-height: 1000px;
+            }
+        }
+    }
+}

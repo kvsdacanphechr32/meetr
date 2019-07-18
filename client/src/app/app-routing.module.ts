@@ -65,7 +65,10 @@ const routes: Routes = [
   },
   {
     path: 'studies',
-    component: StudiesComponent
+    component: StudiesComponent,
+    data: {
+      bg: 'white'
+    }
   },
   {
     path: 'talk',
