@@ -1,6 +1,7 @@
 @import '~src/style/_variables';
 
 #all {
+
   display: none;
 
   .columns {
@@ -37,6 +38,7 @@
   hr {
     border-bottom: 1px solid #ccc;
   }
+  
 }
 
 .bottom {
@@ -80,7 +82,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      
+
       color: white;
       background-color: $camo-green;
       @include pxtoem(18, 24);

@@ -1,3 +1,9 @@
-<div class="content">
-    <p>soon!</p>
+<div class="content column" *ngIf="hasContent">    
+  <h4>About</h4>
+
+  <div [innerHtml]="content.para1.html"></div>  
+  
+  <cdn-image cloudinaryPrefix="/" cloudinaryId="{{content.image.public_id}}" width="700" [responsive]="true" autoFormat="true" alt="About page image"></cdn-image>
+
+  <div [innerHtml]="content.para2.html"></div>
 </div>

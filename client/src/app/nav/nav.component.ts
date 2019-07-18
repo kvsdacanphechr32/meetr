@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 
 import { filter } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import { filter } from 'rxjs/operators';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent implements OnInit {
+export class NavComponent {
 
   constructor(private _router: Router) {
     
@@ -19,19 +19,13 @@ export class NavComponent implements OnInit {
   
   }
 
-  /**
-   * Handle component initialization
-   */
-  ngOnInit() {
-
-  }
-
   openCloseNav(close: boolean) {
 
     let menuClass = document.getElementById('menu').classList;
 
     if(close && !menuClass.contains('open')) return;
 
+    document.getElementById('menu').style.display = 'block';
     menuClass.toggle('open');
     document.getElementById('bg').classList.toggle('white');
     document.getElementById('menu-btn').classList.toggle('open');

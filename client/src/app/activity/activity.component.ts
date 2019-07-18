@@ -28,7 +28,7 @@ export class ActivityComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {   
     
-    this._dataSvc.getDataForUrl('/api/data/get/').subscribe((response: any) => {
+    this._dataSvc.getDataForUrl('/api/data/get/activity').subscribe((response: any) => {
 
       this.activities = response;
       

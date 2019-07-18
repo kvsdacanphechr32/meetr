@@ -1,0 +1,6 @@
+@import '~src/style/_variables';
+
+::ng-deep strong {
+    @include pxtoem(18, 24);
+    font-weight: 300;
+}
