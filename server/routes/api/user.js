@@ -33,7 +33,7 @@ exports.exists = async (req, res) => {
     try {
         let userRes = await userFind.exec();
 
-        if(userRes.length < 1)
+        if(!userRes || userRes.length < 1)
             createUser(req, res);
         else
             res.status(200).send(userRes);
