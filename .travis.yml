@@ -3,7 +3,7 @@ node_js:
 - 10.16.0
 addons:
   ssh_known_hosts:
-  - "$QA_SERVER"
+  - $QA_SERVER
 branches:
   only:
   - master
