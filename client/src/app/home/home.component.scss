@@ -2,8 +2,10 @@
 
 .intro {
     display: flex;
+    @import '~src/style/_variables';
 
-    h3 {
+    ::ng-deep strong {
+        @include pxtoem(14, 14);
         font-weight: 400;
         letter-spacing: normal;
     }

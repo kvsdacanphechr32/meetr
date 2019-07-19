@@ -1,10 +1,9 @@
-<div id="first" class="content intro column columns is-mobile is-multiline">
+<div id="first" class="content intro column columns is-mobile is-multiline" *ngIf="hasContent">
 
   <h2 class="column is-full">This is Meetr.</h2>
 
   <div class="column is-full">
-    You need the dark in order to show the light. Let's put some happy little bushes on the other side now. Let your
-    heart take you to wherever you want to be. We'll have a super time.
+    {{content.screen1}}
   </div>
   
   <div id="next" class="column is-full">
@@ -18,30 +17,14 @@
 
 </div>
 
-<div id="second" class="content intro column columns is-mobile is-multiline" style="display: none">
+<div id="second" class="content intro column columns is-mobile is-multiline" style="display: none" *ngIf="hasContent">
 
-  <h2 class="column is-full">This is how it works.</h2>
+  <h2 class="column is-full no-pad">This is how it works.</h2>
 
-  <div class="column is-full-mobile is-half-tablet no-pad">
-  <h3 class="column is-full">
-    Talk it Out
-  </h3>
-
-  <p class="column is-full no-pad">
-    I'm going to mix up a little color. We’ll use Van Dyke Brown, Permanent Red, and a little bit of Prussian Blue.
-  </p>
+  <div class="column is-full-mobile is-half-tablet no-pad" [innerHtml]="content.screen2Column1.html">
   </div>
 
-  <div class="column is-full-mobile is-5-tablet is-offset-1-tablet no-pad">
-
-  <h3 class="column is-full">
-    Track your Progress
-  </h3>
-
-  <p class="column is-full-mobile no-pad">
-    That's a son of a gun of a cloud. We need a shadow side and a highlight side. Happy painting, God bless.
-  </p>
-
+  <div class="column is-full-mobile is-5-tablet is-offset-1-tablet no-pad" [innerHtml]="content.screen2Column2.html">
   </div>
 
   <div id="link" class="column">

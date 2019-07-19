@@ -14,7 +14,6 @@ export class AboutComponent implements OnInit {
   constructor(private _dataSvc: DataService) { }
 
   ngOnInit() {
-
     
     this._dataSvc.getDataForUrl('/api/data/get/about').subscribe((response: any) => {
 
@@ -22,6 +21,7 @@ export class AboutComponent implements OnInit {
       this.hasContent = true;
       
     }); 
+ 
   }
 
 }

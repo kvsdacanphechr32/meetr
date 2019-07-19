@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TweenLite, Back } from 'gsap';
+import { DataService } from '../utils/data.service';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +10,20 @@ import { TweenLite, Back } from 'gsap';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public content: any;
+  public hasContent: boolean;
+
+  constructor(private _dataSvc: DataService) { }
 
   ngOnInit() {
+   
+    this._dataSvc.getDataForUrl('/api/data/get/home').subscribe((response: any) => {
 
+      this.content = response[0];
+      this.hasContent = true;
+      
+    }); 
+ 
   }
 
   public next() {

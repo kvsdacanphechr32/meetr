@@ -13,18 +13,24 @@ const keystone = global.keystone,
 
 var buildData = async (type, res) => {
 
+    let homeFields = 'screen1 screen2Column1.html screen2Column2.html -_id';
     let aboutFields = 'image.public_id para1.html para2.html -_id';
     let aboutStudiesFields = 'caseStudiesIntro -_id';
     let studiesFields = 'name description url -_id';
     let activityFields = 'name intro step1.html step2.html step3.html step4.html step5.html';
 
+    let home = keystone.list('Home').model;
     let about = keystone.list('About').model;
     let study = keystone.list('CaseStudy').model;
     let activity = keystone.list('Activity').model;
     let data = null;
     let getRes = [];
 
-    if (type === 'about') {
+    if (type === 'home') {
+        // Get home
+        data = home.findOne({}, homeFields);
+    }
+    else if (type === 'about') {
         // Get about
         data = about.findOne({}, aboutFields);
     } else if(type === 'activity') {
