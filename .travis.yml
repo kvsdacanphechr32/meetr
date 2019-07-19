@@ -3,13 +3,12 @@ node_js:
 - 10.16.0
 addons:
   ssh_known_hosts:
-  - $QA_SERVER
+  - "$QA_SERVER"
 branches:
   only:
   - master
 before_install:
-- openssl aes-256-cbc -K $encrypted_df4d0c9906af_key -iv $encrypted_df4d0c9906af_iv
-  -in deploy_key.enc -out deploy_key -d
+- openssl aes-256-cbc -K $encrypted_df4d0c9906af_key -iv $encrypted_df4d0c9906af_iv -in deploy_key.enc -out ./deploy_key -d
 - eval "$(ssh-agent -s)"
 - chmod 600 deploy_key
 - ssh-add deploy_key
