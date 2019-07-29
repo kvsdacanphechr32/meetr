@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+
 import createAuth0Client from '@auth0/auth0-spa-js';
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
-import { BehaviorSubject } from 'rxjs';
+
+import * as auth0 from 'auth0-js';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +17,7 @@ export class AuthService {
   profile = new BehaviorSubject<any>(null);
 
   private auth0Client: Auth0Client;
+  private auth0JSWebAuth: auth0.WebAuth;
 
   // Auth0 application configuration
   config = {
@@ -21,6 +25,21 @@ export class AuthService {
     client_id: "efOEnNblz6mqHaH8plFSUZ6Tm3Oe5d9p",
     redirect_uri: `${window.location.origin}/callback`
   };
+
+  getAuth0JS(): any {
+
+    if(!this.auth0JSWebAuth) {
+
+      this.auth0JSWebAuth = new auth0.WebAuth({
+        domain: this.config.domain,
+        clientID: this.config.client_id
+      });
+
+    }
+    
+    return this.auth0JSWebAuth;
+
+  }
 
   /**
    * Gets the Auth0Client instance.
@@ -36,8 +55,6 @@ export class AuthService {
       this.isAuthenticated.subscribe(async isAuthenticated => {
         if (isAuthenticated) {
           this.profile.next(await this.auth0Client.getUser());
-          console.log('isauth', isAuthenticated)
-
           return;
         }
 
@@ -52,6 +69,7 @@ export class AuthService {
 
     if(!this.isAuthenticated.value)
       this.promptLogin.next(true);
+ 
 
   }
 
@@ -60,4 +78,71 @@ export class AuthService {
     this.auth0Client.logout();
     
   }
+
+  public loginUserPass(user: string, password: string): Observable<any> {
+
+    this.auth0JSWebAuth = new auth0.WebAuth({
+      domain: this.config.domain,
+      clientID: this.config.client_id
+    });
+
+    return Observable.create(observer => {
+    
+      this.auth0JSWebAuth.login({
+      
+        email: user,
+        password: password,
+        responseType: 'token',
+        redirectUri: this.config.redirect_uri + '/oauth'
+      
+      }, (err, authResult) => {
+        
+        if (err) {
+          console.error('Error: ', err)
+
+          // TODO: wrong userpass
+          // if(err.code === 'access_denied')
+          // err.description
+
+          observer.complete(err);
+        }
+
+        if (authResult && authResult.id_token && authResult.access_token) {
+          observer.complete(authResult);
+        }
+      });
+
+    });
+
+  }
+
+  public parseLoginResult(): Observable<any> {
+
+    this.auth0JSWebAuth = new auth0.WebAuth({
+      domain: this.config.domain,
+      clientID: this.config.client_id
+    });
+
+    return Observable.create(observer => {
+
+      this.auth0JSWebAuth.parseHash({ hash: window.location.hash }, (err, authResult) => {
+
+        if (err)
+          throw throwError(err);
+      
+        this.auth0JSWebAuth.client.userInfo(authResult.accessToken, (err, user) => {
+
+          if (err)
+            throw throwError(err);
+
+            observer.next(user);
+
+        });
+
+      });
+    
+    });
+  }
+
+
 }

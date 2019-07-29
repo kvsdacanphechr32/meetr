@@ -5,6 +5,8 @@ import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import { AuthService } from '../utils/auth.service';
 import { DataService } from '../utils/data.service';
 
+import * as auth0 from 'auth0-js';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -39,17 +41,20 @@ export class ProfileComponent implements OnInit {
 
     // Get an instance of the Auth0 client
     this.auth0Client = await this.authService.getAuth0Client();
-    console.log('this.auth0Client', this.auth0Client)
 
     // Watch for changes to the isAuthenticated state
     this.authService.isAuthenticated.subscribe(value => {
       this.isAuthenticated = value;
-    });
+    });    
 
     // Watch for changes to the profile data
     this.authService.profile.subscribe(profile => {
+
+      if(!profile) return;
+
       this.profile = profile;
       this.createOrGetUser(profile);
+      
     });
 
     // Prompt for login as needed
@@ -120,16 +125,7 @@ export class ProfileComponent implements OnInit {
   // Login via user/pass
   async loginViaDatabase() {
 
-    let body = {
-      realm: 'Username-Password-Authentication',
-      responseType: 'token',
-      email: this.f['email'].value,
-      password: this.f['password'].value,      
-      scope: 'openid profile email',
-      redirect_uri: `${window.location.origin}/callback`
-    };
-
-    await this.auth0Client.loginWithRedirect(body);
+    this.authService.loginUserPass(this.signinForm.controls['email'].value, this.signinForm.controls['password'].value).subscribe((res) => {});
 
   }
 
@@ -161,6 +157,7 @@ export class ProfileComponent implements OnInit {
         .then(response => response.json())
         .then(json => {
             return json;
+            
         })
         .catch(err => {
           console.error(err)
@@ -168,6 +165,8 @@ export class ProfileComponent implements OnInit {
 
     if(fetchReq.code === 'user_exists')
         this.alreadyExists = true;
+
+    // TODO: login if signup works
   }
 
   /**

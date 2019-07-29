@@ -31,6 +31,10 @@ const routes: Routes = [
     component: CallbackComponent
   },
   {
+    path: 'callback/oauth',
+    component: CallbackComponent
+  },
+  {
     path: 'profile',
     component: ProfileComponent
   },

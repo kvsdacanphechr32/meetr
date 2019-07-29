@@ -22,12 +22,6 @@ script:
 - npm install
 - npm run build-ci
 - cd ../
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: chmod +x .travis/deploy.sh && .travis/deploy.sh $QA_SERVER
-  on:
-    branch: master
 notifications:
   slack:
     rooms:
