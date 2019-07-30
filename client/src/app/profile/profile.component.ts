@@ -130,12 +130,15 @@ export class ProfileComponent implements OnInit {
   }
 
   // Login via user/pass
-  async loginViaDatabase() {
+  loginViaDatabase(emailOverride: string, passOverride: string) {
 
     this.signInSubmitted = true;
-    if(!this.signinForm.valid) return;
+    if(!emailOverride && !this.signinForm.valid) return;
 
-    this.authService.loginUserPass(this.signinForm.controls['email'].value, this.signinForm.controls['password'].value).subscribe((res) => {
+    let email = !emailOverride ? this.signinForm.controls['email'].value : emailOverride;
+    let pass = !passOverride ? this.signinForm.controls['password'].value : passOverride;
+
+    this.authService.loginUserPass(email, pass).subscribe((res) => {
 
       if(res !== undefined && (res.code === 'access_denied' || res.code === 'too_many_attempts'))
         this.errorMsg = res.description;
@@ -181,7 +184,10 @@ export class ProfileComponent implements OnInit {
     if(fetchReq.code === 'user_exists' || fetchReq.code === 'invalid_signup')
         this.alreadyExists = true;
 
-    // TODO: login if signup works
+    // Login if signup works
+    if(fetchReq['_id'])
+      this.loginViaDatabase(body['email'], body['password']);    
+
   }
 
   // Forgot pass
