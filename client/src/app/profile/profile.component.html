@@ -52,9 +52,10 @@
       <form [formGroup]="signinForm" (submit)="loginViaDatabase()" *ngIf="!isAuthenticated">
         <div class="fields">
           <input formControlName="email" id="email" placeholder="email" required />
-          <div *ngIf="signInSubmitted && siForm.email.invalid">
-            <span *ngIf="siForm.email.errors.required">Required.</span>
-            <span *ngIf="siForm.email.errors.email">Please enter a valid email address.</span>
+          <div *ngIf="siForm.email.invalid">
+            <span *ngIf="signInSubmitted && siForm.email.errors.required">Required.</span>
+            <span *ngIf="!errorForgot && signInSubmitted && siForm.email.errors.email">Please enter a valid email address.</span>
+            <span *ngIf="errorForgot">Please provide a valid email address for password reset.</span>
           </div>
 
           <input formControlName="password" id="password" placeholder="password" type="password" required />
@@ -69,10 +70,13 @@
 
       </div>
 
-      <div class="lower column is-full">
+      <div class="lower column is-half">
         <span>
           Don’t have an account? <a href="#" (click)="toggleSignup()">Sign up.</a>
         </span>
+      </div>
+      <div id="forgot" class="lower column">
+          <a href="#" (click)="forgot()">Forgot password</a>
       </div>
 
     </div>

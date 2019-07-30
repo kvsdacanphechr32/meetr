@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   public authInit: boolean;
 
   public errorMsg: string;
+  public errorForgot: boolean;
 
   private signupForm: FormGroup;
   private signinForm: FormGroup;
@@ -181,6 +182,39 @@ export class ProfileComponent implements OnInit {
         this.alreadyExists = true;
 
     // TODO: login if signup works
+  }
+
+  // Forgot pass
+  async forgot() {
+
+    if(!this.siForm['email'].valid) {
+      this.errorForgot = true;
+      return;
+    }
+
+    let body = {
+      'client_id': this.authService.config.client_id,
+      'email': this.siForm['email'].value,
+      'connection': 'Username-Password-Authentication'
+    };
+
+    const fetchReq = await fetch('https://' + this.authService.config.domain + '/dbconnections/change_password', {
+            method: 'post',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        .then(res => {
+            return res;
+        })
+        .catch(err => {
+          console.error(err)
+        });
+        
+    if(fetchReq['ok'] === true)
+        document.getElementById('forgot').innerText = 'Please check your email to reset your password.';
   }
 
   /**
