@@ -16,6 +16,7 @@ var buildData = async (type, res) => {
     let homeFields = 'screen1 screen2Column1.html screen2Column2.html -_id';
     let aboutFields = 'image.public_id para1.html para2.html -_id';
     let aboutStudiesFields = 'caseStudiesIntro -_id';
+    let aboutActivityFields = 'guidePdf.url -_id';
     let studiesFields = 'name description url -_id';
     let activityFields = 'name intro step1.html step2.html step3.html step4.html step5.html';
 
@@ -34,14 +35,21 @@ var buildData = async (type, res) => {
         // Get about
         data = about.findOne({}, aboutFields);
     } else if(type === 'activity') {
-        // Get all activity
+        
+        // Get all activities
         data = activity.find({}, activityFields);
+        let fileData = about.findOne({}, aboutActivityFields);
+
+        getRes.push(await fileData.exec());
+
     } else {
+        
         // Get all studies
         let introData = about.findOne({}, aboutStudiesFields);
         data = study.find({}, studiesFields);
 
         getRes.push(await introData.exec());
+        
     }
 
     try {

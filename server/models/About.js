@@ -28,6 +28,23 @@ var About = new keystone.List('About',
 		nocreate: true
 	});
 
+// Storage adapter for Azure
+var azureFile = new keystone.Storage({
+	adapter: require('keystone-storage-adapter-azure'),
+	azure: {
+	  container: 'meetr',
+	  generateFilename: function (file) {
+		// Cleanup filename
+		return file.originalname.replace(/[\\'\-\[\]\/\{\}\(\)\*\+\?\\\^\$\|]/g, "").replace(/ /g, '_').toLowerCase();
+	  }
+	},
+	schema: {
+	  path: true,
+	  originalname: true,
+	  url: true
+	}
+  });
+
 /**
  * Model Fields
  * @main About
@@ -38,7 +55,8 @@ About.add({
 	image: { type: Types.CloudinaryImage, folder: 'engagement-journalism/cms', autoCleanup: true, required: true, initial: true},
 	para1: { type: Types.Markdown, label: 'Paragraph 1', required: true, initial: true},
 	para2: { type: Types.Markdown, label: 'Paragraph 2', required: true, initial: true},
-	caseStudiesIntro: { type: Types.Markdown, required: true, initial: true}
+	caseStudiesIntro: { type: Types.Markdown, required: true, initial: true},
+	guidePdf: { type: Types.File,  storage: azureFile, label: 'Guide PDF', required: true, initial: true}
 
 });
 

@@ -29,8 +29,12 @@ export class AppComponent implements OnInit {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
+  
       document.body.classList.value = this._active.root.firstChild.snapshot.data['bg'];
   
+      // Always go to top of page
+      window.scrollTo(0, 0);
+      
     });
 
   }

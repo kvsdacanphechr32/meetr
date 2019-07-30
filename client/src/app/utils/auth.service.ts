@@ -51,13 +51,15 @@ export class AuthService {
       this.authCheckPending.next(true);
       this.auth0Client = await createAuth0Client(this.config);
 
-      // Provide the current value of isAuthenticated
-      this.isAuthenticated.next(await this.auth0Client.isAuthenticated());
+      let checkAuth = await this.auth0Client.isAuthenticated()
 
+      // Provide the current value of isAuthenticated
+      this.isAuthenticated.next(checkAuth);
+      
       // Whenever isAuthenticated changes, provide the current value of `getUser`, if profile not set
       this.isAuthenticated.subscribe(async isAuthenticated => {
         this.authCheckPending.next(false);
-
+        
         if (isAuthenticated) {
           this.profile.next(await this.auth0Client.getUser());
           return;

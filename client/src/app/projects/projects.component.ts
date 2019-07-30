@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { DataService } from '../utils/data.service';
 import { AuthService } from '../utils/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
@@ -21,7 +22,7 @@ export class ProjectsComponent implements OnInit {
 
   public newForm: FormGroup;
 
-  constructor(private _dataSvc: DataService, private _authSvc: AuthService, private _formBuilder: FormBuilder) {}
+  constructor(private _dataSvc: DataService, private _authSvc: AuthService, private _formBuilder: FormBuilder, private _router: Router) {}
 
   async ngOnInit() {
 
@@ -86,11 +87,14 @@ export class ProjectsComponent implements OnInit {
     }
 
     this._dataSvc.sendDataToUrl('/api/project/create', data).subscribe((response: any) => {
-
       
+      // Hide modal
       document.getElementById('new').style.display = 'none';
       document.body.classList.value = 'white';
       this.projects.push(response);
+
+      // Go to new project
+      this._router.navigate(['projects', response.slug]);
       
     },
     (err: HttpErrorResponse) => {

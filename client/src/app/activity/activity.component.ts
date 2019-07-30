@@ -3,6 +3,7 @@ import { DataService } from '../utils/data.service';
 
 import { TweenLite } from 'gsap';
 import { OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-activity',
@@ -14,6 +15,9 @@ export class ActivityComponent implements OnInit, AfterViewInit {
   public activities: any[];
   public currentActivity: number = 0;
 
+  public projectKey: string;
+  public pdfUrl: string;
+
   private bgColors: string[] = ['pale-salmon', 'coral', 'blueberry', 'camo-green'];
   
   customOptions: OwlOptions = {
@@ -24,13 +28,21 @@ export class ActivityComponent implements OnInit, AfterViewInit {
     items: 1,
     navSpeed: 700
   }
-  constructor(private _dataSvc: DataService) { }
+  constructor(private _dataSvc: DataService, private _route: ActivatedRoute) { }
 
   ngOnInit() {   
+
+    this._route.params.subscribe(params => {
+
+      if(params)
+        this.projectKey = params['project-slug'];
+
+    });
     
     this._dataSvc.getDataForUrl('/api/data/get/activity').subscribe((response: any) => {
 
-      this.activities = response[0];
+      this.pdfUrl = response[0].guidePdf.url;
+      this.activities = response[1];
       
     }); 
   }

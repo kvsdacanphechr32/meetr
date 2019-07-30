@@ -24,6 +24,57 @@ nav {
         margin-top: 2%;
       }
     }
+
+    #logo {
+
+      * {
+        @include transition(fill, 1s, ease-in-out);
+      }
+
+      .cls-1 {
+        fill: url(#linear-gradient-w);
+      }
+      .cls-2 {
+        fill: url(#linear-gradient-w-2);
+      }
+      circle {
+        fill: #fff;
+      }
+      .cls-4 {
+        fill: url(#linear-gradient-w-3);
+      }
+      .cls-5 {
+        fill: url(#linear-gradient-w-4);
+      }
+      
+      &.color {
+      circle {
+        &:nth-of-type(1) {
+          fill: #e85e5d;
+       
+      }     
+      &:nth-of-type(2), &:nth-of-type(5) {
+        fill: #e9bbb0;
+            }
+            &:nth-of-type(3) {
+              fill: #5a5c27;
+                  }
+                  &:nth-of-type(4) {
+                    fill: #634da0;
+                        }
+       
+      }       
+        .cls-1 {
+          fill: url(#linear-gradient);
+        }
+        .cls-2 {
+          fill: url(#linear-gradient-2);
+        }
+        .cls-5 {
+          fill: url(#linear-gradient-4);
+        }
+      }
+    }
   }
 
   .right {

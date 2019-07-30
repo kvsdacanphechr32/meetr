@@ -1,32 +1,27 @@
 <div id="menu">
-    <ul>
-        <li>            
-            <a [class.current]="itemActive('about')" routerLink="/about" queryParamsHandling="merge" >
-                About
-            </a>
-        </li>
-        <li>            
-            <a [class.current]="itemActive('about')" routerLink="/talk" queryParamsHandling="merge" >
-                Talk it Out
-            </a>
-        </li>
-        <li>            
-            <a [class.current]="itemActive('about')" routerLink="/track" queryParamsHandling="merge" >
-                Track Your Progress
-            </a>
-        </li>
-        <li>            
-            <a [class.current]="itemActive('about')" routerLink="/studies" queryParamsHandling="merge" >
-                Case Studies
-            </a>
-        </li>
-    </ul>
-
-    <hr />
-
-    <ul *ngIf="isAuthenticated === true">
-            <li id="signout">           
-    <a href="#" (click)="signOut()">Sign Out</a>
+  <ul>
+    <li>
+      <a [class.current]="itemActive('about')" routerLink="/about" queryParamsHandling="merge">
+        About
+      </a>
     </li>
-    </ul>
+    <li>
+      <a [class.current]="itemActive('about')" routerLink="/talk" queryParamsHandling="merge">
+        Talk it Out
+      </a>
+    </li>
+    <li>
+      <a [class.current]="itemActive('about')" routerLink="/studies" queryParamsHandling="merge">
+        Case Studies
+      </a>
+    </li>
+  </ul>
+
+  <hr />
+
+  <ul *ngIf="isAuthenticated === true">
+    <li id="signout">
+      <a href="#" (click)="signOut()">Sign Out</a>
+    </li>
+  </ul>
 </div>

@@ -80,6 +80,10 @@ const routes: Routes = [
   {
     path: 'talk',
     component: ActivityComponent
+  },
+  {
+    path: 'talk/:project-slug',
+    component: ActivityComponent
   }
 ];
 

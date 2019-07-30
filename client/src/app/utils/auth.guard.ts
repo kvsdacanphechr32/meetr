@@ -21,14 +21,13 @@ export class AuthGuard implements CanActivate
 
       pending = val;
       isAuthenticated = this.authService.isAuthenticated.getValue();
-
-      if(!isAuthenticated) 
+      
+      if(!isAuthenticated && !pending) 
         this.authService.showLoginPrompt();
     });
 
-    if (isAuthenticated || pending) {
+    if (isAuthenticated || pending)
       return true;
-    }
     
     this.authService.showLoginPrompt();
 

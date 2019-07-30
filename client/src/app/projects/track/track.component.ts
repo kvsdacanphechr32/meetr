@@ -46,7 +46,7 @@ export class TrackComponent implements OnInit {
     this.responseForm = this._formBuilder.group(radioGroups);
 
     // If no pre-selected project, get all projects for dropdown if project id is not in url
-    if (!this._dataSvc.currentProjectId) {
+/*     if (!this._dataSvc.currentProjectId) {
 
       // Check for project and user id
       this._route.params.subscribe(params => {
@@ -81,15 +81,13 @@ export class TrackComponent implements OnInit {
         });
       });
 
-    }
-    else {
-      // Project is cached from last page unless params empty
-      this._route.params.subscribe(params => {
-        console.log(params)
-        if(Object.values(params).length > 0)
-          this.hasProjects = true;
-      });
-    }
+    } */
+   
+    // Project is cached from last page unless params empty
+    this._route.params.subscribe(params => {
+      if(Object.values(params).length > 0)
+        this.hasProjects = true;
+    });
 
   }
 

@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { ActivatedRoute } from '@angular/router';
 
 import { DataService } from '../../utils/data.service';
 
-import { TweenLite, Back, TweenMax } from 'gsap';
+import { TweenLite, TweenMax } from 'gsap';
 
 import * as ismobile from 'ismobilejs';
 import * as paper from 'paper';
@@ -15,7 +15,7 @@ import * as dateformat from 'dateformat';
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent implements OnInit, AfterViewInit {
+export class ProjectComponent implements OnInit {
 
   public project: any;
   public progress: any[];
@@ -42,10 +42,6 @@ export class ProjectComponent implements OnInit, AfterViewInit {
     this._dataSvc.userId.subscribe(id => {
       if (id) this.getData(id);
     });
-
-  }
-
-  ngAfterViewInit() {
 
   }
 
@@ -151,6 +147,7 @@ export class ProjectComponent implements OnInit, AfterViewInit {
     let canvasImg = this.canvasElement.nativeElement.toDataURL();
     let doc = new jsPDF();
     let dt = dateformat(new Date(), 'mm-d-yy_h:MM:sstt');
+    
     doc.addImage(canvasImg, 'PNG', 0, 0);
     doc.save('results_' + this.project.slug + '_' + dt + '.pdf');
 
