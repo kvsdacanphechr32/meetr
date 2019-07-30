@@ -11,10 +11,10 @@ import * as auth0 from 'auth0-js';
 })
 
 export class AuthService {
-  
+
   isAuthenticated = new BehaviorSubject(false);
   promptLogin = new BehaviorSubject(false);
-  profile = new BehaviorSubject<any>(null);
+  profile = new BehaviorSubject < any > (null);
 
   private auth0Client: Auth0Client;
   private auth0JSWebAuth: auth0.WebAuth;
@@ -28,7 +28,7 @@ export class AuthService {
 
   getAuth0JS(): any {
 
-    if(!this.auth0JSWebAuth) {
+    if (!this.auth0JSWebAuth) {
 
       this.auth0JSWebAuth = new auth0.WebAuth({
         domain: this.config.domain,
@@ -36,7 +36,7 @@ export class AuthService {
       });
 
     }
-    
+
     return this.auth0JSWebAuth;
 
   }
@@ -44,42 +44,43 @@ export class AuthService {
   /**
    * Gets the Auth0Client instance.
    */
-  async getAuth0Client(): Promise<Auth0Client> {
+  async getAuth0Client(): Promise < Auth0Client > {
+
     if (!this.auth0Client) {
       this.auth0Client = await createAuth0Client(this.config);
 
       // Provide the current value of isAuthenticated
       this.isAuthenticated.next(await this.auth0Client.isAuthenticated());
 
-      // Whenever isAuthenticated changes, provide the current value of `getUser`
+      // Whenever isAuthenticated changes, provide the current value of `getUser`, if profile not set
       this.isAuthenticated.subscribe(async isAuthenticated => {
-        if (isAuthenticated) {
+        if (isAuthenticated && !this.profile.getValue()) {
           this.profile.next(await this.auth0Client.getUser());
           return;
         }
-
-        this.profile.next(null);
       });
     }
 
     return this.auth0Client;
+
   }
 
   showLoginPrompt() {
 
-    if(!this.isAuthenticated.value)
+    if (!this.isAuthenticated.value)
       this.promptLogin.next(true);
- 
+
 
   }
 
   signOut() {
 
     this.auth0Client.logout();
-    
+
   }
 
-  public loginUserPass(user: string, password: string): Observable<any> {
+  // Handle login via user/pass (using auth0 webauth, not auth0-spa)
+  public loginUserPass(user: string, password: string): Observable < any > {
 
     this.auth0JSWebAuth = new auth0.WebAuth({
       domain: this.config.domain,
@@ -87,25 +88,18 @@ export class AuthService {
     });
 
     return Observable.create(observer => {
-    
+
       this.auth0JSWebAuth.login({
-      
+
         email: user,
         password: password,
         responseType: 'token',
         redirectUri: this.config.redirect_uri + '/oauth'
-      
+
       }, (err, authResult) => {
-        
-        if (err) {
-          console.error('Error: ', err)
 
-          // TODO: wrong userpass
-          // if(err.code === 'access_denied')
-          // err.description
-
-          observer.complete(err);
-        }
+        if (err)
+          observer.next(err);
 
         if (authResult && authResult.id_token && authResult.access_token) {
           observer.complete(authResult);
@@ -116,7 +110,7 @@ export class AuthService {
 
   }
 
-  public parseLoginResult(): Observable<any> {
+  public parseLoginResult(): Observable < any > {
 
     this.auth0JSWebAuth = new auth0.WebAuth({
       domain: this.config.domain,
@@ -125,22 +119,27 @@ export class AuthService {
 
     return Observable.create(observer => {
 
-      this.auth0JSWebAuth.parseHash({ hash: window.location.hash }, (err, authResult) => {
+      this.auth0JSWebAuth.parseHash({
+        hash: window.location.hash
+      }, (err, authResult) => {
 
         if (err)
           throw throwError(err);
-      
+
+        if (!authResult)
+          return;
+
         this.auth0JSWebAuth.client.userInfo(authResult.accessToken, (err, user) => {
 
           if (err)
             throw throwError(err);
 
-            observer.next(user);
+          observer.next(user);
 
         });
 
       });
-    
+
     });
   }
 

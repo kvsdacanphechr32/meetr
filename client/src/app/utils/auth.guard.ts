@@ -13,13 +13,12 @@ export class AuthGuard implements CanActivate
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> {
-    const client = await this.authService.getAuth0Client();
-    const isAuthenticated = await client.isAuthenticated();
+    
+    const isAuthenticated = this.authService.isAuthenticated.getValue();
 
     if (isAuthenticated) {
       return true;
     }
-
     
     this.authService.showLoginPrompt();
 

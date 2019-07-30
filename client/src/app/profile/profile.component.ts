@@ -19,7 +19,10 @@ export class ProfileComponent implements OnInit {
   public alreadyExists: boolean;
   public signUpShow: boolean;
   public signUpSubmitted: boolean;
+  public signInSubmitted: boolean;
   public authInit: boolean;
+
+  public errorMsg: string;
 
   private signupForm: FormGroup;
   private signinForm: FormGroup;
@@ -54,7 +57,7 @@ export class ProfileComponent implements OnInit {
 
       this.profile = profile;
       this.createOrGetUser(profile);
-      
+
     });
 
     // Prompt for login as needed
@@ -70,8 +73,11 @@ export class ProfileComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() {
+  get suForm() {
     return this.signupForm.controls;
+  }
+  get siForm() {
+    return this.signinForm.controls;
   }
 
   createOrGetUser(profile: any) {
@@ -125,7 +131,15 @@ export class ProfileComponent implements OnInit {
   // Login via user/pass
   async loginViaDatabase() {
 
-    this.authService.loginUserPass(this.signinForm.controls['email'].value, this.signinForm.controls['password'].value).subscribe((res) => {});
+    this.signInSubmitted = true;
+    if(!this.signinForm.valid) return;
+
+    this.authService.loginUserPass(this.signinForm.controls['email'].value, this.signinForm.controls['password'].value).subscribe((res) => {
+
+      if(res !== undefined && (res.code === 'access_denied' || res.code === 'too_many_attempts'))
+        this.errorMsg = res.description;
+
+    });
 
   }
 
@@ -140,10 +154,10 @@ export class ProfileComponent implements OnInit {
 
     let body = {
       'client_id': this.authService.config.client_id,
-      'email': this.f['email'].value,
-      'password': this.f['password'].value,
+      'email': this.suForm['email'].value,
+      'password': this.suForm['password'].value,
       'connection': 'Username-Password-Authentication',
-      'name': this.f['name'].value,
+      'name': this.suForm['name'].value,
     };
 
     const fetchReq = await fetch('https://' + this.authService.config.domain + '/dbconnections/signup', {

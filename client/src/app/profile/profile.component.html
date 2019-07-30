@@ -1,5 +1,5 @@
-<a id="signin" class="top mono" href="#" (click)="showModal()" *ngIf="!isAuthenticated && authInit">Sign In</a>
-<div id="signin" *ngIf="!authInit">Wait...</div>
+<a id="signin-link" class="top mono" href="#" (click)="showModal()" *ngIf="!isAuthenticated && authInit">Sign In</a>
+<div id="signin-link" *ngIf="!authInit">Wait...</div>
 
 <img id="pic" [src]="profile.picture" *ngIf="isAuthenticated && profile" alt="Profile picture" />
 
@@ -22,10 +22,10 @@
     </div>
 
     <!-- SIGNIN -->
-    <div class="signin columns is-mobile is-multiline" *ngIf="!signUpShow">
+    <div id="signin" class="columns is-mobile is-multiline" *ngIf="!signUpShow">
 
-      <div class="column is-full-mobile is-half-tablet">
-        <p class="roboto">Sign in with Google or Facebook</p>
+      <div class="column is-5">
+        <p>Sign in with Google or Facebook</p>
 
         <div class="social-login">
 
@@ -47,37 +47,25 @@
 
       <hr />
 
-      <div class="column is-full-mobile is-offset-1-tablet">
-
-        <!-- <a href="#" (click)="login('Username-Password-Authentication')">
-          <p>Or, sign in with email</p>
-        </a>
-
-        Soon! -->
+      <div class="column is-offset-1">
         
-      <form class="columns column is-11-mobile is-full-tablet is-multiline" [formGroup]="signinForm"
-        (submit)="loginViaDatabase()" *ngIf="!isAuthenticated">
+      <form [formGroup]="signinForm" (submit)="loginViaDatabase()" *ngIf="!isAuthenticated">
         <div class="fields">
-          <div class="column is-full-mobile is-half-tablet" data-aos="fade-up" data-aos-delay="1000">
-            <input formControlName="email" id="email" placeholder="email" required />
-            <div *ngIf="f.email.invalid">
-              <span *ngIf="f.email.errors.required">Required.</span>
-              <span *ngIf="f.email.errors.email">Please enter a valid email address.</span>
-            </div>
+          <input formControlName="email" id="email" placeholder="email" required />
+          <div *ngIf="signInSubmitted && siForm.email.invalid">
+            <span *ngIf="siForm.email.errors.required">Required.</span>
+            <span *ngIf="siForm.email.errors.email">Please enter a valid email address.</span>
           </div>
-          <div class="column is-full-mobile is-half-tablet" data-aos="fade-up" data-aos-delay="1000">
-            <input formControlName="password" id="password" placeholder="password" type="password" required />
-            <div *ngIf="f.password.invalid">
-              <span *ngIf="f.password.errors.required">Required.</span>
 
-            </div>
+          <input formControlName="password" id="password" placeholder="password" type="password" required />
+          <div *ngIf="signInSubmitted && siForm.password.invalid">
+            <span *ngIf="siForm.password.errors.required">Required.</span>
           </div>
+          <div class="note">{{errorMsg}}</div>
+
         </div>
-        <div class="column is-full-mobile is-5-tablet" data-aos="fade-up" data-aos-delay="1500">
-          <button type="submit">Sign In</button>
-        </div>
+          <button class="mono" type="submit">Sign In</button>
       </form>
-
 
       </div>
 
@@ -124,18 +112,18 @@
           <div class="fields">
 
               <input formControlName="name" id="name" placeholder="name" required />
-              <div class="note" *ngIf="signUpSubmitted && f.name.invalid">Required.</div>
+              <div class="note" *ngIf="signUpSubmitted && suForm.name.invalid">Required.</div>
             
               <input formControlName="email" id="email" placeholder="email" required />
-              <div class="note" *ngIf="signUpSubmitted && f.email.invalid">
-                <span *ngIf="f.email.errors.required">Required.</span>
-                <span *ngIf="f.email.errors.email">Please enter a valid email address.</span>
+              <div class="note" *ngIf="signUpSubmitted && suForm.email.invalid">
+                <span *ngIf="suForm.email.errors.required">Required.</span>
+                <span *ngIf="suForm.email.errors.email">Please enter a valid email address.</span>
               </div>
               <input formControlName="password" id="password" placeholder="password" type="password" required />
-              <div class="note" *ngIf="signUpSubmitted && f.password.invalid">
-                <span *ngIf="f.password.errors.required">Required.</span>
-                <span *ngIf="f.password.errors.pattern">Your password must be at least 8 and contain at least 3 of: special characters, lowercase letters, uppercase letters, or numbers.</span>
-            </div>
+              <div class="note" *ngIf="signUpSubmitted && suForm.password.invalid">
+                <span *ngIf="suForm.password.errors.required">Required.</span>
+                <span *ngIf="suForm.password.errors.pattern">Your password must be at least 8 and contain at least 3 of: special characters, lowercase letters, uppercase letters, or numbers.</span>
+              </div>
           </div>
             <button class="mono" type="submit">Create An Account</button>
         </form>

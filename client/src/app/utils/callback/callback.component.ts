@@ -38,21 +38,17 @@ export class CallbackComponent implements OnInit {
 
   }
 
+  // Handle auth redirect from non-SPA (oauth) flow
   handleOAuth() {
 
     this.authService.parseLoginResult().subscribe(profile => {
       
       this.authService.profile.next(profile);
       this.authService.isAuthenticated.next(true);
-      // debugger
 
-      // setTimeout(() => {
-        this.router.navigate(['/projects']).then(e => {
-          console.log(e)
-        });
+      window.location.hash = '';
+      this.router.navigate(['/projects']);
 
-      // }, 5000)
-      
     }, err => {
       console.error(err);
     });

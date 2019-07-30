@@ -12,6 +12,7 @@ import { AuthService } from '../utils/auth.service';
 export class ProjectsComponent implements OnInit {
 
   public profile: any;
+  public userName: string;
   public projects: any[]
   public projectSubmitted: boolean;
 
@@ -23,7 +24,11 @@ export class ProjectsComponent implements OnInit {
 
     // Watch for changes to the profile data
     this._authSvc.profile.subscribe(profile => {
+      if(!profile || this.profile !== undefined) return;
+
       this.profile = profile;
+      this.userName = profile.given_name || profile.name.split(/\s+/)[0];
+
     });
 
     let userId = this._dataSvc.userId.getValue();
@@ -31,11 +36,11 @@ export class ProjectsComponent implements OnInit {
       this.getProjects(userId)
     else 
     {
-      // this._authSvc.showLoginPrompt();
       this._dataSvc.userId.subscribe(id => {
         if(id) this.getProjects(id);
       });
     }
+
     this.newForm = this._formBuilder.group({
       'name': ['', [Validators.required]],
       'description': ['', [Validators.required]]
