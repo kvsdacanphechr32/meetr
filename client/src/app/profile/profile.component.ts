@@ -214,7 +214,8 @@ export class ProfileComponent implements OnInit {
         });
         
     if(fetchReq['ok'] === true)
-        document.getElementById('forgot').innerText = 'Please check your email to reset your password.';
+      document.getElementById('forgot').innerText = 'Please check your email to reset your password.';
+      
   }
 
   /**

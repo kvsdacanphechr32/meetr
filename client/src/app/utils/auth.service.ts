@@ -54,7 +54,8 @@ export class AuthService {
 
       // Whenever isAuthenticated changes, provide the current value of `getUser`, if profile not set
       this.isAuthenticated.subscribe(async isAuthenticated => {
-        if (isAuthenticated && !this.profile.getValue()) {
+        console.log('auth', isAuthenticated)
+        if (isAuthenticated) {
           this.profile.next(await this.auth0Client.getUser());
           return;
         }

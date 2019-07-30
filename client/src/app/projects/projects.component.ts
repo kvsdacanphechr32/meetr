@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { DataService } from '../utils/data.service';
 import { AuthService } from '../utils/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-projects',
@@ -11,8 +12,10 @@ import { AuthService } from '../utils/auth.service';
 })
 export class ProjectsComponent implements OnInit {
 
-  public profile: any;
   public userName: string;
+  public errorMsg: string;
+
+  public profile: any;
   public projects: any[]
   public projectSubmitted: boolean;
 
@@ -83,11 +86,16 @@ export class ProjectsComponent implements OnInit {
     }
 
     this._dataSvc.sendDataToUrl('/api/project/create', data).subscribe((response: any) => {
+
       
       document.getElementById('new').style.display = 'none';
       document.body.classList.value = 'white';
       this.projects.push(response);
-
+      
+    },
+    (err: HttpErrorResponse) => {
+      if(err.status === 409)
+        this.errorMsg = 'You already have a project with that name';
     });
 
   }

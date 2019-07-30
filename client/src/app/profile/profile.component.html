@@ -1,7 +1,9 @@
 <a id="signin-link" class="top mono" href="#" (click)="showModal()" *ngIf="!isAuthenticated && authInit">Sign In</a>
 <div id="signin-link" *ngIf="!authInit">Wait...</div>
 
-<img id="pic" [src]="profile.picture" *ngIf="isAuthenticated && profile" alt="Profile picture" />
+<a routerLink="projects" *ngIf="isAuthenticated && profile" >
+  <img id="pic" [src]="profile.picture" alt="Profile picture" />
+</a>
 
 <div id="wrapper-profile" class="modal-wrapper">
   <div id="modal" class="modal columns is-mobile">

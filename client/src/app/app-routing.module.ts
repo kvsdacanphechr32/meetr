@@ -49,6 +49,7 @@ const routes: Routes = [
   {
     path: 'projects/:id',
     component: ProjectComponent,
+    canActivate: [AuthGuard],
     data: {
       bg: 'white'
     }
@@ -56,6 +57,7 @@ const routes: Routes = [
   {
     path: 'projects/:id/track',
     component: TrackComponent,
+    canActivate: [AuthGuard],
     data: {
       bg: 'white'
     }
@@ -63,6 +65,7 @@ const routes: Routes = [
   {
     path: 'track',
     component: TrackComponent,
+    canActivate: [AuthGuard],
     data: {
       bg: 'white'
     }

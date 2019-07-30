@@ -16,6 +16,7 @@ export class AuthGuard implements CanActivate
     
     const isAuthenticated = this.authService.isAuthenticated.getValue();
 
+    console.log(isAuthenticated)
     if (isAuthenticated) {
       return true;
     }

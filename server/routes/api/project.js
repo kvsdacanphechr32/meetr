@@ -17,6 +17,14 @@ const Project = require('../../models/Project'),
 exports.create = async (req, res) => { 
 
     let displayName = req.body.name.replace(/ /g, '-').toLowerCase();
+    let projectCt = await Project.count({name: req.body.name, user: req.body.userId}).exec();
+
+    // Check if already exists
+    if(projectCt > 0) {
+        res.sendStatus(409);
+        return;
+    }
+
     let newProject = new Project({ name: req.body.name, description: req.body.description, user: req.body.userId, slug: displayName });
  
     try {

@@ -54,6 +54,9 @@
       </div>
       <div class="column is-full">
         <button class="mono no-pad" type="submit">Create Project</button>
+        <div *ngIf="projectSubmitted && errorMsg">
+            {{errorMsg}}
+        </div>
       </div>
     </form>
   </div>
