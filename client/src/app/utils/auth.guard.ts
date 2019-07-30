@@ -14,10 +14,19 @@ export class AuthGuard implements CanActivate
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> {
     
-    const isAuthenticated = this.authService.isAuthenticated.getValue();
+    let pending = true;
+    let isAuthenticated = this.authService.isAuthenticated.getValue();
 
-    console.log(isAuthenticated)
-    if (isAuthenticated) {
+    this.authService.authCheckPending.subscribe(val => {
+
+      pending = val;
+      isAuthenticated = this.authService.isAuthenticated.getValue();
+
+      if(!isAuthenticated) 
+        this.authService.showLoginPrompt();
+    });
+
+    if (isAuthenticated || pending) {
       return true;
     }
     

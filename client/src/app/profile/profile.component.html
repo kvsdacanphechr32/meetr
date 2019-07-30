@@ -132,6 +132,10 @@
               </div>
           </div>
             <button class="mono" type="submit">Create An Account</button>
+            <div *ngIf="alreadyExists">
+              This email address was registered previously. Please <a href="#" (click)="toggleSignup()">signin</a>.
+            </div>
+            
         </form>
       </div>
       <div class="lower column is-full">
@@ -143,8 +147,4 @@
     </div>
   </div>
 
-</div>
-
-<div *ngIf="alreadyExists">
-  This email address was registered previously. Please signin.
 </div>

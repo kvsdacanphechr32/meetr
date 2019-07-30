@@ -12,6 +12,7 @@ import * as auth0 from 'auth0-js';
 
 export class AuthService {
 
+  authCheckPending = new BehaviorSubject(false);
   isAuthenticated = new BehaviorSubject(false);
   promptLogin = new BehaviorSubject(false);
   profile = new BehaviorSubject < any > (null);
@@ -47,6 +48,7 @@ export class AuthService {
   async getAuth0Client(): Promise < Auth0Client > {
 
     if (!this.auth0Client) {
+      this.authCheckPending.next(true);
       this.auth0Client = await createAuth0Client(this.config);
 
       // Provide the current value of isAuthenticated
@@ -54,7 +56,8 @@ export class AuthService {
 
       // Whenever isAuthenticated changes, provide the current value of `getUser`, if profile not set
       this.isAuthenticated.subscribe(async isAuthenticated => {
-        console.log('auth', isAuthenticated)
+        this.authCheckPending.next(false);
+
         if (isAuthenticated) {
           this.profile.next(await this.auth0Client.getUser());
           return;

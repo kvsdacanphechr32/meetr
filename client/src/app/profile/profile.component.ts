@@ -178,7 +178,7 @@ export class ProfileComponent implements OnInit {
           console.error(err)
         });
 
-    if(fetchReq.code === 'user_exists')
+    if(fetchReq.code === 'user_exists' || fetchReq.code === 'invalid_signup')
         this.alreadyExists = true;
 
     // TODO: login if signup works
