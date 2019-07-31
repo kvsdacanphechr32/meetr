@@ -16,93 +16,6 @@
   }
 }
 
-#select {
-  @include pxtoem(18, 24);
-  position: relative;
-  width: 300px;
-  height: 45px;
-  margin: 40px auto;
-
-  background: #fff;
-  cursor: pointer;
-
-  background-repeat: no-repeat;
-  background-image: cdn-image('img/dropdown', c_fill, f_auto, w_30);
-  background-position: right center;
-
-  border: solid 1px #999999;
-  color: #999999;
-
-  span {
-    display: block;
-    width: 100%;
-    height: 100%;
-
-    padding: 10px 15px;
-  }
-
-  ul {
-
-    position: absolute;
-    top: 100%;
-    left: -5px;
-    right: 0px;
-    padding: 0;
-
-    background: white;
-    transition: all 0.3s ease-out;
-    list-style: none;
-
-    opacity: 0;
-    pointer-events: none;
-
-    li {
-      display: block;
-      text-decoration: none;
-      color: #333;
-      padding: 10px;
-      transition: all 0.3s ease-out;
-
-      &:hover {
-        color: grey;
-      }
-    }
-
-  }
-
-  &.active ul {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-}
-
-//   padding: 3%;
-//   margin: 0;
-//   border: 1px solid #ccc;
-//   width: 300px;
-//   border-radius: 3px;
-//   overflow: hidden;
-//   background-color: #fff;
-
-//   // background: #fff url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 90% 50%;
-
-
-//   select {
-//     width: 300px;
-//     border: solid 1px #ccc;
-
-//     padding: 5px 8px;
-//     border: none;
-//     box-shadow: none;
-//     background-color: transparent;
-//     background-image: none;
-//     appearance: none;
-//     option {
-//     }
-//   }
-// }
-
 form {
 
   text-align: center;
@@ -150,8 +63,8 @@ form {
     cursor: pointer;
 
     border: solid 1px;
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     transition: all 0.3s;
     align-items: center;
@@ -194,7 +107,12 @@ form {
 
   .row {
     width: 100%;
-    margin-top: 8%;
+
+    padding: 8% 4% 8%;
+
+    &:nth-child(even) {
+      background-color: rgba(233, 187, 176, 0.15);
+    }
   }
 
   .fields {

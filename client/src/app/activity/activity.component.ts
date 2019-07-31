@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../utils/data.service';
 
 import { TweenLite } from 'gsap';
@@ -10,15 +10,13 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './activity.component.html',
   styleUrls: ['./activity.component.scss']
 })
-export class ActivityComponent implements OnInit, AfterViewInit {
+export class ActivityComponent implements OnInit {
 
   public activities: any[];
   public currentActivity: number = 0;
 
   public projectKey: string;
   public pdfUrl: string;
-
-  private bgColors: string[] = ['pale-salmon', 'coral', 'blueberry', 'camo-green'];
   
   customOptions: OwlOptions = {
     mouseDrag: true,
@@ -47,12 +45,6 @@ export class ActivityComponent implements OnInit, AfterViewInit {
     }); 
   }
   
-  ngAfterViewInit() {
-    
-    document.body.classList.value = 'activity ' + this.bgColors[this.currentActivity];
-    
-  }
-
   gotoNext() { 
   
     this.goto(0, true);
@@ -70,12 +62,6 @@ export class ActivityComponent implements OnInit, AfterViewInit {
     else
       this.currentActivity = activityIndex;
 
-    TweenLite.to(document.getElementById('bg'), .7, {css: {filter: 'opacity(0.5)'}, onComplete:() => {
-    
-      document.body.classList.value = 'activity ' + this.bgColors[this.currentActivity];
-      TweenLite.to(document.getElementById('bg'), .7, {css: {filter: 'opacity(1)'}});
-    
-    }});
   }
 
   sliderInit(activityIndex: Number) {

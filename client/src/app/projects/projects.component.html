@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <form class="columns column is-multiline" [formGroup]="newForm" (submit)="submitNew()">
+    <form id="new" class="columns column is-multiline" [formGroup]="newForm" (submit)="submitNew()">
       <div class="fields">
         <div class="column is-full">
           <input formControlName="name" id="name" placeholder="Project Name" required />
@@ -45,10 +45,10 @@
           </div>
         </div>
         <div class="column is-full">
-          <textarea formControlName="description" id="description" placeholder="Project Description" rows="10" required></textarea>
+          <textarea formControlName="description" id="description" placeholder="Project Description" rows="5" maxlength="150" required></textarea>
+          <div *ngIf="descCount > 0">{{descCount}} / {{descLimit}}</div>
           <div *ngIf="projectSubmitted && f.description.invalid">
             <span *ngIf="f.description.errors.required">Required.</span>
-
           </div>
         </div>
       </div>

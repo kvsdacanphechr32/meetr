@@ -79,11 +79,17 @@ const routes: Routes = [
   },
   {
     path: 'talk',
-    component: ActivityComponent
+    component: ActivityComponent,
+    data: {
+      bg: 'white'
+    }
   },
   {
     path: 'talk/:project-slug',
-    component: ActivityComponent
+    component: ActivityComponent,
+    data: {
+      bg: 'white'
+    }
   }
 ];
 

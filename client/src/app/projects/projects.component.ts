@@ -16,6 +16,9 @@ export class ProjectsComponent implements OnInit {
   public userName: string;
   public errorMsg: string;
 
+  public descLimit: number = 150;
+  public descCount: number;
+
   public profile: any;
   public projects: any[]
   public projectSubmitted: boolean;
@@ -49,6 +52,11 @@ export class ProjectsComponent implements OnInit {
       'name': ['', [Validators.required]],
       'description': ['', [Validators.required]]
     });
+
+    // Show char limit on description
+    (document.querySelector('#new #description') as HTMLElement).onkeyup = (el) => {
+      this.descCount = (el.target as HTMLTextAreaElement).value.length;
+    }
 
   }
 

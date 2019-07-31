@@ -11,19 +11,20 @@
   @include not-phones {
     display: grid;
   }
-    
+
   grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
   grid-template-rows: 2;
   @include pxtoem(14, 18);
 
   div {
+    color: $brown-grey;
     cursor: pointer;
     padding-top: 5%;
 
     &.active,
     &:hover {
       div {
-        border-bottom: 1px solid white;
+        border-bottom: 1px solid $brown-grey;
       }
 
     }
@@ -54,29 +55,56 @@
 
 .activity {
   display: none;
+  counter-reset: step; 
 
   .step {
 
+    background-color: rgba(233, 187, 176, 0.15);
+    padding: 6%;
+
+    counter-increment: step;
     p {
       margin-top: 0;
-      @include pxtoem(14, 18);
-
+      @include pxtoem(18, 24);
+      
       &.intro {
         margin-bottom: 18%;
       }
     }
-
+    
     .text {
-
-      text-align: center;
-
+      
       ::ng-deep p {
-
         font-size: 1em;
+
+        &:nth-child(1) {
+          display: flex;
+          flex-direction: row;
+
+          &::before {
+
+            content: counter(step);
+  
+            font-family: Spectral;
+            @include pxtoem(24, 36);
+  
+            text-align: center;
+            
+            flex-shrink: 0;
+            
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+
+            background-color: rgba(233, 187, 176, 0.4);
+          }
+        }
 
         strong {
           @include pxtoem(18, 24);
           font-weight: 100;
+
+          margin-left: 7%;
         }
       }
 
@@ -97,17 +125,18 @@
 .bottom {
 
   margin-top: 10%;
-  
+
   hr {
     border: solid 1px white;
   }
+
   div {
-    
+
     display: flex;
     margin-top: 2%;
     justify-content: space-between;
     @include pxtoem(14, 18);
-    }
+  }
 
   a {
     color: white;
