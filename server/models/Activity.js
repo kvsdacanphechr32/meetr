@@ -34,6 +34,7 @@ var Activity = new keystone.List('Activity',
 Activity.add({
 	
 	name: { type: String, required: true, initial: true },
+	order: { type: Types.Select, label: 'Order on Page', options: '1, 2, 3, 4', required: true, initial: true},
 	intro: { type: String, label: 'Intro Text', required: true, initial: true},
     steps: { type: Types.Select, label: 'Number of Steps', options: '1, 2, 3, 4, 5', required: true, initial: true},
     step1: { type: Types.Markdown, dependsOn: { steps: ['1', '2', '3', '4', '5'] } },
@@ -46,6 +47,6 @@ Activity.add({
 /**
  * Model Registration
  */
-Activity.defaultSort = '-createdAt';
-Activity.defaultColumns = 'name';
+Activity.defaultSort = '-order';
+Activity.defaultColumns = 'name, order';
 Activity.register();

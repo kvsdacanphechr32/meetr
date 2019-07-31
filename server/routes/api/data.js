@@ -37,7 +37,7 @@ var buildData = async (type, res) => {
     } else if(type === 'activity') {
         
         // Get all activities
-        data = activity.find({}, activityFields);
+        data = activity.find({}, activityFields).sort({order: 1});
         let fileData = about.findOne({}, aboutActivityFields);
 
         getRes.push(await fileData.exec());

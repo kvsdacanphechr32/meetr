@@ -95,7 +95,6 @@ export class ProjectComponent implements OnInit {
 
     this.progress.forEach((survey, i) => {
 
-
       if (colorIndex === 0) colorIndex = 4;
       colorIndex--;
 
@@ -123,12 +122,12 @@ export class ProjectComponent implements OnInit {
       g.onMouseEnter = (event) => {
         // Layout the tooltip above the dot
         tooltip = new p.PointText({
-          point: [event.target.position._x - 40, event.target.position._y - 10],
-          content: '(' + survey.sumX + ',' + survey.sumY + ')',
-          fillColor: 'red',
-          fontSize: 10
+          point: [event.target.position._x - 75, event.target.position._y - 15],
+          content: '( ' + survey.sumX + ', ' + survey.sumY + ' )',
+          fillColor: '#e85e5d',
+          fontSize: 14
         });
-        // g.scale(1.5);/
+        // g.scale(1.5);
       };
       g.onMouseLeave = () => {
         // g.scale(.75);
@@ -166,9 +165,7 @@ export class ProjectComponent implements OnInit {
           doc.addFont('Spectral-Bold.ttf', 'Spectral-Bold', 'normal');
           doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'normal');
 
-          console.log(doc.getFontList())
-          
-          var width = doc.internal.pageSize.getWidth();
+          let width = doc.internal.pageSize.getWidth();
           
           let descArr = doc.splitTextToSize(this.project.description, width-60);
           let descHeight = 0;
