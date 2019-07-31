@@ -27,48 +27,67 @@ nav {
 
     #logo {
 
-      * {
-        @include transition(fill, 1s, ease-in-out);
+      max-width: 100px;
+
+      polygon, circle {
+        @include transition(all, 1s, ease-in-out);
+      }
+
+      circle {
+        fill: #fff;
       }
 
       .cls-1 {
         fill: url(#linear-gradient-w);
       }
+
       .cls-2 {
         fill: url(#linear-gradient-w-2);
       }
-      circle {
-        fill: #fff;
-      }
+
       .cls-4 {
         fill: url(#linear-gradient-w-3);
       }
+
       .cls-5 {
         fill: url(#linear-gradient-w-4);
       }
-      
+
       &.color {
-      circle {
-        &:nth-of-type(1) {
-          fill: #e85e5d;
-       
-      }     
-      &:nth-of-type(2), &:nth-of-type(5) {
-        fill: #e9bbb0;
-            }
-            &:nth-of-type(3) {
-              fill: #5a5c27;
-                  }
-                  &:nth-of-type(4) {
-                    fill: #634da0;
-                        }
-       
-      }       
+        
+        circle {
+
+          &:nth-of-type(1) {
+            fill: #e85e5d;
+          }
+
+          &:nth-of-type(2),
+          &:nth-of-type(5) {
+            fill: #e9bbb0;
+          }
+
+          &:nth-of-type(3) {
+            fill: #5a5c27;
+          }
+
+          &:nth-of-type(4) {
+            fill: #634da0;
+          // fill: url(#linear-gradient);
+
+          }
+
+        }
+
         .cls-1 {
           fill: url(#linear-gradient);
         }
+
         .cls-2 {
           fill: url(#linear-gradient-2);
+        }
+
+        .cls-4 {
+          fill: url(#linear-gradient-3);
         }
         .cls-5 {
           fill: url(#linear-gradient-4);
@@ -93,7 +112,7 @@ nav {
     position: relative;
 
     justify-content: space-between;
-    
+
     cursor: pointer;
 
     #lines {
@@ -111,9 +130,9 @@ nav {
         background: white;
         opacity: 1;
         left: 0;
-        
+
         transform-origin: center;
-        
+
         @include transform(rotate(0deg));
         @include transition(all, .7s, ease-in-out);
 
@@ -125,19 +144,19 @@ nav {
           position: relative;
           top: 29px;
         }
-        
+
         @include phones {
           width: 25px;
 
 
-        &:nth-child(2) {
-          top: 6px;
-        }
+          &:nth-child(2) {
+            top: 6px;
+          }
 
-        &:nth-child(3) {
-          position: relative;
-          top: 12px;
-        }
+          &:nth-child(3) {
+            position: relative;
+            top: 12px;
+          }
         }
 
       }
@@ -167,7 +186,7 @@ nav {
             @include transform(rotate(45deg));
             top: 16px;
 
-            @include phones {  
+            @include phones {
               top: -4px;
             }
           }

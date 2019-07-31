@@ -41,12 +41,34 @@
   
 }
 
+#pdf {
+  cursor: pointer;
+
+  svg {
+    @include transition(transform, .5s, ease-in-out);
+  }
+
+  &:hover {
+    svg {
+      @include scale(1.2);
+    }
+  }
+}
+
 .bottom {
 
   @include pxtoem(18, 24);
   line-height: 1.5;
 
   margin-top: 5%;
+
+  &.back {
+    a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;  
+    }
+  }
 
   a {
     text-transform: uppercase;

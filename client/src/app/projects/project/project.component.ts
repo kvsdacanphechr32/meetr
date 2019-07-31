@@ -5,10 +5,12 @@ import { DataService } from '../../utils/data.service';
 
 import { TweenLite, TweenMax } from 'gsap';
 
+import * as _ from 'underscore';
 import * as ismobile from 'ismobilejs';
 import * as paper from 'paper';
 import * as jsPDF from 'jspdf';
 import * as dateformat from 'dateformat';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-project',
@@ -24,6 +26,9 @@ export class ProjectComponent implements OnInit {
 
   canvasElement: ElementRef;
 
+  spectralFont: string;
+  robotoFont: string;
+
   @ViewChild('canvasElement', {
     static: false
   }) set content(content: ElementRef) {
@@ -31,7 +36,7 @@ export class ProjectComponent implements OnInit {
     this.drawGrid()
   };
 
-  constructor(private _dataSvc: DataService, private _route: ActivatedRoute) {
+  constructor(private _dataSvc: DataService, private _route: ActivatedRoute, private _http: HttpClient) {
 
     this.isPhone = ismobile.phone;
 
@@ -147,10 +152,45 @@ export class ProjectComponent implements OnInit {
     let canvasImg = this.canvasElement.nativeElement.toDataURL();
     let doc = new jsPDF();
     let dt = dateformat(new Date(), 'mm-d-yy_h:MM:sstt');
-    
-    doc.addImage(canvasImg, 'PNG', 0, 0);
-    doc.save('results_' + this.project.slug + '_' + dt + '.pdf');
 
+    // Fonts encoding for PDF
+    this._http.get('assets/spectral-base-64', {responseType: 'text'}).subscribe(data => {
+      this.spectralFont = data
+       
+      this._http.get('assets/roboto-base-64', {responseType: 'text'}).subscribe(data => {
+          this.robotoFont = data;
+
+          doc.addFileToVFS('Spectral-Bold.ttf', this.spectralFont);
+          doc.addFileToVFS('Roboto-Regular.ttf', this.robotoFont);
+          
+          doc.addFont('Spectral-Bold.ttf', 'Spectral-Bold', 'normal');
+          doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'normal');
+
+          console.log(doc.getFontList())
+          
+          var width = doc.internal.pageSize.getWidth();
+          
+          let descArr = doc.splitTextToSize(this.project.description, width-60);
+          let descHeight = 0;
+          _.each(descArr, (d) => {
+            descHeight += doc.getTextDimensions(d).h;
+          });
+          
+          doc.setFontSize(40)
+          doc.setFont('Spectral-Bold');
+          doc.text(10, 20, this.project.name);
+          
+          doc.setFontSize(20);
+          doc.setFont('Roboto-Regular');
+          doc.text(10, 40, descArr);
+          
+          doc.addImage(canvasImg, 'PNG', 0, 50+descHeight, width, width);
+          
+          doc.save('results_' + this.project.slug + '_' + dt + '.pdf');
+      
+      });
+
+    });
   }
 
   public viewAll() {

@@ -16,11 +16,19 @@
     </div>
     <div class="column">
 
-      <a (click)="exportPdf()">
-
-        <cdn-image cloudinaryId="img/pdf-export" width="37" phoneWidth="33" svg="true" alt="Export as PDF button image">
-        </cdn-image>
-
+      <a id="pdf" (click)="exportPdf()">
+        <svg fill="none" height="36" viewBox="0 0 35 36" width="35" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#000" stroke-miterlimit="10">
+            <path d="m26.716 9.216h-8.716v-8.716" />
+            <path
+              d="m5.931 18v2.95h-.268v-6.973h2.147c.737 0 1.274.201 1.676.536.402.336.603.872.603 1.476 0 .603-.2 1.14-.603 1.475-.402.335-.939.536-1.61.536h-1.944zm0-.268h1.879c.603 0 1.14-.134 1.475-.47.335-.268.536-.737.536-1.274 0-.536-.201-1.005-.536-1.273-.335-.336-.805-.47-1.475-.47h-1.88v3.487zm5.565 3.151v-6.906h1.944c.537 0 1.006.134 1.476.402.402.269.804.604 1.005 1.073.269.47.403.939.403 1.542v.872c0 .603-.134 1.073-.336 1.542-.268.47-.603.805-1.005 1.073-.403.268-.939.402-1.475.402zm.268-6.638v6.37h1.677c.469 0 .938-.134 1.34-.335.403-.268.738-.537.94-1.006.2-.402.334-.872.334-1.408v-.872c0-.536-.134-1.005-.335-1.408-.2-.402-.536-.737-.939-1.005-.402-.269-.804-.336-1.273-.336zm9.924 3.285h-3.554v3.42h-.268v-6.973h4.291v.268h-4.023v3.018h3.554v.268z"
+              fill="#000" stroke-width=".75" />
+            <path d="m26.716 35.5a7.308 7.308 0 1 0 0-14.617 7.308 7.308 0 0 0 0 14.617zm0-2.95v-8.717" />
+            <path d="m22.358 28.192 4.358 4.358 4.426-4.358m-8.784 4.358h8.784" />
+            <path
+              d="m19.475 28.192c0-4.023 3.285-7.309 7.308-7.309v-11.667l-8.715-8.716h-17.568v35h26.216c-4.023 0-7.24-3.285-7.24-7.308z" />
+          </g>
+        </svg>
       </a>
 
     </div>
@@ -49,7 +57,7 @@
     <canvas #canvasElement id="canvas" width="680" height="680" *ngIf="!isPhone"></canvas>
     <canvas #canvasElement id="canvas" width="300" height="300" *ngIf="isPhone"></canvas>
 
-    <div class="bottom mono">
+    <div class="bottom mono back">
       <a routerLink="/projects" *ngIf="progress">
         <svg width="21" height="17" fill="none" viewBox="0 0 21 17">
           <path stroke="#000" d="M21 8.539H.727M8.473 16.497L.363 8.388" />
@@ -59,16 +67,17 @@
       </a>
     </div>
   </div>
-  
+
   <!-- No progress -->
   <div id="none" class="column is-full" *ngIf="progress && progress.length === 0">
 
     <div id="grid">
 
-        <a href="#" routerLink="/projects/{{project.slug}}/track" class="mono">Track your Progress</a>
+      <a href="#" routerLink="/projects/{{project.slug}}/track" class="mono">Track your Progress</a>
 
     </div>
 
-    <div class="bottom">Not ready to track your progress? Start by <a class="mono" routerLink="/talk/{{project.slug}}">talking it out</a>.</div>
+    <div class="bottom">Not ready to track your progress? Start by <a class="mono"
+        routerLink="/talk/{{project.slug}}">talking it out</a>.</div>
   </div>
 </div>
