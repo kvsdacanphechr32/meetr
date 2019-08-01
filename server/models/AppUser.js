@@ -16,11 +16,6 @@ var appUserSchema = new Schema({
 		index: true,
 		unique: true
 	},
-	socialId: {
-		type: String,
-		index: true,
-		unique: true
-	},
 	imgUrl: {
 		type: String
 	}
