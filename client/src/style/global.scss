@@ -125,6 +125,7 @@ a {
 
 button {
   cursor: pointer;
+  background: none;
 }
 
 // Global styles
@@ -185,18 +186,9 @@ h4 {
     display: block;
     background-color: white;
 
-    // margin-top: -8%;
-
     width: 900px;
     max-width: 80%;
     min-height: 270px;
-
-    @include not-desktop {
-
-      width: 500px;
-      min-height: 300px;
-
-    }
 
     @include phones {
       width: 355px;
@@ -205,6 +197,17 @@ h4 {
       hr {
         margin: 0;
         width: 90%;
+      }
+    }
+
+    @include tablet-portrait {
+
+      width: 500px;
+      min-height: 300px;
+
+      hr {
+        margin: 1%;
+        width: auto;
       }
     }
 
@@ -251,6 +254,7 @@ h4 {
 
         text-decoration: underline;
         text-transform: uppercase;
+        text-align: left;
 
         line-height: 1.5;
         letter-spacing: 2px;

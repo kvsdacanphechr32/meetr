@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
-
 import { filter } from 'rxjs/operators';
+
+import { MenuComponent } from '../menu/menu.component';
+import { DataService } from '../utils/data.service';
 
 @Component({
   selector: 'app-nav',
@@ -10,7 +12,7 @@ import { filter } from 'rxjs/operators';
 })
 export class NavComponent {
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private _dataSvc: DataService) {
     
     _router.events.pipe(filter(e => e instanceof NavigationStart)).subscribe(e => {
     // Close menu when nav starts
@@ -25,10 +27,12 @@ export class NavComponent {
 
     if(close && !menuClass.contains('open')) return;
 
-    document.getElementById('menu').style.display = 'block';
     menuClass.toggle('open');
-    document.getElementById('bg').classList.toggle('white');
     document.getElementById('menu-btn').classList.toggle('open');
+
+    this._dataSvc.menuOpen.next(menuClass.contains('open'));    
+
+    // document.getElementById('bg').classList.toggle('white');
 
   }
 

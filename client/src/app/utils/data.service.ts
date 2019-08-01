@@ -15,6 +15,7 @@ export class DataService {
 
   public isLoading: Subject<boolean> = new Subject<boolean>();
   public serverProblem: Subject<boolean> = new Subject<boolean>();
+  public menuOpen: Subject<boolean> = new Subject<boolean>();
 
   public previousUrl: string;
   public currentUrl: string;

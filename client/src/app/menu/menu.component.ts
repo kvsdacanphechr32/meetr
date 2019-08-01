@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from '../utils/auth.service';
+
+import { TweenLite, TimelineLite, Circ, Back, Expo } from 'gsap';
+import { DataService } from '../utils/data.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements AfterViewInit {
 
   public isAuthenticated: boolean;
   private currentUrl: string;
-  // @ViewChild('menu') menu: ElementRef;
+
+  private tl: TimelineLite;
   
-  constructor(private _router: Router, private authService: AuthService) { 
+  constructor(private _router: Router, private authService: AuthService, private _dataSvc: DataService) { 
 
     // Close menu when nav starts
     _router.events.pipe(filter(e => e instanceof NavigationStart)).subscribe(e => {
@@ -30,9 +34,30 @@ export class MenuComponent implements OnInit {
     this.authService.isAuthenticated.subscribe(value => {
       this.isAuthenticated = value;
     });
+
+    _dataSvc.menuOpen.subscribe(open => {
+      if(open)
+        this.open();
+      else
+        this.close();
+    });
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+
+    let menu = document.getElementById('menu');
+    let nav = document.getElementById('menu-nav');
+    let line = document.getElementById('line');
+
+   	this.tl = new TimelineLite({paused:true});
+    
+    let tl = this.tl;    
+    tl.set(menu, {css: {zIndex: 23}});
+    tl.fromTo(menu, .2, {autoAlpha:0}, {autoAlpha:1});
+    tl.fromTo(nav, .7, {autoAlpha:0, left:'-5%'}, {autoAlpha:1, left:0, ease: Expo.easeOut}, '+.3');
+    tl.fromTo(document.getElementById('signout'), .7, {autoAlpha:0, top:'-5%'}, {autoAlpha:1, top:0, ease: Expo.easeOut}, '+.4');
+    tl.fromTo(line, .7, {autoAlpha:0, width:0}, {autoAlpha:1, width:'50%', ease: Expo.easeOut}, '+.35');
+
   }
 
   // Is passed route active?
@@ -45,6 +70,18 @@ export class MenuComponent implements OnInit {
   signOut() {
 
       this.authService.signOut();
+
+  }
+
+  open() {
+
+    this.tl.play();
+
+  }
+  
+  close() {
+
+    this.tl.reverse();
 
   }
 }

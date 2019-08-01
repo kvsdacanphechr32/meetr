@@ -26,7 +26,7 @@
     <!-- SIGNIN -->
     <div id="signin" class="columns is-mobile is-multiline" *ngIf="!signUpShow">
 
-      <div class="column is-5">
+      <div class="column is-full-mobile is-5-tablet">
         <p>Sign in with Google or Facebook</p>
 
         <div class="social-login">
@@ -49,7 +49,7 @@
 
       <hr />
 
-      <div class="column is-offset-1">
+      <div class="column is-11-mobile is-5-tablet">
         
       <form [formGroup]="signinForm" (submit)="loginViaDatabase()" *ngIf="!isAuthenticated">
         <div class="fields">
@@ -85,7 +85,7 @@
 
     <!-- SIGNUP -->
     <div id="signup" class="columns is-mobile is-multiline" *ngIf="signUpShow">
-      <div class="column is-5">
+      <div class="column is-full-mobile is-5-tablet">
 
         <p>Sign up with Google or Facebook</p>
 
@@ -109,7 +109,7 @@
 
       <hr />
 
-      <div class="column is-offset-1">
+      <div class="column is-11-mobile is-5-tablet">
 
         <p>Sign up with email</p>
 

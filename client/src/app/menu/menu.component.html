@@ -1,5 +1,5 @@
 <div id="menu">
-  <ul>
+  <ul id="menu-nav">
     <li>
       <a [class.current]="itemActive('about')" routerLink="/about" queryParamsHandling="merge">
         About
@@ -17,11 +17,12 @@
     </li>
   </ul>
 
-  <hr />
+  <hr id="line" />
 
-  <ul *ngIf="isAuthenticated === true">
-    <li id="signout">
+  <ul id="signout">
+    <li *ngIf="isAuthenticated === true">
       <a href="#" (click)="signOut()">Sign Out</a>
     </li>
+    <li *ngIf="isAuthenticated === false"></li>
   </ul>
 </div>

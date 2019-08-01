@@ -4,7 +4,6 @@ nav {
 
   position: relative;
   margin-bottom: 0 !important;
-  z-index: 25;
 
   padding: 2% 0;
 
@@ -114,8 +113,10 @@ nav {
 
     display: flex;
     position: relative;
+    z-index: 25;
+    min-width: 50px;
 
-    justify-content: space-between;
+    justify-content: space-evenly;
 
     cursor: pointer;
 
@@ -124,7 +125,15 @@ nav {
 
       display: block;
       cursor: pointer;
-      // align-content: center;
+      
+      padding-top: 4%;
+
+
+      @include phones {
+        padding-top: 9%;
+      }
+
+      @include transition(all, .7s, ease-in-out);
 
       span {
         display: block;
@@ -182,27 +191,29 @@ nav {
 
     &.open {
 
+      
       #lines {
+        @include translate(0, 5%);
+        @include not-phones {
+          @include translate(0, 30%);
+        }
+        
         span {
           background: black;
 
           &:nth-child(1) {
-            @include transform(rotate(45deg));
-            top: 16px;
-
-            @include phones {
-              top: -4px;
-            }
-          }
-
-          &:nth-child(2) {
             opacity: 0;
             left: 15px;
           }
+          
+          &:nth-child(2) {
+            top: 0;
+            @include transform(rotate(45deg));
+          }
 
           &:nth-child(3) {
+            top: 0px;
             @include transform(rotate(-45deg));
-            top: 14px;
           }
         }
       }
