@@ -22,6 +22,7 @@ export class ActivityComponent implements OnInit {
     mouseDrag: true,
     touchDrag: true,
     pullDrag: false,
+    autoHeight: true,
     dots: true,
     items: 1,
     navSpeed: 700
@@ -64,8 +65,9 @@ export class ActivityComponent implements OnInit {
 
   }
 
-  sliderInit(activityIndex: Number) {
+  sliderInit(activityIndex: Number, ref: any) {
 
+    console.log(ref)
     setTimeout(() => {
       let dots = document.querySelector('.activity.a_' + activityIndex + ' .owl-dots');
       dots.appendChild(document.querySelector('.activity.a_' + activityIndex + ' .arrow'));
@@ -79,12 +81,20 @@ export class ActivityComponent implements OnInit {
     let dots = document.querySelector('.activity.a_' + activityIndex + ' .owl-dots');
     let dotsArrow = document.querySelector('.activity.a_' + activityIndex + ' .arrow');
     let end = (slidesNum-1 === data.startPosition);
-    if (end && activityIndex < 3)
-      dots.classList.add('end');
-    else
+    
+    if (end) {
+      if(activityIndex < 3)
+        dots.classList.add('end');
+      else
+        document.getElementById('track').classList.value = 'end';
+    }
+    else {
+      document.getElementById('track').classList.value = '';
       dots.classList.remove('end');
+    }
 
-    TweenLite.to(dotsArrow, .7, {opacity: end?1:0, delay: end?.6:0});
+    if (activityIndex < 3)
+      TweenLite.to(dotsArrow, .7, {opacity: end?1:0, delay: end?.6:0});
 
   }
 

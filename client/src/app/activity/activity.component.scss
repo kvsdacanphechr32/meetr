@@ -55,53 +55,119 @@
 
 .activity {
   display: none;
-  counter-reset: step; 
+  counter-reset: step;
+
+  &.a_0 .step {
+    background-color: rgba(233, 187, 176, 0.15);
+
+    .text {
+      ::ng-deep p:nth-child(1)::before {
+        background-color: rgba(233, 187, 176, 0.4);
+
+      }
+    }
+  }
+
+  &.a_1 .step {
+    background-color: rgba(232, 94, 93, 0.15);
+
+    .text {
+      ::ng-deep p:nth-child(1)::before {
+        background-color: rgba(232, 94, 93, 0.15);
+      }
+    }
+  }
+
+  &.a_2 .step {
+    background-color: rgba(99, 77, 160, 0.15);
+
+    .text {
+      ::ng-deep p:nth-child(1)::before {
+        background-color: rgba(99, 77, 160, 0.15);
+      }
+    }
+  }
+
+  &.a_3 .step {
+    background-color: rgba(90, 92, 39, 0.15);
+
+    .text {
+      ::ng-deep p:nth-child(1)::before {
+        background-color: rgba(90, 92, 39, 0.15);
+      }
+    }
+  }
 
   .step {
 
-    background-color: rgba(233, 187, 176, 0.15);
     padding: 6%;
 
     counter-increment: step;
+
     p {
       margin-top: 0;
       @include pxtoem(18, 24);
-      
+
       &.intro {
         margin-bottom: 18%;
       }
     }
-    
+
     .text {
-      
+
+
+      @include not-phones {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(50%, 1fr));
+        grid-template-rows: 3;
+      }
+
+      column-gap: 5%;
+
       ::ng-deep p {
-        font-size: 1em;
+        @include pxtoem(14, 18);
 
         &:nth-child(1) {
           display: flex;
           flex-direction: row;
 
+          grid-column: 1 / 3;
+
           &::before {
 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
             content: counter(step);
-  
+
             font-family: Spectral;
             @include pxtoem(24, 36);
-  
-            text-align: center;
-            
+
             flex-shrink: 0;
-            
+
             width: 50px;
             height: 50px;
             border-radius: 50px;
-
-            background-color: rgba(233, 187, 176, 0.4);
           }
         }
 
+        &:nth-child(2),
+        &:nth-child(3) {
+          grid-column: 1;
+        }
+
+        &:nth-child(4),
+        &:nth-child(5) {
+          grid-column: 2;
+        }
+
+        &:nth-child(4) {
+          grid-row: 2;
+        }
+
         strong {
-          @include pxtoem(18, 24);
+          font-size: 1.3em;
           font-weight: 100;
 
           margin-left: 7%;
@@ -112,9 +178,11 @@
   }
 
   .next {
+
     opacity: 0;
     position: absolute;
     right: -50%;
+
   }
 
   h4 {
@@ -127,7 +195,7 @@
   margin-top: 10%;
 
   hr {
-    border: solid 1px white;
+    border: solid 1px black;
   }
 
   div {
@@ -136,14 +204,47 @@
     margin-top: 2%;
     justify-content: space-between;
     @include pxtoem(14, 18);
+
+    @include phones {
+      flex-direction: column;
+    }
+
   }
 
   a {
-    color: white;
     text-decoration: none;
 
     span {
       text-decoration: underline;
+    }
+
+    svg {
+      position: relative;
+      margin-left: 10px;
+      top: 7.5%;
+
+      @include transition(all, .6s, ease-in-out);
+
+    }
+
+    &:hover {
+      svg {
+        @include translate(0, 25%);
+      }
+    }
+
+    &#track {
+      margin-top: 5%;
+
+      @include not-phones {
+        margin-top: 0;
+
+        @include transition(transform, .6s, ease-in-out);
+
+        &.end {
+          @include translate(0, -200%);
+        }
+      }
     }
   }
 
