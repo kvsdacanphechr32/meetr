@@ -63,6 +63,8 @@ export class ProjectComponent implements OnInit {
 
         this._dataSvc.currentProjectId = response.project._id;
 
+        if(!this.progress || (this.progress && this.progress.length < 1)) return;
+        
         // Prompt user to track if >30 days since last tracking
         const oneDay = 24*60*60*1000;
         const dtToday = new Date(Date.now());

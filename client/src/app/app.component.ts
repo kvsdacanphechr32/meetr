@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
       document.body.classList.value = this._active.root.firstChild.snapshot.data['bg'];
       let logoColor = (document.body.classList.value === 'white');
       document.getElementById('logo').classList.value = logoColor ? 'color' : '';
+      document.getElementById('txt').classList.value = logoColor ? 'black': '';
   
       // Always go to top of page
       window.scrollTo(0, 0);
