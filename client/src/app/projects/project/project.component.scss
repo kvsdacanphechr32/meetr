@@ -1,11 +1,53 @@
 @import '~src/style/_variables';
 
+#prompt {
+  
+  display: flex;
+  align-items: center;
+
+  color: white;
+  background-color: $camo-green;
+  max-width: 680px;
+
+  margin-top: 6%;
+  margin-bottom: 6%;
+  margin-left: auto;
+
+  .column {
+    &:nth-child(2) {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    a {
+      cursor: pointer;
+      text-decoration: underline;
+      text-transform: uppercase;
+      color: white;
+    }
+  }
+
+}
+
+#view {
+
+  display: block;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  margin-top: 2%;
+
+}
+
 #all {
 
-  display: none;
+  hr {
+    display: none;
+  }
 
   .columns {
     display: none;
+    transform-origin: top;
 
     &:nth-of-type(4n+1) .num {
       background-color: $camo-green;
@@ -38,7 +80,7 @@
   hr {
     border-bottom: 1px solid #ccc;
   }
-  
+
 }
 
 #pdf {
@@ -66,7 +108,7 @@
     a {
       display: flex;
       flex-direction: row;
-      align-items: center;  
+      align-items: center;
     }
   }
 
@@ -92,7 +134,7 @@
       height: 680px;
     }
 
-    background-image: cdn-image('img/grid', c_fill, f_auto, w_810);
+    background-image: cdn-image('img/grid-blank', c_fill, f_auto, w_680);
     background-repeat: no-repeat;
     background-size: contain;
     background-position-x: center;
@@ -105,6 +147,7 @@
       color: white;
       background-color: $camo-green;
       @include pxtoem(18, 24);
+      box-shadow: inset 2px -2px 0px 1px black;
 
       width: 200px;
       height: 80px;

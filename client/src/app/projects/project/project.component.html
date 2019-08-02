@@ -6,13 +6,24 @@
     <p>
       {{project.description}}
     </p>
+
+    <div id="prompt" class="columns is-multiline is-mobile" *ngIf="showPrompt">
+      <div class="column is-full-mobile is-8-tablet is-8-desktop">
+        It’s been 30 days since your last entry. Want to track your progress?
+      </div>
+      <div class="column">
+        <a routerLink="/projects/{{project.slug}}/track" class="mono">yes</a>
+        <a (click)="dismissPrompt()" class="mono">not now</a> 
+      </div>
+    </div>
+  
   </div>
 
   <div class="columns column is-full is-mobile is-multiline" *ngIf="progress && progress.length > 0">
 
     <div class="column is-9">
       Latest Entry: {{progress[0].date | date: 'MM/dd/yyyy'}} <br />
-      <a (click)="viewAll()">view all</a>
+      <a id="view" (click)="viewAll()">view all</a>
     </div>
     <div class="column">
 
@@ -34,7 +45,7 @@
     </div>
 
     <div id="all" class="column is-full">
-      <hr />
+      <hr id="all-hr1" />
       <div class="columns is-mobile" *ngFor="let entry of progress; let i = index;">
         <div class="column is-1">
           <span class="num mono">
@@ -48,7 +59,7 @@
           {{entry.sumX}}, {{entry.sumY}}
         </div>
       </div>
-      <hr />
+      <hr id="all-hr2" />
     </div>
   </div>
 

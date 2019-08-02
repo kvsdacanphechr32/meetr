@@ -30,9 +30,7 @@ export class NavComponent {
     menuClass.toggle('open');
     document.getElementById('menu-btn').classList.toggle('open');
 
-    this._dataSvc.menuOpen.next(menuClass.contains('open'));    
-
-    // document.getElementById('bg').classList.toggle('white');
+    this._dataSvc.menuOpen.next(menuClass.contains('open'));
 
   }
 
