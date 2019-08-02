@@ -12,7 +12,7 @@
         <br />
         Create
         <span *ngIf="projects.length > 0; else first">a</span>
-        <ng-template #first>your first</ng-template> Project
+        <ng-template #first>your<br />first</ng-template> Project
       </button>
     </div>
     <div class="project" *ngFor="let project of projects;"><a

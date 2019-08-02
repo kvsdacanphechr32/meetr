@@ -24,6 +24,8 @@
 
     .new {
       max-width: 50%;
+      min-width: 320px;
+      min-height: 200px;
     }
   }
 
@@ -31,6 +33,8 @@
 
     background-color: $camo-green;
     background-size: cover;
+
+    @include box-shadow(2px, -2px, 0px, 1px, black);
 
     &:not(.new) {
       background-image: cdn-image('img/grid-sm', c_fill, f_auto, w_320);

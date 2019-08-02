@@ -23,6 +23,7 @@ export class ProjectComponent implements OnInit {
   public progress: any[];
   public hasContent: boolean;
   public isPhone: boolean;
+  public showPrompt: boolean;
 
   canvasElement: ElementRef;
 
@@ -61,6 +62,14 @@ export class ProjectComponent implements OnInit {
         this.hasContent = true;
 
         this._dataSvc.currentProjectId = response.project._id;
+
+        // Prompt user to track if >30 days since last tracking
+        const oneDay = 24*60*60*1000;
+        const dtToday = new Date(Date.now());
+        const dtLastTrack = new Date(this.progress[0].date);        
+        const diffDays = Math.round(Math.abs((dtToday.getTime() - dtLastTrack.getTime())/(oneDay)));
+
+        this.showPrompt = diffDays > 30;
 
       });
 
@@ -192,9 +201,15 @@ export class ProjectComponent implements OnInit {
 
   public viewAll() {
 
-    TweenLite.fromTo(document.getElementById('all'), 1, {opacity:0}, {opacity:1, display:'block'});
-    TweenMax.staggerFromTo(document.querySelectorAll('#all .columns'), 1, {y:'-50%', opacity:0}, {y:'10%', opacity:1, display:'flex', delay:.6}, .4);
-
+    let allResults = document.querySelectorAll('#all .columns');
+    TweenLite.fromTo(document.getElementById('all-hr1'), .4, {opacity:0, width:0}, {opacity:1, width:'100%', display:'block'});
+    TweenMax.staggerFromTo(allResults, .4, {y:'-50%', opacity:0}, {y:'10%', opacity:1, display:'flex', delay:.5}, .3);
+    TweenLite.fromTo(document.getElementById('all-hr2'), .4, {opacity:0, width:0}, {opacity:1, width:'100%', display:'block', delay:allResults.length*.3});
+    
+  }
+  
+  public dismissPrompt() {
+    TweenLite.fromTo(document.getElementById('prompt'), .4, {opacity:0}, {opacity:1, height:0});    
   }
 
 }

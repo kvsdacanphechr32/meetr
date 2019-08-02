@@ -20,11 +20,12 @@ exports.create = async (req, res) => {
     let sumX = 0;
     let sumY = 0;
 
-    // responses.slice(0, 4).forEach((n) => sumX += parseInt(n)-3);
-    // responses.slice(5, 9).forEach((n) => sumY += parseInt(n)-3);
+    // Calculate responses to plot as sums
+    responses.slice(0, 5).forEach((n) => sumX += parseInt(n)-3);
+    responses.slice(5, 10).forEach((n) => sumY += parseInt(n)-3);
 
-    sumX += ((parseInt(responses[10])-3) + (parseInt(responses[11])-3));
-    sumY += ((parseInt(responses[10])-3) + (parseInt(responses[11])-3));
+    sumX += (parseInt(responses[10])-3 + parseInt(responses[11])-3);
+    sumY += (parseInt(responses[10])-3 + parseInt(responses[11])-3);
     
     let newProgress = new Progress({ date: Date.now(), project: req.body.projectId, responses: req.body.responses, sumX: sumX, sumY: sumY });
     let userProject = Project.findOne({_id: req.body.projectId}, 'slug');
@@ -45,7 +46,7 @@ exports.create = async (req, res) => {
  */
 exports.get = async (req, res) => { 
 
-    let progQuery = Progress.findOne({project: req.params.projectId});
+    let progQuery = Progress.findOne({project: req.params.projectId}, {sort: {date:1}});
  
     try {
         let getRes = await progQuery.exec();
