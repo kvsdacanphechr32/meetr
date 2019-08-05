@@ -1,3 +1,6 @@
+<div class="content" *ngIf="errorMsg">
+  <h3>{{errorMsg}}</h3>
+</div>
 <div class="content columns is-mobile is-multiline" *ngIf="hasContent">
 
   <div class="column is-full">
@@ -86,11 +89,10 @@
 
     <div id="grid">
 
-      <a href="#" routerLink="/projects/{{project.slug}}/track" class="mono">Track your Progress</a>
-
+      <a href="#" routerLink="/talk/{{project.slug}}" class="mono">Talk it out</a>
+      
     </div>
-
-    <div class="bottom">Not ready to track your progress? Start by <a class="mono"
-        routerLink="/talk/{{project.slug}}">talking it out</a>.</div>
+    
+    <div class="bottom">Skip Talk It Out and <a href="#" routerLink="/projects/{{project.slug}}/track" class="mono">Track Your Progress</a>.
   </div>
 </div>

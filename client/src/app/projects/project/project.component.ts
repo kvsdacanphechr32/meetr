@@ -10,7 +10,7 @@ import * as ismobile from 'ismobilejs';
 import * as paper from 'paper';
 import * as jsPDF from 'jspdf';
 import * as dateformat from 'dateformat';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-project',
@@ -24,6 +24,8 @@ export class ProjectComponent implements OnInit {
   public hasContent: boolean;
   public isPhone: boolean;
   public showPrompt: boolean;
+
+  public errorMsg: string;
 
   canvasElement: ElementRef;
 
@@ -77,6 +79,10 @@ export class ProjectComponent implements OnInit {
 
         this.showPrompt = diffDays > 30;
 
+      },
+      (err: HttpErrorResponse) => {
+        if(err.status === 404)
+          this.errorMsg = 'Project not found.';
       });
 
     });

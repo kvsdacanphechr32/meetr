@@ -3,7 +3,7 @@
 
   <button (click)="create()" *ngIf="!projects">Create your <br />First Project</button>
 
-  <div id="projects" class="columns is-mobile" [class.none]="projects && projects.length === 0">
+  <div id="projects" class="columns is-mobile is-multiline" [class.none]="projects && projects.length === 0">
     <div class="project new">
       <button (click)="create()" *ngIf="projects">
         <svg width="15" height="15" fill="none" viewBox="0 0 15 15">
@@ -14,7 +14,12 @@
         <span *ngIf="projects.length > 0; else first">a</span>
         <ng-template #first>your<br />first</ng-template> Project
       </button>
+
+
     </div>
+    
+    <p id="none" class="column is-full" *ngIf="!projects || projects.length === 0">You currently have no projects.</p>
+
     <div class="project" *ngFor="let project of projects;"><a
         routerLink="/projects/{{project.slug}}">{{project.name}}</a></div>
   </div>

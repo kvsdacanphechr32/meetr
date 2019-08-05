@@ -25,6 +25,12 @@
     margin-top: 8%;
     opacity: 0;
 
+      &#signout li {
+
+        font-family: 'Roboto', sans-serif;
+        @include pxtoem(18, 24);
+      }
+
     li {
       font-family: Spectral;
       @include pxtoem(24, 36);
@@ -41,12 +47,6 @@
       a.current {
         opacity: .5;
         cursor: default;
-      }
-
-      &#signout {
-
-        font-family: 'Roboto', sans-serif;
-        @include pxtoem(18, 24);
       }
     }
 
