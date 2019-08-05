@@ -56,7 +56,7 @@
           {{entry.date | date: 'MM/dd/yyyy'}}
         </div>
         <div class="column">
-          {{entry.sumX}}, {{entry.sumY}}
+          {{entry.sumX/2}}, {{entry.sumY/2}}
         </div>
       </div>
       <hr id="all-hr2" />
@@ -65,8 +65,7 @@
 
   <div class="column is-full" *ngIf="progress && progress.length > 0">
 
-    <canvas #canvasElement id="canvas" width="680" height="680" *ngIf="!isPhone"></canvas>
-    <canvas #canvasElement id="canvas" width="300" height="300" *ngIf="isPhone"></canvas>
+    <canvas #canvasElement id="canvas"></canvas>
 
     <div class="bottom mono back columns">
       <a class="column" routerLink="/projects" *ngIf="progress">
