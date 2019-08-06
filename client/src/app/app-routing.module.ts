@@ -35,10 +35,6 @@ const routes: Routes = [
     component: CallbackComponent
   },
   {
-    path: 'profile',
-    component: ProfileComponent
-  },
-  {
     path: 'projects',
     component: ProjectsComponent,
     canActivate: [AuthGuard],

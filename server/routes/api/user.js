@@ -19,7 +19,7 @@ let createUser = async (req, res) => {
         res.json(saveRes);
     }
     catch(e) {
-        res.status(500).json({e});
+        res.sendStatus(500);
     }
 };
 
