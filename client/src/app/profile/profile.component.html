@@ -128,7 +128,7 @@
               <input formControlName="password" id="password" placeholder="password" type="password" required />
               <div class="note" *ngIf="signUpSubmitted && suForm.password.invalid">
                 <span *ngIf="suForm.password.errors.required">Required.</span>
-                <span *ngIf="suForm.password.errors.pattern">Your password must be at least 8 and contain at least 3 of: special characters, lowercase letters, uppercase letters, or numbers.</span>
+                <span *ngIf="suForm.password.errors.pattern">Your password must be at least 8 characters long and contain at least 3 of: special characters, lowercase letters, uppercase letters, or numbers.</span>
               </div>
           </div>
             <button class="mono" type="submit">Create An Account</button>

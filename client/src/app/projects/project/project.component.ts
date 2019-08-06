@@ -124,6 +124,7 @@ export class ProjectComponent implements OnInit {
         xLine.sendToBack();
         yLine.sendToBack();
 
+        // Draw gridline labels along mid-x-axis
         if (n === 1 || n === 4 || n === 7 || n === 9 || n === 12) {
           let txt = '-7';
           if (n === 4) txt = '-3';
@@ -139,7 +140,7 @@ export class ProjectComponent implements OnInit {
           });
         }
 
-        // Grid labels
+        // Grid labels on left/top
         if (n === 0 || n === 6) {
           let offset = n === 0 ? 10 : -20;
           let x = Math.ceil(n * boxW) + offset;
@@ -166,7 +167,7 @@ export class ProjectComponent implements OnInit {
 
       gLines.addChild(gLabels)
 
-      // Labels
+      // Labels on sides
       let longevity = new p.PointText({
         point: [widthExt / 2, (heightExt * .03)],
         content: 'LONGEVITY',
@@ -193,6 +194,7 @@ export class ProjectComponent implements OnInit {
       strong.rotate(90);
       weak.rotate(-90);
 
+      // Plot dots on grid
       this.progress.forEach((survey, i) => {
 
         if (colorIndex === 0) colorIndex = 4;
@@ -247,6 +249,7 @@ export class ProjectComponent implements OnInit {
       gLines.addChild(path)
       path.sendToBack();
 
+      // Scale to allow room for side labels
       gLines.scale(.9, new p.Point(widthExt / 2, heightExt / 2));
   }
 
@@ -267,15 +270,18 @@ export class ProjectComponent implements OnInit {
       }).subscribe(data => {
         this.robotoFont = data;
 
+        // Add our fonts in base64 encoding
         doc.addFileToVFS('Spectral-Bold.ttf', this.spectralFont);
         doc.addFileToVFS('Roboto-Regular.ttf', this.robotoFont);
 
+        // Add names/styles for fonts
         doc.addFont('Spectral-Bold.ttf', 'Spectral-Bold', 'normal');
         doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'normal');
 
         let width = doc.internal.pageSize.getWidth();
 
-        let descArr = doc.splitTextToSize(this.project.description, width - 60);
+        // Cleanup description so it doesn't overrun
+        let descArr = doc.splitTextToSize(this.project.description.replace(/(\r\n|\n|\r)/gm, ' '), width - 60);
         let descHeight = 0;
         _.each(descArr, (d) => {
           descHeight += doc.getTextDimensions(d).h;
@@ -289,6 +295,7 @@ export class ProjectComponent implements OnInit {
         doc.setFont('Roboto-Regular');
         doc.text(10, 40, descArr);
 
+        // Add img under description
         doc.addImage(canvasImg, 'PNG', 0, 50 + descHeight, width, width);
 
         doc.save('results_' + this.project.slug + '_' + dt + '.pdf');
@@ -331,12 +338,14 @@ export class ProjectComponent implements OnInit {
   }
 
   public dismissPrompt() {
+
     TweenLite.fromTo(document.getElementById('prompt'), .4, {
       opacity: 0
     }, {
       opacity: 1,
       height: 0
     });
+
   }
 
   }

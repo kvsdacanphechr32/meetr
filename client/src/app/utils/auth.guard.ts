@@ -24,6 +24,7 @@ export class AuthGuard implements CanActivate
       
       if(!isAuthenticated && !pending) 
         this.authService.showLoginPrompt();
+
     });
 
     if (isAuthenticated || pending)
@@ -32,5 +33,6 @@ export class AuthGuard implements CanActivate
     this.authService.showLoginPrompt();
 
     return false;
+    
   }
 }

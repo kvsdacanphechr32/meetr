@@ -12,6 +12,10 @@ var appUserSchema = new Schema({
 	},
 	email: {
 		type: String,
+		unique: true
+	},
+	sub: {
+		type: String,
 		required: true,
 		index: true,
 		unique: true

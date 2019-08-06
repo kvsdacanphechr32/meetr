@@ -86,6 +86,7 @@ export class ProfileComponent implements OnInit {
     if(!profile) return;
 
     let data = {
+      sub: profile.sub,
       email: profile.email,
       name: profile.name,
       img: profile.picture

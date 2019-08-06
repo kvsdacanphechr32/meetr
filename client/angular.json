@@ -30,7 +30,9 @@
             "styles": [
               "src/style/global.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/gsap/umd/TweenMax.js"
+            ]
           },
           "configurations": {
             "production": {
