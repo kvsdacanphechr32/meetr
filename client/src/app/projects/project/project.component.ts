@@ -39,7 +39,8 @@ export class ProjectComponent implements OnInit {
     if(content) {
       this.canvasElement.nativeElement.width = this.isPhone ? 300 : 680;
       this.canvasElement.nativeElement.height = this.isPhone ? 300 : 680;
-      this.drawGrid()
+      
+      this.drawGrid();
     }
   };
 
@@ -95,9 +96,8 @@ export class ProjectComponent implements OnInit {
       _paper.setup(this.canvasElement.nativeElement);
       let p = _paper;
 
-      let canvas = this.canvasElement.nativeElement;
-      let widthExt = canvas.style.width.replace('px', ''),
-        heightExt = canvas.style.height.replace('px', '');
+      let widthExt = this.isPhone ? 300 : 680,
+        heightExt = this.isPhone ? 300 : 680;
 
       let tooltip: paper.PointText;
       let segments: paper.Point[] = [];
@@ -202,6 +202,8 @@ export class ProjectComponent implements OnInit {
 
         let xPos = (widthExt / 2) + ((survey.sumX / 2) * ((widthExt / 2) / 7)),
           yPos = (heightExt / 2) - (survey.sumY / 2) * ((heightExt / 2) / 7);
+
+          console.log(xPos, yPos)
 
         segments.push(new p.Point(xPos, yPos));
 
