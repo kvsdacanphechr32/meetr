@@ -12,14 +12,14 @@ const AppUser = require('../../models/AppUser');
 
 let createUser = async (req, res) => { 
 
-    let newUser = new AppUser({ name: req.body.name, email: req.body.email, imgUrl: req.body.img});
+    let newUser = new AppUser({ name: req.body.name, email: req.body.email, sub: req.body.sub, imgUrl: req.body.img});
  
     try {
         let saveRes = await newUser.save();
         res.json(saveRes);
     }
     catch(e) {
-        res.status(500).json({e});
+        res.sendStatus(500);
     }
 };
 
@@ -28,7 +28,7 @@ let createUser = async (req, res) => {
  */
 exports.exists = async (req, res) => { 
 
-    let userFind = AppUser.findOne({email: req.body.email}, '_id imgUrl');
+    let userFind = AppUser.findOne({$or: [{email: req.body.email}, {sub: req.body.sub}]}, '_id imgUrl');
  
     try {
         let userRes = await userFind.exec();

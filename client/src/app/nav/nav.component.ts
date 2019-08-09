@@ -28,9 +28,13 @@ export class NavComponent {
     if(close && !menuClass.contains('open')) return;
 
     menuClass.toggle('open');
+    let opened = menuClass.contains('open');
     document.getElementById('menu-btn').classList.toggle('open');
 
-    this._dataSvc.menuOpen.next(menuClass.contains('open'));
+    this._dataSvc.menuOpen.next(opened);
+
+    document.getElementById('logo').classList.value = opened ? 'color' : '';
+    document.getElementById('txt').classList.value = opened ? 'black': '';
 
   }
 

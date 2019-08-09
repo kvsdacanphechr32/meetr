@@ -17,6 +17,8 @@ nav {
 
   a {
 
+    position: relative;
+    z-index: 20;
 
     &#home {
       ::ng-deep img {
@@ -96,6 +98,13 @@ nav {
 
     #txt {
       margin-left: 1%;
+
+      path {
+        @include transition(fill, 1s, ease-in-out);
+      }
+      &.black path {
+        fill: black;
+      }
     }
   }
 

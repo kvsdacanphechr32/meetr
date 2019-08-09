@@ -10,7 +10,7 @@ import * as ismobile from 'ismobilejs';
 import * as paper from 'paper';
 import * as jsPDF from 'jspdf';
 import * as dateformat from 'dateformat';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-project',
@@ -25,6 +25,8 @@ export class ProjectComponent implements OnInit {
   public isPhone: boolean;
   public showPrompt: boolean;
 
+  public errorMsg: string;
+
   canvasElement: ElementRef;
 
   spectralFont: string;
@@ -34,7 +36,12 @@ export class ProjectComponent implements OnInit {
     static: false
   }) set content(content: ElementRef) {
     this.canvasElement = content;
-    this.drawGrid()
+    if(content) {
+      this.canvasElement.nativeElement.width = this.isPhone ? 300 : 680;
+      this.canvasElement.nativeElement.height = this.isPhone ? 300 : 680;
+      
+      this.drawGrid();
+    }
   };
 
   constructor(private _dataSvc: DataService, private _route: ActivatedRoute, private _http: HttpClient) {
@@ -63,14 +70,20 @@ export class ProjectComponent implements OnInit {
 
         this._dataSvc.currentProjectId = response.project._id;
 
+        if (!this.progress || (this.progress && this.progress.length < 1)) return;
+
         // Prompt user to track if >30 days since last tracking
-        const oneDay = 24*60*60*1000;
+        const oneDay = 24 * 60 * 60 * 1000;
         const dtToday = new Date(Date.now());
-        const dtLastTrack = new Date(this.progress[0].date);        
-        const diffDays = Math.round(Math.abs((dtToday.getTime() - dtLastTrack.getTime())/(oneDay)));
+        const dtLastTrack = new Date(this.progress[0].date);
+        const diffDays = Math.round(Math.abs((dtToday.getTime() - dtLastTrack.getTime()) / (oneDay)));
 
         this.showPrompt = diffDays > 30;
 
+      },
+      (err: HttpErrorResponse) => {
+        if(err.status === 404)
+          this.errorMsg = 'Project not found.';
       });
 
     });
@@ -78,81 +91,168 @@ export class ProjectComponent implements OnInit {
 
   drawGrid() {
 
-    if (!this.canvasElement) return;
-    let _paper = new paper.PaperScope();
-    _paper.setup(this.canvasElement.nativeElement);
-    let p = _paper;
+      if (!this.canvasElement) return;
+      let _paper = new paper.PaperScope();
+      _paper.setup(this.canvasElement.nativeElement);
+      let p = _paper;
 
-    let canvas = this.canvasElement.nativeElement;
-    let widthExt = canvas.style.width.replace('px', ''),
-      heightExt = canvas.style.height.replace('px', '');
+      let widthExt = this.isPhone ? 300 : 680,
+        heightExt = this.isPhone ? 300 : 680;
 
-    let tooltip: paper.PointText;
-    let segments: paper.Point[] = [];
-    let colors = ['#e9bbb0', '#e85e5d', '#634da0', '#5a5c27'];
-    let colorIndex = 4;
+      let tooltip: paper.PointText;
+      let segments: paper.Point[] = [];
+      let colors = ['#e9bbb0', '#e85e5d', '#634da0', '#5a5c27'];
+      let colorIndex = 4;
 
-    let bgImg = new Image();
-    bgImg.crossOrigin = 'anonymous';
+      let boxW = ((widthExt) / 2) / 6;
+      let gLines: paper.Group = new p.Group();
+      let gLabels: paper.Group = new p.Group();
 
-    bgImg.onload = () => {
-      let bg: paper.Raster = new p.Raster(bgImg);
-      bg.position = new p.Point(widthExt / 2, heightExt / 2);
-      bg.sendToBack();
-    }
-    bgImg.src = 'https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_' + widthExt + '/v00032120/engagement-journalism/img/grid.png';
+      // Draw grid and grid labels
+      _.times(13, (n) => {
 
-    this.progress.forEach((survey, i) => {
+        let label;
+        let xLine = new paper.Path.Line(new p.Point(Math.ceil(n * boxW), 0), new p.Point([Math.ceil(n * boxW), heightExt]));
+        let yLine = new paper.Path.Line(new p.Point(0, Math.ceil(n * boxW)), new p.Point([widthExt, Math.ceil(n * boxW)]));
 
-      if (colorIndex === 0) colorIndex = 4;
-      colorIndex--;
+        xLine.strokeColor = new p.Color('#ccc');
+        yLine.strokeColor = new p.Color('#ccc');
 
-      let xPos = (widthExt / 2) + (survey.sumX * ((widthExt / 2) / 6)),
-        yPos = (heightExt / 2) - survey.sumY * ((heightExt / 2) / 6);
+        xLine.strokeWidth = n === 6 ? 2 : 1;
+        yLine.strokeWidth = n === 6 ? 2 : 1;
 
-      segments.push(new p.Point(xPos, yPos));
+        xLine.sendToBack();
+        yLine.sendToBack();
 
-      let g: paper.Group = new p.Group();
-      let dot = new paper.Path.Circle({
-        center: [xPos, yPos],
-        radius: 16,
-        fillColor: colors[colorIndex]
+        // Draw gridline labels along mid-x-axis
+        if (n === 1 || n === 4 || n === 7 || n === 9 || n === 12) {
+          let txt = '-7';
+          if (n === 4) txt = '-3';
+          else if (n === 7) txt = '0';
+          else if (n === 9) txt = '3';
+          else txt = '7';
+
+          let offset = n === 7 ? -45 : -20;
+          label = new p.PointText({
+            point: new p.Point(Math.ceil(n * boxW) + offset, (heightExt / 2) + 20),
+            content: txt,
+            fontSize: 12
+          });
+        }
+
+        // Grid labels on left/top
+        if (n === 0 || n === 6) {
+          let offset = n === 0 ? 10 : -20;
+          let x = Math.ceil(n * boxW) + offset;
+          let y = n === 0 ? (heightExt / 2) - 20 : 0;
+          label = new p.PointText({
+            point: new p.Point(x, y),
+            content: n === 0 ? 'social infrastructure' : 'objective',
+            fontSize: 14
+          });
+
+          if (n === 6) {
+            label.rotate(-90);
+            label.translate(new p.Point(-label.bounds.width, label.bounds.height));
+          }
+        }
+        if (label) {
+          gLabels.addChild(label);
+          label.bringToFront();
+        }
+
+        gLines.addChildren([xLine, yLine])
+
       });
 
-      let txt = new p.PointText({
-        point: [xPos - 5, yPos + 5],
-        content: this.progress.length - i,
-        fillColor: 'white',
-        fontSize: 16
+      gLines.addChild(gLabels)
+
+      // Labels on sides
+      let longevity = new p.PointText({
+        point: [widthExt / 2, (heightExt * .03)],
+        content: 'LONGEVITY',
+        fontSize: 12
+      });
+      let novelty = new p.PointText({
+        point: [widthExt / 2, heightExt - (heightExt * .02)],
+        content: 'NOVELTY',
+        fontSize: 12
+      });
+      let weak = new p.PointText({
+        point: [0, heightExt / 2],
+        content: 'WEAK',
+        fontSize: 12
+      });
+      let strong = new p.PointText({
+        point: [widthExt - 45, heightExt / 2],
+        content: 'STRONG',
+        fontSize: 12
       });
 
-      g.addChildren([dot, txt]);
+      longevity.translate(new p.Point(-longevity.bounds.width / 2, 0));
+      novelty.translate(new p.Point(-novelty.bounds.width / 2, 0));
+      strong.rotate(90);
+      weak.rotate(-90);
 
-      g.onMouseEnter = (event) => {
-        // Layout the tooltip above the dot
-        tooltip = new p.PointText({
-          point: [event.target.position._x - 75, event.target.position._y - 15],
-          content: '( ' + survey.sumX + ', ' + survey.sumY + ' )',
-          fillColor: '#e85e5d',
-          fontSize: 14
+      // Plot dots on grid
+      this.progress.forEach((survey, i) => {
+
+        if (colorIndex === 0) colorIndex = 4;
+        colorIndex--;
+
+        let xPos = (widthExt / 2) + ((survey.sumX / 2) * ((widthExt / 2) / 7)),
+          yPos = (heightExt / 2) - (survey.sumY / 2) * ((heightExt / 2) / 7);
+
+          console.log(xPos, yPos)
+
+        segments.push(new p.Point(xPos, yPos));
+
+        let g: paper.Group = new p.Group();
+        let dot = new paper.Path.Circle({
+          center: [xPos, yPos],
+          radius: 16,
+          fillColor: colors[colorIndex]
         });
-        // g.scale(1.5);
-      };
-      g.onMouseLeave = () => {
-        // g.scale(.75);
-        tooltip.remove();
-      };
-      
-    });
-    
-    // Draw line(s)
-    let path = new p.Path(segments);
-    path.strokeColor = new p.Color('black');
-    path.strokeCap = 'round';
-    path.strokeWidth = 1.5;
-    path.dashArray = [1, 4];
-    path.sendToBack();
 
+        let txt = new p.PointText({
+          point: [xPos - 5, yPos + 5],
+          content: this.progress.length - i,
+          fillColor: 'white',
+          fontSize: 16
+        });
+
+        g.addChildren([dot, txt]);
+
+        g.onMouseEnter = (event) => {
+          // Layout the tooltip above the dot
+          tooltip = new p.PointText({
+            point: [event.target.position._x - 75, event.target.position._y - 15],
+            content: '( ' + survey.sumX / 2 + ', ' + survey.sumY / 2 + ' )',
+            fillColor: '#e85e5d',
+            fontSize: 14
+          });
+          // g.scale(1.5);
+        };
+        g.onMouseLeave = () => {
+          // g.scale(.75);
+          tooltip.remove();
+        };
+        gLines.addChild(g)
+
+      });
+
+      // Draw line(s)
+      let path = new p.Path(segments);
+      path.strokeColor = new p.Color('black');
+      path.strokeCap = 'round';
+      path.strokeWidth = 1.5;
+      path.dashArray = [1, 4];
+
+      gLines.addChild(path)
+      path.sendToBack();
+
+      // Scale to allow room for side labels
+      gLines.scale(.9, new p.Point(widthExt / 2, heightExt / 2));
   }
 
   public exportPdf() {
@@ -162,38 +262,46 @@ export class ProjectComponent implements OnInit {
     let dt = dateformat(new Date(), 'mm-d-yy_h:MM:sstt');
 
     // Fonts encoding for PDF
-    this._http.get('assets/spectral-base-64', {responseType: 'text'}).subscribe(data => {
+    this._http.get('assets/spectral-base-64', {
+      responseType: 'text'
+    }).subscribe(data => {
       this.spectralFont = data
-       
-      this._http.get('assets/roboto-base-64', {responseType: 'text'}).subscribe(data => {
-          this.robotoFont = data;
 
-          doc.addFileToVFS('Spectral-Bold.ttf', this.spectralFont);
-          doc.addFileToVFS('Roboto-Regular.ttf', this.robotoFont);
-          
-          doc.addFont('Spectral-Bold.ttf', 'Spectral-Bold', 'normal');
-          doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'normal');
+      this._http.get('assets/roboto-base-64', {
+        responseType: 'text'
+      }).subscribe(data => {
+        this.robotoFont = data;
 
-          let width = doc.internal.pageSize.getWidth();
-          
-          let descArr = doc.splitTextToSize(this.project.description, width-60);
-          let descHeight = 0;
-          _.each(descArr, (d) => {
-            descHeight += doc.getTextDimensions(d).h;
-          });
-          
-          doc.setFontSize(40)
-          doc.setFont('Spectral-Bold');
-          doc.text(10, 20, this.project.name);
-          
-          doc.setFontSize(20);
-          doc.setFont('Roboto-Regular');
-          doc.text(10, 40, descArr);
-          
-          doc.addImage(canvasImg, 'PNG', 0, 50+descHeight, width, width);
-          
-          doc.save('results_' + this.project.slug + '_' + dt + '.pdf');
-      
+        // Add our fonts in base64 encoding
+        doc.addFileToVFS('Spectral-Bold.ttf', this.spectralFont);
+        doc.addFileToVFS('Roboto-Regular.ttf', this.robotoFont);
+
+        // Add names/styles for fonts
+        doc.addFont('Spectral-Bold.ttf', 'Spectral-Bold', 'normal');
+        doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'normal');
+
+        let width = doc.internal.pageSize.getWidth();
+
+        // Cleanup description so it doesn't overrun
+        let descArr = doc.splitTextToSize(this.project.description.replace(/(\r\n|\n|\r)/gm, ' '), width - 60);
+        let descHeight = 0;
+        _.each(descArr, (d) => {
+          descHeight += doc.getTextDimensions(d).h;
+        });
+
+        doc.setFontSize(40)
+        doc.setFont('Spectral-Bold');
+        doc.text(10, 20, this.project.name);
+
+        doc.setFontSize(20);
+        doc.setFont('Roboto-Regular');
+        doc.text(10, 40, descArr);
+
+        // Add img under description
+        doc.addImage(canvasImg, 'PNG', 0, 50 + descHeight, width, width);
+
+        doc.save('results_' + this.project.slug + '_' + dt + '.pdf');
+
       });
 
     });
@@ -202,14 +310,44 @@ export class ProjectComponent implements OnInit {
   public viewAll() {
 
     let allResults = document.querySelectorAll('#all .columns');
-    TweenLite.fromTo(document.getElementById('all-hr1'), .4, {opacity:0, width:0}, {opacity:1, width:'100%', display:'block'});
-    TweenMax.staggerFromTo(allResults, .4, {y:'-50%', opacity:0}, {y:'10%', opacity:1, display:'flex', delay:.5}, .3);
-    TweenLite.fromTo(document.getElementById('all-hr2'), .4, {opacity:0, width:0}, {opacity:1, width:'100%', display:'block', delay:allResults.length*.3});
-    
-  }
-  
-  public dismissPrompt() {
-    TweenLite.fromTo(document.getElementById('prompt'), .4, {opacity:0}, {opacity:1, height:0});    
+    TweenLite.fromTo(document.getElementById('all-hr1'), .4, {
+      opacity: 0,
+      width: 0
+    }, {
+      opacity: 1,
+      width: '100%',
+      display: 'block'
+    });
+    TweenMax.staggerFromTo(allResults, .4, {
+      y: '-50%',
+      opacity: 0
+    }, {
+      y: '10%',
+      opacity: 1,
+      display: 'flex',
+      delay: .5
+    }, .3);
+    TweenLite.fromTo(document.getElementById('all-hr2'), .4, {
+      opacity: 0,
+      width: 0
+    }, {
+      opacity: 1,
+      width: '100%',
+      display: 'block',
+      delay: allResults.length * .3
+    });
+
   }
 
-}
+  public dismissPrompt() {
+
+    TweenLite.fromTo(document.getElementById('prompt'), .4, {
+      opacity: 0
+    }, {
+      opacity: 1,
+      height: 0
+    });
+
+  }
+
+  }

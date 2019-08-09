@@ -1,3 +1,6 @@
+<div class="content" *ngIf="errorMsg">
+  <h3>{{errorMsg}}</h3>
+</div>
 <div class="content columns is-mobile is-multiline" *ngIf="hasContent">
 
   <div class="column is-full">
@@ -56,7 +59,7 @@
           {{entry.date | date: 'MM/dd/yyyy'}}
         </div>
         <div class="column">
-          {{entry.sumX}}, {{entry.sumY}}
+          {{entry.sumX/2}}, {{entry.sumY/2}}
         </div>
       </div>
       <hr id="all-hr2" />
@@ -65,8 +68,7 @@
 
   <div class="column is-full" *ngIf="progress && progress.length > 0">
 
-    <canvas #canvasElement id="canvas" width="680" height="680" *ngIf="!isPhone"></canvas>
-    <canvas #canvasElement id="canvas" width="300" height="300" *ngIf="isPhone"></canvas>
+    <canvas #canvasElement id="canvas" height="680" width="680"></canvas>
 
     <div class="bottom mono back columns">
       <a class="column" routerLink="/projects" *ngIf="progress">
@@ -87,11 +89,10 @@
 
     <div id="grid">
 
-      <a href="#" routerLink="/projects/{{project.slug}}/track" class="mono">Track your Progress</a>
-
+      <a href="#" routerLink="/talk/{{project.slug}}" class="mono">Talk it out</a>
+      
     </div>
-
-    <div class="bottom">Not ready to track your progress? Start by <a class="mono"
-        routerLink="/talk/{{project.slug}}">talking it out</a>.</div>
+    
+    <div class="bottom">Skip Talk It Out and <a href="#" routerLink="/projects/{{project.slug}}/track" class="mono">Track Your Progress</a>.
   </div>
 </div>

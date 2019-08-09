@@ -25,7 +25,7 @@ router.all('/*', function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method");
     
     if(req.method === 'OPTIONS')
-        res.send(200);
+        res.sendStatus(200);
     else
         next();
 

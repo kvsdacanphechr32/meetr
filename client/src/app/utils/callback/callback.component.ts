@@ -15,8 +15,14 @@ export class CallbackComponent implements OnInit {
   async ngOnInit() {
 
     if(this.router.url.indexOf('/oauth') > 0) {
-      this.handleOAuth();
+
+      if(window.location.hash.length < 1)
+        this.router.navigate(['/projects']);
+      else
+        this.handleOAuth();
+
       return;
+      
     }
 
     const client = await this.authService.getAuth0Client();
