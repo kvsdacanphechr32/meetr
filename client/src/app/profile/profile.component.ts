@@ -101,13 +101,15 @@ export class ProfileComponent implements OnInit {
   showModal() { 
 
     document.getElementById('wrapper-profile').style.display = 'flex';
-
+    // document.getElementById('nav').classList.add('open');
+    
   }
-
+  
   closeModal() { 
-
+    
     document.getElementById('wrapper-profile').style.display = 'none';
-
+    document.getElementById('nav').classList.remove('open');
+    
   }
 
   toggleSignup() { 

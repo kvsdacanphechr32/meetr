@@ -108,6 +108,10 @@ nav {
     }
   }
 
+  &.open {
+    height: 100%;
+  }
+
   .right {
     text-align: right;
     justify-content: flex-end;
@@ -126,8 +130,6 @@ nav {
     min-width: 50px;
 
     justify-content: space-evenly;
-
-    cursor: pointer;
 
     #lines {
       position: relative;

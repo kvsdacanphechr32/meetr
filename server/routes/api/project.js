@@ -16,7 +16,7 @@ const Project = require('../../models/Project'),
  */
 exports.create = async (req, res) => { 
 
-    let displayName = req.body.name.replace(/ /g, '-').toLowerCase();
+    let displayName = req.body.name.replace(/ /g, '-').toLowerCase().replace(/[^\w\s]/gi, '-');
     let projectCt = await Project.count({name: req.body.name, user: req.body.userId}).exec();
 
     // Check if already exists
