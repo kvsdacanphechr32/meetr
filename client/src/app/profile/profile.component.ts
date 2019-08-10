@@ -101,7 +101,7 @@ export class ProfileComponent implements OnInit {
   showModal() { 
 
     document.getElementById('wrapper-profile').style.display = 'flex';
-    // document.getElementById('nav').classList.add('open');
+    document.getElementById('nav').classList.add('open');
     
   }
   
