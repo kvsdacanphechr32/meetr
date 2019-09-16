@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TweenLite, Back } from 'gsap';
 import { DataService } from '../utils/data.service';
+
+import * as ismobile from 'ismobilejs';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +13,13 @@ export class HomeComponent implements OnInit {
 
   public content: any;
   public hasContent: boolean;
+  public isPhone: boolean;
 
-  constructor(private _dataSvc: DataService) { }
+  constructor(private _dataSvc: DataService) { 
+
+    this.isPhone = ismobile.phone;
+
+  }
 
   ngOnInit() {
    
@@ -24,14 +30,6 @@ export class HomeComponent implements OnInit {
       
     }); 
  
-  }
-
-  public next() {
-
-    TweenLite.to(document.getElementById('first'), 1, {x: '-100%', display: 'none', ease: Back.easeIn, onComplete:() => {
-      TweenLite.fromTo(document.getElementById('second'), 1, {x: '100%'}, {x: '0%', display: 'flex', ease: Back.easeOut});
-    }});
-
   }
 
 }

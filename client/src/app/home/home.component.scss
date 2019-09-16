@@ -1,53 +1,100 @@
 @import '~src/style/_variables';
 
-.intro {
-    display: flex;
-    @import '~src/style/_variables';
-
-    ::ng-deep strong {
-        @include pxtoem(14, 14);
-        font-weight: 400;
-        letter-spacing: normal;
-    }
-
-    &#first div {
-        @include pxtoem(18, 24);
-    }
-    p {
-        @include pxtoem(14, 18);
-    }
-
-    #link {
-        display: flex;
-        justify-content: center;
-        a {
-            
-            @include pxtoem(24, 36);
-            font-weight: 300;
-            letter-spacing: 2px;
-            
-            text-transform: uppercase;
-            color: white;
-         
-            margin-top: 16%;
-        
-        }
-    }
+h1,
+h3,
+h5 {
+  font-weight: 300;
 }
 
-#next {
+h1 {
+  font-family: Spectral;
+  @include pxtoem(36, 64);
+}
+
+h5 {
+  @include pxtoem(18, 36);
+
+  margin: 40px 0 0;
+
+}
+
+#top {
+
+  overflow: visible;
+  min-height: 900px;
+
+  @include phones {
+    min-height: 600px;
+
+    h1 {
+      margin: 0;
+    }
+
+    h5 {
+      margin-top: 5%;
+    }
+  }
+
+  ::ng-deep img {
+
+    position: absolute;
+
+    max-width: 70%;
+    margin-top: 8%;
+
+    @include phones {
+      margin-top: 20%;
+      max-width: 120%;
+    }
+
+  }
+
+}
+
+#works {
+
+  background-color: $pale-salmon-15;
+  padding-top: 22%;
+
+  @include phones {
+    padding-top: 5%;
+  }
+
+  h5 {
+    font-weight: normal;
+    margin: 5% 0 0;
+  }
+
+  .column:nth-child(2) {
+      margin-top: 24%;
+  }
+
+  .header {
     
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
 
-    justify-content: center;
-    margin-top: 60px;
+    min-height: 200px;
 
-    button {
-        background: none;
-        height: 50px;
-        width: 50px;
-        border: solid 1px white;
-        border-radius: 50px;
+    font-family: 'Spectral';
+    font-weight: 600;
+    text-transform: uppercase;
+    
+    div {
+        position: absolute;
     }
     
+    .label {
+        @include pxtoem(24, 36);
+    }
+
+    .outline {        
+      &:before {
+        -webkit-text-stroke-color: $coral;
+
+      }
+    }
+  }
 }

@@ -35,10 +35,12 @@ var Home = new keystone.List('Home',
 Home.add({
 	
 	name: { type: String, default: "Home", hidden: true, required: true, initial: true },
-	screen1: { type: Types.Text, required: true, initial: true},
-	screen2Para: { type: Types.Markdown, label: 'Screen 2 Paragraph', required: true, initial: true},
-	screen2Column1: { type: Types.Markdown, required: true, initial: true},
-	screen2Column2: { type: Types.Markdown, required: true, initial: true}
+	tagline: { type: Types.Text, required: true, initial: true},
+	screen1: { type: Types.Text, label: 'How it works', required: true, initial: true},
+	talk: { type: Types.Text, label: 'Talk it out', required: true, initial: true},
+	track: { type: Types.Text, label: 'Track your progress', required: true, initial: true},
+	// screen2Para: { type: Types.Markdown, label: 'Screen 2 Paragraph', required: true, initial: true},
+	// screen2Column2: { type: Types.Markdown, required: true, initial: true}
 
 });
 

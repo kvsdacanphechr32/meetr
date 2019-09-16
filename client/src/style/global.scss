@@ -42,29 +42,7 @@ body {
 
   overflow-x: hidden;
 
-  .top {
-    color: white;
-  }
-
-  #bg {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-image: linear-gradient(to top, #5a5c27, #634da0 33%, #e85e5d 66%, #e9bbb0);
-    animation: fade-out 1s forwards;
-
-    @include filter(opacity, 1);
-  }
-
   &.activity {
-    .content {
-      color: white;
-
-      h4 {
-        color: white;
-      }
-    }
 
     #bg {
       background-image: none;
@@ -271,7 +249,6 @@ h4 {
 }
 
 .content {
-  color: white;
 
   margin-left: auto;
   margin-right: auto;
@@ -358,4 +335,34 @@ h4 {
       opacity: 1;
     }
   }
+}
+
+// Outlined font style
+.outline {
+
+  font-family: 'Roboto';
+
+  display: block;
+  position: relative;
+  width: 100%;
+
+  @include pxtoem(100, 200);  
+  font-weight: 900;
+
+  paint-order: stroke fill;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0);
+
+  &:before {
+    
+    position: absolute;
+    display: block;
+    
+    content: attr(data-text);
+
+    -webkit-text-stroke-width: 2px;
+    z-index: -2;
+    font-size: 1em;
+  
+  }
+
 }

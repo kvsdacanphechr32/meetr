@@ -14,17 +14,11 @@ import { StudiesComponent } from './studies/studies.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    data: {
-      bg: ''
-    }
+    component: HomeComponent
   },
   {
     path: 'about',
-    component: AboutComponent,
-    data: {
-      bg: 'white'
-    }
+    component: AboutComponent
   },
   {
     path: 'callback',
@@ -37,55 +31,34 @@ const routes: Routes = [
   {
     path: 'projects',
     component: ProjectsComponent,
-    canActivate: [AuthGuard],
-    data: {
-      bg: 'white'
-    }
+    canActivate: [AuthGuard]
   },
   {
     path: 'projects/:id',
     component: ProjectComponent,
-    canActivate: [AuthGuard],
-    data: {
-      bg: 'white'
-    }
+    canActivate: [AuthGuard]
   },
   {
     path: 'projects/:id/track',
     component: TrackComponent,
-    canActivate: [AuthGuard],
-    data: {
-      bg: 'white'
-    }
+    canActivate: [AuthGuard]
   },
   {
     path: 'track',
     component: TrackComponent,
-    canActivate: [AuthGuard],
-    data: {
-      bg: 'white'
-    }
+    canActivate: [AuthGuard]
   },
   {
     path: 'studies',
-    component: StudiesComponent,
-    data: {
-      bg: 'white'
-    }
+    component: StudiesComponent
   },
   {
     path: 'talk',
-    component: ActivityComponent,
-    data: {
-      bg: 'white'
-    }
+    component: ActivityComponent
   },
   {
     path: 'talk/:project-slug',
-    component: ActivityComponent,
-    data: {
-      bg: 'white'
-    }
+    component: ActivityComponent
   }
 ];
 
