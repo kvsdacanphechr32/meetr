@@ -162,11 +162,16 @@ h4 {
   .modal {
 
     display: block;
-    background-color: white;
+    background-color: #fdf5f3;
 
     width: 900px;
     max-width: 80%;
     min-height: 270px;
+
+    h2 {
+      @include pxtoem(24, 36);
+      font-weight: 300;
+    }
 
     @include phones {
       width: 355px;
@@ -193,7 +198,6 @@ h4 {
       @include pxtoem(14, 18);
     }
 
-    // padding: 0 6.5% 6.5%;
     padding: 0 6.5% 1.5%;
 
     .fields {

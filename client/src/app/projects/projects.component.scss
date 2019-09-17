@@ -4,11 +4,11 @@
   display: grid;
 
   grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
-  grid-gap: 40px;
-  grid-auto-rows: minmax(140px, 280px);
-  
+  grid-gap: 78px;
+  grid-auto-rows: minmax(140px, 240px);
+
   @include desktop {
-    grid-auto-rows: minmax(280px, 320px);
+    grid-auto-rows: minmax(250px, 250px);
   }
 
   @include phones {
@@ -31,32 +31,48 @@
 
   .project {
 
-    background-color: $camo-green;
-    background-size: cover;
-
-    @include box-shadow(2px, -2px, 0px, 1px, black);
-
-    &:not(.new) {
-      background-image: cdn-image('img/grid-sm', c_fill, f_auto, w_320);
-    }
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: $camo-green-25;
 
     // height: 320px;
     @include phones {
       height: 140px;
     }
-    
-    button,
+
     a {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+
+      height: 100%;
+    }
+
+    p {
+      @include pxtoem(18, 24);
+      letter-spacing: 2px;
+      text-decoration: underline;
+    }
+
+    span {
+      @include pxtoem(14, 18);
+
+    }
+
+    .txt {
+      max-width: 320px;
+    }
+
+    .icon {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    button {
       display: table;
 
       font-family: 'Roboto Mono', sans-serif;
 
       text-align: center;
-      text-decoration: underline;
       text-transform: uppercase;
 
       line-height: 1.5;
@@ -65,6 +81,7 @@
 
     button {
       color: white;
+      text-decoration: underline;
       @include pxtoem(18, 24);
 
       height: 100%;
@@ -72,8 +89,8 @@
     }
 
     a {
-      background-color: white;
-      @include pxtoem(14, 18);
+      // @include pxtoem(14, 18);
+      text-decoration: none;
 
       padding-top: 2%;
       padding-bottom: 2%;
@@ -98,7 +115,7 @@
   }
 }
 
-#none { 
+#none {
   font-weight: 300;
   text-align: center;
 }

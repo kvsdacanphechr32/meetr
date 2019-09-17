@@ -53,10 +53,16 @@
             justify-content: center;
             align-items: center;
             
-            width: 45px;
-            height: 45px;
+            width: 75px;
+            height: 75px;
             border: solid 1px #000000;
             border-radius: 50px;
+
+            background-color: white;
+        }
+
+        .lower a {
+            font-weight: 700;
         }
 
         .social-login {

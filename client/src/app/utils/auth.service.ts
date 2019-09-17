@@ -15,6 +15,7 @@ export class AuthService {
   authCheckPending = new BehaviorSubject(false);
   isAuthenticated = new BehaviorSubject(false);
   promptLogin = new BehaviorSubject(false);
+  prompSignup = new BehaviorSubject(false);
   profile = new BehaviorSubject < any > (null);
 
   private auth0Client: Auth0Client;

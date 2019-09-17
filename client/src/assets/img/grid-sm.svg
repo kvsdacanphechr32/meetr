@@ -1,7 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" fill="none" viewBox="0 0 320 320">
-    <path stroke="#fff" stroke-miterlimit="10" d="M266.683 0v320M213.317 0v320"/>
-    <path stroke="#fff" stroke-miterlimit="10" stroke-width="2" d="M160 0v320"/>
-    <path stroke="#fff" stroke-miterlimit="10" d="M106.683 0v320M53.317 0v320M320 266.682H0M320 213.318H0"/>
-    <path stroke="#fff" stroke-miterlimit="10" stroke-width="2" d="M320 160H0"/>
-    <path stroke="#fff" stroke-miterlimit="10" d="M320 106.682H0M320 53.318H0"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" fill="none" viewBox="0 0 140 140">
+    <path fill="#fff" stroke="#5A5C27" d="M.5.5h139v139H.5z"/>
+    <path stroke="#5A5C27" stroke-miterlimit="10" d="M116.674 0v140M93.326 0v140"/>
+    <path stroke="#5A5C27" stroke-miterlimit="10" stroke-width="2" d="M70 0v140"/>
+    <path stroke="#5A5C27" stroke-miterlimit="10" d="M46.674 0v140M23.326 0v140M140 116.674H0M140 93.326H0"/>
+    <path stroke="#5A5C27" stroke-miterlimit="10" stroke-width="2" d="M140 70H0"/>
+    <path stroke="#5A5C27" stroke-miterlimit="10" d="M140 46.674H0M140 23.326H0"/>
 </svg>

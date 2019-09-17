@@ -68,6 +68,13 @@ export class ProfileComponent implements OnInit {
         this.showModal();
       } 
     });
+    // Prompt for signup as needed (mostly from home)
+    /* this.authService.prompSignup.subscribe(prompt => {
+      if(prompt) {
+        this.signUpShow = true;
+        this.showModal();
+      } 
+    }); */
 
     this.authInit = true;
 
@@ -102,6 +109,9 @@ export class ProfileComponent implements OnInit {
 
     document.getElementById('wrapper-profile').style.display = 'flex';
     document.getElementById('nav').classList.add('open');
+
+    // Always be at top of page
+    window.scrollTo(0, 0);
     
   }
   

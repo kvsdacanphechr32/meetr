@@ -70,8 +70,6 @@
         </h3>
       </div>
     </div>
-    <!-- <div id="link" class="column">
-    </div> -->
 
   </section>
 
@@ -87,26 +85,27 @@
 <div id="whywhat" *ngIf="hasContent">
   <section class="container desktop">
     <div class="column columns is-mobile is-multiline is-11-mobile no-pad no-margin">
-    <div class="column is-full-mobile is-4-tablet">
-      <h4 class="no-margin">Why Meetr?</h4>
-    </div>
-    <div class="column is-full-mobile is-7-tablet" [innerHtml]="content.why.html">
-      </div>
-    <div class="column is-full-mobile is-4-tablet">
-      <h4 class="no-margin">What is <strong>engaged journalism</strong>?</h4>
-      <a class="mono uppercase hidden-mobile" routerLink="/about">
-        Learn more
-      </a>
-    </div>
-    <div class="column is-full-mobile is-7-tablet" [innerHtml]="content.what.html">
+      <div class="column is-full-mobile is-4-tablet">
+        <h4 class="no-margin">Why Meetr?</h4>
       </div>
 
+      <div class="column is-full-mobile is-7-tablet" [innerHtml]="content.why.html">
+      </div>
+
+      <div class="column is-full-mobile is-4-tablet">
+        <h4 class="no-margin">What is <strong>engaged journalism</strong>?</h4>
+        <a class="mono uppercase hidden-mobile" routerLink="/about">
+          Learn more
+        </a>
+      </div>
+      <div class="column is-full-mobile is-7-tablet" [innerHtml]="content.what.html">
+      </div>
 
       <div class="column is-full-mobile hidden-tablet-plus">
-          <a class="mono uppercase" routerLink="/about">
-            Learn more
-          </a>
+        <a class="mono uppercase" routerLink="/about">
+          Learn more
+        </a>
       </div>
-  </div>
+    </div>
   </section>
 </div>
