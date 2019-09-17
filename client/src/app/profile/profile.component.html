@@ -1,5 +1,5 @@
-<a id="signin-link" class="top mono" href="#" (click)="showModal()" *ngIf="!isAuthenticated && authInit">Sign In</a>
-<div id="signin-link" *ngIf="!authInit">Wait...</div>
+<a id="signin-link" class="top mono uppercase" href="#" (click)="showModal()" *ngIf="!isAuthenticated && authInit">Sign In</a>
+<div id="signin-link" class="uppercase" *ngIf="!authInit">Wait...</div>
 
 <a routerLink="projects" *ngIf="isAuthenticated && profile" >
   <img id="pic" [src]="profile.picture" alt="Profile picture" />

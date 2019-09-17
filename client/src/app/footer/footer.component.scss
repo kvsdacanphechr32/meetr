@@ -1,17 +1,14 @@
-footer {
+footer div {
+
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 
     bottom: 0;
     width: 100%;
 
-    margin-top: 15%;
+    margin-top: 5%;
     margin-bottom: 5%;
-    margin-left: 1%;
 
-    ::ng-deep img {
-        filter: invert(1);
-    }
 }

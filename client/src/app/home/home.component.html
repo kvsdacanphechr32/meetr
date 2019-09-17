@@ -5,8 +5,8 @@
     <cdn-image cloudinaryPrefix="engagement-journalism/" cloudinaryId="img/home/top" width="1000" [responsive]="true"
       autoFormat="true" alt="Page top artwork image" *ngIf="!isPhone"></cdn-image>
 
-    <cdn-image cloudinaryPrefix="engagement-journalism/" cloudinaryId="img/home/top-mobile" width="375" [responsive]="true"
-    autoFormat="true" alt="Page top artwork image" *ngIf="isPhone"></cdn-image>
+    <cdn-image cloudinaryPrefix="engagement-journalism/" cloudinaryId="img/home/top-mobile" width="375"
+      [responsive]="true" autoFormat="true" alt="Page top artwork image" *ngIf="isPhone"></cdn-image>
 
     <div id="header" class="column is-9-mobile is-offset-3-mobile is-half-tablet is-offset-half-tablet">
       <h1>This is Meetr.</h1>
@@ -18,55 +18,95 @@
 </section>
 
 <div id="works" *ngIf="hasContent">
-  <section class="container desktop column columns is-mobile is-multiline no-pad">
 
-    <div class="column is-11-mobile is-half-tablet">
+  <section class="container desktop">
 
-      <h1>This is how it works.</h1>
-      <h5>{{content.screen1}}</h5>
+    <div class="column columns is-mobile is-multiline is-11-mobile no-pad no-margin">
+      <div class="column is-full-mobile is-half-tablet">
 
-    </div>
+        <h1>This is how it works.</h1>
+        <h5>{{content.screen1}}</h5>
 
-    <div class="column is-full-mobile is-half-tablet">
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="column is-full-mobile is-half-tablet">
 
         <div class="header">
           <div class="outline" data-text="1">1</div>
-            <div class="label">
-              Talk it Out
-            </div>
+          <div class="label">
+            Talk it Out
+          </div>
         </div>
-      <h3>
-        {{content.talk}}
-      </h3>
-    </div>
-    <div class="column">
+        <h3>
+          {{content.talk}}
+        </h3>
+      </div>
+      <div class="column">
 
-      <cdn-image cloudinaryPrefix="engagement-journalism/" cloudinaryId="img/home/talkitout" width="600"
-        [responsive]="true" autoFormat="true" alt="'Talk it out' image"></cdn-image>
+        <cdn-image cloudinaryPrefix="engagement-journalism/" cloudinaryId="img/home/talkitout" width="600"
+          [responsive]="true" autoFormat="true" alt="'Talk it out' image"></cdn-image>
+      </div>
     </div>
 
-    <div class="column is-full-mobile is-half-tablet">
-      <cdn-image cloudinaryPrefix="engagement-journalism/" cloudinaryId="img/home/trackprogress" width="600"
-      [responsive]="true" autoFormat="true" alt="'Talk it out' image"></cdn-image>
-    </div>
-    
-    <div class="column">
+    <div id="step2" class="column columns is-mobile is-multiline is-11-mobile no-pad no-margin">
+
+      <!-- STEP 2 -->
+      <div class="column is-full-mobile is-half-tablet">
+        <cdn-image cloudinaryPrefix="engagement-journalism/" cloudinaryId="img/home/trackprogress" width="600"
+          [responsive]="true" autoFormat="true" alt="'Talk it out' image"></cdn-image>
+      </div>
+
+      <div class="column">
 
         <div class="header">
-            <div class="outline" data-text="2">2</div>
-              <div class="label">
-                  Track Your Progress
-              </div>
+          <div class="outline" data-text="2">2</div>
+          <div class="label">
+            Track Your Progress
           </div>
-      <h3>
-        {{content.track}}
-      </h3>
+        </div>
+        <h3>
+          {{content.track}}
+        </h3>
+      </div>
     </div>
-
     <!-- <div id="link" class="column">
-      <a class="mono" routerLink="/projects">Get Started</a>
     </div> -->
 
   </section>
 
+</div>
+
+<div id="getstarted" *ngIf="hasContent">
+  <section class="container desktop">
+    <h1>It’s easy to get started</h1>
+    <a class="mono uppercase" routerLink="/projects">Get Started</a>
+  </section>
+</div>
+
+<div id="whywhat" *ngIf="hasContent">
+  <section class="container desktop">
+    <div class="column columns is-mobile is-multiline is-11-mobile no-pad no-margin">
+    <div class="column is-full-mobile is-4-tablet">
+      <h4 class="no-margin">Why Meetr?</h4>
+    </div>
+    <div class="column is-full-mobile is-7-tablet" [innerHtml]="content.why.html">
+      </div>
+    <div class="column is-full-mobile is-4-tablet">
+      <h4 class="no-margin">What is <strong>engaged journalism</strong>?</h4>
+      <a class="mono uppercase hidden-mobile" routerLink="/about">
+        Learn more
+      </a>
+    </div>
+    <div class="column is-full-mobile is-7-tablet" [innerHtml]="content.what.html">
+      </div>
+
+
+      <div class="column is-full-mobile hidden-tablet-plus">
+          <a class="mono uppercase" routerLink="/about">
+            Learn more
+          </a>
+      </div>
+  </div>
+  </section>
 </div>

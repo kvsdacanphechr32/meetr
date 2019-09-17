@@ -13,9 +13,7 @@ h1 {
 
 h5 {
   @include pxtoem(18, 36);
-
   margin: 40px 0 0;
-
 }
 
 #top {
@@ -24,7 +22,7 @@ h5 {
   min-height: 900px;
 
   @include phones {
-    min-height: 600px;
+    min-height: 530px;
 
     h1 {
       margin: 0;
@@ -62,15 +60,12 @@ h5 {
 
   h5 {
     font-weight: normal;
-    margin: 5% 0 0;
-  }
-
-  .column:nth-child(2) {
-      margin-top: 24%;
+    margin: 5% 0 18%;
+    line-height: 1.8;
   }
 
   .header {
-    
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -81,20 +76,102 @@ h5 {
     font-family: 'Spectral';
     font-weight: 600;
     text-transform: uppercase;
-    
+
     div {
-        position: absolute;
-    }
-    
-    .label {
-        @include pxtoem(24, 36);
+      position: absolute;
     }
 
-    .outline {        
+    .label {
+      @include pxtoem(24, 36);
+    }
+
+    .outline {
       &:before {
         -webkit-text-stroke-color: $coral;
 
       }
     }
   }
+
+  #step2 {
+    margin-top: 10%;
+    margin-bottom: 10%;
+
+    @include phones {
+      margin-top: 5%;
+      flex-direction: column-reverse;
+    }
+  }
+}
+
+#getstarted {
+
+  padding: 9% 0;
+
+  text-align: center;
+
+  background-image: cdn-image('img/home/bg', c_fill, f_auto, w_1440);
+  background-size: cover;
+
+  @include phones {
+    background-image: cdn-image('img/home/bg', c_fill, f_auto, w_375);
+  }
+
+  h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+  }
+
+  .mono {
+    @include pxtoem(24, 36);
+  }
+
+}
+
+#whywhat {
+
+  padding: 9% 0;
+
+  background-color: $blueberry-15;
+  color: $blueberry;
+
+  h4 {
+    color: $blueberry;
+    font-weight: 300;
+
+    strong {
+      font-weight: 600;
+    }
+  }
+
+  a {
+    color: $blueberry;
+
+    @include not-phones {
+      display: block;
+      letter-spacing: 2px;
+      font-size: 1.3em;
+      margin-top: 9%;
+    }
+  }
+
+  ::ng-deep p {
+    @include pxtoem(12, 18);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  // To achieve one item per line, has to be UL in CMS
+  ::ng-deep ul {
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+
+    li {
+      @include pxtoem(12, 18);
+      font-weight: 300;
+    }
+  }
+
 }
