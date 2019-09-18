@@ -2,7 +2,7 @@
 
   <div id="top" class="columns column is-multiline is-mobile">
 
-    <h4 class="column is-5 no-margin">Hi, {{userName}}</h4>
+    <h4 class="column is-11-mobile is-5-tablet no-margin">Hi, {{userName}}</h4>
     <p class="column">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sapien velit, aliquet eget
       commodo nec, auctor a sapien.</p>
   </div>
@@ -22,8 +22,8 @@
         <span>Create A Project</span>
       </button>
 
-      <!-- empty for grid layout -->
-      <div></div>
+      <!-- empty for grid layout, on non-mobile -->
+      <div class="hidden-mobile"></div>
 
     </div>
 
@@ -55,19 +55,19 @@
 
           <button class="mono no-pad" type="submit">
 
-              <svg xmlns="http://www.w3.org/2000/svg" width="218" height="165" fill="none" viewBox="0 0 218 165">
-                <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
-                  d="M217 145H1V1h72l27 27h117v117z" />
-                <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
-                  d="M82 10h126v18H100L82 10zM86.5 104.5l-29.2-5.8L80.7 87l-.4-23 17.9 17.2 23.3-11.7-11.7 23.3 17.2 17.9-23-.4-11.7 23.4-5.8-29.2z" />
-                <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
-                  d="M86.5 104.5l-7.8-1.5-50.5 50.7 9.3 9.3L88 112.3l-1.5-7.8zM46 82a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM104.5 55a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zM122.5 136a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9z" />
-                <path stroke="#000" stroke-miterlimit="10" stroke-width="2"
-                  d="M64 28v18M55 37h18M140.5 73v27M127 86.5h27" />
-              </svg>
-                
+            <svg xmlns="http://www.w3.org/2000/svg" width="218" height="165" fill="none" viewBox="0 0 218 165">
+              <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+                d="M217 145H1V1h72l27 27h117v117z" />
+              <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+                d="M82 10h126v18H100L82 10zM86.5 104.5l-29.2-5.8L80.7 87l-.4-23 17.9 17.2 23.3-11.7-11.7 23.3 17.2 17.9-23-.4-11.7 23.4-5.8-29.2z" />
+              <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+                d="M86.5 104.5l-7.8-1.5-50.5 50.7 9.3 9.3L88 112.3l-1.5-7.8zM46 82a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM104.5 55a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zM122.5 136a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9z" />
+              <path stroke="#000" stroke-miterlimit="10" stroke-width="2"
+                d="M64 28v18M55 37h18M140.5 73v27M127 86.5h27" />
+            </svg>
+
             Create Project
-          
+
           </button>
           <div *ngIf="projectSubmitted && errorMsg">
             {{errorMsg}}
@@ -93,27 +93,28 @@
           </div>
 
           <div class="txt">
-            <p class="name uppercase">
+            
+            <div class="name uppercase">
               {{project.name}}
-            </p>
-            <span class="desc">
 
+              <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" fill="none" viewBox="0 0 34 27">
+                  <path stroke="#000" d="M0 13.523h33.284M20.329.358l13.313 13.313" />
+                  <path stroke="#000" stroke-width="1.01184" d="M20.329 26.37l13.313-13.314" />
+                </svg>
+              </div>
+              
+            </div>
+            <span class="desc">
               {{project.description}}
             </span>
-          </div>
-
-          <div class="icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" fill="none" viewBox="0 0 34 27">
-              <path stroke="#000" d="M0 13.523h33.284M20.329.358l13.313 13.313" />
-              <path stroke="#000" stroke-width="1.01184" d="M20.329 26.37l13.313-13.314" />
-            </svg>
 
           </div>
         </a>
       </div>
 
       <!-- empty for grid layout, if only one project -->
-      <div *ngIf="projects.length === 1"></div>
+      <div *ngIf="projects.length === 1" class="hidden-mobile"></div>
     </div>
   </div>
 

@@ -86,7 +86,7 @@
   }
 
   @include phones {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(164  px, 1fr));
     grid-gap: 17px;
 
   }
@@ -108,29 +108,13 @@
 
     // height: 320px;
     @include phones {
-      height: 140px;
+      height: 164px;
     }
 
     &:hover {
       .icon {
         @include translate(15%, 0);
       }
-    }
-
-    .txt,
-    .icon {
-      height: 60%;
-    }
-
-    .txt {
-      max-width: 320px;
-    }
-
-    .icon {
-      display: flex;
-      align-items: flex-start;
-
-      @include transition(transform, .2s, ease-in-out);
     }
 
     a {
@@ -142,14 +126,38 @@
       text-decoration: none;
 
       height: 100%;
+      padding: 2% 4%;
 
-      padding-top: 2%;
-      padding-bottom: 2%;
-      padding-left: 4%;
-      padding-right: 4%;
+      @include phones { 
+        svg {
+          max-width: 70px;
+        }
+      }
+    
+    .txt {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      height: 100%;
+
+      max-width: 320px;
+      @include phones { 
+        max-width: 65%;
+      }
+    }
+    
+    .icon {
+      display: flex;
+      align-items: flex-start;
+      height: 60%;
+
+      @include transition(transform, .2s, ease-in-out);
     }
 
-    p {
+    }
+
+    .name {
       @include pxtoem(18, 24);
       letter-spacing: 2px;
       text-decoration: underline;
