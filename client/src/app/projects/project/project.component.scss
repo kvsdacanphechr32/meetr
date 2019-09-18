@@ -1,16 +1,18 @@
 @import '~src/style/_variables';
 
 #prompt {
+
+  @include pxtoem(14, 18);
   
   display: flex;
   align-items: center;
 
   background-color: $camo-green;
-  max-width: 680px;
-
-  margin-top: 6%;
+  color: white;
+  
   margin-bottom: 6%;
-  margin-left: auto;
+
+  padding: 20px 40px;
 
   .column {
     &:nth-child(2) {
@@ -23,6 +25,8 @@
       text-decoration: underline;
       text-transform: uppercase;
       color: white;
+
+      letter-spacing: 1px;
     }
   }
 
@@ -166,11 +170,3 @@
 
   }
 }
-
-// canvas {
-
-//   // max-width: 300px;
-//   @include phones {
-//     max-width: 300px;
-//   }
-// }

@@ -1,6 +1,52 @@
 @import '~src/style/_variables';
 
+#top {
+  margin: 3em 0; 
+  p {
+    @include pxtoem(18, 24);
+
+  }
+}
+
+#new {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  grid-gap: 78px;
+  grid-auto-rows: minmax(80px, 120px);
+
+  margin-bottom: 6%;
+
+  button {
+
+    display: flex;
+    align-items: center;
+
+    text-align: left;
+
+    background: $camo-green;
+    border: none;
+
+    line-height: 1.5;
+    letter-spacing: 2px;
+    color: white;
+    @include pxtoem(18, 24);
+    
+    padding: 2% 3%;
+    
+    span {
+      text-transform: uppercase;
+      text-decoration: underline;
+    }
+
+    svg {
+      margin: 0 5%;
+    }
+  }
+}
+
 #projects {
+
   display: grid;
 
   grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
@@ -12,7 +58,6 @@
   }
 
   @include phones {
-
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     grid-gap: 17px;
 
@@ -38,24 +83,15 @@
       height: 140px;
     }
 
-    a {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-
-      height: 100%;
+    &:hover {
+      .icon {
+        @include translate(15%, 0);
+      }
     }
 
-    p {
-      @include pxtoem(18, 24);
-      letter-spacing: 2px;
-      text-decoration: underline;
-    }
-
-    span {
-      @include pxtoem(14, 18);
-
+    .txt,
+    .icon {
+      height: 60%;
     }
 
     .txt {
@@ -65,32 +101,19 @@
     .icon {
       display: flex;
       align-items: flex-start;
-    }
 
-    button {
-      display: table;
-
-      font-family: 'Roboto Mono', sans-serif;
-
-      text-align: center;
-      text-transform: uppercase;
-
-      line-height: 1.5;
-      letter-spacing: 2px;
-    }
-
-    button {
-      color: white;
-      text-decoration: underline;
-      @include pxtoem(18, 24);
-
-      height: 100%;
-      width: 100%;
+      @include transition(transform, .2s, ease-in-out);
     }
 
     a {
-      // @include pxtoem(14, 18);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+
       text-decoration: none;
+
+      height: 100%;
 
       padding-top: 2%;
       padding-bottom: 2%;
@@ -98,13 +121,19 @@
       padding-right: 4%;
     }
 
-    &.new {
-      button {
-        background: none;
-        border: none;
-      }
+    p {
+      @include pxtoem(18, 24);
+      letter-spacing: 2px;
+      text-decoration: underline;
+
+      margin-top: 0;
+    }
+
+    span {
+      @include pxtoem(14, 18);
     }
   }
+
 }
 
 #modal {

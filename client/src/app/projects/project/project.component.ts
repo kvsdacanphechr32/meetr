@@ -203,8 +203,6 @@ export class ProjectComponent implements OnInit {
         let xPos = (widthExt / 2) + ((survey.sumX / 2) * ((widthExt / 2) / 7)),
           yPos = (heightExt / 2) - (survey.sumY / 2) * ((heightExt / 2) / 7);
 
-          console.log(xPos, yPos)
-
         segments.push(new p.Point(xPos, yPos));
 
         let g: paper.Group = new p.Group();
@@ -342,10 +340,11 @@ export class ProjectComponent implements OnInit {
   public dismissPrompt() {
 
     TweenLite.fromTo(document.getElementById('prompt'), .4, {
-      opacity: 0
+      opacity: 1
     }, {
-      opacity: 1,
-      height: 0
+      opacity: 0,
+      height: 0,
+      padding: 0
     });
 
   }

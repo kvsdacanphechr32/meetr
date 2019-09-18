@@ -1,42 +1,46 @@
-<section class="container desktop">
+<section class="container desktop" *ngIf="hasContent">
 
+  <div id="top" class="columns column is-multiline is-mobile">
+
+    <h4 class="column is-5 no-margin">Hi, {{userName}}</h4>
+    <p class="column">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sapien velit, aliquet eget
+      commodo nec, auctor a sapien.</p>
+  </div>
 
   <div class="column">
-    <h4>Hi, {{userName}}</h4>
 
     <button (click)="create()" *ngIf="!projects">Create your <br />First Project</button>
-
-    <div id="projects" class="columns is-mobile is-multiline" [class.none]="projects && projects.length === 0">
-      <!-- <div class="project new">
-      <button (click)="create()" *ngIf="projects">
-        <svg width="15" height="15" fill="none" viewBox="0 0 15 15">
-          <path stroke="#fff" d="M15 7.5H0M7.5 0v15" />
+    <div class="columns no-pad" id="new">
+      <button class="mono" (click)="create()" *ngIf="projects">
+        <svg width="30" height="30" fill="none" viewBox="0 0 30 30">
+          <path stroke="#fff" d="M30 14.5H0M14.499 0v30" />
         </svg>
-        <br />
-        Create
-        <span *ngIf="projects.length > 0; else first">a</span>
-        <ng-template #first>your<br />first</ng-template> Project
+
+        <span>Create A Project</span>
       </button>
 
+      <div></div>
 
-    </div> -->
+    </div>
+    <div id="projects" class="columns is-mobile is-multiline" [class.none]="projects && projects.length === 0">
 
-      <!-- <p id="none" class="column is-full" *ngIf="!projects || projects.length === 0">You currently have no projects.</p> -->
+
+      <p id="none" class="column is-full" *ngIf="!projects || projects.length === 0">You currently have no projects.</p>
 
       <div class="project" *ngFor="let project of projects;">
-          <a routerLink="/projects/{{project.slug}}">
-        <div>
-          <svg width="140" height="140" fill="none" viewBox="0 0 140 140">
-            <path fill="#fff" stroke="#5A5C27" d="M.5.5h139v139H.5z" />
-            <path stroke="#5A5C27" stroke-miterlimit="10" d="M116.674 0v140M93.326 0v140" />
-            <path stroke="#5A5C27" stroke-miterlimit="10" stroke-width="2" d="M70 0v140" />
-            <path stroke="#5A5C27" stroke-miterlimit="10" d="M46.674 0v140M23.326 0v140M140 116.674H0M140 93.326H0" />
-            <path stroke="#5A5C27" stroke-miterlimit="10" stroke-width="2" d="M140 70H0" />
-            <path stroke="#5A5C27" stroke-miterlimit="10" d="M140 46.674H0M140 23.326H0" />
-          </svg>
-        </div>
+        <a routerLink="/projects/{{project.slug}}">
+          <div>
+            <svg width="140" height="140" fill="none" viewBox="0 0 140 140">
+              <path fill="#fff" stroke="#5A5C27" d="M.5.5h139v139H.5z" />
+              <path stroke="#5A5C27" stroke-miterlimit="10" d="M116.674 0v140M93.326 0v140" />
+              <path stroke="#5A5C27" stroke-miterlimit="10" stroke-width="2" d="M70 0v140" />
+              <path stroke="#5A5C27" stroke-miterlimit="10" d="M46.674 0v140M23.326 0v140M140 116.674H0M140 93.326H0" />
+              <path stroke="#5A5C27" stroke-miterlimit="10" stroke-width="2" d="M140 70H0" />
+              <path stroke="#5A5C27" stroke-miterlimit="10" d="M140 46.674H0M140 23.326H0" />
+            </svg>
+          </div>
 
-        <div class="txt">
+          <div class="txt">
             <p class="name uppercase">
               {{project.name}}
             </p>
@@ -44,62 +48,61 @@
 
               {{project.description}}
             </span>
-        </div>
-        
-        <div class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" fill="none" viewBox="0 0 34 27">
-            <path stroke="#000" d="M0 13.523h33.284M20.329.358l13.313 13.313" />
-            <path stroke="#000" stroke-width="1.01184" d="M20.329 26.37l13.313-13.314" />
-          </svg>
+          </div>
 
-        </div>
-          </a>
-      </div>
-    </div>
-  </div>
-
-  <div id="new" class="modal-wrapper">
-    <div id="modal" class="modal">
-
-      <div class="columns is-mobile">
-        <h2 class="column is-9">Create a Project</h2>
-
-        <div id="close-btn" class="column">
-          <a (click)="closeModal()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 50 50">
-              <path fill="#fff" d="M0 0h50v50H0z" />
-              <path stroke="#000" stroke-width="1" d="M11.414 11.586l27.577 28.991M40.406 11.121L11.414 38.699" />
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" fill="none" viewBox="0 0 34 27">
+              <path stroke="#000" d="M0 13.523h33.284M20.329.358l13.313 13.313" />
+              <path stroke="#000" stroke-width="1.01184" d="M20.329 26.37l13.313-13.314" />
             </svg>
-          </a>
-        </div>
+
+          </div>
+        </a>
       </div>
-
-      <form id="new" class="columns column is-multiline" [formGroup]="newForm" (submit)="submitNew()">
-        <div class="fields">
-          <div class="column is-full">
-            <input formControlName="name" id="name" placeholder="Project Name" required />
-            <div *ngIf="projectSubmitted && f.name.invalid">
-              <span *ngIf="f.name.errors.required">Required.</span>
-            </div>
-          </div>
-          <div class="column is-full">
-            <textarea formControlName="description" id="description" placeholder="Project Description" rows="5"
-              maxlength="150" required></textarea>
-            <div *ngIf="descCount > 0">{{descCount}} / {{descLimit}}</div>
-            <div *ngIf="projectSubmitted && f.description.invalid">
-              <span *ngIf="f.description.errors.required">Required.</span>
-            </div>
-          </div>
-        </div>
-        <div class="column is-full">
-          <button class="mono no-pad" type="submit">Create Project</button>
-          <div *ngIf="projectSubmitted && errorMsg">
-            {{errorMsg}}
-          </div>
-        </div>
-      </form>
     </div>
-
   </div>
 
 </section>
+
+<div id="new-modal" class="modal-wrapper">
+  <div id="modal" class="modal">
+
+    <div class="columns is-mobile">
+      <h2 class="column is-9">Create a Project</h2>
+
+      <div id="close-btn" class="column">
+        <a (click)="closeModal()">
+          <svg width="50" height="50" fill="none" viewBox="0 0 50 50">
+            <path stroke="#000" stroke-width="1" d="M11.414 11.586l27.577 28.991M40.406 11.121L11.414 38.699" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <form id="new-form" class="columns column is-multiline" [formGroup]="newForm" (submit)="submitNew()">
+      <div class="fields">
+        <div class="column is-full">
+          <input formControlName="name" id="name" placeholder="Project Name" required />
+          <div *ngIf="projectSubmitted && f.name.invalid">
+            <span *ngIf="f.name.errors.required">Required.</span>
+          </div>
+        </div>
+        <div class="column is-full">
+          <textarea formControlName="description" id="description" placeholder="Project Description" rows="5"
+            maxlength="150" required></textarea>
+          <div *ngIf="descCount > 0">{{descCount}} / {{descLimit}}</div>
+          <div *ngIf="projectSubmitted && f.description.invalid">
+            <span *ngIf="f.description.errors.required">Required.</span>
+          </div>
+        </div>
+      </div>
+      <div class="column is-full">
+        <button class="mono no-pad" type="submit">Create Project</button>
+        <div *ngIf="projectSubmitted && errorMsg">
+          {{errorMsg}}
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

@@ -42,6 +42,10 @@ body {
 
   overflow-x: hidden;
 
+  &.modal-open {
+    overflow-y: hidden;
+  }
+
   &.activity {
 
     #bg {

@@ -21,6 +21,8 @@ export class ProjectsComponent implements OnInit {
 
   public profile: any;
   public projects: any[]
+
+  public hasContent: boolean;
   public projectSubmitted: boolean;
 
   public newForm: FormGroup;
@@ -52,12 +54,6 @@ export class ProjectsComponent implements OnInit {
       'name': ['', [Validators.required]],
       'description': ['', [Validators.required]]
     });
-
-    // Show char limit on description
-    (document.querySelector('#new #description') as HTMLElement).onkeyup = (el) => {
-      this.descCount = (el.target as HTMLTextAreaElement).value.length;
-    }
-
   }
 
   // convenience getter for easy access to form fields
@@ -70,6 +66,12 @@ export class ProjectsComponent implements OnInit {
     this._dataSvc.getDataForUrl('/api/project/get/' + userId).subscribe((response: any) => {
         
       this.projects = response;
+      this.hasContent = true;
+
+      // Show char limit on description
+      (document.querySelector('#new-modal #description') as HTMLElement).onkeyup = (el) => {
+        this.descCount = (el.target as HTMLTextAreaElement).value.length;
+      }  
 
     });
   
@@ -77,7 +79,7 @@ export class ProjectsComponent implements OnInit {
 
   create() {
 
-    document.getElementById('new').style.display = 'flex';
+    document.getElementById('new-modal').style.display = 'flex';
     document.body.classList.value = '';
 
   }
@@ -97,7 +99,7 @@ export class ProjectsComponent implements OnInit {
     this._dataSvc.sendDataToUrl('/api/project/create', data).subscribe((response: any) => {
       
       // Hide modal
-      document.getElementById('new').style.display = 'none';
+      document.getElementById('new-modal').style.display = 'none';
       document.body.classList.value = 'white';
       this.projects.push(response);
 
@@ -114,7 +116,7 @@ export class ProjectsComponent implements OnInit {
 
   closeModal() { 
 
-    document.getElementById('new').style.display = 'none';
+    document.getElementById('new-modal').style.display = 'none';
     document.body.classList.value = 'white';
 
   }
