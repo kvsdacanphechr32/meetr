@@ -23,6 +23,7 @@ export class ProjectsComponent implements OnInit {
   public projects: any[]
 
   public hasContent: boolean;
+  public noProjects: boolean;
   public projectSubmitted: boolean;
 
   public newForm: FormGroup;
@@ -67,11 +68,15 @@ export class ProjectsComponent implements OnInit {
         
       this.projects = response;
       this.hasContent = true;
+      this.noProjects = !this.projects || this.projects.length === 0;
 
       // Show char limit on description
-      (document.querySelector('#new-modal #description') as HTMLElement).onkeyup = (el) => {
-        this.descCount = (el.target as HTMLTextAreaElement).value.length;
-      }  
+      // document.querySelectorAll('form #description').forEach(desc => {
+        // (document.querySelector('form #description') as HTMLElement).onkeyup = el => {
+        //   this.descCount = (el.target as HTMLTextAreaElement).value.length;
+        // }  
+        // console.log((desc as HTMLElement).onkeyup)
+      // });
 
     });
   
@@ -119,6 +124,12 @@ export class ProjectsComponent implements OnInit {
     document.getElementById('new-modal').style.display = 'none';
     document.body.classList.value = 'white';
 
+  }
+
+  public countDes(evt) {
+
+    this.descCount = (evt.target as HTMLTextAreaElement).value.length;
+  
   }
 
 }

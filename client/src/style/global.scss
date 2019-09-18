@@ -141,6 +141,26 @@ h4 {
   line-height: 1.5;
 }
 
+form {
+
+  button {
+
+    @include pxtoem(18, 24);
+
+    text-decoration: underline;
+    text-transform: uppercase;
+    text-align: left;
+
+    line-height: 1.5;
+    letter-spacing: 2px;
+
+    margin-top: 5%;
+
+    border: none;
+
+  }
+}
+
 .container {
   overflow: hidden;
 }
@@ -204,6 +224,16 @@ h4 {
 
     padding: 0 6.5% 1.5%;
 
+    #close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      cursor: pointer;
+    }
+
+  }
+}
+
     .fields {
 
       input,
@@ -225,36 +255,6 @@ h4 {
         padding: 4% 0;
       }
     }
-
-    #close-btn {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      cursor: pointer;
-    }
-
-    form {
-
-      button {
-
-        @include pxtoem(18, 24);
-
-        text-decoration: underline;
-        text-transform: uppercase;
-        text-align: left;
-
-        line-height: 1.5;
-        letter-spacing: 2px;
-
-        margin-top: 5%;
-
-        border: none;
-
-      }
-    }
-
-  }
-}
 
 .content {
 
