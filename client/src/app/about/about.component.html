@@ -1,14 +1,20 @@
 <div class="container" *ngIf="hasContent">
-  <section class="column about">
-    <h2>About</h2>
-    <h3>Meetr — A place where engaged journalism reflection meets measurable progress.</h3>
-    <p>Meetr came to be through the collaboration of the Agora Journalism Center at the University of Oregon’s School of Journalism and Communication and the Engagement Lab at Emerson College in Boston, MA. Its goal is to support the practice of relational journalism and to provide engagement journalists an apparatus to encourage reflection and highlight growth.</p>
-    <p>The reflection guide and survey is based on the Civic Media Practice report by Eric Gordon and Gabriel Mugar. It has been adapted specifically for journalists by Regina Lawrence and Andrew DeVigal, and refined by a cohort of engagement journalists assembled in 2018. The process of developing the tool is explained in detail in the Building Engagement report.</p>
+  <section class="columns about">
+    <div class="column is-full-mobile is-one-third">
+        <h2>About</h2>
+    </div>
+    <div class="column is-full-mobile is-two-thirds">
+      <h3>Meetr — A place where engaged journalism reflection meets measurable progress.</h3>
+      <p>Meetr came to be through the collaboration of the Agora Journalism Center at the University of Oregon’s School of Journalism and Communication and the Engagement Lab at Emerson College in Boston, MA. Its goal is to support the practice of relational journalism and to provide engagement journalists an apparatus to encourage reflection and highlight growth.</p>
+      <p>The reflection guide and survey is based on the Civic Media Practice report by Eric Gordon and Gabriel Mugar. It has been adapted specifically for journalists by Regina Lawrence and Andrew DeVigal, and refined by a cohort of engagement journalists assembled in 2018. The process of developing the tool is explained in detail in the Building Engagement report.</p>
+    </div>
   </section>
 
+  <!-- TODO: Style this section -->
   <section class="column download">
     <h2><a href="#">Download the Building Engagement Report</a></h2>
     <!-- TODO: Add SVG -->
+    <!-- TODO: Add download link -->
   </section>
 
 </div>
@@ -16,14 +22,18 @@
 <div class="purple" *ngIf="hasContent">
   <!-- Container within .purple so background color extends full width of page -->
   <div class="container">
-    <section class="column what">
-      <h2>What is engaged journalism?</h2>
-      <div [innerHtml]="content.what.html"></div>
+    <section class="columns what">
+      <div class="column is-one-third is-full-mobile">
+        <h2>What is engaged journalism?</h2>
+      </div>
+      <div class="info-list column is-full-mobile is-two-thirds" [innerHtml]="content.what.html"></div>
     </section>
 
-    <section class="column why">
-      <h2>Why do engaged journalism?</h2>
-      <div [innerHtml]="content.what.html"></div>
+    <section class="columns why">
+      <div class="column is-one-third is-full-mobile">
+        <h2>Why do engaged journalism?</h2>
+      </div>
+      <div class="info-list column is-full-mobile is-two-thirds" [innerHtml]="content.why.html"></div>
     </section>
   </div>
 </div>
