@@ -55,8 +55,8 @@ About.add({
 	// image: { type: Types.CloudinaryImage, folder: 'engagement-journalism/cms', autoCleanup: true, required: true, initial: true},
 	para1: { type: Types.Markdown, label: 'Paragraph 1', required: true, initial: true},
 	para2: { type: Types.Markdown, label: 'Paragraph 2', required: true, initial: true},
-	what: { type: Types.Textarea, label: 'What', required: true, initial: true },
-	why: { type: Types.Textarea, label: 'Why', required: true, initial: true },
+	what: { type: Types.Markdown, label: 'What', required: true, initial: true },
+	why: { type: Types.Markdown, label: 'Why', required: true, initial: true },
 	caseStudiesIntro: { type: Types.Markdown, required: true, initial: true},
 	guidePdf: { type: Types.File,  storage: azureFile, label: 'Guide PDF', required: true, initial: true}
 
