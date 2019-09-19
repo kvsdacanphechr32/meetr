@@ -2,6 +2,19 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "./client",
+			"name": "Client"
+		},
+		{
+			"path": "./server",
+			"name": "Server"
 		}
-	]
+	],
+	"settings": {
+		"files.exclude": {
+			"**/node_modules": true
+		}
+	}
 }
