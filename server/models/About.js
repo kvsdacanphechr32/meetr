@@ -52,7 +52,7 @@ var azureFile = new keystone.Storage({
 About.add({
 	
 	name: { type: String, default: "About", hidden: true, required: true, initial: true },
-	image: { type: Types.CloudinaryImage, folder: 'engagement-journalism/cms', autoCleanup: true, required: true, initial: true},
+	// image: { type: Types.CloudinaryImage, folder: 'engagement-journalism/cms', autoCleanup: true, required: true, initial: true},
 	para1: { type: Types.Markdown, label: 'Paragraph 1', required: true, initial: true},
 	para2: { type: Types.Markdown, label: 'Paragraph 2', required: true, initial: true},
 	what: { type: Types.Textarea, label: 'What', required: true, initial: true },
