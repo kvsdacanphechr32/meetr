@@ -12,7 +12,7 @@ nav {
   }
 
   @include phones {
-    padding: 5% 8%;
+    padding: 5% 3%;
   }
 
   a {
@@ -29,7 +29,9 @@ nav {
 
     #logo {
 
-      // max-width: 100px;
+      @include phones {
+        max-width: 128px;
+      }
 
     }
 
@@ -68,7 +70,7 @@ nav {
     z-index: 25;
     min-width: 50px;
 
-    justify-content: space-evenly;
+    justify-content: space-between;
 
     #lines {
       position: relative;
@@ -90,7 +92,7 @@ nav {
         position: relative;
         height: 1px;
         width: 46px;
-        background: white;
+        background: black;
         opacity: 1;
         left: 0;
 

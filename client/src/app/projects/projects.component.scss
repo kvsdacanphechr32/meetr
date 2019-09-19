@@ -6,6 +6,14 @@
   p {
     @include pxtoem(18, 24);
   }
+
+  h4 {
+    font-weight: 400;
+
+    strong {
+      font-weight: 700;
+    }    
+  }
 }
 
 #new {
@@ -13,7 +21,7 @@
 
   grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
   grid-gap: 78px;
-  grid-auto-rows: minmax(80px, 120px);
+  grid-auto-rows: auto;
 
   margin-bottom: 6%;
 
@@ -33,6 +41,11 @@
     @include pxtoem(18, 24);
 
     padding: 2% 3%;
+    height: 60px;
+
+    @include not-phones {
+      height: 120px;
+    }
 
     span {
       text-transform: uppercase;
@@ -79,15 +92,16 @@
   display: grid;
 
   grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
-  grid-gap: 78px;
-  grid-auto-rows: minmax(140px, 240px);
-
+  grid-auto-rows: auto;
+  grid-gap: 20px;
+  
   @include desktop {
     grid-auto-rows: minmax(250px, 250px);
+    grid-gap: 78px;
   }
 
-  @include phones {
-    grid-template-columns: repeat(auto-fit, minmax(164 px, 1fr));
+  @include not-desktop {
+    grid-template-columns: repeat(1, 100%);
     grid-gap: 17px;
 
   }
@@ -138,28 +152,27 @@
       .txt {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-evenly;
 
         height: 100%;
 
-        max-width: 320px;
-
+        max-width: 50%;
         @include phones {
           max-width: 65%;
         }
       }
 
       .icon {
-        display: flex;
-        align-items: flex-start;
-        height: 60%;
-
+        display: inline-block;
         @include transition(transform, .2s, ease-in-out);
       }
 
     }
 
     .name {
+      display: flex;
+      justify-content: space-between;
+
       @include pxtoem(18, 24);
       letter-spacing: 2px;
       text-decoration: underline;

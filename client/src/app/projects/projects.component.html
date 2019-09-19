@@ -2,18 +2,16 @@
 
   <div id="top" class="columns column is-multiline is-mobile">
 
-    <h4 class="column is-11-mobile is-5-tablet no-margin">Hi, {{userName}}</h4>
+    <h4 class="column is-11-mobile is-5-tablet no-margin">Hi, <strong>{{userName}}</strong></h4>
     <p class="column">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sapien velit, aliquet eget
       commodo nec, auctor a sapien.</p>
   </div>
 
   <div class="column">
 
-    <!-- <button (click)="create()" *ngIf="!projects">Create your <br />First Project</button> -->
-
     <p id="none" *ngIf="noProjects">You currently have no projects.</p>
 
-    <div class="columns no-pad" id="new" *ngIf="projects && projects.length > 0">
+    <div class="" id="new" *ngIf="projects && projects.length > 0">
       <button class="mono" (click)="create()" *ngIf="projects">
         <svg width="30" height="30" fill="none" viewBox="0 0 30 30">
           <path stroke="#fff" d="M30 14.5H0M14.499 0v30" />
@@ -77,7 +75,7 @@
 
     </div>
 
-    <div id="projects" class="columns is-mobile is-multiline" [class.none]="noProjects">
+    <div id="projects">
 
       <div class="project" *ngFor="let project of projects;">
         <a routerLink="/projects/{{project.slug}}">
@@ -97,12 +95,12 @@
             <div class="name uppercase">
               {{project.name}}
 
-              <div class="icon">
+              <span class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="34" height="27" fill="none" viewBox="0 0 34 27">
                   <path stroke="#000" d="M0 13.523h33.284M20.329.358l13.313 13.313" />
                   <path stroke="#000" stroke-width="1.01184" d="M20.329 26.37l13.313-13.314" />
                 </svg>
-              </div>
+              </span>
               
             </div>
             <span class="desc">

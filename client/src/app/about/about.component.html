@@ -13,30 +13,17 @@
 
 </div>
 
-<div class="purple">
+<div class="purple" *ngIf="hasContent">
+  <!-- Container within .purple so background color extends full width of page -->
   <div class="container">
     <section class="column what">
       <h2>What is engaged journalism?</h2>
-      <p>“Engaged journalism” is  an evolving set of practices within journalism that include:</p>
-      <ul>
-        <li>Reporting “with” rather than “on” communities</li>
-        <li>Reframing journalism as a conversation with communities</li>
-        <li>Prioritizing trust-building</li>
-        <li>Practicing relational rather than transactional journalism</li>
-        <li>Making sure journalism matters to communities</li>
-      </ul>
+      <div [innerHtml]="content.what.html"></div>
     </section>
 
     <section class="column why">
       <h2>Why do engaged journalism?</h2>
-      <p>Engaged journalism provides on-ramps for public participation in journalism through these kinds of processes (and many more):</p>
-      <ul>
-        <li>Asking communities to define the issues and stories that matter to them</li>
-        <li>Producing stories with community members</li>
-        <li>Convening/facilitating community dialogue</li>
-        <li>Bridging divides within and across communities</li>
-        <li>Re-inventing reporting processes to prioritize trust-building</li>
-      </ul>
+      <div [innerHtml]="content.what.html"></div>
     </section>
   </div>
 </div>
