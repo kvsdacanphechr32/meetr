@@ -1,5 +1,9 @@
 @import '~src/style/_variables';
 
+h4 {
+  font-weight: 300;
+}
+
 #prompt {
 
   @include pxtoem(14, 18);
@@ -100,6 +104,74 @@
   }
 }
 
+#none {
+  // #grid {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+
+  //   width: 100%;
+  //   height: 300px;
+
+  //   @include not-phones {
+  //     height: 680px;
+  //   }
+
+  //   background-image: cdn-image('img/grid-blank', c_fill, f_auto, w_680);
+  //   background-repeat: no-repeat;
+  //   background-size: contain;
+  //   background-position-x: center;
+
+  //   a {
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: center;
+
+  //     color: white;
+  //     background-color: $camo-green;
+  //     @include pxtoem(18, 24);
+  //     box-shadow: inset 2px -2px 0px 1px black;
+
+  //     width: 200px;
+  //     height: 80px;
+
+  //     @include not-phones {
+  //       width: 400px;
+  //       height: 200px;
+  //     }
+
+  //     text-align: center;
+  //     text-decoration: underline;
+  //     text-transform: uppercase;
+
+  //     line-height: 1.5;
+  //     letter-spacing: 2px;
+  //   }
+
+  // }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: cdn-image('img/project/grid-fade', c_fill, f_auto, w_1440);
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  min-height: 621px;
+
+  text-align: center;
+  @include pxtoem(18, 36);
+  color: #bbbbbb;
+
+  p {
+    background-color: white;
+    padding: 4% 6%;
+    width: 40%;
+  }
+    
+
+}
+
 .bottom {
 
   @include pxtoem(18, 24);
@@ -121,52 +193,5 @@
     span {
       margin-left: 5%;
     }
-  }
-}
-
-#none {
-  #grid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    height: 300px;
-
-    @include not-phones {
-      height: 680px;
-    }
-
-    background-image: cdn-image('img/grid-blank', c_fill, f_auto, w_680);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position-x: center;
-
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      color: white;
-      background-color: $camo-green;
-      @include pxtoem(18, 24);
-      box-shadow: inset 2px -2px 0px 1px black;
-
-      width: 200px;
-      height: 80px;
-
-      @include not-phones {
-        width: 400px;
-        height: 200px;
-      }
-
-      text-align: center;
-      text-decoration: underline;
-      text-transform: uppercase;
-
-      line-height: 1.5;
-      letter-spacing: 2px;
-    }
-
   }
 }

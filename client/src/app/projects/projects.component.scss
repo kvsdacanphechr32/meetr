@@ -3,10 +3,6 @@
 #top {
   margin: 3em 0;
 
-  p {
-    @include pxtoem(18, 24);
-  }
-
   h4 {
     font-weight: 400;
 

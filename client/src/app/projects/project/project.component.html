@@ -18,10 +18,10 @@
 
     </div>
 
-    <div class="column is-half">
+    <div id="top" class="column columns is-mobile is-full">
+      <h4 class="column is-11-mobile is-5-tablet no-margin">{{project.name}}</h4>
+      <p class="column">
 
-      <h4>{{project.name}}</h4>
-      <p>
         {{project.description}}
       </p>
 
@@ -92,15 +92,17 @@
     <!-- No progress -->
     <div id="none" class="column is-full" *ngIf="progress && progress.length === 0">
 
-      <div id="grid">
+      <p>You currently have no data.</p>
+
+      <!-- <div id="grid">
 
         <a href="#" routerLink="/talk/{{project.slug}}" class="mono">Talk it out</a>
 
-      </div>
-
+      </div> -->
+<!-- 
       <div class="bottom">Skip Talk It Out and <a href="#" routerLink="/projects/{{project.slug}}/track"
           class="mono">Track Your Progress</a>.
-      </div>
+      </div> -->
     </div>
     </div>
 </section>
