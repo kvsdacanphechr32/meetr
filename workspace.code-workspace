@@ -1,7 +1,20 @@
 {
 	"folders": [
 		{
-			"path": "/Users/john_richardson/Documents/Projects/building-engagement"
+			"path": "."
+		},
+		{
+			"path": "./client",
+			"name": "Client"
+		},
+		{
+			"path": "./server",
+			"name": "Server"
 		}
-	]
+	],
+	"settings": {
+		"files.exclude": {
+			"**/node_modules": true
+		}
+	}
 }

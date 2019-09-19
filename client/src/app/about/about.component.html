@@ -1,9 +1,42 @@
-<div class="content column" *ngIf="hasContent">    
-  <h4>About</h4>
+<div class="container" *ngIf="hasContent">
+  <section class="column about">
+    <h2>About</h2>
+    <h3>Meetr — A place where engaged journalism reflection meets measurable progress.</h3>
+    <p>Meetr came to be through the collaboration of the Agora Journalism Center at the University of Oregon’s School of Journalism and Communication and the Engagement Lab at Emerson College in Boston, MA. Its goal is to support the practice of relational journalism and to provide engagement journalists an apparatus to encourage reflection and highlight growth.</p>
+    <p>The reflection guide and survey is based on the Civic Media Practice report by Eric Gordon and Gabriel Mugar. It has been adapted specifically for journalists by Regina Lawrence and Andrew DeVigal, and refined by a cohort of engagement journalists assembled in 2018. The process of developing the tool is explained in detail in the Building Engagement report.</p>
+  </section>
 
-  <div [innerHtml]="content.para1.html"></div>  
-  
-  <cdn-image cloudinaryPrefix="/" cloudinaryId="{{content.image.public_id}}" width="700" [responsive]="true" autoFormat="true" alt="About page image"></cdn-image>
+  <section class="column download">
+    <h2><a href="#">Download the Building Engagement Report</a></h2>
+    <!-- TODO: Add SVG -->
+  </section>
 
-  <div [innerHtml]="content.para2.html"></div>
+</div>
+
+<div class="purple">
+  <div class="container">
+    <section class="column what">
+      <h2>What is engaged journalism?</h2>
+      <p>“Engaged journalism” is  an evolving set of practices within journalism that include:</p>
+      <ul>
+        <li>Reporting “with” rather than “on” communities</li>
+        <li>Reframing journalism as a conversation with communities</li>
+        <li>Prioritizing trust-building</li>
+        <li>Practicing relational rather than transactional journalism</li>
+        <li>Making sure journalism matters to communities</li>
+      </ul>
+    </section>
+
+    <section class="column why">
+      <h2>Why do engaged journalism?</h2>
+      <p>Engaged journalism provides on-ramps for public participation in journalism through these kinds of processes (and many more):</p>
+      <ul>
+        <li>Asking communities to define the issues and stories that matter to them</li>
+        <li>Producing stories with community members</li>
+        <li>Convening/facilitating community dialogue</li>
+        <li>Bridging divides within and across communities</li>
+        <li>Re-inventing reporting processes to prioritize trust-building</li>
+      </ul>
+    </section>
+  </div>
 </div>
