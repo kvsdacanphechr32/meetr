@@ -6,4 +6,3 @@ Engagement Journalists are committed to the practice of reporting with, not repo
 > This an Engagment Lab MEAN stack project. Please see [engagementlab.github.io](https://engagementlab.github.io) for help.
 
 ![Build Status](https://api.travis-ci.org/engagementlab/meetr.svg?branch=master "Build Status")
-/Users/john_richardson/Documents/Projects/meetr/README.md

@@ -1,7 +1,8 @@
 @import '~src/style/_variables';
 
 #top {
-  margin: 3em 0; 
+  margin: 3em 0;
+
   p {
     @include pxtoem(18, 24);
   }
@@ -30,9 +31,9 @@
     letter-spacing: 2px;
     color: white;
     @include pxtoem(18, 24);
-    
+
     padding: 2% 3%;
-    
+
     span {
       text-transform: uppercase;
       text-decoration: underline;
@@ -50,7 +51,7 @@
   color: #bbbbbb;
 }
 
-#first { 
+#first {
   padding: 6%;
   background-color: $camo-green-25;
 
@@ -86,7 +87,7 @@
   }
 
   @include phones {
-    grid-template-columns: repeat(auto-fit, minmax(164  px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(164 px, 1fr));
     grid-gap: 17px;
 
   }
@@ -128,32 +129,33 @@
       height: 100%;
       padding: 2% 4%;
 
-      @include phones { 
+      @include phones {
         svg {
           max-width: 70px;
         }
       }
-    
-    .txt {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
 
-      height: 100%;
+      .txt {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-      max-width: 320px;
-      @include phones { 
-        max-width: 65%;
+        height: 100%;
+
+        max-width: 320px;
+
+        @include phones {
+          max-width: 65%;
+        }
       }
-    }
-    
-    .icon {
-      display: flex;
-      align-items: flex-start;
-      height: 60%;
 
-      @include transition(transform, .2s, ease-in-out);
-    }
+      .icon {
+        display: flex;
+        align-items: flex-start;
+        height: 60%;
+
+        @include transition(transform, .2s, ease-in-out);
+      }
 
     }
 
