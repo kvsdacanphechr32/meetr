@@ -22,6 +22,7 @@ export class ProjectComponent implements OnInit {
   public project: any;
   public progress: any[];
   public hasContent: boolean;
+  public noProgress: boolean;
   public isPhone: boolean;
   public showPrompt: boolean;
 
@@ -68,6 +69,8 @@ export class ProjectComponent implements OnInit {
         this.progress = response.progress;
         this.hasContent = true;
 
+        this.noProgress = this.progress && this.progress.length === 0
+        
         this._dataSvc.currentProjectId = response.project._id;
 
         if (!this.progress || (this.progress && this.progress.length < 1)) return;

@@ -18,7 +18,7 @@
 
     </div>
 
-    <div id="top" class="column columns is-mobile is-full">
+    <div id="top" class="column columns is-full is-mobile is-multiline">
       <h4 class="column is-11-mobile is-5-tablet no-margin">{{project.name}}</h4>
       <p class="column">
 
@@ -27,6 +27,7 @@
 
     </div>
 
+    <!-- Have progress -->
     <div class="columns column is-full is-mobile is-multiline" *ngIf="progress && progress.length > 0">
 
       <div class="column is-9">
@@ -71,10 +72,11 @@
       </div>
     </div>
 
-    <div class="column is-full" *ngIf="progress && progress.length > 0">
+    <!-- Progress canvas -->
+    <div class="column is-full" *ngIf="!noProgress">
 
       <canvas #canvasElement id="canvas" height="680" width="680"></canvas>
-
+      <!-- 
       <div class="bottom mono back columns">
         <a class="column" routerLink="/projects" *ngIf="progress">
           <svg width="21" height="17" fill="none" viewBox="0 0 21 17">
@@ -85,12 +87,49 @@
         </a>
         <a class="column" routerLink="/projects/{{project.slug}}/track" *ngIf="progress">
           Track your Progress
-        </a>
+        </a> -->
+    </div>
+  </div>
+
+  <!-- No progress -->
+  <div class="column columns no-margin  is-11-mobile is-full-tablet is-mobile is-multiline" *ngIf="noProgress">
+
+
+    <!-- Talk it out btn -->
+    <div class="column columnsis-full is-mobile is-multiline green">
+
+      <div class="header column is-full">
+        <div class="outline" data-text="1">1</div>
+        <div class="label">
+          Talk it Out
+        </div>
+      </div>
+
+      <div class="column is-half-mobile">
+        <svg xmlns="http://www.w3.org/2000/svg" width="127" height="100" fill="none" viewBox="0 0 127 100">
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10"
+            d="M69.286 99.28c-47.962 0-56.963-35.944-56.963-35.944s26.798-47.88 41.846-47.88c6.665 0 12.025 3.636 15.117 8.987 3.092-5.35 8.314-8.986 14.98-8.986 14.979 0 41.983 47.88 41.983 47.88S117.248 99.28 69.286 99.28z" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10"
+            d="M126.249 63.336s-23.981 20.922-56.963 20.922-56.963-20.922-56.963-20.922S44.412 33.43 69.286 33.43c24.874 0 56.963 29.907 56.963 29.907z" />
+          <path fill="#fff" d="M39.324 78.359c12.025-16.875 29.959-1.852 29.959-1.852s18.002-15.023 29.959 1.852" />
+          <path stroke="#000" stroke-miterlimit="10"
+            d="M39.324 78.359c12.025-16.875 29.959-1.852 29.959-1.852s18.002-15.023 29.959 1.852" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10"
+            d="M66.26 48.383V33.566c-6.872.617-14.086 3.224-20.958 6.654v8.163H66.26zM93.265 48.383v-8.095c-6.871-3.43-14.155-6.036-20.957-6.653V48.45h20.957v-.068z" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10"
+            d="M.503.503v47.948h29.478L45.716 64.16V48.451H56.16V.503H.504z" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10"
+            d="M19.055 12.85h-6.184v15.434h6.184V12.85zM19.055 31.371h-6.184v6.174h6.184V31.37zM31.422 12.85h-6.184v15.434h6.184V12.85zM31.422 31.371h-6.184v6.174h6.184V31.37zM43.793 12.85H37.61v15.434h6.184V12.85zM43.793 31.371H37.61v6.174h6.184V31.37z" />
+        </svg>
+
+      </div>
+
+      <div class="column is-half-mobile">
+        <p class="mono">Start by talking it out</p>
       </div>
     </div>
 
-    <!-- No progress -->
-    <div id="none" class="column is-full" *ngIf="progress && progress.length === 0">
+    <div id="none" class="column is-11-mobile is-full-tablet">
 
       <p>You currently have no data.</p>
 
@@ -99,10 +138,11 @@
         <a href="#" routerLink="/talk/{{project.slug}}" class="mono">Talk it out</a>
 
       </div> -->
-<!-- 
+      <!-- 
       <div class="bottom">Skip Talk It Out and <a href="#" routerLink="/projects/{{project.slug}}/track"
           class="mono">Track Your Progress</a>.
       </div> -->
     </div>
-    </div>
+
+  </div>
 </section>
