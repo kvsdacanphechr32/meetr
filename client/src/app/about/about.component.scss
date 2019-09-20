@@ -22,6 +22,7 @@ p {
             margin-top: 0;
         }
 
+        padding-bottom: 8em;
         padding-top: 8em;
     }
 
@@ -38,8 +39,34 @@ p {
     }
 }
 
+.download {
+
+    background-image: cdn-image('img/speckled-bg', c_fill, f_auto, w_680);
+
+    .preview-container {
+        margin-right: 10%;
+        margin-top: 5%;
+    }
+
+    h2 {
+        // margin-left: 15%;
+        
+        font-family: 'Roboto Mono', monospace;
+        font-weight: normal;
+        font-size: 2em;
+        text-transform: uppercase;
+        text-align: center;
+
+        // max-width: 80%;
+    }
+}
+
 .purple {
     padding: 0 1em 5em 1em;
+
+    .what, .why {
+        padding-right: 5%;
+    }
 
     @include not-phones {
         padding: 7em 1em 7em 1em;
@@ -92,6 +119,7 @@ p {
     // To achieve one item per line, has to be UL in CMS
     ::ng-deep ul {
         list-style: none;
+        list-style-position: outside;
 
         margin: 0;
         padding: 0;
