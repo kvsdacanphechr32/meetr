@@ -9,14 +9,28 @@
       <p>The reflection guide and survey is based on the Civic Media Practice report by Eric Gordon and Gabriel Mugar. It has been adapted specifically for journalists by Regina Lawrence and Andrew DeVigal, and refined by a cohort of engagement journalists assembled in 2018. The process of developing the tool is explained in detail in the Building Engagement report.</p>
     </div>
   </section>
+</div>
 
-  <!-- TODO: Style this section -->
-  <section class="column download">
-    <h2><a href="#">Download the Building Engagement Report</a></h2>
-    <!-- TODO: Add SVG -->
-    <!-- TODO: Add download link -->
-  </section>
+<div class="download">
+  <div class="container">
+    <section class="columns is-centered is-vcentered">
+      <div class="column is-one-third preview-container">
+        <a href="{{ content.guidePdf.url }}">
+          <cdn-image 
+            class="pdf-preview" width="600" [responsive]="true" autoFormat="true"
+            cloudinaryPrefix="engagement-journalism/" cloudinaryId="img/about/pdf-preview"
+            alt="Building Engagement PDF preview"></cdn-image>
+        </a>
+      </div>
 
+      <!-- <div class="column"></div> -->
+
+      <div class="column is-one-third">
+        <!-- TODO: Add download link -->
+        <h2><a href="{{ content.guidePdf.url }}">Download the Building Engagement Report</a></h2>
+      </div>
+    </section>
+  </div>
 </div>
 
 <div class="purple" *ngIf="hasContent">
