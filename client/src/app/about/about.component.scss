@@ -37,11 +37,16 @@ p {
     p {
         font-size: 1.3em;
     }
+
+    .desc {
+        padding-right: 5%;
+    }
 }
 
 .download {
 
     background-image: cdn-image('img/speckled-bg', c_fill, f_auto, w_680);
+    background-repeat: repeat;
 
     .preview-container {
         margin-right: 10%;
@@ -64,9 +69,9 @@ p {
 .purple {
     padding: 0 1em 5em 1em;
 
-    .what, .why {
-        padding-right: 5%;
-    }
+    // .what, .why {
+    //     padding-right: 5%;
+    // }
 
     @include not-phones {
         padding: 7em 1em 7em 1em;
