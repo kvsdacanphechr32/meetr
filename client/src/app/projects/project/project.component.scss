@@ -4,6 +4,12 @@ h4 {
   font-weight: 300;
 }
 
+#top {
+  a {
+    @include pxtoem(14, 18);
+  }
+}
+
 #prompt {
 
   @include pxtoem(14, 18);
@@ -48,13 +54,7 @@ h4 {
 
 #all {
 
-  hr {
-    display: none;
-  }
-
   .columns {
-    display: none;
-    transform-origin: top;
 
     &:nth-of-type(4n+1) .num {
       background-color: $camo-green;
@@ -82,6 +82,15 @@ h4 {
       color: white;
       text-align: center;
     }
+
+    .note {
+
+      font-family: Roboto;
+      @include pxtoem(12, 18);
+      font-style: italic;
+      line-height: 1.5;
+      color: $brown-grey;
+    }
   }
 
   hr {
@@ -95,6 +104,10 @@ h4 {
 
   svg {
     @include transition(transform, .5s, ease-in-out);
+
+    @include phones {
+      max-width: 48px;
+    }
   }
 
   &:hover {
@@ -146,12 +159,15 @@ h4 {
       margin-left: 5%;
     }
   }
+
   svg {
     @include phones {
       max-width: 100px;
     }
+
     max-width: 100%;
   }
+
   p {
     @include pxtoem(18, 24);
     letter-spacing: 2px;
@@ -174,7 +190,7 @@ h4 {
     font-family: 'Spectral';
     font-weight: 600;
     text-transform: uppercase;
-    
+
     @include not-phones {
       margin-top: 4%;
     }
@@ -208,19 +224,21 @@ h4 {
 
   margin-top: 5%;
 
-  &.back {
-    a {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-  }
-
   a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     text-transform: uppercase;
 
     span {
       margin-left: 5%;
     }
+
+    @include phones {
+      svg {
+        max-width: 20px;
+      }
+    }
   }
+
 }

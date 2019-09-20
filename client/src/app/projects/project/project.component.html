@@ -20,40 +20,58 @@
 
     <div id="top" class="column columns is-full is-mobile is-multiline">
       <h4 class="column is-11-mobile is-5-tablet no-margin">{{project.name}}</h4>
-      <p class="column">
-
+      <p class="column is-8-mobile is-6-tablet">
         {{project.description}}
       </p>
+
+      <!-- empty for layout purposes -->
+      <div class="column is-5-tablet hidden-mobile"></div>
+      <div class="column is-3-tablet hidden-mobile">
+        <a routerLink="/talk/{{project.slug}}" class="mono uppercase">1 Talk it out</a>
+      </div>
+      <div class="column hidden-mobile">
+        <a routerLink="/projects/{{project.slug}}/track" class="mono uppercase">2 Track your Progress</a>
+      </div>
+
+      <a id="pdf" class="column hidden-tablet-plus" (click)="exportPdf()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="78" height="81" fill="none" viewBox="0 0 78 81">
+          <path stroke="#000" stroke-miterlimit="10" d="M60.423 20.423H40.5V.5" />
+          <path fill="#000" stroke="#000" stroke-miterlimit="10"
+            d="M12.913 40.5v6.743H12.3V31.305h4.904c1.686 0 2.912.46 3.832 1.226.92.766 1.38 1.992 1.38 3.371 0 1.38-.46 2.606-1.38 3.372-.92.766-2.146 1.226-3.678 1.226h-4.445zm0-.613h4.291c1.38 0 2.606-.306 3.372-1.073.766-.613 1.226-1.685 1.226-2.912 0-1.226-.46-2.298-1.226-2.912-.766-.766-1.839-1.072-3.372-1.072h-4.29v7.97zM25.632 47.09V31.305h4.445c1.226 0 2.299.306 3.371.92.92.612 1.84 1.379 2.3 2.451.612 1.073.919 2.146.919 3.525v1.993c0 1.379-.307 2.452-.767 3.524a7.094 7.094 0 0 1-2.298 2.453c-.92.613-2.146.92-3.372.92h-4.598zm.613-15.172v14.56h3.832c1.073 0 2.145-.307 3.065-.767.92-.613 1.686-1.226 2.145-2.299.46-.92.767-1.992.767-3.218V38.2a7.123 7.123 0 0 0-.767-3.218c-.46-.92-1.225-1.686-2.145-2.299-.92-.613-1.84-.766-2.912-.766h-3.985zM48.928 39.427h-8.123v7.816h-.613V31.305H50v.613h-9.195v6.896h8.123v.613z" />
+          <path stroke="#000" stroke-miterlimit="10"
+            d="M60.423 80.5c9.226 0 16.705-7.48 16.705-16.705 0-9.226-7.48-16.705-16.705-16.705-9.226 0-16.705 7.48-16.705 16.705 0 9.226 7.479 16.705 16.705 16.705zM60.422 73.757V53.833" />
+          <path stroke="#000" stroke-miterlimit="10" d="M50.462 63.795l9.961 9.962 10.115-9.962M50.462 73.757h20.076" />
+          <path stroke="#000" stroke-miterlimit="10"
+            d="M43.872 63.795c0-9.195 7.51-16.705 16.705-16.705V20.423L40.653.5H.5v80h59.923c-9.195 0-16.551-7.51-16.551-16.705z" />
+        </svg>
+      </a>
+
+      <div class="column is-half-mobile hidden-tablet-plus">
+        <a routerLink="/talk/{{project.slug}}" class="mono uppercase">1 Talk it out</a>
+      </div>
+      <div class="column hidden-tablet-plus">
+        <a routerLink="/projects/{{project.slug}}/track" class="mono uppercase">2 Track your Progress</a>
+      </div>
+
 
     </div>
 
     <!-- Have progress -->
     <div class="columns column is-full is-mobile is-multiline" *ngIf="progress && progress.length > 0">
 
-      <div class="column is-9">
-        Latest Entry: {{progress[0].date | date: 'MM/dd/yyyy'}} <br />
-        <a id="view" (click)="viewAll()">view all</a>
-      </div>
-      <div class="column">
-
-        <a id="pdf" (click)="exportPdf()">
-          <svg fill="none" height="36" viewBox="0 0 35 36" width="35" xmlns="http://www.w3.org/2000/svg">
-            <g stroke="#000" stroke-miterlimit="10">
-              <path d="m26.716 9.216h-8.716v-8.716" />
-              <path
-                d="m5.931 18v2.95h-.268v-6.973h2.147c.737 0 1.274.201 1.676.536.402.336.603.872.603 1.476 0 .603-.2 1.14-.603 1.475-.402.335-.939.536-1.61.536h-1.944zm0-.268h1.879c.603 0 1.14-.134 1.475-.47.335-.268.536-.737.536-1.274 0-.536-.201-1.005-.536-1.273-.335-.336-.805-.47-1.475-.47h-1.88v3.487zm5.565 3.151v-6.906h1.944c.537 0 1.006.134 1.476.402.402.269.804.604 1.005 1.073.269.47.403.939.403 1.542v.872c0 .603-.134 1.073-.336 1.542-.268.47-.603.805-1.005 1.073-.403.268-.939.402-1.475.402zm.268-6.638v6.37h1.677c.469 0 .938-.134 1.34-.335.403-.268.738-.537.94-1.006.2-.402.334-.872.334-1.408v-.872c0-.536-.134-1.005-.335-1.408-.2-.402-.536-.737-.939-1.005-.402-.269-.804-.336-1.273-.336zm9.924 3.285h-3.554v3.42h-.268v-6.973h4.291v.268h-4.023v3.018h3.554v.268z"
-                fill="#000" stroke-width=".75" />
-              <path d="m26.716 35.5a7.308 7.308 0 1 0 0-14.617 7.308 7.308 0 0 0 0 14.617zm0-2.95v-8.717" />
-              <path d="m22.358 28.192 4.358 4.358 4.426-4.358m-8.784 4.358h8.784" />
-              <path
-                d="m19.475 28.192c0-4.023 3.285-7.309 7.308-7.309v-11.667l-8.715-8.716h-17.568v35h26.216c-4.023 0-7.24-3.285-7.24-7.308z" />
-            </g>
-          </svg>
-        </a>
-
-      </div>
-
-      <div id="all" class="column is-full">
+        <a id="pdf" class="column is-5-tablet hidden-mobile" (click)="exportPdf()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="78" height="81" fill="none" viewBox="0 0 78 81">
+              <path stroke="#000" stroke-miterlimit="10" d="M60.423 20.423H40.5V.5" />
+              <path fill="#000" stroke="#000" stroke-miterlimit="10"
+                d="M12.913 40.5v6.743H12.3V31.305h4.904c1.686 0 2.912.46 3.832 1.226.92.766 1.38 1.992 1.38 3.371 0 1.38-.46 2.606-1.38 3.372-.92.766-2.146 1.226-3.678 1.226h-4.445zm0-.613h4.291c1.38 0 2.606-.306 3.372-1.073.766-.613 1.226-1.685 1.226-2.912 0-1.226-.46-2.298-1.226-2.912-.766-.766-1.839-1.072-3.372-1.072h-4.29v7.97zM25.632 47.09V31.305h4.445c1.226 0 2.299.306 3.371.92.92.612 1.84 1.379 2.3 2.451.612 1.073.919 2.146.919 3.525v1.993c0 1.379-.307 2.452-.767 3.524a7.094 7.094 0 0 1-2.298 2.453c-.92.613-2.146.92-3.372.92h-4.598zm.613-15.172v14.56h3.832c1.073 0 2.145-.307 3.065-.767.92-.613 1.686-1.226 2.145-2.299.46-.92.767-1.992.767-3.218V38.2a7.123 7.123 0 0 0-.767-3.218c-.46-.92-1.225-1.686-2.145-2.299-.92-.613-1.84-.766-2.912-.766h-3.985zM48.928 39.427h-8.123v7.816h-.613V31.305H50v.613h-9.195v6.896h8.123v.613z" />
+              <path stroke="#000" stroke-miterlimit="10"
+                d="M60.423 80.5c9.226 0 16.705-7.48 16.705-16.705 0-9.226-7.48-16.705-16.705-16.705-9.226 0-16.705 7.48-16.705 16.705 0 9.226 7.479 16.705 16.705 16.705zM60.422 73.757V53.833" />
+              <path stroke="#000" stroke-miterlimit="10" d="M50.462 63.795l9.961 9.962 10.115-9.962M50.462 73.757h20.076" />
+              <path stroke="#000" stroke-miterlimit="10"
+                d="M43.872 63.795c0-9.195 7.51-16.705 16.705-16.705V20.423L40.653.5H.5v80h59.923c-9.195 0-16.551-7.51-16.551-16.705z" />
+            </svg>
+          </a>
+      <div id="all" class="column is-full-mobile">
         <hr id="all-hr1" />
         <div class="columns is-mobile" *ngFor="let entry of progress; let i = index;">
           <div class="column is-1">
@@ -64,8 +82,11 @@
           <div class="column is-2">
             {{entry.date | date: 'MM/dd/yyyy'}}
           </div>
-          <div class="column">
+          <div class="column is-1">
             {{entry.sumX/2}}, {{entry.sumY/2}}
+          </div>
+          <div class="column note">
+            {{entry.note}}
           </div>
         </div>
         <hr id="all-hr2" />
@@ -75,19 +96,20 @@
     <!-- Progress canvas -->
     <div class="column is-full" *ngIf="!noProgress">
 
-      <canvas #canvasElement id="canvas" height="680" width="680"></canvas>
-      <!-- 
-      <div class="bottom mono back columns">
+      <div class="center">
+        <canvas #canvasElement id="canvas" height="680" width="680"></canvas>
+      </div>
+      
+      <div class="bottom mono columns">
         <a class="column" routerLink="/projects" *ngIf="progress">
-          <svg width="21" height="17" fill="none" viewBox="0 0 21 17">
-            <path stroke="#000" d="M21 8.539H.727M8.473 16.497L.363 8.388" />
-            <path stroke="#000" stroke-width="1.02719" d="M8.473.363l-8.11 8.11" />
-          </svg>
-          <span>Back to<br />Projects</span>
+          <svg width="54" height="42" fill="none" viewBox="0 0 54 42">
+            <path stroke="#000" d="M54 20.405H.717M21.671 41.569L.358 20.256"/>
+            <path stroke="#000" stroke-width="1.01239" d="M21.671.358L.358 21.67"/>
+        </svg>
+        
+          <span>Back to Projects</span>
         </a>
-        <a class="column" routerLink="/projects/{{project.slug}}/track" *ngIf="progress">
-          Track your Progress
-        </a> -->
+        </div>
     </div>
   </div>
 
