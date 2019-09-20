@@ -1,3 +1,10 @@
+/*
+ * TODO: - Change numbers to outline on mobile
+ *       - Put numbers on same row as survey question
+ *       - expand rows to full screen width on mobile
+ *       - Put "add a note?" and "optional" on same line on mobile
+ */
+
 @import '~src/style/_variables';
 
 #arrow {
@@ -30,16 +37,25 @@ form {
     font-weight: 900;
 
     // TODO: Change first value for mobile layout
-    @include pxtoem(18, 72);
+    @include pxtoem(24, 72);
+  }
+
+  .item-number-mobile {
+    font-family: 'Spectral', serif;
+    font-weight: normal;
   }
 
   p {
-    text-align: left;
     @include pxtoem(16, 20);
 
-    $m: 6%;
+    margin: 0;
 
-    margin: 0 $m 0 $m;
+    @include not-phones {
+      text-align: left;
+
+      $m: 6%;
+      margin: 0 $m;
+    }
   }
 
   /* Hide the browser's default radio button */
@@ -81,6 +97,12 @@ form {
     transition: all 0.3s;
     align-items: center;
     justify-content: center;
+
+    @include phones {
+      $side: 40px;
+      width: $side;
+      height: $side;
+    }
 
     &.one {
       border-color: $pale-salmon;
@@ -128,29 +150,38 @@ form {
       display: block;
       box-sizing: border-box;
 
+      border: solid 1px $brown-grey;
+
       margin-top: 30px;
       width: 100%;
-
       padding: 24px 30px;
 
       font-family: 'Roboto', sans-serif;
       @include pxtoem(12, 18);
+
+      @include phones {
+        padding: 12px 15px;
+      }
     }
   }
 
   .submit {
-    // width: 100%;
     margin-top: 60px;
     
     background-image: cdn-image('img/speckled-bg', c_fill, f_auto, w_680);
     background-repeat: repeat;
     background-clip: border-box;
+
+    @include phones {
+      margin-bottom: 60px;
+    }
   }
 
   button {
     font-family: 'Roboto Mono', monospace;
     @include pxtoem(18, 36);
     letter-spacing: 2px;
+    text-align: center;
 
     background: none;
     border: none;
