@@ -1,5 +1,5 @@
 <div class="container" *ngIf="hasContent">
-  <section class="columns is-multiline about">
+  <section class="section columns column is-multiline about">
     <div class="column is-full-mobile is-one-third">
         <h2>About</h2>
     </div>
@@ -13,7 +13,12 @@
 
 <div class="download">
   <div class="container">
-    <section class="columns is-multiline is-centered is-vcentered">
+    <section class="section columns column is-multiline is-centered is-vcentered">
+      <div class="column is-one-third hidden-tablet-plus">
+        <!-- Mobile download link -->
+        <h2><a href="{{ content.guidePdf.url }}">Download the Building Engagement Report</a></h2>
+      </div>
+
       <div class="column is-one-third preview-container">
         <cdn-image 
           class="pdf-preview" width="600" [responsive]="true" autoFormat="true"
@@ -21,10 +26,8 @@
           alt="Building Engagement PDF preview"></cdn-image>
       </div>
 
-      <!-- <div class="column"></div> -->
-
-      <div class="column is-one-third">
-        <!-- TODO: Add download link -->
+      <div class="column is-one-third hidden-mobile">
+        <!-- Desktop download link -->
         <h2><a href="{{ content.guidePdf.url }}">Download the Building Engagement Report</a></h2>
       </div>
     </section>
@@ -34,18 +37,18 @@
 <div class="purple" *ngIf="hasContent">
   <!-- Container within .purple so background color extends full width of page -->
   <div class="container">
-    <section class="columns is-multiline what">
-      <div class="column is-one-third is-full-mobile">
+    <section class="section columns column is-multiline what">
+      <div class="column is-one-third">
         <h2>What is engaged journalism?</h2>
       </div>
-      <div class="info-list column is-full-mobile" [innerHtml]="content.what.html"></div>
+      <div class="column info-list" [innerHtml]="content.what.html"></div>
     </section>
 
-    <section class="columns is-multiline why">
-      <div class="column is-one-third is-full-mobile">
+    <section class="section columns column is-multiline why">
+      <div class="column is-one-third">
         <h2>Why do engaged journalism?</h2>
       </div>
-      <div class="info-list column is-full-mobile" [innerHtml]="content.why.html"></div>
+      <div class="column info-list" [innerHtml]="content.why.html"></div>
     </section>
   </div>
 </div>
