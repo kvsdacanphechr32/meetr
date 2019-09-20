@@ -92,56 +92,88 @@
   </div>
 
   <!-- No progress -->
-  <div class="column columns no-margin  is-11-mobile is-full-tablet is-mobile is-multiline" *ngIf="noProgress">
-
+  <div class="column columns no-margin is-mobile is-multiline is-centered" *ngIf="noProgress">
 
     <!-- Talk it out btn -->
-    <div class="column columnsis-full is-mobile is-multiline green">
+    <div class="column columns no-margin is-mobile is-multiline is-11-mobile is-5-tablet green">
 
-      <div class="header column is-full">
+      <div class="header column is-full no-pad">
         <div class="outline" data-text="1">1</div>
         <div class="label">
           Talk it Out
         </div>
       </div>
 
-      <div class="column is-half-mobile">
-        <svg xmlns="http://www.w3.org/2000/svg" width="127" height="100" fill="none" viewBox="0 0 127 100">
-          <path fill="#fff" stroke="#000" stroke-miterlimit="10"
-            d="M69.286 99.28c-47.962 0-56.963-35.944-56.963-35.944s26.798-47.88 41.846-47.88c6.665 0 12.025 3.636 15.117 8.987 3.092-5.35 8.314-8.986 14.98-8.986 14.979 0 41.983 47.88 41.983 47.88S117.248 99.28 69.286 99.28z" />
-          <path fill="#fff" stroke="#000" stroke-miterlimit="10"
-            d="M126.249 63.336s-23.981 20.922-56.963 20.922-56.963-20.922-56.963-20.922S44.412 33.43 69.286 33.43c24.874 0 56.963 29.907 56.963 29.907z" />
-          <path fill="#fff" d="M39.324 78.359c12.025-16.875 29.959-1.852 29.959-1.852s18.002-15.023 29.959 1.852" />
-          <path stroke="#000" stroke-miterlimit="10"
-            d="M39.324 78.359c12.025-16.875 29.959-1.852 29.959-1.852s18.002-15.023 29.959 1.852" />
-          <path fill="#fff" stroke="#000" stroke-miterlimit="10"
-            d="M66.26 48.383V33.566c-6.872.617-14.086 3.224-20.958 6.654v8.163H66.26zM93.265 48.383v-8.095c-6.871-3.43-14.155-6.036-20.957-6.653V48.45h20.957v-.068z" />
-          <path fill="#fff" stroke="#000" stroke-miterlimit="10"
-            d="M.503.503v47.948h29.478L45.716 64.16V48.451H56.16V.503H.504z" />
-          <path fill="#fff" stroke="#000" stroke-miterlimit="10"
-            d="M19.055 12.85h-6.184v15.434h6.184V12.85zM19.055 31.371h-6.184v6.174h6.184V31.37zM31.422 12.85h-6.184v15.434h6.184V12.85zM31.422 31.371h-6.184v6.174h6.184V31.37zM43.793 12.85H37.61v15.434h6.184V12.85zM43.793 31.371H37.61v6.174h6.184V31.37z" />
+      <div class="column is-5-mobile">
+        <svg width="254" fill="none" viewBox="0 0 254 200">
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M138.574 198.565c-95.928 0-113.932-71.891-113.932-71.891s53.6-95.764 83.697-95.764c13.331 0 24.051 7.271 30.235 17.973 6.184-10.702 16.629-17.973 29.96-17.973 29.961 0 83.972 95.764 83.972 95.764s-18.004 71.891-113.932 71.891z" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M252.506 126.674s-47.964 41.845-113.932 41.845-113.932-41.845-113.932-41.845 64.181-59.818 113.932-59.818c49.751 0 113.932 59.818 113.932 59.818z" />
+          <path fill="#fff" d="M78.647 156.72c24.05-33.75 59.92-3.704 59.92-3.704s36.008-30.046 59.921 3.704" />
+          <path stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M78.647 156.72c24.05-33.75 59.92-3.704 59.92-3.704s36.008-30.046 59.921 3.704" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M132.521 96.764V67.13c-13.744 1.235-28.174 6.448-41.917 13.308v16.326h41.917zM186.534 96.765v-16.19c-13.744-6.86-28.312-12.073-41.917-13.308v29.635h41.917v-.137z" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M1.001 1.001v95.9H59.96l31.472 31.419V96.902h20.889V1H1.001z" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M38.107 25.696H25.738v30.87h12.37v-30.87zM38.107 62.74H25.738v12.348h12.37V62.74zM62.842 25.696H50.473v30.87h12.37v-30.87zM62.842 62.74H50.473v12.348h12.37V62.74zM87.585 25.696H75.217v30.87h12.368v-30.87zM87.585 62.74H75.217v12.348h12.368V62.74z" />
         </svg>
 
       </div>
 
-      <div class="column is-half-mobile">
-        <p class="mono">Start by talking it out</p>
+      <div class="column center">
+        <a routerLink="/talk/{{project.slug}}">
+          <p class="mono uppercase">Start by talking it out</p>
+        </a>
       </div>
     </div>
 
-    <div id="none" class="column is-11-mobile is-full-tablet">
+    <!-- Track btn -->
+    <div class="column columns no-margin is-mobile is-multiline is-11-mobile is-5-tablet green">
+
+      <div class="header column is-full no-pad">
+        <div class="outline" data-text="2">2</div>
+        <div class="label">
+          Track Your Progress
+        </div>
+      </div>
+
+      <div class="column is-5-mobile">
+
+        <svg width="202" fill="none" viewBox="0 0 202 230">
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M182.818 28.273H1V210.09h181.818V28.273z" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M164.636 46.454H19.182V191.91h145.454V46.454z" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M110.092 19.182C110.092 9.182 101.91 1 91.91 1c-10 0-18.182 8.182-18.182 18.182H46.455v27.273h90.909V19.182h-27.272z" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M91.91 28.273a9.09 9.09 0 0 0 9.09-9.091 9.09 9.09 0 1 0-18.181 0 9.09 9.09 0 0 0 9.09 9.09zM46.454 82.818a9.091 9.091 0 1 0 0-18.182 9.091 9.091 0 0 0 0 18.182zM46.454 128.273a9.09 9.09 0 0 0 9.091-9.091 9.09 9.09 0 1 0-18.182 0 9.09 9.09 0 0 0 9.091 9.091zM46.454 173.727a9.09 9.09 0 1 0 0-18.182 9.09 9.09 0 0 0 0 18.182z" />
+          <path stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M73.727 73.727h72.727M73.727 119.182h72.727M73.727 164.636h27.272" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M86.252 155.647v-53.536c0-8.485 6.87-15.252 15.253-15.252 8.384 0 15.253 6.868 15.253 15.252v49.697c0-7.07 6.262-14.04 14.04-14.04s14.04 6.97 14.04 14.04c0-7.07 6.263-14.04 14.041-14.04 7.778 0 14.04 6.97 14.04 14.04 0-7.07 6.263-14.04 14.041-14.04 7.777 0 14.04 6.97 14.04 14.04v33.031c0 24.04-19.495 43.535-43.535 43.535h-27.778c-24.041 0-43.536-19.495-43.536-43.535v-29.192h.102z" />
+          <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M109.182 109.687H93.93v-8.586c0-3.636 3.03-6.666 6.666-6.666h1.92c3.636 0 6.666 3.03 6.666 6.666v8.586z" />
+          <path stroke="#000" stroke-miterlimit="10" stroke-width="2"
+            d="M93.93 140.293h15.252M97.766 136.455h7.576M97.766 144.131h7.576" />
+        </svg>
+
+      </div>
+
+      <div class="column center">
+        <a routerLink="/projects/{{project.slug}}/track">
+          <p class="mono uppercase">Skip talk it out and track your progress</p>
+        </a>
+      </div>
+    </div>
+
+    <div id="none" class="column is-full">
 
       <p>You currently have no data.</p>
 
-      <!-- <div id="grid">
-
-        <a href="#" routerLink="/talk/{{project.slug}}" class="mono">Talk it out</a>
-
-      </div> -->
-      <!-- 
-      <div class="bottom">Skip Talk It Out and <a href="#" routerLink="/projects/{{project.slug}}/track"
-          class="mono">Track Your Progress</a>.
-      </div> -->
     </div>
 
   </div>
