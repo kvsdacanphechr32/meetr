@@ -110,11 +110,11 @@ h5 {
 
   text-align: center;
 
-  background-image: cdn-image('img/home/bg', c_fill, f_auto, w_1440);
+  background-image: cdn-image('img/speckled-bg', c_fill, f_auto, w_1440);
   background-size: cover;
 
   @include phones {
-    background-image: cdn-image('img/home/bg', c_fill, f_auto, w_375);
+    background-image: cdn-image('img/speckled-bg', c_fill, f_auto, w_375);
   }
 
   h1 {
