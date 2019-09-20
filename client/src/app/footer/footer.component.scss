@@ -1,3 +1,5 @@
+@import '~src/style/_variables';
+
 footer div {
 
     display: flex;
@@ -10,5 +12,10 @@ footer div {
 
     margin-top: 5%;
     margin-bottom: 5%;
+
+    @include phones {
+        margin-left: 4%;
+        width: 92%;
+    }
 
 }
