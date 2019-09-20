@@ -1,71 +1,90 @@
 <div class="content columns is-mobile is-multiline">
-
-<div class="column is-full">      
+  
+  <div class="column is-full">      
     <h4>Track Your Progress</h4>
-
+    
     <div id="arrow" *ngIf="hasProjects">
-        <span>Not at all</span>
-        <svg width="159" height="17" fill="none" viewBox="0 0 159 17">
-            <path stroke="url(#a)" d="M0 8.236h158.555"/>
-            <path stroke="#5A5C27" d="M150.723.355l7.922 7.922"/>
-            <path stroke="#5A5C27" stroke-width="1.00351" d="M150.723 16.117l7.922-7.922"/>
-            <defs>
-                <linearGradient id="a" x1="158.555" x2="0" y1="8.738" y2="8.738" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#5A5C27"/>
-                    <stop offset=".318" stop-color="#634DA0"/>
-                    <stop offset=".661" stop-color="#E85E5D"/>
-                    <stop offset="1" stop-color="#E9BBB0"/>
-                </linearGradient>
-            </defs>
-        </svg>
-        
-        <span>A lot</span>
-    </div>
-
-    <p *ngIf="!hasProjects">You don't have any projects to track. Please go <a routerLink="/projects">create one</a>.</p>
-</div>
+      <span>Not at all</span>
+      <svg width="159" height="17" fill="none" viewBox="0 0 159 17">
+        <path stroke="url(#a)" d="M0 8.236h158.555"/>
+        <path stroke="#5A5C27" d="M150.723.355l7.922 7.922"/>
+        <path stroke="#5A5C27" stroke-width="1.00351" d="M150.723 16.117l7.922-7.922"/>
+        <defs>
+          <linearGradient id="a" x1="158.555" x2="0" y1="8.738" y2="8.738" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#5A5C27"/>
+            <stop offset=".318" stop-color="#634DA0"/>
+            <stop offset=".661" stop-color="#E85E5D"/>
+            <stop offset="1" stop-color="#E9BBB0"/>
+          </linearGradient>
+        </defs>
+      </svg>
       
-<form class="columns column is-full-mobile is-full-tablet is-multiline" [formGroup]="responseForm" (submit)="submitNew()" *ngIf="hasProjects">
-
-    <div class="row" *ngFor='let prompt of prompts; let i = index;'>
-       <h4>
-           {{i+1}}
-       </h4>
-       <p>{{prompt}}</p>
-
-       <div class="fields">
-
-           <input id="{{i}}_1" formControlName="{{i}}" type="radio" value="1" />
-           <label class="radio one" for="{{i}}_1">1</label>
-           
-           <input id="{{i}}_2" formControlName="{{i}}" type="radio" value="2" />
-           <label class="radio two" for="{{i}}_2">2</label>
-           
-           <input id="{{i}}_3" formControlName="{{i}}" type="radio" value="3" />
-           <label class="radio three" for="{{i}}_3">3</label>
-          
-           <input id="{{i}}_4" formControlName="{{i}}" type="radio" value="4" />
-           <label class="radio four" for="{{i}}_4">4</label>
-           
-       </div>
+      <span>A lot</span>
     </div>
-
-    <div id="note" class="row">
-
-        <div>
-            <p>Would you like to add a note?</p>
-            <span> Optional</span>
-        </div>
-        <textarea rows="10"></textarea>
-
-    </div>
-
-    <div class="column is-full">
-
-        
-        <button type="submit">See Your Results</button>
-        <strong *ngIf="formError"><br />Please select a ranking for each response.</strong>
-        
-    </div>
-</form>
+    
+    <p *ngIf="!hasProjects">You don't have any projects to track. Please go <a routerLink="/projects">create one</a>.</p>
+  </div>
 </div>
+  
+<form [formGroup]="responseForm" (submit)="submitNew()" *ngIf="hasProjects">
+  <div class="container content columns column is-full-mobile is-full-tablet is-multiline">
+    
+    <div class="row columns is-vcentered" *ngFor='let prompt of prompts; let i = index;'>
+      <div class="column has-text-centered is-narrow">
+        <h4 class="outline" [attr.data-text]="i+1">
+          {{i+1}}
+        </h4>
+      </div>
+
+      <div class="column">
+        <p>{{prompt}}</p>
+      </div>
+
+      <div class="columns">
+        <div class="fields">
+          <div class="column">
+            <input id="{{i}}_1" formControlName="{{i}}" type="radio" value="1" />
+            <label class="radio one" for="{{i}}_1">1</label>
+          </div>
+          
+          <div class="column">
+            <input id="{{i}}_2" formControlName="{{i}}" type="radio" value="2" />
+            <label class="radio two" for="{{i}}_2">2</label>
+          </div>
+          
+          <div class="column">
+            <input id="{{i}}_3" formControlName="{{i}}" type="radio" value="3" />
+            <label class="radio three" for="{{i}}_3">3</label>
+          </div>
+          
+          <div class="column">
+            <input id="{{i}}_4" formControlName="{{i}}" type="radio" value="4" />
+            <label class="radio four" for="{{i}}_4">4</label>
+          </div>
+            
+        </div>
+      </div>
+    </div>
+
+    <div id="note" class="container">
+
+      <div class="columns column is-vcentered">
+        <h5>Would you like to add a note?</h5>
+        <span>Optional</span>
+      </div>
+
+      <textarea cols="30" rows="10" placeholder="Add a note"
+        autocomplete="on" spellcheck="true"></textarea>
+      
+    </div>
+
+  </div>
+
+  <div class="submit">
+    <div class="container submit">
+      <button type="submit">Submit & See Your Results</button>
+      <strong *ngIf="formError"><br />Please select a ranking for each response.</strong>
+    </div>
+  </div>
+
+</form>
