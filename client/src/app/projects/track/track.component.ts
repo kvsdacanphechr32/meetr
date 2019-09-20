@@ -44,49 +44,28 @@ export class TrackComponent implements OnInit {
     let radioGroups = {};
     this.prompts.forEach((p, i) => radioGroups[i + ''] = [null, [Validators.required]]);
     this.responseForm = this._formBuilder.group(radioGroups);
+   
+    this._route.params.subscribe(params => {
+      
+      // User has projects if params provided
+      if (Object.values(params).length > 0)
+        this.hasProjects = true;
 
-    // If no pre-selected project, get all projects for dropdown if project id is not in url
-/*     if (!this._dataSvc.currentProjectId) {
-
-      // Check for project and user id
-      this._route.params.subscribe(params => {
+      // If no current internal project ID, get project data
+      if (!this._dataSvc.currentProjectId && params['id']) {
         this._dataSvc.userId.subscribe(id => {
-        
+
           if (id) {
             let userId = id;
-
-            if (!params['id']) {
-              // Get all user's projects
-              this._dataSvc.getDataForUrl('/api/project/get/' + userId).subscribe((response: any) => {
-
-                this.projects = response;
-                this.hasProjects = response.length > 0;
-                this.showDropdown = true;
-
-              });
-            } 
-            
-            else {
-              
-              // Get project data from api
-              this._dataSvc.getDataForUrl('/api/project/get/' + userId + '/' + params['id']).subscribe((response: any) => {
-                
-                this._dataSvc.currentProjectId = response.project._id;
-                this.hasProjects = response.project._id !== undefined;
-                
-              });
-            }
+            // Get user's project and cache ID
+            this._dataSvc.getDataForUrl('/api/project/get/' + userId + '/' + params['id']).subscribe((response: any) => {
+              this._dataSvc.currentProjectId = response.project._id
+            });
           }
 
         });
-      });
-
-    } */
-   
-    // Project is cached from last page unless params empty
-    this._route.params.subscribe(params => {
-      if(Object.values(params).length > 0)
-        this.hasProjects = true;
+      }
+      
     });
 
   }
@@ -120,7 +99,8 @@ export class TrackComponent implements OnInit {
 
     let data = {
       projectId: this.selectedProjectId || this._dataSvc.currentProjectId,
-      responses: Object.values(this.responseForm.value)
+      responses: Object.values(this.responseForm.value),
+      note: (document.querySelector('#note textarea') as HTMLInputElement).value
     };
 
     this._dataSvc.sendDataToUrl('/api/progress/create', data).subscribe((response: any) => {
