@@ -77,9 +77,10 @@
         <span>Optional</span>
       </div>
 
-      <textarea cols="30" rows="10" placeholder="Add a note"
-        autocomplete="on" spellcheck="true"></textarea>
-      
+      <textarea cols="30" rows="4" placeholder="Add a note"
+        autocomplete="on" maxlength="200" spellcheck="true" (keyup)="countNote($event)"></textarea>
+      <div *ngIf="noteCount > 0">{{noteCount}} / {{noteLimit}}</div>
+    
     </div>
 
   </div>

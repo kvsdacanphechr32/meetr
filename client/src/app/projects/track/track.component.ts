@@ -15,8 +15,10 @@ export class TrackComponent implements OnInit {
   
   public projects: any[];
   public hasProjects: boolean;
-  public showDropdown: boolean;
   public formError: boolean;
+
+  public noteLimit: number = 200;
+  public noteCount: number;
 
   public prompts: Array<string> =  
   [
@@ -108,6 +110,12 @@ export class TrackComponent implements OnInit {
       this._router.navigate(['/projects', response.slug]);
 
     });
+  }
+
+  public countNote(evt) {
+
+    this.noteCount = (evt.target as HTMLTextAreaElement).value.length;
+  
   }
 
   }

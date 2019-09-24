@@ -303,38 +303,46 @@ export class ProjectComponent implements OnInit {
 
         // Draw all progress entries
         let prevNoteHeight = 0;
+        let newPage = false;
         this.progress.forEach((p, i) => {
 
-          // Offset on y is project description plus cumulative previous note heights
-          let yOffset = (descHeight+prevNoteHeight)
+          // Offset on y is project description plus cumulative previous note heights, unless new pg just added
+          let yOffset = newPage ? 20 : (descHeight+prevNoteHeight) + 50;
+          if(newPage) newPage = false;
 
           // Line only for records past first
           if(i > 0)
-            doc.line(10, 50 + yOffset, width-20, 50 + yOffset, 'FD');
+            doc.line(10, yOffset, width-20, yOffset, 'FD');
+
+            console.log(yOffset, descHeight, prevNoteHeight)
           
           doc.setFontSize(14);
-          doc.setDrawColor(0)
+          doc.setDrawColor(0);
+
+          // Circle for response #
           doc.setFillColor(circleColors[circleColorIndex]);
 
           if(circleColorIndex === 3)
             circleColorIndex = 0;
           else
             circleColorIndex++;
-          
-          doc.circle(16, 60 + yOffset, 4, 'F');
-   
-          doc.setTextColor(255,255, 255);
-          doc.text(14.5, 62 + yOffset, (this.progress.length-i)+'');
   
+          doc.circle(16, yOffset + 10, 4, 'F');
+  
+          // Response #
+          doc.setTextColor(255,255, 255);
+          doc.text(14.5, yOffset + 12, (this.progress.length-i)+'');
+  
+          // Date
           doc.setTextColor(0, 0, 0);
-          doc.text(40, 62 + yOffset, dateformat(p.date, 'mm/dd/yyyy'));
-          doc.text(90, 62 + yOffset, p.sumX/2 + ', ' + p.sumY/2);
+          doc.text(40, yOffset + 12, dateformat(p.date, 'mm/dd/yyyy'));
+          doc.text(90, yOffset + 12, p.sumX/2 + ', ' + p.sumY/2);
   
           // Note cannot exceed specified width 
           let noteArr = doc.splitTextToSize(p.note, 75);
 
           doc.setTextColor(151, 151, 151);
-          doc.text(120, 62 + yOffset, noteArr);
+          doc.text(120, yOffset + 12, noteArr);
           
           // Measure note height
           _.each(noteArr, (d) => {
@@ -344,14 +352,15 @@ export class ProjectComponent implements OnInit {
           // If approaching height of page, add a page and reset cumulative height
           if((yOffset + prevNoteHeight) > (height-50)) {
             doc.addPage();
+            newPage = true;
+            descHeight = 0;
             prevNoteHeight = 0;
           }
+
           // Buffer
           prevNoteHeight += 20;
 
         });
-
-        // doc.addHTML(document.getElementById('all', ))
 
         doc.addPage();
 

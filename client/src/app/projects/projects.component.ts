@@ -70,14 +70,6 @@ export class ProjectsComponent implements OnInit {
       this.hasContent = true;
       this.noProjects = !this.projects || this.projects.length === 0;
 
-      // Show char limit on description
-      // document.querySelectorAll('form #description').forEach(desc => {
-        // (document.querySelector('form #description') as HTMLElement).onkeyup = el => {
-        //   this.descCount = (el.target as HTMLTextAreaElement).value.length;
-        // }  
-        // console.log((desc as HTMLElement).onkeyup)
-      // });
-
     });
   
   }
