@@ -37,12 +37,23 @@ h5 {
 
     position: absolute;
 
-    max-width: 70%;
-    margin-top: 8%;
 
+    @include until-tablet-wide {
+      margin-top: 29%;
+      max-width: 90%;
+    }
+    @include not-phones {
+      margin-top: 23%;
+      max-width: 88%;
+    }
     @include phones {
       margin-top: 20%;
       max-width: 120%;
+    }
+    @include desktop {
+
+      max-width: 70%;
+      margin-top: 8%;
     }
 
   }

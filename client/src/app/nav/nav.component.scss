@@ -35,7 +35,6 @@ nav {
 
     }
 
-
     #txt {
       margin-left: 1%;
 
@@ -73,13 +72,13 @@ nav {
     justify-content: space-between;
 
     #lines {
-      position: relative;
-
       display: block;
+      position: relative;
+      @include translate(0, .75rem);
+
       cursor: pointer;
 
-      padding-top: 4%;
-
+      // padding-top: 4%;
 
       @include phones {
         padding-top: 9%;
