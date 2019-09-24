@@ -7,6 +7,11 @@
 
 @import '~src/style/_variables';
 
+
+h4 {
+  font-weight: 300;
+}
+
 #arrow {
   display: flex;
   flex-direction: row;
@@ -14,18 +19,31 @@
   justify-content: space-around;
 
   svg {
-    padding-left: 2%;
-    padding-right: 2%;
+    width: 60%;
+    @include phones {
+      width: 40%;
+    }
   }
 
   span {
     text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.2em;
   }
 }
 
 form {
 
   text-align: center;
+
+  // Phones override
+  @include phones {
+
+    .content {
+      width: 100%;
+    }
+
+  }
 
   h4,
   p {
@@ -36,8 +54,7 @@ form {
     font-family: 'Roboto', sans-serif;
     font-weight: 900;
 
-    // TODO: Change first value for mobile layout
-    @include pxtoem(24, 72);
+    @include pxtoem(48, 72);
   }
 
   .item-number-mobile {
@@ -193,15 +210,17 @@ form {
     line-height: 1.5;
     letter-spacing: 2px;
 
-    // margin-top: 21%;
     $m: 10%;
     margin: $m 0;
   }
 
   .row {
     width: 100%;
-
     padding: 8% 4% 8%;
+
+    @include phones {
+      padding: 8% 0 8%;
+    }
 
     &:nth-child(even) {
       background-color: rgba(233, 187, 176, 0.15);

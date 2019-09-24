@@ -1,23 +1,25 @@
-<div class="content columns is-mobile is-multiline">
+<div class="container columns is-mobile is-multiline">
   
-  <div class="column is-full">      
-    <h4>Track Your Progress</h4>
-    
-    <div id="arrow" *ngIf="hasProjects">
+    <div id="top" class="column columns is-full is-mobile is-multiline">   
+    <h4 class="column is-full-mobile is-6-tablet no-margin">Track Your Progress</h4>
+    <p class="column is-full-mobile is-5-tablet">
+        some kind of text here!
+      </p>
+    <div id="arrow" class="column is-11-mobile is-5-tablet is-offset-6-tablet" *ngIf="hasProjects">
       <span>Not at all</span>
-      <svg width="159" height="17" fill="none" viewBox="0 0 159 17">
-        <path stroke="url(#a)" d="M0 8.236h158.555"/>
-        <path stroke="#5A5C27" d="M150.723.355l7.922 7.922"/>
-        <path stroke="#5A5C27" stroke-width="1.00351" d="M150.723 16.117l7.922-7.922"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="302" height="18" fill="none" viewBox="0 0 302 18">
+        <path stroke="url(#a)" stroke-width="2" d="M0 8.433l300.688.001"/>
+        <path stroke="#5A5C27" stroke-width="2" d="M293.378.709l7.913 7.913"/>
+        <path stroke="#5A5C27" stroke-width="2.00458" d="M293.379 17.16l7.913-7.912"/>
         <defs>
-          <linearGradient id="a" x1="158.555" x2="0" y1="8.738" y2="8.738" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#5A5C27"/>
-            <stop offset=".318" stop-color="#634DA0"/>
-            <stop offset=".661" stop-color="#E85E5D"/>
-            <stop offset="1" stop-color="#E9BBB0"/>
-          </linearGradient>
+            <linearGradient id="a" x1="300.688" x2="0" y1="9.436" y2="9.436" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#5A5C27"/>
+                <stop offset=".318" stop-color="#634DA0"/>
+                <stop offset=".661" stop-color="#E85E5D"/>
+                <stop offset="1" stop-color="#E9BBB0"/>
+            </linearGradient>
         </defs>
-      </svg>
+      </svg>    
       
       <span>A lot</span>
     </div>
@@ -29,23 +31,22 @@
 <form [formGroup]="responseForm" (submit)="submitNew()" *ngIf="hasProjects">
   <div class="container content columns column is-full-tablet is-multiline">
     
-    <div class="row columns is-vcentered" *ngFor='let prompt of prompts; let i = index;'>
-      <div class="column has-text-centered is-narrow">
-        <h4 class="outline hidden-mobile" [attr.data-text]="i+1">
+    <div class="row columns is-vcentered is-multiline is-mobile" *ngFor='let prompt of prompts; let i = index;'>
+      <div class="column has-text-centered is-narrow is-2-mobile">
+        <!-- <h4 class="outline hidden-mobile" [attr.data-text]="i+1">
           {{i+1}}
-        </h4>
+        </h4> -->
 
-        <h4 class="item-number-mobile hidden-tablet-plus" [attr.data-text]="i+1">
+        <h4 class="outline" [attr.data-text]="i+1">
           {{i+1}}
         </h4>
       </div>
 
-      <div class="column">
+      <div class="column is-8-mobile">
         <p>{{prompt}}</p>
       </div>
 
-      <div class="columns is-centered is-mobile">
-        <div class="fields">
+        <div class="fields column is-11-mobile">
           <div class="column">
             <input id="{{i}}_1" formControlName="{{i}}" type="radio" value="1" />
             <label class="radio one" for="{{i}}_1">1</label>
@@ -67,7 +68,6 @@
           </div>
             
         </div>
-      </div>
     </div>
 
     <div id="note" class="container">
