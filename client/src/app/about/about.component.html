@@ -4,14 +4,14 @@
         <h2>About</h2>
     </div>
     <div class="column">
-      <h3>Meetr — A place where engaged journalism reflection meets measurable progress.</h3>
-      <p>Meetr came to be through the collaboration of the Agora Journalism Center at the University of Oregon’s School of Journalism and Communication and the Engagement Lab at Emerson College in Boston, MA. Its goal is to support the practice of relational journalism and to provide engagement journalists an apparatus to encourage reflection and highlight growth.</p>
-      <p>The reflection guide and survey is based on the Civic Media Practice report by Eric Gordon and Gabriel Mugar. It has been adapted specifically for journalists by Regina Lawrence and Andrew DeVigal, and refined by a cohort of engagement journalists assembled in 2018. The process of developing the tool is explained in detail in the Building Engagement report.</p>
+      <h3>{{content.intro}}</h3>
+      <p>{{content.para1}}</p>
+      <p>{{content.para2}}</p>
     </div>
   </section>
 </div>
 
-<div class="download">
+<div class="download" *ngIf="hasContent">
   <div class="container">
     <section class="section columns column is-multiline is-centered is-vcentered">
       <div class="column is-one-third hidden-tablet-plus">
