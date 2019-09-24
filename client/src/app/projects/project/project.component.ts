@@ -338,16 +338,19 @@ export class ProjectComponent implements OnInit {
           doc.text(40, yOffset + 12, dateformat(p.date, 'mm/dd/yyyy'));
           doc.text(90, yOffset + 12, p.sumX/2 + ', ' + p.sumY/2);
   
-          // Note cannot exceed specified width 
-          let noteArr = doc.splitTextToSize(p.note, 75);
+          // Add note if defined 
+          if(p.note) {
+            // Note cannot exceed specified width 
+            let noteArr = doc.splitTextToSize(p.note, 75);
 
-          doc.setTextColor(151, 151, 151);
-          doc.text(120, yOffset + 12, noteArr);
-          
-          // Measure note height
-          _.each(noteArr, (d) => {
-            prevNoteHeight += doc.getTextDimensions(d).h;
-          });
+            doc.setTextColor(151, 151, 151);
+            doc.text(120, yOffset + 12, noteArr);
+            
+            // Measure note height
+            _.each(noteArr, (d) => {
+              prevNoteHeight += doc.getTextDimensions(d).h;
+            });
+          }
 
           // If approaching height of page, add a page and reset cumulative height
           if((yOffset + prevNoteHeight) > (height-50)) {
