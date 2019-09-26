@@ -122,6 +122,15 @@
       height: 164px;
     }
 
+    .name {
+      word-break: break-all;
+    }
+
+    .desc {
+      hyphens: auto;
+      word-break: break-all;
+    }
+
     &:hover {
       .icon {
         @include translate(15%, 0);
