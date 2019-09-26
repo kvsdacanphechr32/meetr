@@ -79,8 +79,7 @@
 
       <div class="column is-full">
         <textarea cols="10" rows="4" placeholder="Add a note"
-          autocomplete="on" maxlength="200" spellcheck="true" (keyup)="countNote($event)">
-        </textarea>
+          autocomplete="on" maxlength="200" spellcheck="true" (keyup)="countNote($event)"></textarea>
       </div>
 
       <div *ngIf="noteCount > 0">{{noteCount}} / {{noteLimit}}</div>
