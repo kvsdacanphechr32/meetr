@@ -40,7 +40,7 @@ export class ProjectComponent implements OnInit {
     if(content) {
       this.canvasElement.nativeElement.width = this.isPhone ? 300 : 680;
       this.canvasElement.nativeElement.height = this.isPhone ? 300 : 680;
-      
+
       this.drawGrid();
     }
   };
@@ -70,7 +70,7 @@ export class ProjectComponent implements OnInit {
         this.hasContent = true;
 
         this.noProgress = this.progress && this.progress.length === 0
-        
+
         this._dataSvc.currentProjectId = response.project._id;
 
         if (!this.progress || (this.progress && this.progress.length < 1)) return;
@@ -315,7 +315,7 @@ export class ProjectComponent implements OnInit {
             doc.line(10, yOffset, width-20, yOffset, 'FD');
 
             console.log(yOffset, descHeight, prevNoteHeight)
-          
+
           doc.setFontSize(14);
           doc.setDrawColor(0);
 
@@ -326,26 +326,26 @@ export class ProjectComponent implements OnInit {
             circleColorIndex = 0;
           else
             circleColorIndex++;
-  
+
           doc.circle(16, yOffset + 10, 4, 'F');
-  
+
           // Response #
           doc.setTextColor(255,255, 255);
           doc.text(14.5, yOffset + 12, (this.progress.length-i)+'');
-  
+
           // Date
           doc.setTextColor(0, 0, 0);
           doc.text(40, yOffset + 12, dateformat(p.date, 'mm/dd/yyyy'));
           doc.text(90, yOffset + 12, p.sumX/2 + ', ' + p.sumY/2);
-  
-          // Add note if defined 
+
+          // Add note if defined
           if(p.note) {
-            // Note cannot exceed specified width 
+            // Note cannot exceed specified width
             let noteArr = doc.splitTextToSize(p.note, 75);
 
             doc.setTextColor(151, 151, 151);
             doc.text(120, yOffset + 12, noteArr);
-            
+
             // Measure note height
             _.each(noteArr, (d) => {
               prevNoteHeight += doc.getTextDimensions(d).h;

@@ -1,4 +1,5 @@
-<a id="signin-link" class="top mono uppercase" href="#" (click)="showModal()" *ngIf="!isAuthenticated && authInit">Sign In</a>
+<!-- TODO: Fix the chain of booleans -->
+<a id="signin-link" class="top mono uppercase" href="#" (click)="showModal()" *ngIf="!isAuthenticated && authInit && !hideCloseButton">Sign In</a>
 <div id="signin-link" class="uppercase" *ngIf="!authInit">Wait...</div>
 
 <a routerLink="projects" *ngIf="isAuthenticated && profile" >
@@ -13,7 +14,7 @@
           In</span>
       </h2>
 
-      <div id="close-btn" class="column">
+      <div id="close-btn" class="column" *ngIf="!hideCloseButton">
         <a (click)="closeModal()">
           <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 50 50">
             <path stroke="#000" stroke-width="1" d="M11.414 11.586l27.577 28.991M40.406 11.121L11.414 38.699" />
