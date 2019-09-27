@@ -10,11 +10,16 @@ import { AboutComponent } from './about/about.component';
 import { AuthGuard } from './utils/auth.guard';
 import { ActivityComponent } from './activity/activity.component';
 import { StudiesComponent } from './studies/studies.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   },
   {
     path: 'about',
