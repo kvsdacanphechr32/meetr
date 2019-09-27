@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
@@ -9,12 +9,14 @@ import * as auth0 from 'auth0-js';
 import { Router, NavigationStart } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
   public profile: any;
   public isAuthenticated: boolean;
@@ -39,7 +41,7 @@ export class ProfileComponent implements OnInit {
               private _router: Router)
   {
     _router.events.pipe(filter(e => e instanceof NavigationStart))
-                  .subscribe(e => { this.closeModal(); });
+                  .subscribe(e => { this.closeModal(); clearAllBodyScrollLocks(); });
   }
 
   async ngOnInit() {
@@ -92,6 +94,10 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  async ngOnDestroy() {
+    clearAllBodyScrollLocks();
+  }
+
   // convenience getter for easy access to form fields
   get suForm() {
     return this.signupForm.controls;
@@ -126,12 +132,18 @@ export class ProfileComponent implements OnInit {
     // Always be at top of page
     window.scrollTo(0, 0);
 
+    disableBodyScroll(document.getElementById('modal'));
+
   }
 
   closeModal() {
 
+    this.hideCloseButton = false;
+
     document.getElementById('wrapper-profile').style.display = 'none';
     document.getElementById('nav').classList.remove('open');
+
+    enableBodyScroll(document.getElementById('modal'));
 
   }
 
