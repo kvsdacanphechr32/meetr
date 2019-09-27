@@ -6,6 +6,8 @@ import { AuthService } from '../utils/auth.service';
 import { DataService } from '../utils/data.service';
 
 import * as auth0 from 'auth0-js';
+import { Router, NavigationStart } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -31,7 +33,14 @@ export class ProfileComponent implements OnInit {
   private signinForm: FormGroup;
   private auth0Client: Auth0Client;
 
-  constructor(private authService: AuthService, private _dataSvc: DataService, private _formBuilder: FormBuilder) {}
+  constructor(private authService: AuthService,
+              private _dataSvc: DataService,
+              private _formBuilder: FormBuilder,
+              private _router: Router)
+  {
+    _router.events.pipe(filter(e => e instanceof NavigationStart))
+                  .subscribe(e => { this.closeModal(); });
+  }
 
   async ngOnInit() {
 
