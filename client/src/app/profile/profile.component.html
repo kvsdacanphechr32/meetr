@@ -9,8 +9,8 @@
 <div id="wrapper-profile" class="modal-wrapper">
   <div id="modal" class="modal columns is-mobile">
 
-    <div class="columns is-mobile is-multiline">
-      <h2 class="column is-7-mobile is-9-tablet"><span id="up" *ngIf="signUpShow">Sign Up</span><span id="in" *ngIf="!signUpShow">Sign
+    <div class="no-bottom-space columns is-mobile is-multiline">
+      <h2 class="no-bottom-space column is-7-mobile is-9-tablet"><span id="up" *ngIf="signUpShow">Sign Up</span><span id="in" *ngIf="!signUpShow">Sign
           In</span>
       </h2>
 
@@ -63,7 +63,7 @@
           <div *ngIf="signInSubmitted && siForm.password.invalid">
             <span *ngIf="siForm.password.errors.required">Required.</span>
           </div>
-          <div class="note">{{errorMsg}}</div>
+          <div class="note" *ngIf="errorMsg">{{errorMsg}}</div>
 
         </div>
           <button class="mono" type="submit">Sign In</button>

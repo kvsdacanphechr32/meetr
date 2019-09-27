@@ -29,6 +29,7 @@
 #wrapper-profile {
 
     position: fixed;
+    overflow: hidden;
     // display: none;
 
     justify-content: center;
@@ -43,14 +44,28 @@
     height: 100%;
 
     #modal {
-
         @include not-phones {
             position: relative;
             top: -20%;
         }
 
+        @include phones {
+            position: absolute;
+
+            max-height: 100vh;
+            width: 100%;
+            overflow: hidden scroll;
+        }
+
         hr {
             border: solid 1px $pale-salmon;
+        }
+
+        .no-bottom-space {
+            @include phones {
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
         }
 
         #signin {
@@ -70,6 +85,12 @@
 
             width: 75px;
             height: 75px;
+
+            @include phones {
+                width: 50px;
+                height: 50px;
+            }
+
             border: solid 1px #000000;
             border-radius: 50px;
 
@@ -86,6 +107,10 @@
 
             margin-top: 7%;
             margin-bottom: 12%;
+
+            @include phones {
+                margin-bottom: 0;
+            }
         }
 
     }
