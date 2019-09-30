@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
@@ -6,13 +6,17 @@ import { AuthService } from '../utils/auth.service';
 import { DataService } from '../utils/data.service';
 
 import * as auth0 from 'auth0-js';
+import { Router, NavigationStart } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
   public profile: any;
   public isAuthenticated: boolean;
@@ -22,14 +26,23 @@ export class ProfileComponent implements OnInit {
   public signInSubmitted: boolean;
   public authInit: boolean;
 
+  public hideCloseButton: boolean;
+
   public errorMsg: string;
   public errorForgot: boolean;
 
   private signupForm: FormGroup;
   private signinForm: FormGroup;
   private auth0Client: Auth0Client;
-  
-  constructor(private authService: AuthService, private _dataSvc: DataService, private _formBuilder: FormBuilder) {}
+
+  constructor(private authService: AuthService,
+              private _dataSvc: DataService,
+              private _formBuilder: FormBuilder,
+              private _router: Router)
+  {
+    _router.events.pipe(filter(e => e instanceof NavigationStart))
+                  .subscribe(e => { this.closeModal(); clearAllBodyScrollLocks(); });
+  }
 
   async ngOnInit() {
 
@@ -49,7 +62,7 @@ export class ProfileComponent implements OnInit {
     // Watch for changes to the isAuthenticated state
     this.authService.isAuthenticated.subscribe(value => {
       this.isAuthenticated = value;
-    });    
+    });
 
     // Watch for changes to the profile data
     this.authService.profile.subscribe(profile => {
@@ -65,19 +78,24 @@ export class ProfileComponent implements OnInit {
     this.authService.promptLogin.subscribe(prompt => {
       if(prompt) {
         this.signUpShow = false;
-        this.showModal();
-      } 
+        this.showModal(false);
+      }
     });
+
     // Prompt for signup as needed (mostly from home)
     /* this.authService.prompSignup.subscribe(prompt => {
       if(prompt) {
         this.signUpShow = true;
         this.showModal();
-      } 
+      }
     }); */
 
     this.authInit = true;
 
+  }
+
+  async ngOnDestroy() {
+    clearAllBodyScrollLocks();
   }
 
   // convenience getter for easy access to form fields
@@ -105,24 +123,31 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  showModal() { 
+  showModal(allowClose = true) {
+    this.hideCloseButton = !allowClose;
 
     document.getElementById('wrapper-profile').style.display = 'flex';
     document.getElementById('nav').classList.add('open');
 
     // Always be at top of page
     window.scrollTo(0, 0);
-    
-  }
-  
-  closeModal() { 
-    
-    document.getElementById('wrapper-profile').style.display = 'none';
-    document.getElementById('nav').classList.remove('open');
-    
+
+    disableBodyScroll(document.getElementById('modal'));
+
   }
 
-  toggleSignup() { 
+  closeModal() {
+
+    this.hideCloseButton = false;
+
+    document.getElementById('wrapper-profile').style.display = 'none';
+    document.getElementById('nav').classList.remove('open');
+
+    enableBodyScroll(document.getElementById('modal'));
+
+  }
+
+  toggleSignup() {
 
     this.signUpShow = !this.signUpShow;
 
@@ -134,7 +159,7 @@ export class ProfileComponent implements OnInit {
   async login(connectionType: string) {
 
     let body = {
-      connection: connectionType,       
+      connection: connectionType,
       redirect_uri: `${window.location.origin}/callback`
     };
 
@@ -160,10 +185,10 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  async signup() { 
+  async signup() {
 
     this.signUpSubmitted = true;
-    
+
     // stop here if form is invalid
     if (this.signupForm.invalid) {
       return;
@@ -188,7 +213,7 @@ export class ProfileComponent implements OnInit {
         .then(response => response.json())
         .then(json => {
             return json;
-            
+
         })
         .catch(err => {
           console.error(err)
@@ -199,7 +224,7 @@ export class ProfileComponent implements OnInit {
 
     // Login if signup works
     if(fetchReq['_id'])
-      this.loginViaDatabase(body['email'], body['password']);    
+      this.loginViaDatabase(body['email'], body['password']);
 
   }
 
@@ -231,17 +256,17 @@ export class ProfileComponent implements OnInit {
         .catch(err => {
           console.error(err)
         });
-        
+
     if(fetchReq['ok'] === true)
       document.getElementById('forgot').innerText = 'Please check your email to reset your password.';
-      
+
   }
 
   /**
    * Logs the user out of the applicaion, as well as on Auth0
    */
   logout() {
-    
+
     this.auth0Client.logout({
       client_id: this.authService.config.client_id,
       returnTo: window.location.origin

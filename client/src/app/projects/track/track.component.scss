@@ -173,6 +173,11 @@ form {
       margin: 4% 0 1%;
       padding: 2.5% 3.5%;
 
+      @include phones {
+        // TODO: Fix padding overflow on mobile that makes this too wide at 100%
+        width: 92%;
+      }
+
       font-family: 'Roboto', sans-serif;
       @include pxtoem(12, 18);
 

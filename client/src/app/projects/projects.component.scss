@@ -8,7 +8,7 @@
 
     strong {
       font-weight: 700;
-    }    
+    }
   }
 }
 
@@ -90,7 +90,7 @@
   grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
   grid-auto-rows: auto;
   grid-gap: 20px;
-  
+
   @include desktop {
     grid-auto-rows: minmax(250px, 250px);
     grid-gap: 78px;
@@ -114,12 +114,16 @@
   }
 
   .project {
-
     background-color: $camo-green-25;
 
-    // height: 320px;
     @include phones {
-      height: 164px;
+      min-height: 164px;
+    }
+
+    .name, .desc {
+      word-break: break-all;
+      overflow-wrap: break-word;
+      hyphens: auto;
     }
 
     &:hover {
@@ -129,32 +133,40 @@
     }
 
     a {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-
       text-decoration: none;
 
       height: 100%;
-      padding: 2% 4%;
 
-      @include phones {
-        svg {
-          max-width: 70px;
+      .master {
+        height: 100%;
+
+        .margin {
+          @include desktop {
+            margin-top: 5%;
+          }
+
+          margin-top: 1%;
         }
       }
 
-      .txt {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
+      svg {
+        display: block;
+        margin: 0 auto;
+      }
 
-        height: 100%;
-
-        max-width: 50%;
+      .project-image {
         @include phones {
-          max-width: 65%;
+          max-width: 70px;
+          max-height: 70px;
+        }
+      }
+
+
+      .txt {
+        padding-right: 4%;
+
+        @include phones {
+          padding-left: 0;
         }
       }
 
@@ -163,21 +175,17 @@
         @include transition(transform, .2s, ease-in-out);
       }
 
-    }
+      .name {
+        @include pxtoem(18, 24);
+        letter-spacing: 2px;
+        text-decoration: underline;
+      }
 
-    .name {
-      display: flex;
-      justify-content: space-between;
+      .desc {
+        @include pxtoem(12, 18);
 
-      @include pxtoem(18, 24);
-      letter-spacing: 2px;
-      text-decoration: underline;
-
-      margin-top: 0;
-    }
-
-    span {
-      @include pxtoem(14, 18);
+        padding-right: 4%;
+      }
     }
   }
 

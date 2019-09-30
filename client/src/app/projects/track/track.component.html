@@ -70,15 +70,18 @@
         </div>
     </div>
 
-    <div id="note" class="container">
+    <div id="note" class="columns column is-multiline is-full">
 
-      <div class="columns column is-vcentered">
+      <div class="column is-vcentered">
         <h5>Would you like to add a note?</h5>
         <span>Optional</span>
       </div>
 
-      <textarea cols="30" rows="4" placeholder="Add a note"
-        autocomplete="on" maxlength="200" spellcheck="true" (keyup)="countNote($event)"></textarea>
+      <div class="column is-full">
+        <textarea cols="10" rows="4" placeholder="Add a note"
+          autocomplete="on" maxlength="200" spellcheck="true" (keyup)="countNote($event)"></textarea>
+      </div>
+
       <div *ngIf="noteCount > 0">{{noteCount}} / {{noteLimit}}</div>
     
     </div>

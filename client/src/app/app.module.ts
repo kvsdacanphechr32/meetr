@@ -30,6 +30,7 @@ import { SanitizeHtmlPipe } from './utils/sanitize-html.pipe';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { StudiesComponent } from './studies/studies.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const cloudinary = {
   Cloudinary: CloudinaryCore
@@ -52,7 +53,8 @@ export const config: CloudinaryConfiguration = cloudinaryConfiguration;
     AboutComponent,
     ActivityComponent,
     SanitizeHtmlPipe,
-    StudiesComponent
+    StudiesComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
