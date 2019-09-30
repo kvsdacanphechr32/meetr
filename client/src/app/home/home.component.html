@@ -3,10 +3,10 @@
   <div class="column columns is-mobile is-multiline" *ngIf="hasContent">
 
     <cdn-image cloudinaryPrefix="engagement-journalism/" cloudinaryId="img/home/top" width="1000" [responsive]="true"
-      autoFormat="true" alt="Page top artwork image" *ngIf="!isPhone"></cdn-image>
+      autoFormat="true" alt="Page top artwork image" *ngIf="isDesktop"></cdn-image>
 
     <cdn-image cloudinaryPrefix="engagement-journalism/" cloudinaryId="img/home/top-mobile" width="375"
-      [responsive]="true" autoFormat="true" alt="Page top artwork image" *ngIf="isPhone"></cdn-image>
+      [responsive]="true" autoFormat="true" alt="Page top artwork image" *ngIf="!isDesktop"></cdn-image>
 
     <div id="header" class="column is-9-mobile is-offset-3-mobile is-7-tablet is-offset-4-tablet">
       <h1>This is Meetr.</h1>

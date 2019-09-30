@@ -38,20 +38,37 @@ h5 {
     position: absolute;
 
 
-    @include until-tablet-wide {
-      margin-top: 29%;
-      max-width: 90%;
+    // @include not-phones {
+    //   margin-top: 23%;
+    //   max-width: 88%;
+    // }
+    
+    // Really small phones
+    @include mq($until: mobile) {
+      margin-top: 35%;
+      max-width: 110%;
     }
-    @include not-phones {
-      margin-top: 23%;
-      max-width: 88%;
-    }
-    @include phones {
+    @include mq($from: mobile, $until: mobileLg) {
       margin-top: 20%;
       max-width: 120%;
     }
-    @include desktop {
-
+    @include mq($from: mobileLg, $until: tabletPortrait) {
+      margin-top: 0;
+      max-width: 63%;
+    }
+    @include mq($from: tabletPortrait) {
+      margin-top: 12%;
+      left: -6%;
+    }
+    @include mq($from: tabletPortrait, $and: '(orientation: landscape)') {
+      margin-top: 3%;
+      max-width: 77%;
+    }
+    @include mq($from: desktop) {
+      max-width: 70%;
+      margin-top: 21%;
+    }
+    @include mq($from: wide) {
       max-width: 70%;
       margin-top: 8%;
     }
