@@ -5,7 +5,6 @@ import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import { AuthService } from '../utils/auth.service';
 import { DataService } from '../utils/data.service';
 
-import * as auth0 from 'auth0-js';
 import { Router, NavigationStart } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -132,17 +131,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
     // Always be at top of page
     window.scrollTo(0, 0);
 
+    // Turn off scrolling
     disableBodyScroll(document.getElementById('modal'));
-
+    
   }
-
+  
   closeModal() {
-
+    
     this.hideCloseButton = false;
-
+    
     document.getElementById('wrapper-profile').style.display = 'none';
     document.getElementById('nav').classList.remove('open');
-
+    
+    // Turn scrolling back on
     enableBodyScroll(document.getElementById('modal'));
 
   }
