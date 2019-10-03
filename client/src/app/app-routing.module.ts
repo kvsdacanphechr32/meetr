@@ -1,25 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CallbackComponent } from './utils/callback/callback.component';
-import { ProfileComponent } from './profile/profile.component';
+
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectComponent } from './projects/project/project.component';
-import { HomeComponent } from './home/home.component';
 import { TrackComponent } from './projects/track/track.component';
-import { AboutComponent } from './about/about.component';
-import { AuthGuard } from './utils/auth.guard';
 import { ActivityComponent } from './activity/activity.component';
 import { StudiesComponent } from './studies/studies.component';
+
 import { NotFoundComponent } from './not-found/not-found.component';
+
+import { AuthGuard } from './utils/auth.guard';
+import { CallbackComponent } from './utils/callback/callback.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
-  },
-  {
-    path: '**',
-    component: NotFoundComponent
   },
   {
     path: 'about',
@@ -64,6 +62,10 @@ const routes: Routes = [
   {
     path: 'talk/:project-slug',
     component: ActivityComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 
