@@ -52,7 +52,7 @@ bootstrap.start(
 	app,
 	__dirname + '/', 
 	{
-		'name': 'Engagement Journalism CMS'
+		'name': 'Meetr CMS'
 	},
 	() => {
 		
