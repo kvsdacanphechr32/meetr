@@ -1,9 +1,54 @@
-<div class="content column" *ngIf="hasContent">    
-  <h4>About</h4>
+<div class="container" *ngIf="hasContent">
+  <section class="section columns column is-multiline about">
+    <div class="column is-full-mobile is-one-third">
+        <h2>About</h2>
+    </div>
+    <div class="column">
+      <h3>{{content.intro}}</h3>
+      <p>{{content.para1}}</p>
+      <p>{{content.para2}}</p>
+    </div>
+  </section>
+</div>
 
-  <div [innerHtml]="content.para1.html"></div>  
-  
-  <cdn-image cloudinaryPrefix="/" cloudinaryId="{{content.image.public_id}}" width="700" [responsive]="true" autoFormat="true" alt="About page image"></cdn-image>
+<div class="download" *ngIf="hasContent">
+  <div class="container">
+    <section class="section columns column is-multiline is-centered is-vcentered">
+      <div class="column is-one-third hidden-tablet-plus">
+        <!-- Mobile download link -->
+        <h2><a href="{{ content.guidePdf.url }}">Download the Building Engagement Report</a></h2>
+      </div>
 
-  <div [innerHtml]="content.para2.html"></div>
+      <div class="column is-one-third preview-container">
+        <cdn-image 
+          class="pdf-preview" width="600" [responsive]="true" autoFormat="true"
+          cloudinaryPrefix="engagement-journalism/" cloudinaryId="img/about/pdf-preview"
+          alt="Building Engagement PDF preview"></cdn-image>
+      </div>
+
+      <div class="column is-one-third hidden-mobile">
+        <!-- Desktop download link -->
+        <h2><a href="{{ content.guidePdf.url }}">Download the Building Engagement Report</a></h2>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="purple" *ngIf="hasContent">
+  <!-- Container within .purple so background color extends full width of page -->
+  <div class="container">
+    <section class="section columns column is-multiline what">
+      <div class="column is-one-third">
+        <h2>What is engaged journalism?</h2>
+      </div>
+      <div class="column info-list" [innerHtml]="content.what.html"></div>
+    </section>
+
+    <section class="section columns column is-multiline why">
+      <div class="column is-one-third">
+        <h2>Why do engaged journalism?</h2>
+      </div>
+      <div class="column info-list" [innerHtml]="content.why.html"></div>
+    </section>
+  </div>
 </div>

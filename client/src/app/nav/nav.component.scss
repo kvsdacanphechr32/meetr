@@ -12,13 +12,14 @@ nav {
   }
 
   @include phones {
-    padding: 5% 8%;
+    padding: 5% 3%;
   }
 
   a {
 
     position: relative;
-    z-index: 20;
+    display: flex;
+    z-index: 25;
 
     &#home {
       ::ng-deep img {
@@ -28,72 +29,10 @@ nav {
 
     #logo {
 
-      max-width: 100px;
-
-      polygon, circle {
-        @include transition(all, 1s, ease-in-out);
+      @include phones {
+        max-width: 128px;
       }
 
-      circle {
-        fill: #fff;
-      }
-
-      .cls-1 {
-        fill: url(#linear-gradient-w);
-      }
-
-      .cls-2 {
-        fill: url(#linear-gradient-w-2);
-      }
-
-      .cls-4 {
-        fill: url(#linear-gradient-w-3);
-      }
-
-      .cls-5 {
-        fill: url(#linear-gradient-w-4);
-      }
-
-      &.color {
-        
-        circle {
-
-          &:nth-of-type(1) {
-            fill: #e85e5d;
-          }
-
-          &:nth-of-type(2),
-          &:nth-of-type(5) {
-            fill: #e9bbb0;
-          }
-
-          &:nth-of-type(3) {
-            fill: #5a5c27;
-          }
-
-          &:nth-of-type(4) {
-            fill: #634da0;
-          // fill: url(#linear-gradient);
-
-          }
-
-        }
-
-        .cls-1 {
-          fill: url(#linear-gradient);
-        }
-
-        .cls-2 {
-          fill: url(#linear-gradient-2);
-        }
-
-        .cls-4 {
-          fill: url(#linear-gradient-3);
-        }
-        .cls-5 {
-          fill: url(#linear-gradient-4);
-        }
-      }
     }
 
     #txt {
@@ -102,6 +41,7 @@ nav {
       path {
         @include transition(fill, 1s, ease-in-out);
       }
+
       &.black path {
         fill: black;
       }
@@ -129,16 +69,16 @@ nav {
     z-index: 25;
     min-width: 50px;
 
-    justify-content: space-evenly;
+    justify-content: space-between;
 
     #lines {
-      position: relative;
-
       display: block;
-      cursor: pointer;
-      
-      padding-top: 4%;
+      position: relative;
+      @include translate(0, .75rem);
 
+      cursor: pointer;
+
+      // padding-top: 4%;
 
       @include phones {
         padding-top: 9%;
@@ -151,7 +91,7 @@ nav {
         position: relative;
         height: 1px;
         width: 46px;
-        background: white;
+        background: black;
         opacity: 1;
         left: 0;
 
@@ -202,13 +142,14 @@ nav {
 
     &.open {
 
-      
+
       #lines {
         @include translate(0, 5%);
+
         @include not-phones {
           @include translate(0, 30%);
         }
-        
+
         span {
           background: black;
 
@@ -216,7 +157,7 @@ nav {
             opacity: 0;
             left: 15px;
           }
-          
+
           &:nth-child(2) {
             top: 0;
             @include transform(rotate(45deg));

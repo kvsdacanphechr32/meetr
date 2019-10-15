@@ -22,6 +22,7 @@ export class ProjectComponent implements OnInit {
   public project: any;
   public progress: any[];
   public hasContent: boolean;
+  public noProgress: boolean;
   public isPhone: boolean;
   public showPrompt: boolean;
 
@@ -39,7 +40,7 @@ export class ProjectComponent implements OnInit {
     if(content) {
       this.canvasElement.nativeElement.width = this.isPhone ? 300 : 680;
       this.canvasElement.nativeElement.height = this.isPhone ? 300 : 680;
-      
+
       this.drawGrid();
     }
   };
@@ -67,6 +68,8 @@ export class ProjectComponent implements OnInit {
         this.project = response.project;
         this.progress = response.progress;
         this.hasContent = true;
+
+        this.noProgress = this.progress && this.progress.length === 0
 
         this._dataSvc.currentProjectId = response.project._id;
 
@@ -203,8 +206,6 @@ export class ProjectComponent implements OnInit {
         let xPos = (widthExt / 2) + ((survey.sumX / 2) * ((widthExt / 2) / 7)),
           yPos = (heightExt / 2) - (survey.sumY / 2) * ((heightExt / 2) / 7);
 
-          console.log(xPos, yPos)
-
         segments.push(new p.Point(xPos, yPos));
 
         let g: paper.Group = new p.Group();
@@ -260,6 +261,8 @@ export class ProjectComponent implements OnInit {
     let canvasImg = this.canvasElement.nativeElement.toDataURL();
     let doc = new jsPDF();
     let dt = dateformat(new Date(), 'mm-d-yy_h:MM:sstt');
+    let circleColors = ['#5a5c27', '#634da0', '#e85e5d', '#e9bbb0'];
+    let circleColorIndex = 0;
 
     // Fonts encoding for PDF
     this._http.get('assets/spectral-base-64', {
@@ -281,6 +284,7 @@ export class ProjectComponent implements OnInit {
         doc.addFont('Roboto-Regular.ttf', 'Roboto-Regular', 'normal');
 
         let width = doc.internal.pageSize.getWidth();
+        let height = doc.internal.pageSize.getHeight();
 
         // Cleanup description so it doesn't overrun
         let descArr = doc.splitTextToSize(this.project.description.replace(/(\r\n|\n|\r)/gm, ' '), width - 60);
@@ -296,6 +300,72 @@ export class ProjectComponent implements OnInit {
         doc.setFontSize(20);
         doc.setFont('Roboto-Regular');
         doc.text(10, 40, descArr);
+
+        // Draw all progress entries
+        let prevNoteHeight = 0;
+        let newPage = false;
+        this.progress.forEach((p, i) => {
+
+          // Offset on y is project description plus cumulative previous note heights, unless new pg just added
+          let yOffset = newPage ? 20 : (descHeight+prevNoteHeight) + 50;
+          if(newPage) newPage = false;
+
+          // Line only for records past first
+          if(i > 0)
+            doc.line(10, yOffset, width-20, yOffset, 'FD');
+
+            console.log(yOffset, descHeight, prevNoteHeight)
+
+          doc.setFontSize(14);
+          doc.setDrawColor(0);
+
+          // Circle for response #
+          doc.setFillColor(circleColors[circleColorIndex]);
+
+          if(circleColorIndex === 3)
+            circleColorIndex = 0;
+          else
+            circleColorIndex++;
+
+          doc.circle(16, yOffset + 10, 4, 'F');
+
+          // Response #
+          doc.setTextColor(255,255, 255);
+          doc.text(14.5, yOffset + 12, (this.progress.length-i)+'');
+
+          // Date
+          doc.setTextColor(0, 0, 0);
+          doc.text(40, yOffset + 12, dateformat(p.date, 'mm/dd/yyyy'));
+          doc.text(90, yOffset + 12, p.sumX/2 + ', ' + p.sumY/2);
+
+          // Add note if defined
+          if(p.note) {
+            // Note cannot exceed specified width
+            let noteArr = doc.splitTextToSize(p.note, 75);
+
+            doc.setTextColor(151, 151, 151);
+            doc.text(120, yOffset + 12, noteArr);
+
+            // Measure note height
+            _.each(noteArr, (d) => {
+              prevNoteHeight += doc.getTextDimensions(d).h;
+            });
+          }
+
+          // If approaching height of page, add a page and reset cumulative height
+          if((yOffset + prevNoteHeight) > (height-50)) {
+            doc.addPage();
+            newPage = true;
+            descHeight = 0;
+            prevNoteHeight = 0;
+          }
+
+          // Buffer
+          prevNoteHeight += 20;
+
+        });
+
+        doc.addPage();
 
         // Add img under description
         doc.addImage(canvasImg, 'PNG', 0, 50 + descHeight, width, width);
@@ -342,10 +412,11 @@ export class ProjectComponent implements OnInit {
   public dismissPrompt() {
 
     TweenLite.fromTo(document.getElementById('prompt'), .4, {
-      opacity: 0
+      opacity: 1
     }, {
-      opacity: 1,
-      height: 0
+      opacity: 0,
+      height: 0,
+      padding: 0
     });
 
   }

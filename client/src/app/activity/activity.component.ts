@@ -67,7 +67,6 @@ export class ActivityComponent implements OnInit {
 
   sliderInit(activityIndex: Number, ref: any) {
 
-    console.log(ref)
     setTimeout(() => {
       let dots = document.querySelector('.activity.a_' + activityIndex + ' .owl-dots');
       dots.appendChild(document.querySelector('.activity.a_' + activityIndex + ' .arrow'));

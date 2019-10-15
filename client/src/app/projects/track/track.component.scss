@@ -1,4 +1,16 @@
+/*
+ * TODO: - Change numbers to outline on mobile
+ *       - Put numbers on same row as survey question
+ *       - expand rows to full screen width on mobile
+ *       - Put "add a note?" and "optional" on same line on mobile
+ */
+
 @import '~src/style/_variables';
+
+
+h4 {
+  font-weight: 300;
+}
 
 #arrow {
   display: flex;
@@ -7,12 +19,16 @@
   justify-content: space-around;
 
   svg {
-    padding-left: 2%;
-    padding-right: 2%;
+    width: 60%;
+    @include phones {
+      width: 40%;
+    }
   }
 
   span {
     text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.2em;
   }
 }
 
@@ -20,14 +36,43 @@ form {
 
   text-align: center;
 
+  // Phones override
+  @include phones {
+
+    .content {
+      width: 100%;
+    }
+
+  }
+
   h4,
   p {
     margin: 0;
   }
 
+  h4 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+
+    @include pxtoem(48, 72);
+  }
+
+  .item-number-mobile {
+    font-family: 'Spectral', serif;
+    font-weight: normal;
+  }
+
   p {
-    padding-top: 2%;
-    padding-bottom: 5%;
+    @include pxtoem(16, 20);
+
+    margin: 0;
+
+    @include not-phones {
+      text-align: left;
+
+      $m: 6%;
+      margin: 0 $m;
+    }
   }
 
   /* Hide the browser's default radio button */
@@ -70,6 +115,12 @@ form {
     align-items: center;
     justify-content: center;
 
+    @include phones {
+      $side: 40px;
+      width: $side;
+      height: $side;
+    }
+
     &.one {
       border-color: $pale-salmon;
     }
@@ -88,9 +139,71 @@ form {
 
   }
 
+  #note {
+    margin-top: 60px;
+
+    text-align: left;
+
+    h5 {
+      display: inline-block;
+
+      margin: 0 30px 0 0;
+      
+      font-family: 'Roboto', sans-serif;
+      font-weight: normal;
+      @include pxtoem(16, 32);
+    }
+
+    span {
+      color: $brown-grey;
+      text-transform: uppercase;
+      line-height: 1.5;
+      @include pxtoem(12, 18);
+    }
+
+    textarea {
+      resize: none;
+      
+      display: block;
+      box-sizing: border-box;
+
+      border: solid 1px $brown-grey;
+
+      width: 100%;
+      margin: 4% 0 1%;
+      padding: 2.5% 3.5%;
+
+      @include phones {
+        // TODO: Fix padding overflow on mobile that makes this too wide at 100%
+        width: 92%;
+      }
+
+      font-family: 'Roboto', sans-serif;
+      @include pxtoem(12, 18);
+
+      @include phones {
+        padding: 12px 15px;
+      }
+    }
+  }
+
+  .submit {
+    margin-top: 60px;
+    
+    background-image: cdn-image('img/speckled-bg', c_fill, f_auto, w_680);
+    background-repeat: repeat;
+    background-clip: border-box;
+
+    @include phones {
+      margin-bottom: 60px;
+    }
+  }
+
   button {
-    font-family: 'Roboto Mono', sans-serif;
-    @include pxtoem(18, 24);
+    font-family: 'Roboto Mono', monospace;
+    @include pxtoem(18, 36);
+    letter-spacing: 2px;
+    text-align: center;
 
     background: none;
     border: none;
@@ -102,13 +215,17 @@ form {
     line-height: 1.5;
     letter-spacing: 2px;
 
-    margin-top: 21%;
+    $m: 10%;
+    margin: $m 0;
   }
 
   .row {
     width: 100%;
-
     padding: 8% 4% 8%;
+
+    @include phones {
+      padding: 8% 0 8%;
+    }
 
     &:nth-child(even) {
       background-color: rgba(233, 187, 176, 0.15);
@@ -118,5 +235,11 @@ form {
   .fields {
     display: flex;
     justify-content: space-evenly;
+  }
+}
+
+.outline {
+  &:before {
+    display: inline-block;
   }
 }

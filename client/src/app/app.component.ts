@@ -26,14 +26,8 @@ export class AppComponent implements OnInit {
 
     this._router.events.subscribe((evt) => {
 
-      if (!(evt instanceof NavigationEnd)) {
+      if (!(evt instanceof NavigationEnd))
         return;
-      }
-  
-      document.body.classList.value = this._active.root.firstChild.snapshot.data['bg'];
-      let logoColor = (document.body.classList.value === 'white');
-      document.getElementById('logo').classList.value = logoColor ? 'color' : '';
-      document.getElementById('txt').classList.value = logoColor ? 'black': '';
   
       // Always go to top of page
       window.scrollTo(0, 0);

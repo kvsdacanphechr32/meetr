@@ -33,9 +33,6 @@ export class NavComponent {
 
     this._dataSvc.menuOpen.next(opened);
 
-    document.getElementById('logo').classList.value = opened ? 'color' : '';
-    document.getElementById('txt').classList.value = opened ? 'black': '';
-
   }
 
 }

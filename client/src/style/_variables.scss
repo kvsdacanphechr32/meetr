@@ -2,7 +2,7 @@
 $cloudinary-account: 'engagement-lab-home';
 $cdn-product: 'engagement-journalism';
 
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400|Roboto:300,400,700|Spectral:300');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400|Roboto:300,400,700,900|Spectral:300,400,600');
 
 // COLORS
 $pale-salmon: #e9bbb0;
@@ -10,6 +10,10 @@ $coral: #e85e5d;
 $blueberry: #634da0;
 $camo-green: #5a5c27;
 $brown-grey: #979797;
+$blueberry-15: rgba(99, 77, 160, 0.15);
+$camo-green-15: rgba(90, 92, 39, 0.15);
+$pale-salmon-15: rgba(233, 187, 176, 0.15);
+$camo-green-25: rgba(90, 92, 39, 0.25);
 
 // FONT CONFIG
 $base-font-size: 14;
@@ -27,13 +31,15 @@ $base-font-size-mobile: 14;
 $mq-breakpoints: (mobile: 320px,
 mobileLg: 375px,
 tablet: 1024px,
-tabletPortrait: 768px,
 desktop: 980px,
 wide: 1300px,
 
 // Tweakpoints
 desktopAd: 810px,
-mobileLandscape: 480px);
+mobileLandscape: 480px,
+tabletPortrait: 768px);
+// $mq-show-breakpoints: (mobile, mobileLandscape, tablet, tabletPortrait, desktop, wide);
+
 
 // Mixins 
 @import '../../node_modules/@engagementlab/el-scss/bundle';

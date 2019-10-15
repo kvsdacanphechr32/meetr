@@ -20,6 +20,9 @@ var progressSchema = new Schema({
         type: Array,
         required: true
     },
+    note: {
+        type: String
+    },
     sumX: {
         type: Number,
         required: true

@@ -1,31 +1,129 @@
-<div class="content column">
-  <h4>Hi, {{userName}}</h4>
+<section class="container desktop" *ngIf="hasContent">
 
-  <button (click)="create()" *ngIf="!projects">Create your <br />First Project</button>
+  <div id="top" class="columns column is-multiline is-mobile">
 
-  <div id="projects" class="columns is-mobile is-multiline" [class.none]="projects && projects.length === 0">
-    <div class="project new">
-      <button (click)="create()" *ngIf="projects">
-        <svg width="15" height="15" fill="none" viewBox="0 0 15 15">
-          <path stroke="#fff" d="M15 7.5H0M7.5 0v15" />
+    <h4 class="column is-11-mobile is-5-tablet no-margin">Hi, <strong>{{userName}}</strong></h4>
+    <p class="column">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sapien velit, aliquet eget
+      commodo nec, auctor a sapien.</p>
+  </div>
+
+  <div class="column">
+
+    <p id="none" *ngIf="noProjects">You currently have no projects.</p>
+
+    <div class="" id="new" *ngIf="projects && projects.length > 0">
+      <button class="mono" (click)="create()" *ngIf="projects">
+        <svg width="30" height="30" fill="none" viewBox="0 0 30 30">
+          <path stroke="#fff" d="M30 14.5H0M14.499 0v30" />
         </svg>
-        <br />
-        Create
-        <span *ngIf="projects.length > 0; else first">a</span>
-        <ng-template #first>your<br />first</ng-template> Project
+
+        <span>Create A Project</span>
       </button>
 
+      <!-- empty for grid layout, on non-mobile -->
+      <div class="hidden-mobile"></div>
 
     </div>
-    
-    <p id="none" class="column is-full" *ngIf="!projects || projects.length === 0">You currently have no projects.</p>
 
-    <div class="project" *ngFor="let project of projects;"><a
-        routerLink="/projects/{{project.slug}}">{{project.name}}</a></div>
+    <!-- Form for first project -->
+    <div id="first" class="columns column is-full is-mobile is-multiline" *ngIf="noProjects">
+
+      <h4 class="column is-full">Create Your First Project</h4>
+
+      <form id="new-form" class="columns column is-full is-multiline is-mobile" [formGroup]="newForm"
+        (submit)="submitNew()">
+        <div class="fields column is-half no-pad">
+          <div class="column is-full">
+            <input formControlName="name" id="name" placeholder="Project Name" required />
+            <div *ngIf="projectSubmitted && f.name.invalid">
+              <span *ngIf="f.name.errors.required">Required.</span>
+            </div>
+          </div>
+          <div class="column is-full">
+            <textarea formControlName="description" id="description" placeholder="Project Description" rows="5"
+              maxlength="150" required (keyup)="countDes($event)"></textarea>
+            <div *ngIf="descCount > 0">{{descCount}} / {{descLimit}}</div>
+            <div *ngIf="projectSubmitted && f.description.invalid">
+              <span *ngIf="f.description.errors.required">Required.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="column" id="right">
+
+          <button class="mono no-pad" type="submit">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="218" height="165" fill="none" viewBox="0 0 218 165">
+              <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+                d="M217 145H1V1h72l27 27h117v117z" />
+              <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+                d="M82 10h126v18H100L82 10zM86.5 104.5l-29.2-5.8L80.7 87l-.4-23 17.9 17.2 23.3-11.7-11.7 23.3 17.2 17.9-23-.4-11.7 23.4-5.8-29.2z" />
+              <path fill="#fff" stroke="#000" stroke-miterlimit="10" stroke-width="2"
+                d="M86.5 104.5l-7.8-1.5-50.5 50.7 9.3 9.3L88 112.3l-1.5-7.8zM46 82a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM104.5 55a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zM122.5 136a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9z" />
+              <path stroke="#000" stroke-miterlimit="10" stroke-width="2"
+                d="M64 28v18M55 37h18M140.5 73v27M127 86.5h27" />
+            </svg>
+
+            Create Project
+
+          </button>
+          <div *ngIf="projectSubmitted && errorMsg">
+            {{errorMsg}}
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+    <!-- Project List Display -->
+    <div id="projects">
+      <div class="project" *ngFor="let project of projects;">
+
+        <a routerLink="/projects/{{project.slug}}">
+          <div class="master columns column is-mobile">
+
+            <div class="margin column is-one-third-desktop is-one-quarter-tablet is-one-quarter-mobile">
+              <svg class="project-image" width="140" height="140" fill="none" viewBox="0 0 140 140">
+                <path fill="#fff" stroke="#5A5C27" d="M.5.5h139v139H.5z" />
+                <path stroke="#5A5C27" stroke-miterlimit="10" d="M116.674 0v140M93.326 0v140" />
+                <path stroke="#5A5C27" stroke-miterlimit="10" stroke-width="2" d="M70 0v140" />
+                <path stroke="#5A5C27" stroke-miterlimit="10" d="M46.674 0v140M23.326 0v140M140 116.674H0M140 93.326H0" />
+                <path stroke="#5A5C27" stroke-miterlimit="10" stroke-width="2" d="M140 70H0" />
+                <path stroke="#5A5C27" stroke-miterlimit="10" d="M140 46.674H0M140 23.326H0" />
+              </svg>
+            </div>
+
+            <div class="margin txt column">
+
+              <div class="columns is-mobile">
+                <div class="column name uppercase">
+                  {{project.name}}
+                </div>
+
+                <span class="column icon is-one-fifth">
+                  <svg class="go-arrow" xmlns="http://www.w3.org/2000/svg" width="34" height="27" fill="none" viewBox="0 0 34 27">
+                    <path stroke="#000" d="M0 13.523h33.284M20.329.358l13.313 13.313" />
+                    <path stroke="#000" stroke-width="1.01184" d="M20.329 26.37l13.313-13.314" />
+                  </svg>
+                </span>
+              </div>
+
+              <p class="desc">
+                {{project.description}}
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- empty for grid layout, if only one project -->
+      <div *ngIf="projects.length === 1" class="hidden-mobile"></div>
+    </div>
   </div>
-</div>
 
-<div id="new" class="modal-wrapper">
+</section>
+
+<div id="new-modal" class="modal-wrapper">
   <div id="modal" class="modal">
 
     <div class="columns is-mobile">
@@ -33,15 +131,14 @@
 
       <div id="close-btn" class="column">
         <a (click)="closeModal()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 50 50">
-            <path fill="#fff" d="M0 0h50v50H0z" />
+          <svg width="50" height="50" fill="none" viewBox="0 0 50 50">
             <path stroke="#000" stroke-width="1" d="M11.414 11.586l27.577 28.991M40.406 11.121L11.414 38.699" />
           </svg>
         </a>
       </div>
     </div>
 
-    <form id="new" class="columns column is-multiline" [formGroup]="newForm" (submit)="submitNew()">
+    <form id="new-form" class="columns column is-multiline" [formGroup]="newForm" (submit)="submitNew()">
       <div class="fields">
         <div class="column is-full">
           <input formControlName="name" id="name" placeholder="Project Name" required />
@@ -50,7 +147,8 @@
           </div>
         </div>
         <div class="column is-full">
-          <textarea formControlName="description" id="description" placeholder="Project Description" rows="5" maxlength="150" required></textarea>
+          <textarea formControlName="description" id="description" placeholder="Project Description" rows="5"
+            maxlength="150" (keyup)="countDes($event)" required></textarea>
           <div *ngIf="descCount > 0">{{descCount}} / {{descLimit}}</div>
           <div *ngIf="projectSubmitted && f.description.invalid">
             <span *ngIf="f.description.errors.required">Required.</span>
@@ -60,7 +158,7 @@
       <div class="column is-full">
         <button class="mono no-pad" type="submit">Create Project</button>
         <div *ngIf="projectSubmitted && errorMsg">
-            {{errorMsg}}
+          {{errorMsg}}
         </div>
       </div>
     </form>

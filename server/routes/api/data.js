@@ -13,8 +13,8 @@ const keystone = global.keystone,
 
 var buildData = async (type, res) => {
 
-    let homeFields = 'screen1 screen2Column1.html screen2Column2.html screen2Para.html -_id';
-    let aboutFields = 'image.public_id para1.html para2.html -_id';
+    let homeFields = 'tagline screen1 talk track why.html what.html -_id';
+    let aboutFields = 'intro para1 para2 what.html why.html guidePdf.url -_id';
     let aboutStudiesFields = 'caseStudiesIntro -_id';
     let aboutActivityFields = 'guidePdf.url -_id';
     let studiesFields = 'name description url -_id';

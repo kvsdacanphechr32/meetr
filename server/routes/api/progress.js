@@ -17,6 +17,7 @@ const Progress = require('../../models/Progress'),
 exports.create = async (req, res) => { 
 
     const responses = req.body.responses;
+    const note = req.body.note;
     let sumX = 0;
     let sumY = 0;
 
@@ -28,7 +29,7 @@ exports.create = async (req, res) => {
     sumX += (mapping[parseInt(responses[10])-1] + mapping[parseInt(responses[11])-1]);
     sumY += (mapping[parseInt(responses[10])-1] + mapping[parseInt(responses[11])-1]);
     
-    let newProgress = new Progress({ date: Date.now(), project: req.body.projectId, responses: req.body.responses, sumX: sumX, sumY: sumY });
+    let newProgress = new Progress({ date: Date.now(), project: req.body.projectId, responses: req.body.responses, note: note, sumX: sumX, sumY: sumY });
     let userProject = Project.findOne({_id: req.body.projectId}, 'slug');
  
     try {
