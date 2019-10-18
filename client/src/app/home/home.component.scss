@@ -34,30 +34,13 @@ h5 {
   }
 
   ::ng-deep img {
-
-    position: absolute;
-
-
-    // @include not-phones {
-    //   margin-top: 23%;
-    //   max-width: 88%;
-    // }
     
-    // Really small phones
-    @include mq($until: mobile) {
-      margin-top: 35%;
-      max-width: 110%;
-    }
-    @include mq($from: mobile, $until: mobileLg) {
-      margin-top: 20%;
-      max-width: 120%;
-    }
-    @include mq($from: mobileLg, $until: tabletPortrait) {
-      margin-top: 0;
-      max-width: 63%;
-    }
+    @include not-phones {
+      position: absolute;
+    }    
+    
     @include mq($from: tabletPortrait) {
-      margin-top: 12%;
+      margin-top: 24%;
       left: -6%;
     }
     @include mq($from: tabletPortrait, $and: '(orientation: landscape)') {
@@ -83,6 +66,7 @@ h5 {
   padding-top: 22%;
 
   @include phones {
+    margin-top: -20%;
     padding-top: 5%;
   }
 
