@@ -14,10 +14,12 @@ export class HomeComponent implements OnInit {
   public content: any;
   public hasContent: boolean;
   public isDesktop: boolean;
+  public isPhone: boolean;
 
   constructor(private _dataSvc: DataService) { 
 
     this.isDesktop = !ismobile.phone && !ismobile.tablet;
+    this.isPhone = ismobile.phone;
 
   }
 
