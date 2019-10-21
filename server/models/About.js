@@ -59,6 +59,8 @@ About.add({
 	what: { type: Types.Markdown, label: 'What', required: true, initial: true },
 	why: { type: Types.Markdown, label: 'Why', required: true, initial: true },
 
+	caseStudiesIntro: { type: Types.Markdown, label: 'Case Studies Intro', required: true, initial: true },
+
 	guidePdf: { type: Types.File,  storage: azureFile, label: 'Guide PDF', required: true, initial: true}
 
 });
