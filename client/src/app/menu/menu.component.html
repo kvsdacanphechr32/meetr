@@ -6,6 +6,11 @@
       </a>
     </li>
     <li>
+      <a [class.current]="itemActive('projects')" routerLink="/projects" queryParamsHandling="merge">
+        Projects
+      </a>
+    </li>
+    <li>
       <a [class.current]="itemActive('about')" routerLink="/talk" queryParamsHandling="merge">
         Talk it Out
       </a>
