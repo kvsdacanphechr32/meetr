@@ -18,28 +18,37 @@ const SendEmail = function() {
         apiKey: process.env.MAILGUN_KEY,
         domain: process.env.MAILGUN_DOMAIN
     });
-    // Get all projects where reminder interval not null
-    let projects = Project.find({reminderPeriod: {$ne: null}}, 'name slug reminderEmail -_id');
+
+    // Get all projects where reminder interval not null, and populate user for each
+    let projects = Project.find({reminderPeriod: {$ne: null}}, 'name slug reminderEmail -_id').populate('user');
  
+
+    // todo: check time delta
     try {
         let getRes = await projects.exec();
-        let recipientData = [];
+        let recipientEmails = [];
+        let recipientData = {};
 
         getRes.forEach((project, i) => {
 
-            let subjectLine = 'Meetr reminder for your project "' + project.name + '"';
-            // let body = '<img src="http://bit.ly/2YKMNyC" style="width:120px"><h4>Form Message</h4>';
-            
-            let body = 'It has been ';
-            
-            recipientData.push({
+            recipientEmails.push(project.reminderEmail);
+            recipientData[project.reminderEmail] = {
                 from: '<noreply@meetr.in>',
                 to: project.reminderEmail,
-                subject: subjectLine,
-                text: body
-            });
+                project: project.name,
+                slug: project.slug,
+                name: project.user.name
+            };
 
         });
+
+        var data = {
+            'recipient-variables': recipientData,
+            from: 'Meetr <noreply@meetr.in>',
+            to: recipientEmails,
+            subject: 'Meetr reminder for your project "%recipient.project%"',
+            html: '<p>This is a reminder that it\'s time to take the track progress for your project "%recipient.project%" on Meetr. Please <a href="https://meetr.in/projects/%recipient.slug%/track">click here</a> to do so!</p><p>- Meetr</p>'
+        };
 
         mailgun.messages().send(data, function (error, body) {
             if (error) {
@@ -51,7 +60,6 @@ const SendEmail = function() {
     catch(e) {
         throw new Error(e);
     }
-}
 }
 
 exports.url = urlValidator;
