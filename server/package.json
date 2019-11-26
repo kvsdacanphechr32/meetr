@@ -23,6 +23,7 @@
     "lodash": "4.17.15",
     "mailgun-js": "^0.22.0",
     "mongoose": "^5.7.5",
+    "node-fetch": "^2.6.0",
     "validator": "^10.9.0",
     "winston": "^3.2.1"
   }

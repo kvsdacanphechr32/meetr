@@ -45,6 +45,48 @@ exports.exists = async (req, res) => {
 }
 
 /*
+ * Find user on auth0 via email and return bool if/not found
+ */
+exports.find = async (req, res) => { 
+
+    // Get management API token
+    var request = require("request");
+
+    var options = {
+      method: 'POST',
+      url: 'https://' + process.env.MEETR_AUTH0_DOMAIN + '/oauth/token',
+      headers: {'content-type': 'application/x-www-form-urlencoded'},
+      form: {
+        grant_type: 'client_credentials',
+        client_id: process.env.MEETR_AUTH0_CLIENT_ID,
+        client_secret: process.env.MEETR_AUTH0_CLIENT_SECRET,
+        audience: 'https://' + process.env.MEETR_AUTH0_DOMAIN + '/api/v2/'
+      }
+    };
+
+    // Now check if input email is associated w/ any user
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+    
+      let accessToken = JSON.parse(body)['access_token'];
+      let options = {
+      method: 'GET',
+        url: 'https://' + process.env.MEETR_AUTH0_DOMAIN + '/api/v2/users-by-email',
+        qs: {email: req.body.email},
+        headers: {authorization: 'Bearer ' + accessToken}
+      };
+      
+      request(options, function (error, response, body) {
+        if (error) res.status(500).json({error});
+      
+        // User is found if response not '[]' (length > 1)
+        res.send(body.split(',').length > 1);
+      });
+    });
+
+};
+
+/*
  * Create data
  */
 exports.create = (req, res) => {

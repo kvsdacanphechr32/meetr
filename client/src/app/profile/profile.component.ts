@@ -29,6 +29,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   public errorMsg: string;
   public errorForgot: boolean;
+  public showForgot: boolean = true;
 
   private signupForm: FormGroup;
   private signinForm: FormGroup;
@@ -80,15 +81,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.showModal(false);
       }
     });
-
-    // Prompt for signup as needed (mostly from home)
-    /* this.authService.prompSignup.subscribe(prompt => {
-      if(prompt) {
-        this.signUpShow = true;
-        this.showModal();
-      }
-    }); */
-
+    
     this.authInit = true;
 
   }
@@ -151,6 +144,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   toggleSignup() {
 
     this.signUpShow = !this.signUpShow;
+
+  }
+
+  // Clear forgot pass errors on email input
+  emailInput(evt) {
+
+    this.showForgot = true;
+    document.getElementById('forgot-msg').innerText = '';
 
   }
 
@@ -236,30 +237,44 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.errorForgot = true;
       return;
     }
-
-    let body = {
-      'client_id': this.authService.config.client_id,
-      'email': this.siForm['email'].value,
-      'connection': 'Username-Password-Authentication'
+    
+    let data = {
+      email: this.siForm['email'].value
     };
 
-    const fetchReq = await fetch('https://' + this.authService.config.domain + '/dbconnections/change_password', {
-            method: 'post',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        })
-        .then(res => {
-            return res;
-        })
-        .catch(err => {
-          console.error(err)
-        });
+    this._dataSvc.sendDataToUrl('/api/user/find', data).subscribe(async (found: boolean) => {
+      
+      // Does user exist?
+      if(!found) {
+        this.showForgot = false;
+        document.getElementById('forgot-msg').innerText = 'An account with the email provided could not be found.';
+        return;
+      }
 
-    if(fetchReq['ok'] === true)
-      document.getElementById('forgot').innerText = 'Please check your email to reset your password.';
+      let body = {
+        'client_id': this.authService.config.client_id,
+        'email': this.siForm['email'].value,
+        'connection': 'Username-Password-Authentication'
+      }
+      const fetchReq = await fetch('https://' + this.authService.config.domain + '/dbconnections/change_password', {
+              method: 'post',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(body)
+          })
+          .then(res => {
+              return res;
+          })
+          .catch(err => {
+            console.error(err)
+          });
+
+      if(fetchReq['ok'] === true)
+        document.getElementById('forgot').innerText = 'Please check your email to reset your password.';
+
+    });
 
   }
 
