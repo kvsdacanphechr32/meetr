@@ -25,7 +25,16 @@ exports.create = async (req, res) => {
         return;
     }
 
-    let newProject = new Project({ name: req.body.name, description: req.body.description, user: req.body.userId, slug: displayName });
+    let newProject = new Project({ 
+        name: req.body.name, 
+        description: req.body.description, 
+        reminderEmail: req.body.reminderEmail,
+        reminderPeriod: req.body.reminderPeriod,
+        // Last reminder date is now, by default
+        lastReminderDate: new Date(),
+        user: req.body.userId, 
+        slug: displayName 
+    });
  
     try {
         let saveRes = await newProject.save();

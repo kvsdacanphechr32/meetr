@@ -6,6 +6,8 @@ import { AuthService } from '../utils/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import * as dateFormat from 'dateformat';
+
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -15,18 +17,22 @@ export class ProjectsComponent implements OnInit {
 
   public userName: string;
   public errorMsg: string;
+  public reminderFirstDate: string;
 
   public descLimit: number = 150;
   public descCount: number;
 
   public profile: any;
   public projects: any[]
+  public reminderIntervals: any = ['Once a week', 'Every other week', 'Once a month', 'Every other month'];
 
   public hasContent: boolean;
   public noProjects: boolean;
   public projectSubmitted: boolean;
 
   public newForm: FormGroup;
+
+  selectedInterval: number;
 
   constructor(private _dataSvc: DataService, private _authSvc: AuthService, private _formBuilder: FormBuilder, private _router: Router) {}
 
@@ -53,7 +59,9 @@ export class ProjectsComponent implements OnInit {
 
     this.newForm = this._formBuilder.group({
       'name': ['', [Validators.required]],
-      'description': ['', [Validators.required]]
+      'description': ['', [Validators.required]],
+      'reminderEmail': ['', [Validators.email]],
+      'reminderInterval': [''],
     });
   }
 
@@ -90,8 +98,10 @@ export class ProjectsComponent implements OnInit {
     let data = {
       name: this.f['name'].value,
       description: this.f['description'].value,
-      userId: this._dataSvc.userId.getValue()
-    }
+      userId: this._dataSvc.userId.getValue(),
+      reminderEmail: this.f['reminderEmail'].value,
+      reminderPeriod: this.selectedInterval
+    };
 
     this._dataSvc.sendDataToUrl('/api/project/create', data).subscribe((response: any) => {
       
@@ -122,6 +132,38 @@ export class ProjectsComponent implements OnInit {
 
     this.descCount = (evt.target as HTMLTextAreaElement).value.length;
   
+  }
+
+  // Cache reminder interval index
+  public changeInterval(evt) {
+      
+    /* 0 = 'Once a week', 
+      1 = 'Every other week', 
+      2 = 'Once a month', 
+      3 = 'Every other month'
+    */
+    let today = new Date();
+    let delta = 0;
+
+    this.selectedInterval = parseInt((evt.target as HTMLOptionElement).value);
+
+    switch(this.selectedInterval) {
+      case 0: 
+        delta = today.getDate() + 7;
+        break;
+      case 1: 
+        delta = today.getDate() + 14;
+        break;
+      case 2: 
+        delta = today.getDate() + 31;
+        break;
+      case 3: 
+        delta = today.getDate() + 62;
+        break;
+    }
+
+    this.reminderFirstDate = dateFormat(new Date().setDate(delta), 'mmmm dS, yyyy');
+
   }
 
 }
