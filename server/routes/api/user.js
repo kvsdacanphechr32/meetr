@@ -78,9 +78,19 @@ exports.find = async (req, res) => {
       
       request(options, function (error, response, body) {
         if (error) res.status(500).json({error});
+            
+        const users = JSON.parse(body),
+              _l = require('lodash');
+
+        // console.log(body)
+
+        // Find if any associated user signed up via social
+        let isSocial = _l.some(users, (user) => {
+            return user.user_id.indexOf('facebook') > -1 || user.user_id.indexOf('google') > -1
+        });
       
         // User is found if response not '[]' (length > 1)
-        res.send(body.split(',').length > 1);
+        res.json({social: isSocial, exists: users.length > 1});
       });
     });
 

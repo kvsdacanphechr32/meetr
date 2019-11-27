@@ -242,10 +242,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
       email: this.siForm['email'].value
     };
 
-    this._dataSvc.sendDataToUrl('/api/user/find', data).subscribe(async (found: boolean) => {
+    this._dataSvc.sendDataToUrl('/api/user/find', data).subscribe(async (data: any) => {
+
+      // Show error if user used social sign-uo
+      if(data.social) {
+        this.showForgot = false;
+        document.getElementById('forgot-msg').innerText = 'You signed up via Google or Facebook and cannot reset your password here.';
+        return;
+      }      
       
       // Does user exist?
-      if(!found) {
+      if(!data.exists) {
         this.showForgot = false;
         document.getElementById('forgot-msg').innerText = 'An account with the email provided could not be found.';
         return;
@@ -270,6 +277,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
           .catch(err => {
             console.error(err)
           });
+
+          console.log(fetchReq)
 
       if(fetchReq['ok'] === true)
         document.getElementById('forgot').innerText = 'Please check your email to reset your password.';

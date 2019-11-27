@@ -8,8 +8,7 @@
  *
  * ==========
  */
-const keystone = global.keystone,
-      _l = require('lodash');
+const keystone = global.keystone;
 
 var buildData = async (type, res) => {
 
@@ -19,7 +18,6 @@ var buildData = async (type, res) => {
     let aboutActivityFields = 'guidePdf.url -_id';
     let studiesFields = 'name description url -_id';
     let activityFields = 'name intro step1.html step2.html step3.html step4.html step5.html';
-    let projectFields = 'name user -_id'
     let userFields = 'name email'
 
     let home = keystone.list('Home').model;
