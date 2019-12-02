@@ -45,8 +45,7 @@
               <span *ngIf="f.description.errors.required">Required.</span>
             </div>
           </div>
-
-            <!--      
+                 
           <div class="column is-half">
             <input formControlName="reminderEmail" id="email" placeholder="Email"/>
             <div *ngIf="projectSubmitted && f.reminderEmail.invalid">
@@ -62,7 +61,7 @@
             <div *ngIf="projectSubmitted && f.reminderEmail.invalid">
               <span *ngIf="f.reminderEmail.errors">Please enter a valid email.</span>
             </div>
-          </div> -->
+          </div>
         </div>
 
         <div class="column" id="right">
@@ -171,8 +170,7 @@
           </div>
         </div>
 
-
-<!--         <h5>Set up a survey reminder (optional)</h5>
+        <h5>Set up a survey reminder (optional)</h5>
         <div class="column is-full">
             <select id="interval" (change)="changeInterval($event)" formControlName="reminderInterval">
               <option value="" disabled>Choose a reminder interval</option>
@@ -183,12 +181,12 @@
             </div>
         </div>
         <div class="column" *ngIf="f.reminderInterval.value !== ''">
-          <input formControlName="reminderEmail" id="email" placeholder="Email"/>
+          <input formControlName="reminderEmail" id="email" type="email" placeholder="Email"/>
           <div *ngIf="projectSubmitted && f.reminderEmail.invalid">
             <span *ngIf="f.reminderEmail.errors">Please enter a valid email.</span>
           </div>
         </div>
- -->
+
       </div>
       <div class="column is-full">
         <button class="mono no-pad" type="submit">Create Project</button>

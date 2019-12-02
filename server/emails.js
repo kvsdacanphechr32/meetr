@@ -24,6 +24,7 @@ const SendEmail = async function() {
     // Register user schema
     require('./models/AppUser');
     
+    // DB connect
     try {
         await mongoose.connect('mongodb://localhost/engagement-journalism', {useNewUrlParser: true, useUnifiedTopology: true});
     } catch (error) {
@@ -31,7 +32,7 @@ const SendEmail = async function() {
     }
 
     // Get all projects where reminder interval not null, and populate user for each
-    let projects = Project.find({reminderPeriod: {$ne: null}}, 'name slug reminderEmail -_id').populate('user');
+    let projects = Project.find({reminderPeriod: {$ne: null}}, 'name slug reminderPeriod reminderEmail lastReminderDate -_id').populate('user');
 
     // todo: check time delta
     try {
@@ -40,6 +41,33 @@ const SendEmail = async function() {
         let recipientData = {};
         
         getRes.forEach((project, i) => {
+
+            // Get time difference from last reminder date and today
+            let dayDelta = new Date().getTime() - new Date(project.lastReminderDate).getTime();
+            // Get delta in days by dividing by milliseconds in one day
+            let daysSince = parseInt(dayDelta / (1000 * 3600 * 24));
+
+            // Should email be sent?
+            let send = false;
+
+            switch(project.reminderPeriod) {
+                case 0:
+                    send = daysSince >= 14;
+                    break;
+                case 1:
+                    send = daysSince >= 30;
+                    break;
+                case 2:
+                    send = daysSince >= 60;
+                    break;
+            }
+            console.log(project.lastReminderDate)
+            console.log(daysSince)
+
+            if(!send) {
+                console.log('dont send')
+                return;
+            }
             
             recipientEmails.push(project.reminderEmail);
             recipientData[project.reminderEmail] = {
@@ -61,7 +89,9 @@ const SendEmail = async function() {
                 '<img src="https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,w_150/v1565109667/engagement-journalism/img/meetr_logo_raster.png" alt="Meetr logo" /><br />' +
                 '<p>This is a reminder that it\'s time to take the track progress for your project "%recipient.project%" on Meetr. Please <a href="https://meetr.in/projects/%recipient.slug%/track">click here</a> to do so!</p><p>- Meetr</p>'
         };
-        
+
+
+        // Send message batch, and quit
         mailgun.messages().send(data, function (error, body) {
             if (error) {
                 console.error('Mailgun error: ' + error)
@@ -74,7 +104,9 @@ const SendEmail = async function() {
         throw Error(e);        
     }
 };
+
 SendEmail().catch(err => {
+    // Print error and quit
     console.error(err); 
     return process.exit(22);
 });

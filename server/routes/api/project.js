@@ -31,7 +31,7 @@ exports.create = async (req, res) => {
         reminderEmail: req.body.reminderEmail,
         reminderPeriod: req.body.reminderPeriod,
         // Last reminder date is now, by default
-        lastReminderDate: new Date(),
+        lastReminderDate: new Date(Date.now()).toISOString(),
         user: req.body.userId, 
         slug: displayName 
     });

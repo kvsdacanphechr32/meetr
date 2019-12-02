@@ -24,7 +24,7 @@ export class ProjectsComponent implements OnInit {
 
   public profile: any;
   public projects: any[]
-  public reminderIntervals: any = ['Once a week', 'Every other week', 'Once a month', 'Every other month'];
+  public reminderIntervals: any = ['Every two weeks', 'Once a month', 'Every other month'];
 
   public hasContent: boolean;
   public noProjects: boolean;
@@ -137,10 +137,9 @@ export class ProjectsComponent implements OnInit {
   // Cache reminder interval index
   public changeInterval(evt) {
       
-    /* 0 = 'Once a week', 
-      1 = 'Every other week', 
-      2 = 'Once a month', 
-      3 = 'Every other month'
+    /* 0 = 'Every two weeks', 
+      1 = 'Once a month', 
+      2 = 'Every other month'
     */
     let today = new Date();
     let delta = 0;
@@ -149,15 +148,12 @@ export class ProjectsComponent implements OnInit {
 
     switch(this.selectedInterval) {
       case 0: 
-        delta = today.getDate() + 7;
-        break;
-      case 1: 
         delta = today.getDate() + 14;
         break;
-      case 2: 
+      case 1: 
         delta = today.getDate() + 31;
         break;
-      case 3: 
+      case 2: 
         delta = today.getDate() + 62;
         break;
     }
