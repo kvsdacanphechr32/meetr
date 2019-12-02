@@ -101,7 +101,7 @@
       </div>
       
       <div class="bottom mono columns">
-        <a class="column" routerLink="/projects" *ngIf="progress">
+        <a class="column is-half" routerLink="/projects" *ngIf="progress">
           <svg width="54" height="42" fill="none" viewBox="0 0 54 42">
             <path stroke="#000" d="M54 20.405H.717M21.671 41.569L.358 20.256"/>
             <path stroke="#000" stroke-width="1.01239" d="M21.671.358L.358 21.67"/>
@@ -109,8 +109,18 @@
         
           <span>Back to Projects</span>
         </a>
+        <a class="column" routerLink="/projects/{{projectId}}" (click)="promptDelete()">
+            Delete this Project
+        </a>
         </div>
+
     </div>
+      <div class="bottom mono columns" *ngIf="noProgress">
+        <a class="column" routerLink="/projects/{{projectId}}" (click)="promptDelete()">
+            Delete this Project
+        </a>
+        </div>
+        
   </div>
 
   <!-- No progress -->

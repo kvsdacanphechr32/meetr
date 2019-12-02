@@ -40,6 +40,7 @@ router.post('/api/user/find', routeIncludes, routes.api.user.find);
 router.post('/api/project/create', routeIncludes, routes.api.project.create);
 router.get('/api/project/get/:userId', routeIncludes, routes.api.project.getAll);
 router.get('/api/project/get/:userId/:projectId', routeIncludes, routes.api.project.get);
+router.get('/api/project/delete/:userId/:projectId', routeIncludes, routes.api.project.delete);
 
 router.post('/api/progress/create', routeIncludes, routes.api.progress.create);
 

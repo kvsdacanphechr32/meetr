@@ -46,6 +46,23 @@ exports.create = async (req, res) => {
 }
 
 /*
+ * Delete project given id and user
+ */
+exports.delete = async (req, res) => {
+
+    let deleteQ = Project.deleteOne({user: req.params.userId, slug: req.params.projectId});
+    
+    try {
+        await deleteQ.exec();
+        res.sendStatus(200);
+    }
+    catch(e) {
+        res.status(500).json({e});
+    }
+    
+}
+
+/*
  * Get projects for user
  */
 exports.getAll = async (req, res) => { 

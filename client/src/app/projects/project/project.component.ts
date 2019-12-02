@@ -20,6 +20,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 export class ProjectComponent implements OnInit {
 
   public project: any;
+  public projectId: string;
   public progress: any[];
   public hasContent: boolean;
   public noProgress: boolean;
@@ -29,7 +30,10 @@ export class ProjectComponent implements OnInit {
   public errorMsg: string;
 
   canvasElement: ElementRef;
+  
+  userId: string;
 
+  // Font data for PDF
   spectralFont: string;
   robotoFont: string;
 
@@ -54,16 +58,21 @@ export class ProjectComponent implements OnInit {
   ngOnInit() {
 
     this._dataSvc.userId.subscribe(id => {
-      if (id) this.getData(id);
+      if (id) {
+        this.userId = id;
+        this.getData();
+      } 
     });
 
   }
 
-  getData(userId: string) {
+  getData() {
 
     this._route.params.subscribe(params => {
 
-      this._dataSvc.getDataForUrl('/api/project/get/' + userId + '/' + params['id']).subscribe((response: any) => {
+      this.projectId = params['id'];
+
+      this._dataSvc.getDataForUrl('/api/project/get/' + this.userId + '/' + this.projectId).subscribe((response: any) => {
 
         this.project = response.project;
         this.progress = response.progress;
@@ -255,6 +264,14 @@ export class ProjectComponent implements OnInit {
       // Scale to allow room for side labels
       gLines.scale(.9, new p.Point(widthExt / 2, heightExt / 2));
   }
+  
+  deleteProject() {
+
+    this._dataSvc.getDataForUrl('/api/project/delete/' + this.userId + '/' + this.projectId).subscribe((response: any) => {
+
+    });
+
+  }
 
   public exportPdf() {
 
@@ -421,4 +438,11 @@ export class ProjectComponent implements OnInit {
 
   }
 
+  public promptDelete() {
+    
+    if(confirm('Are you sure you want to delete this project'))
+      this.deleteProject();
+
   }
+
+}
