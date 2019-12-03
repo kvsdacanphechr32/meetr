@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { DataService } from '../../utils/data.service';
 
@@ -49,7 +49,7 @@ export class ProjectComponent implements OnInit {
     }
   };
 
-  constructor(private _dataSvc: DataService, private _route: ActivatedRoute, private _http: HttpClient) {
+  constructor(private _dataSvc: DataService, private _route: ActivatedRoute, private _router: Router, private _http: HttpClient) {
 
     this.isPhone = ismobile.phone;
 
@@ -268,6 +268,11 @@ export class ProjectComponent implements OnInit {
   deleteProject() {
 
     this._dataSvc.getDataForUrl('/api/project/delete/' + this.userId + '/' + this.projectId).subscribe((response: any) => {
+
+      // If success, redirect to projects
+      if(response.deleted)
+        this._router.navigateByUrl('/projects');
+        
 
     });
 

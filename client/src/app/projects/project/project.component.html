@@ -115,11 +115,6 @@
         </div>
 
     </div>
-      <div class="bottom mono columns" *ngIf="noProgress">
-        <a class="column" routerLink="/projects/{{projectId}}" (click)="promptDelete()">
-            Delete this Project
-        </a>
-        </div>
         
   </div>
 
@@ -206,6 +201,12 @@
 
       <p>You currently have no data.</p>
 
+    </div>
+
+    <div class="bottom mono columns">
+      <a class="column" routerLink="/projects/{{projectId}}" (click)="promptDelete()">
+        Delete this Project
+      </a>
     </div>
 
   </div>

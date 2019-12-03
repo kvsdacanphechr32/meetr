@@ -54,12 +54,12 @@ exports.delete = async (req, res) => {
     
     try {
         await deleteQ.exec();
-        res.sendStatus(200);
+        res.status(200).json({deleted: true});
     }
     catch(e) {
         res.status(500).json({e});
     }
-    
+
 }
 
 /*
