@@ -12,21 +12,25 @@
 
 require('dotenv').load();
 
-const SendEmail = async function() {
-    
+const SendEmail = async function () {
+
     const Project = require('./models/Project'),
-    mongoose = require('mongoose'),
-    mailgun = require('mailgun-js')({
-        apiKey: process.env.MAILGUN_KEY,
-        domain: process.env.MAILGUN_DOMAIN
-    });
+        mongoose = require('mongoose'),
+        mailgun = require('mailgun-js')({
+            apiKey: process.env.MAILGUN_KEY,
+            domain: process.env.MAILGUN_DOMAIN
+        });
 
     // Register user schema
     require('./models/AppUser');
-    
+
     // DB connect
     try {
-        await mongoose.connect('mongodb://localhost/engagement-journalism', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+        await mongoose.connect('mongodb://localhost/engagement-journalism', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true
+        });
     } catch (error) {
         throw new Error('Mongoose error!', error);
     }
@@ -34,14 +38,17 @@ const SendEmail = async function() {
     console.log('----' + new Date() + '----');
 
     // Get all projects where reminder interval not null, and populate user for each
-    let projects = Project.find({reminderPeriod: {$ne: null}}, 'name slug reminderPeriod reminderEmail lastReminderDate').populate('user');
+    let projects = Project.find({
+        reminderPeriod: {
+            $ne: null
+        }
+    }, 'name slug reminderPeriod reminderEmail lastReminderDate').populate('user');
 
-    // todo: check time delta
     try {
         let getRes = await projects.exec();
         let recipientEmails = [];
         let recipientData = {};
-        
+
         getRes.forEach((project, i) => {
 
             // Get time difference from last reminder date and today
@@ -52,7 +59,7 @@ const SendEmail = async function() {
             // Should email be sent?
             let send = false;
 
-            switch(project.reminderPeriod) {
+            switch (project.reminderPeriod) {
                 case 0:
                     send = daysSince >= 14;
                     break;
@@ -63,11 +70,11 @@ const SendEmail = async function() {
                     send = daysSince >= 60;
                     break;
             }
-            
+
             // If period not triggered, skip
-            if(!send)
+            if (!send)
                 return;
-            
+
             recipientEmails.push(project.reminderEmail);
             recipientData[project.reminderEmail] = {
                 from: '<noreply@meetr.in>',
@@ -78,22 +85,22 @@ const SendEmail = async function() {
             };
 
             console.log('=> Reminder for project "%s" to %s ', project.name, project.reminderEmail);
-            
+
         });
 
         // If no recipients, quit
-        if(recipientEmails.length === 0)
+        if (recipientEmails.length === 0)
             process.exit(22);
 
-        
-        var data = {
+        const subject = (process.env.NODE_ENV !== 'production' ? '(TESTING) ' : '') + 'Meetr reminder for your project "%recipient.project%"';
+        const data = {
             'recipient-variables': recipientData,
             from: 'Meetr <noreply@meetr.in>',
             to: recipientEmails,
-            subject: 'Meetr reminder for your project "%recipient.project%"',
-            html: 
-                '<img src="https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,w_150/v1565109667/engagement-journalism/img/meetr_logo_raster.png" alt="Meetr logo" /><br />' +
-                '<p>This is a reminder that it\'s time to take the track progress for your project "%recipient.project%" on Meetr. Please <a href="https://meetr.in/projects/%recipient.slug%/track">click here</a> to do so!</p><p>- Meetr</p>'
+            subject: subject,
+            html: '<img src="https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,w_150/v1565109667/engagement-journalism/img/meetr_logo_raster.png" alt="Meetr logo" /><br />' +
+                '<p>This is a reminder that it\'s time to take the track progress for your project "%recipient.project%" on Meetr.' +
+                'Please <a href="https://meetr.in/projects/%recipient.slug%/track">click here</a> to do so!</p><p>- Meetr</p>'
         };
 
 
@@ -118,14 +125,13 @@ const SendEmail = async function() {
             // Exit script
             process.exit(22);
         });
-    }
-    catch(e) {
-        throw Error(e);        
+    } catch (e) {
+        throw Error(e);
     }
 };
 
 SendEmail().catch(err => {
     // Print error and quit
-    console.error(err); 
+    console.error(err);
     return process.exit(22);
 });
