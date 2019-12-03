@@ -105,7 +105,7 @@ const SendEmail = async function () {
 
 
         // Send message batch, and updated affected projects
-        mailgun.messages().send(data, function (error, body) {
+        mailgun.messages().send(data, async function (error, body) {
             if (error) {
                 console.error('Mailgun error: ' + error)
                 throw new Error('Mailgun error: ' + error)
@@ -115,12 +115,10 @@ const SendEmail = async function () {
 
             // If success, we need to update all affected projects w/ 
             // new last reminder date
-            getRes.forEach(async (project) => {
-
+            await Promise.all(getRes.map(async (project) => {
                 project.lastReminderDate = new Date(Date.now()).toISOString();
                 await project.save();
-
-            });
+            }));
 
             // Exit script
             process.exit(22);
