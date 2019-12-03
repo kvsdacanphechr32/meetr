@@ -26,13 +26,15 @@ const SendEmail = async function() {
     
     // DB connect
     try {
-        await mongoose.connect('mongodb://localhost/engagement-journalism', {useNewUrlParser: true, useUnifiedTopology: true});
+        await mongoose.connect('mongodb://localhost/engagement-journalism', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
     } catch (error) {
         throw new Error('Mongoose error!', error);
     }
 
+    console.log('----' + new Date() + '----');
+
     // Get all projects where reminder interval not null, and populate user for each
-    let projects = Project.find({reminderPeriod: {$ne: null}}, 'name slug reminderPeriod reminderEmail lastReminderDate -_id').populate('user');
+    let projects = Project.find({reminderPeriod: {$ne: null}}, 'name slug reminderPeriod reminderEmail lastReminderDate').populate('user');
 
     // todo: check time delta
     try {
@@ -61,13 +63,10 @@ const SendEmail = async function() {
                     send = daysSince >= 60;
                     break;
             }
-            console.log(project.lastReminderDate)
-            console.log(daysSince)
-
-            if(!send) {
-                console.log('dont send')
+            
+            // If period not triggered, skip
+            if(!send)
                 return;
-            }
             
             recipientEmails.push(project.reminderEmail);
             recipientData[project.reminderEmail] = {
@@ -77,8 +76,15 @@ const SendEmail = async function() {
                 slug: project.slug,
                 name: project.user.name
             };
+
+            console.log('=> Reminder for project "%s" to %s ', project.name, project.reminderEmail);
             
         });
+
+        // If no recipients, quit
+        if(recipientEmails.length === 0)
+            process.exit(22);
+
         
         var data = {
             'recipient-variables': recipientData,
@@ -91,12 +97,25 @@ const SendEmail = async function() {
         };
 
 
-        // Send message batch, and quit
+        // Send message batch, and updated affected projects
         mailgun.messages().send(data, function (error, body) {
             if (error) {
                 console.error('Mailgun error: ' + error)
                 throw new Error('Mailgun error: ' + error)
             }
+
+            console.log('==> Sent ' + recipientEmails.length + ' reminder(s)');
+
+            // If success, we need to update all affected projects w/ 
+            // new last reminder date
+            getRes.forEach(async (project) => {
+
+                project.lastReminderDate = new Date(Date.now()).toISOString();
+                await project.save();
+
+            });
+
+            // Exit script
             process.exit(22);
         });
     }

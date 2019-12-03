@@ -59,7 +59,8 @@ bootstrap.start(
 		app.listen(process.env.PORT);
 
 		var mongoose = require('mongoose');
-		mongoose.connect('mongodb://localhost/engagement-journalism', {useNewUrlParser: true, useUnifiedTopology: true});
+		mongoose.connect('mongodb://localhost/engagement-journalism', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+		
 		var db = mongoose.connection;
 		db.on('error', console.error.bind(console, 'connection error:'));
 
