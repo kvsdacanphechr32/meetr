@@ -82,7 +82,7 @@ const SendEmail = async function () {
                 name: project.user.name
             };
 
-            logger.info('=> Reminder for project "%s" to %s ', project.name, project.reminderEmail);
+            logger.info('=> Reminder for project "' + project.name + '" to ' + project.reminderEmail);
 
         });
 
@@ -90,15 +90,19 @@ const SendEmail = async function () {
         if (recipientEmails.length === 0)
             return;
 
-        const subject = (process.env.NODE_ENV !== 'production' ? '(TESTING) ' : '') + 'Meetr reminder for your project "%recipient.project%"';
+        const subject = (process.env.NODE_ENV !== 'production' ? '(TESTING) ' : '') + 'Meetr reminder for your project "%recipient.project%"',
+              body = '<img src="https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,w_150/v1565109667/engagement-journalism/img/meetr_logo_raster.png" alt="Meetr logo" /><br />' +
+                    'Hi %recipient.name%,' +
+                    '<p>How’s your engaged journalism project going? We want to keep helping you measure its value. Please remember to track the progress of your project, %recipient.project%” on Meetr.<br />' +
+                    'Talk it out and track your progress by visiting <a href="https://meetr.in">Meetr</a>.</p>' +
+                    'The Meetr Team';
+        
         const data = {
             'recipient-variables': recipientData,
             from: 'Meetr <noreply@meetr.in>',
             to: recipientEmails,
             subject: subject,
-            html: '<img src="https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,w_150/v1565109667/engagement-journalism/img/meetr_logo_raster.png" alt="Meetr logo" /><br />' +
-                '<p>This is a reminder that it\'s time to take the track progress for your project "%recipient.project%" on Meetr.' +
-                'Please <a href="https://meetr.in/projects/%recipient.slug%/track">click here</a> to do so!</p><p>- Meetr</p>'
+            html: body
         };
 
 
