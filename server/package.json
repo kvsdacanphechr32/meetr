@@ -24,6 +24,7 @@
     "mailgun-js": "^0.22.0",
     "mongoose": "^5.7.5",
     "node-fetch": "^2.6.0",
+    "node-schedule": "^1.3.2",
     "validator": "^10.9.0",
     "winston": "^3.2.1"
   }

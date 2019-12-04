@@ -25,23 +25,13 @@ const SendEmail = async function () {
             level: 'info',
             format: winston.format.simple(),
             transports: [
-                new(winston.transports.File)({filename: __dirname + '/emails.log', level: 'info'})
+                new(winston.transports.File)({filename: __dirname + '/emails.log', level: 'info'}),
+                new(winston.transports.File)({filename: __dirname + '/emails.log', level: 'error'})
             ]
         });
 
     // Register user schema
     require('./models/AppUser');
-
-    // DB connect
-    try {
-        await mongoose.connect('mongodb://localhost/engagement-journalism', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true
-        });
-    } catch (error) {
-        throw new Error('Mongoose error!', error);
-    }
 
     logger.info('----' + new Date() + '----');
 
@@ -92,13 +82,13 @@ const SendEmail = async function () {
                 name: project.user.name
             };
 
-            console.log('=> Reminder for project "%s" to %s ', project.name, project.reminderEmail);
+            logger.info('=> Reminder for project "%s" to %s ', project.name, project.reminderEmail);
 
         });
 
         // If no recipients, quit
         if (recipientEmails.length === 0)
-            process.exit(22);
+            return;
 
         const subject = (process.env.NODE_ENV !== 'production' ? '(TESTING) ' : '') + 'Meetr reminder for your project "%recipient.project%"';
         const data = {
@@ -115,11 +105,11 @@ const SendEmail = async function () {
         // Send message batch, and updated affected projects
         mailgun.messages().send(data, async function (error, body) {
             if (error) {
-                console.error('Mailgun error: ' + error)
+                logger.error('Mailgun error: ' + error)
                 throw new Error('Mailgun error: ' + error)
             }
 
-            console.log('==> Sent ' + recipientEmails.length + ' reminder(s)');
+            logger.info('==> Sent ' + recipientEmails.length + ' reminder(s)');
 
             // If success, we need to update all affected projects w/ 
             // new last reminder date
@@ -128,16 +118,10 @@ const SendEmail = async function () {
                 await project.save();
             }));
 
-            // Exit script
-            process.exit(22);
         });
     } catch (e) {
         throw Error(e);
     }
 };
 
-SendEmail().catch(err => {
-    // Print error and quit
-    console.error(err);
-    return process.exit(22);
-});
+module.exports = SendEmail;

@@ -28,7 +28,9 @@ logFormat = winston.format.combine(
 		const ts = timestamp.slice(0, 19).replace('T', ' ');
 		return `${ts} [${level}]: ${message} ${Object.keys(args).length ? JSON.stringify(args, null, 2) : ''}`;
 	}),
-);
+),
+Emails = require('./emails');
+
 global.logger = winston.createLogger({
 	level: 'info',
 	format: logFormat,
@@ -63,6 +65,17 @@ bootstrap.start(
 		
 		var db = mongoose.connection;
 		db.on('error', console.error.bind(console, 'connection error:'));
+
+		// Schedule email reminders
+		let schedule = require('node-schedule');
+		schedule.scheduleJob('* * * * *', () => {
+
+			Emails().catch(err => {
+				// Print error if any
+				console.error(err);
+			});
+			
+		})
 
 	}
 );
