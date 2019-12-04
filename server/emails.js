@@ -19,6 +19,14 @@ const SendEmail = async function () {
         mailgun = require('mailgun-js')({
             apiKey: process.env.MAILGUN_KEY,
             domain: process.env.MAILGUN_DOMAIN
+        }),
+        winston = require('winston');
+        const logger = winston.createLogger({
+            level: 'info',
+            format: winston.format.simple(),
+            transports: [
+                new(winston.transports.File)({filename: __dirname + '/emails.log', level: 'info'})
+            ]
         });
 
     // Register user schema
@@ -35,7 +43,7 @@ const SendEmail = async function () {
         throw new Error('Mongoose error!', error);
     }
 
-    console.log('----' + new Date() + '----');
+    logger.info('----' + new Date() + '----');
 
     // Get all projects where reminder interval not null, and populate user for each
     let projects = Project.find({
